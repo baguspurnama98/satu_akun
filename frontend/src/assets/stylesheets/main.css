@@ -1,0 +1,47 @@
+@import './tailwind.css';
+
+
+body {
+    background-image: linear-gradient(90deg, rgba(255,255,255,1) 10%, rgba(230,230,230,1) 100%);
+}
+
+
+.course {
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    max-width: 100%;
+    margin: 20px;
+    overflow: hidden;
+    width: 800px;
+}
+
+.course h6 {
+    opacity: 0.8;
+    margin: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.course h2 {
+    letter-spacing: 1px;
+    margin: 10px 0;
+}
+
+.course-preview {
+    background: url('https://promoproduk.id/wp-content/uploads/2020/10/modern-device-with-netflix-app_23-2147915520.jpg') rgba(255, 0, 0, 0.3);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    background-blend-mode: multiply;
+    color: #fff;
+    padding: 30px;
+    min-width: 250px;
+    min-height: 200px;
+}
+
+.course-info {
+    padding: 30px;
+    position: relative;
+    width: 100%;
+}
