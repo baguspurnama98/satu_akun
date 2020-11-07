@@ -1,154 +1,113 @@
 <template>
 <div class="hello">
 
-    <div class="flex items-center justify-center">
-        <div class="bg-white shadow-lg rounded mb-4 course">
-            <div class="course-preview">
-            </div>
-            <div class="course-info">
-                <h6 class="text-sm">Paket Premium</h6>
-                <h1 class="font-bold text-3xl subpixel-antialiased">
-                    Netflix
-                </h1>
-                <div class="py-3 mb-3">
-                    <div class="flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2">
-                        <span class="bg-green-400 h-2 w-2 m-2 rounded-full"></span>
-                        <div class="font-medium px-2">Kapasitas Maksimum 4 orang</div>
-                    </div>
-                    <div class="flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2">
-                        <span class="bg-green-400 h-2 w-2 m-2 rounded-full"></span>
-                        <div class="font-medium px-2">4 perangkat bersamaan</div>
-                    </div>
-                    <div class="flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2">
-                        <span class="bg-green-400 h-2 w-2 m-2 rounded-full"></span>
-                        <div class="font-medium px-2">Bayar ketika grup penuh</div>
-                    </div>
-                    <div class="flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2">
-                        <span class="bg-green-400 h-2 w-2 m-2 rounded-full"></span>
-                        <div class="font-medium px-2">Tagihan bulanan murah</div>
-                    </div>
-                </div>
-                <button class="px-4 py-2 rounded text-white inline-block shadow-lg bg-red-500 hover:bg-red-600 focus:bg-red-700" type="submit">
-                    Selengkapnya
-                </button>
-            </div>
-        </div>
-    </div>
+    <main class="flex-grow flex justify-center items-center">
+        <div class="grid grid-cols-8 gap-8 items-start mt-8 mx-auto px-8 w-full">
 
-    <!-- component -->
-    <div class="flex items-center justify-center">
-        <div class="w-full max-w-md">
-            <form class="bg-white shadow-lg rounded px-12 pt-6 pb-8 mb-4">
-                <!-- @csrf -->
-                <div class="text-gray-800 text-2xl flex justify-center border-b-2 py-2 mb-4">
-                    Silahkan Login
+            <div class="col-span-8 sm:col-span-8 md:col-span-4 xl:col-span-2">
+                <div class="bg-white rounded-lg mr-4 ml-4 shadow-lg hover:shadow-xl transition duration-200 netflix">
+                    <div class="px-12 pt-6 pb-8 flex">
+                        <h1 class="text-4xl text-bold text-white">Netflix</h1>
+                        <div class="ml-auto">
+                            <span class="flex rounded-full bg-white px-2 py-1 mt-4" title="aktif">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 text-green-500" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </span>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="mb-4">
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" type="email" required autofocus placeholder="Email" />
+                <div class="flex justify-center -mt-4">
+                    <div class="bg-white shadow-md rounded-lg px-4 py-6">
+                        <div class="text-left">
+                            <span class="font-bold text-gray-700 mr-2">Apriyantotobing8@gmail.com</span>
+                        </div>
+                        <div class="text-left">
+                            <span class="font-bold text-gray-700 mr-2">apriaja</span>
+                        </div>
+                        <div class="text-left pt-3">
+                            selesai: <b>22/11/2020</b>
+                        </div>
+                    </div>
                 </div>
-                <div class="mb-6">
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" name="password" required autocomplete="current-password" />
+            </div>
+
+            <div class="col-span-8 sm:col-span-8 md:col-span-4 xl:col-span-2">
+                <div class="bg-white rounded-lg mr-4 ml-4 shadow-lg hover:shadow-xl transition duration-200 spotify">
+                    <div class="px-12 pt-6 pb-8 flex">
+                        <h1 class="text-4xl text-bold text-white">Spotify</h1>
+                        <div class="ml-auto">
+                            <span class="flex rounded-full bg-white px-2 py-1 mt-4" title="aktif">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 text-green-500" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </span>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="flex items-center justify-between">
-                    <button class="px-4 py-2 rounded text-white inline-block shadow-lg bg-blue-500 hover:bg-blue-600 focus:bg-blue-700" type="submit">
-                        Sign In
+                <div class="flex justify-center -mt-4">
+                    <div class="bg-white shadow-md rounded-lg px-4 py-6">
+                        <div class="text-left">
+                            <span class="font-bold text-gray-700 mr-2">Apriyantotobing8@gmail.com</span>
+                        </div>
+                        <div class="text-left">
+                            <span class="font-bold text-gray-700 mr-2">apriaja</span>
+                        </div>
+                        <div class="text-left pt-3">
+                            selesai: <b>22/11/2020</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-8 sm:col-span-8 md:col-span-4 xl:col-span-2">
+                <div class="bg-white rounded-lg mb-4 mr-4 ml-4 shadow-lg hover:shadow-xl transition duration-200 steam">
+                    <div class="px-12 pt-6 pb-8 flex">
+                        <h1 class="text-4xl text-bold text-white">Steam</h1>
+                        <div class="ml-auto">
+                            <span class="flex rounded-full bg-white px-2 py-1 mt-4" title="tidak aktif">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 text-red-500" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                                </svg>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="flex justify-center mt-4">
+                    <button class="px-4 py-2 rounded text-white inline-block shadow-lg bg-blue-400 hover:bg-blue-500 focus:bg-blue-600" type="submit">
+                        Berlangganan
                     </button>
-                    <a class="inline-block align-baseline font-normal text-sm text-blue-500 hover:text-blue-800" href="#">
-                        Forgot Password?
-                    </a>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- component -->
-    <div>
-        <section class="text-gray-700">
-            <div class="container px-5 py-24 mx-auto">
-                <div class="text-center mb-20">
-                    <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
-                        Frequently Asked Question
-                    </h1>
-                    <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
-                        The most common questions about how our business works and what
-                        can do for you.
-                    </p>
-                </div>
-                <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
-                    <div class="w-full lg:w-1/2 px-4 py-2">
-                        <details class="mb-4">
-                            <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                                How Long is this site live?
-                            </summary>
-
-                            <span>
-                                Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                minim velit nostrud pariatur culpa magna in aute.
-                            </span>
-                        </details>
-                        <details class="mb-4">
-                            <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4">
-                                Can I install/upload anything I want on there?
-                            </summary>
-
-                            <span>
-                                Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                minim velit nostrud pariatur culpa magna in aute.
-                            </span>
-                        </details>
-                        <details class="mb-4">
-                            <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                                How can I migrate to another site?
-                            </summary>
-
-                            <span>
-                                Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                minim velit nostrud pariatur culpa magna in aute.
-                            </span>
-                        </details>
-                    </div>
-                    <div class="w-full lg:w-1/2 px-4 py-2">
-                        <details class="mb-4">
-                            <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                                Can I change the domain you give me?
-                            </summary>
-
-                            <span class="px-4 py-2">
-                                Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                minim velit nostrud pariatur culpa magna in aute.
-                            </span>
-                        </details>
-                        <details class="mb-4">
-                            <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                                How many sites I can create at once?
-                            </summary>
-
-                            <span class="px-4 py-2">
-                                Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                minim velit nostrud pariatur culpa magna in aute.
-                            </span>
-                        </details>
-                        <details class="mb-4">
-                            <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                                How can I communicate with you?
-                            </summary>
-
-                            <span class="px-4 py-2">
-                                Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                minim velit nostrud pariatur culpa magna in aute.
-                            </span>
-                        </details>
-                    </div>
                 </div>
             </div>
-        </section>
-    </div>
+
+            <div class="col-span-8 sm:col-span-8 md:col-span-4 xl:col-span-2">
+                <div class="bg-white rounded-lg mb-4 mr-4 ml-4 shadow-lg hover:shadow-xl transition duration-200 disney">
+                    <div class="px-12 pt-6 pb-8 flex">
+                        <h1 class="text-4xl text-bold text-white">Disney+</h1>
+                        <div class="ml-auto">
+                            <span class="flex rounded-full bg-white px-2 py-1 mt-4" title="tidak aktif">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 text-red-500" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                                </svg>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="flex justify-center mt-4">
+                    <button class="px-4 py-2 rounded text-white inline-block shadow-lg bg-blue-400 hover:bg-blue-500 focus:bg-blue-600" type="submit">
+                        Berlangganan
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
 </div>
 </template>
 
@@ -160,3 +119,29 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.netflix {
+    background-color: #f76363;
+    background-image: var(--svg-pattern-dashboard);
+    background-position: center;
+}
+
+.spotify {
+    background-color: #5deb97;
+    background-image: var(--svg-pattern-dashboard);
+    background-position: center;
+}
+
+.steam {
+    background-color: #686868;
+    background-image: var(--svg-pattern-dashboard);
+    background-position: center;
+}
+
+.disney {
+    background-color: #4c95ff;
+    background-image: var(--svg-pattern-dashboard);
+    background-position: center;
+}
+</style>
