@@ -13,8 +13,7 @@ body {
     display: flex;
     max-width: 100%;
     margin: 20px;
-    overflow: hidden;
-    width: 800px;
+    min-width: 650px;
 }
 
 .course h6 {
@@ -44,7 +43,6 @@ body {
 .course-info {
     padding: 30px;
     position: relative;
-    width: 100%;
 }
 /* http://www.heropatterns.com/ */
 :root {

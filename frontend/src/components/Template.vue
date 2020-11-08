@@ -1,6 +1,7 @@
 <template>
 <div class="hello">
 
+    <!-- component card untuk promo paket streaming -->
     <div class="flex items-center justify-center">
         <div class="bg-white shadow-lg rounded mb-4 course">
             <div class="course-preview">
@@ -34,8 +35,9 @@
             </div>
         </div>
     </div>
+    <!-- component card untuk promo paket streaming -->
 
-    <!-- component -->
+    <!-- component login -->
     <div class="flex items-center justify-center">
         <div class="w-full max-w-md">
             <form class="bg-white shadow-lg rounded px-12 pt-6 pb-8 mb-4">
@@ -61,93 +63,115 @@
         </div>
     </div>
 
-    <!-- component -->
-    <div>
-        <section class="text-gray-700">
-            <div class="container px-5 py-24 mx-auto">
-                <div class="text-center mb-20">
-                    <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
-                        Frequently Asked Question
-                    </h1>
-                    <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
-                        The most common questions about how our business works and what
-                        can do for you.
-                    </p>
-                </div>
-                <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
-                    <div class="w-full lg:w-1/2 px-4 py-2">
-                        <details class="mb-4">
-                            <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                                How Long is this site live?
-                            </summary>
+    <!-- component informasi berlangganan dashboard -->
+    <div class="grid grid-cols-8 gap-8 items-start mt-8 mx-auto px-8 w-full">
 
-                            <span>
-                                Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                minim velit nostrud pariatur culpa magna in aute.
-                            </span>
-                        </details>
-                        <details class="mb-4">
-                            <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4">
-                                Can I install/upload anything I want on there?
-                            </summary>
-
-                            <span>
-                                Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                minim velit nostrud pariatur culpa magna in aute.
-                            </span>
-                        </details>
-                        <details class="mb-4">
-                            <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                                How can I migrate to another site?
-                            </summary>
-
-                            <span>
-                                Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                minim velit nostrud pariatur culpa magna in aute.
-                            </span>
-                        </details>
+        <div class="col-span-8 sm:col-span-8 md:col-span-4 xl:col-span-2">
+            <div class="bg-white rounded-lg mr-4 ml-4 shadow-lg hover:shadow-xl transition duration-200 netflix">
+                <div class="px-12 pt-6 pb-8 flex">
+                    <h1 class="text-4xl font-bold text-white">Netflix</h1>
+                    <div class="ml-auto">
+                        <span class="flex rounded-full bg-white px-2 py-1 mt-4" title="aktif">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 text-green-500" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </span>
                     </div>
-                    <div class="w-full lg:w-1/2 px-4 py-2">
-                        <details class="mb-4">
-                            <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                                Can I change the domain you give me?
-                            </summary>
 
-                            <span class="px-4 py-2">
-                                Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                minim velit nostrud pariatur culpa magna in aute.
-                            </span>
-                        </details>
-                        <details class="mb-4">
-                            <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                                How many sites I can create at once?
-                            </summary>
-
-                            <span class="px-4 py-2">
-                                Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                minim velit nostrud pariatur culpa magna in aute.
-                            </span>
-                        </details>
-                        <details class="mb-4">
-                            <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                                How can I communicate with you?
-                            </summary>
-
-                            <span class="px-4 py-2">
-                                Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                minim velit nostrud pariatur culpa magna in aute.
-                            </span>
-                        </details>
+                </div>
+            </div>
+            <div class="flex justify-center -mt-4">
+                <div class="bg-white shadow-md rounded-lg px-4 py-6 w-3/4">
+                    <div class="text-left">
+                        <span class="font-bold text-gray-700 mr-2">email@gmail.com</span>
+                    </div>
+                    <div class="text-left">
+                        <span class="font-bold text-gray-700 mr-2">apriaja</span>
+                    </div>
+                    <div class="pt-3 inline-flex items-center">
+                        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                        </svg>
+                        <strong>22/11/2020</strong>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+
+        <div class="col-span-8 sm:col-span-8 md:col-span-4 xl:col-span-2">
+            <div class="bg-white rounded-lg mr-4 ml-4 shadow-lg hover:shadow-xl transition duration-200 spotify">
+                <div class="px-12 pt-6 pb-8 flex">
+                    <h1 class="text-4xl font-bold text-white">Spotify</h1>
+                    <div class="ml-auto">
+                        <span class="flex rounded-full bg-white px-2 py-1 mt-4" title="aktif">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 text-green-500" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="flex justify-center -mt-4">
+                <div class="bg-white shadow-md rounded-lg px-4 py-6 w-3/4">
+                    <div class="text-left">
+                        <span class="font-bold text-gray-700 mr-2">email@gmail.com</span>
+                    </div>
+                    <div class="text-left">
+                        <span class="font-bold text-gray-700 mr-2">apriaja</span>
+                    </div>
+                    <div class="pt-3 inline-flex items-center">
+                        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                        </svg>
+                        <strong>22/11/2020</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-span-8 sm:col-span-8 md:col-span-4 xl:col-span-2">
+            <div class="bg-white rounded-lg mb-4 mr-4 ml-4 shadow-lg hover:shadow-xl transition duration-200 steam">
+                <div class="px-12 pt-6 pb-8 flex">
+                    <h1 class="text-4xl font-bold text-white">Steam</h1>
+                    <div class="ml-auto">
+                        <span class="flex rounded-full bg-white px-2 py-1 mt-4" title="tidak aktif">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 text-red-500" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                            </svg>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="flex justify-center mt-4">
+                <button class="px-4 py-2 rounded text-white inline-block shadow-lg bg-blue-400 hover:bg-blue-500 focus:bg-blue-600" type="submit">
+                    Berlangganan
+                </button>
+            </div>
+        </div>
+
+        <div class="col-span-8 sm:col-span-8 md:col-span-4 xl:col-span-2">
+            <div class="bg-white rounded-lg mb-4 mr-4 ml-4 shadow-lg hover:shadow-xl transition duration-200 disney">
+                <div class="px-12 pt-6 pb-8 flex">
+                    <h1 class="text-4xl font-bold text-white">Disney+</h1>
+                    <div class="ml-auto">
+                        <span class="flex rounded-full bg-white px-2 py-1 mt-4" title="tidak aktif">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 text-red-500" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                            </svg>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="flex justify-center mt-4">
+                <button class="px-4 py-2 rounded text-white inline-block shadow-lg bg-blue-400 hover:bg-blue-500 focus:bg-blue-600" type="submit">
+                    Berlangganan
+                </button>
+            </div>
+        </div>
+
     </div>
 </div>
 </template>
