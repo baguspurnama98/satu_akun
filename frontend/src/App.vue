@@ -1,14 +1,13 @@
 <template>
- 
 <div>
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <!-- <headroom> -->
     <!-- <header> -->
-    <Navbar/>
+    <Navbar />
     <!-- </header> -->
     <!-- </headroom> -->
     <HelloWorld msg="Welcome to Your Vue.js App" />
-   
+
 </div>
 </template>
 
@@ -21,8 +20,8 @@ import Navbar from './components/Navbar.vue'
 export default {
     name: 'App',
     components: {
-        HelloWorld, 
-        Navbar, 
+        HelloWorld,
+        Navbar,
         // headroom
     }
 }
@@ -35,6 +34,6 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-  
+
 }
 </style>
