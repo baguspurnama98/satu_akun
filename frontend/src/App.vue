@@ -22,7 +22,6 @@ export default {
     components: {
         HelloWorld,
         Navbar,
-        // headroom
     }
 }
 </script>

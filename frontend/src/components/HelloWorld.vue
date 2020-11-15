@@ -4,7 +4,7 @@
     <div class="flex flex-wrap items-center justify-center">
 
         <!-- component card untuk promo paket streaming -->
-        <div class="bg-white shadow-lg rounded mb-4 course">
+        <div class="bg-white shadow-lg rounded m-4 course">
             <div class="course-preview">
             </div>
             <div class="course-info w-full">
@@ -38,7 +38,7 @@
         <!-- component card untuk promo paket streaming -->
 
         <!-- component login -->
-        <div class="w-full max-w-md">
+        <div class="w-full max-w-md m-4">
             <form class="bg-white shadow-lg rounded px-12 pt-6 pb-8 mb-4">
                 <!-- @csrf -->
                 <div class="text-gray-800 text-2xl flex justify-center border-b-2 py-2 mb-4">
@@ -256,6 +256,7 @@
         </div>
     </section>
     <!-- component hero keunggulan -->
+    <SweetModal>This is an alert.</SweetModal>
 
     <!-- component footer -->
     <footer>
@@ -340,8 +341,16 @@
 </template>
 
 <script>
+// npm install node-sass sass-loader --save-dev
+import {
+    SweetModal
+} from 'sweet-modal-vue'
+
 export default {
     name: "HelloWorld",
+    component: {
+        SweetModal,
+    },
     props: {
         msg: String,
     },

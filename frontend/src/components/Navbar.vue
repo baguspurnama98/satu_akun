@@ -1,20 +1,18 @@
 <template>
-<nav class="p-4 relative sticky w-full z-10 top-0 shadow-xl bg-indigo-500 mb-6">
+<nav id="wrapper" class="p-4 relative sticky w-full z-10 top-0 shadow-xl bg-indigo-500 mb-6">
     <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
-        <div class="flex items-center flex-shrink-0 text-white">
+        <div class="flex items-center text-white">
             <a class="text-white no-underline hover:text-white hover:no-underline" href="#">
                 <span class="text-2xl pl-2"><i class="em em-grinning"></i>Satu Akun</span>
             </a>
         </div>
 
         <div class="block lg:hidden">
-            <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded bg-white border-gray-100 hover:text-indigio-600 hover:border-white">
-                <svg id="toggle-open" class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <button v-on:click="toggle = !toggle" id="nav-toggle" class="flex items-center px-3 py-2 border rounded bg-white border-gray-100 hover:text-indigio-600 hover:border-white">
+                <svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <title>Menu</title>
-                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-                </svg>
-                <svg id="toggle-close" class="fill-current h-4 w-4 hidden" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" />
+                    <path v-if="toggle" d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                    <path v-else d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" />
                 </svg>
             </button>
         </div>
@@ -31,8 +29,8 @@
                         <i class=" text-lg leading-lg text-white opacity-75" /><span class="ml-2">Tentang Kami</span>
                     </a>
                 </li>
-                <li class="nav-item ml-4">
-                    <button class="px-4 py-2 rounded inline-block shadow-xs bg-white hover:bg-red-500 hover:text-white" type="button">
+                <li class="nav-item ml-4 mt-2 lg:mt-0">
+                    <button class="px-4 py-2 rounded inline-block bg-white hover:bg-red-500 hover:text-white" type="button">
                         Masuk
                     </button>
                 </li>
@@ -44,25 +42,17 @@
 
 <script>
 export default {
-    name: "pink-navbar",
+    el: '#wrapper',
     data() {
         return {
-            showMenu: false
+            toggle: true
         }
     },
-    methods: {
-        toggleNavbar: function () {
-            this.showMenu = !this.showMenu;
-        }
-    }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('nav-toggle').addEventListener('click', function () {
-        // kalau bisa pakai v-bind
         document.getElementById("nav-content").classList.toggle("hidden");
-        document.getElementById("toggle-open").classList.toggle("hidden");
-        document.getElementById("toggle-close").classList.toggle("hidden");
     });
 });
 </script>
