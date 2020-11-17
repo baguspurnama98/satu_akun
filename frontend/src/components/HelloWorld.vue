@@ -1,6 +1,7 @@
 <template>
-<div class="">
 
+<div class="">
+ 
     <div class="flex flex-wrap items-center justify-center">
 
         <!-- component card untuk promo paket streaming -->
@@ -151,10 +152,22 @@
             </div>
             <!-- component ini kalau belum berlangganan -->
             <div class="flex justify-center mt-4">
-                <button class="px-4 py-2 rounded text-white inline-block shadow-xs bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700" type="submit">
+                <button  @click="toggleModel = !toggleModel" class="px-4 py-2 rounded text-white inline-block shadow-xs bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700">
                     Berlangganan
                 </button>
+                
+                <div class="fixed overflow-x-hidden overflow-y-auto inset-0 flex justify-center items-center z-50" v-if="toggleModel">
+                    <div class="relative mx-auto w-auto max-w-2xl">
+                        <div class="bg-white w-full rounded shadow-2xl flex flex-col">
+                            <div class="text-2xl font-bold ">Header</div>
+                            <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi voluptatum exercitationem consectetur pariatur fuga repellat inventore beatae, possimus repellendus numquam et perferendis, dignissimos impedit eaque accusantium aliquam tenetur excepturi blanditiis!</span>
+                            <button class="rounded bg-green-500 text-white px-6 mt-1 py-2 w-3/12 m-auto mb-3 " @click="toggleModel=false">Close</button>
+                        </div>
+                    </div>
+                </div>
+                 <div v-if="toggleModel" class="absolute z-40 inset-0 opacity-25 bg-black"> </div>
             </div>
+           
             <!-- component ini kalau belum berlangganan -->
         </div>
 
@@ -254,9 +267,10 @@
                 </div>
             </div>
         </div>
+        
     </section>
     <!-- component hero keunggulan -->
-    <SweetModal>This is an alert.</SweetModal>
+ 
 
     <!-- component footer -->
     <footer>
@@ -336,25 +350,48 @@
         </div>
     </footer>
     <!-- component footer -->
-
+  
 </div>
+
 </template>
 
 <script>
 // npm install node-sass sass-loader --save-dev
+// <SweetModal v-ref="modal">This is an alert.</SweetModal>
 import {
     SweetModal
 } from 'sweet-modal-vue'
 
 export default {
     name: "HelloWorld",
+    data() {
+        return {
+            toggleModel:false
+        };
+    },
     component: {
         SweetModal,
     },
     props: {
         msg: String,
     },
-};
+   methods: {
+        openModal () {
+    // this.crtSelectedItem = { ...item };
+     this.$refs.modal.show()
+  }
+ }
+}
+// new Vue({
+//   el: '#app',
+//   methods: {
+//     parentHandler: function () {
+//       this.$refs.modal1.close();
+//       this.$refs.modal2.open();
+//     }
+//   }
+// });
+
 </script>
 
 <style scoped>
