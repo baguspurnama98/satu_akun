@@ -1,27 +1,16 @@
 <template>
-<div>
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <!-- <headroom> -->
-    <!-- <header> -->
-    <Navbar />
-    <!-- </header> -->
-    <!-- </headroom> -->
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-
-</div>
+<div id="app">
+    <router-view/>
+    <Footer />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-// import Template from './components/Template.vue'
-import Navbar from './components/Navbar.vue'
-// import { headroom }  from 'vue-headroom'
+import Footer from "@/components/Footer.vue"
 
 export default {
-    name: 'App',
     components: {
-        HelloWorld,
-        Navbar,
+        Footer,
     }
 }
 </script>
@@ -33,6 +22,5 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-
 }
 </style>

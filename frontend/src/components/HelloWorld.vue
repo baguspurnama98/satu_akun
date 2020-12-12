@@ -358,9 +358,9 @@
 <script>
 // npm install node-sass sass-loader --save-dev
 // <SweetModal v-ref="modal">This is an alert.</SweetModal>
-import {
-    SweetModal
-} from 'sweet-modal-vue'
+// import {
+//     SweetModal
+// } from 'sweet-modal-vue'
 
 export default {
     name: "HelloWorld",
@@ -370,7 +370,7 @@ export default {
         };
     },
     component: {
-        SweetModal,
+        // SweetModal,
     },
     props: {
         msg: String,
