@@ -18,10 +18,10 @@
                         <h2 class="title-font font-medium uppercase text-gray-900 tracking-widest text-sm mb-3">Penyedia Layanan</h2>
                         <nav class="list-none mb-10">
                             <li>
-                                <a class="text-gray-600 hover:text-gray-800">cs@satuakun.id</a>
+                                <a class="text-gray-600 hover:text-gray-800 cursor-pointer">cs@satuakun.id</a>
                             </li>
                             <li>
-                                <a class="text-gray-600 hover:text-gray-800">085155144278</a>
+                                <a class="text-gray-600 hover:text-gray-800 cursor-pointer">085155144278</a>
                             </li>
                         </nav>
                     </div>
@@ -29,13 +29,13 @@
                         <h2 class="title-font font-medium uppercase text-gray-900 tracking-widest text-sm mb-3">Kebijakan Layanan</h2>
                         <nav class="list-none mb-10">
                             <li>
-                                <a class="text-gray-600 hover:text-gray-800">Kebijakan Privasi</a>
+                                <a class="text-gray-600 hover:text-gray-800 cursor-pointer">Kebijakan Privasi</a>
                             </li>
                             <li>
-                                <a class="text-gray-600 hover:text-gray-800">FAQ</a>
+                                <a class="text-gray-600 hover:text-gray-800 cursor-pointer">FAQ</a>
                             </li>
                             <li>
-                                <a class="text-gray-600 hover:text-gray-800">Skema Harga</a>
+                                <a class="text-gray-600 hover:text-gray-800 cursor-pointer">Skema Harga</a>
                             </li>
                         </nav>
                     </div>
@@ -70,7 +70,7 @@
         <div class="bg-indigo-500">
             <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
                 <p class="text-white text-sm text-center sm:text-left">© 2020 satu_akun —
-                    <a href="https://twitter.com/knyttneve" class="text-gray-300 ml-1" target="_blank" rel="noopener noreferrer">@satu_akun</a>
+                    <a href="https://twitter.com/apri0498" class="text-gray-300 ml-1" target="_blank" rel="noopener noreferrer">@satu_akun</a>
                 </p>
                 <span class="sm:ml-auto sm:mt-0 mt-2 sm:w-auto w-full sm:text-left text-center text-white text-sm">God bless Indonesia</span>
             </div>
