@@ -1,13 +1,13 @@
 <template>
-  <div class="home">
+  <div class="lg:px-10">
     <div class="relative flex flex-col items-center justify-center bg-white min-h-screen min-w-screen">
       <div class="flex flex-col flex-col-reverse items-center justify-center p-10 mx-auto lg:flex-row lg:max-w-6xl lg:p-0">
-        <div class="relative w-full pr-10 rounded-lg md:w-2/3 lg:w-1/2 group">
+        <div class="relative w-full lg:pr-10 rounded-lg md:w-2/3 lg:w-1/2 group">
           <div class="relative">
             <img src="~/assets/img/home_cinema.svg" class="z-10 object-cover w-full h-full" />
           </div>
         </div>
-        <div class="container flex flex-col w-full px-5 pr-12 mb-16 text-2xl text-gray-700 lg:w-1/2 sm:px-0 md:px-10 sm:items-center lg:items-start lg:mb-0">
+        <div class="container flex flex-col w-full px-5 lg:pr-12 mb-16 text-2xl text-gray-700 lg:w-1/2 sm:px-0 md:px-10 sm:items-center lg:items-start lg:mb-0">
           <h1 class="font-sans text-4xl font-extrabold leading-none text-black sm:text-5xl xl:text-6xl sm:text-center lg:text-left">
             <span class="relative">
               <span class="absolute bottom-0 left-0 inline-block w-full h-4 mb-1 -ml-1 transform -skew-x-3 bg-yellow-200"></span>

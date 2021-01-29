@@ -1,7 +1,7 @@
 <template>
     <!-- component footer -->
     <footer>
-        <div class="border-t border-gray-300 bg-indigo-100">
+        <div class="mt-24 bg-indigo-100">
             <div class="container px-5 py-8 flex flex-wrap mx-auto items-center">
                 <div class="w-1/4 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
                     <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">

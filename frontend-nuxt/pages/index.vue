@@ -5,7 +5,7 @@
 
         <!-- component hero keunggulan -->
         <section class="text-gray-700 body-font">
-            <div class="container px-5 pb-24 mx-auto flex flex-wrap">
+            <div class="container px-5 mx-auto flex flex-wrap">
                 <div class="text-center mb-10">
                     <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4"><b>Satu Akun</b> saja cukup</h1>
                     <p class="text-base leading-relaxed ">
@@ -84,7 +84,8 @@
 <script>
 import Landing from "@/components/Hero/Landing";
 export default {
-  components: { Landing },}
+    layout: 'default',
+    components: { Landing },}
 </script>
 
 <style>
