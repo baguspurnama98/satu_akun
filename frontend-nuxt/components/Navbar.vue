@@ -66,6 +66,7 @@
               >
               <a
                 href="#"
+                @click="toggleButton('navLayanan')"
                 class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >Layanan</a
               >
@@ -75,7 +76,39 @@
                 >Tentang Kami</a
               >
             </div>
+            <div
+              class="origin-top-right absolute right-0 mt-2 w-40 rounded shadow-xl bg-white divide-y divide-gray-300 text-left"
+              v-bind:class="[navLayanan ? 'hidden' : '']"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="options-menu"
+            >
+              <div class="py-1">
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                  role="menuitem"
+                  >Netflix</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                  role="menuitem"
+                  >Spotify</a
+                >
+              </div>
+
+              <div class="py-1">
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                  role="menuitem"
+                  >Udemy</a
+                >
+              </div>
+            </div>
           </div>
+
           <!-- <button
             class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
           >
@@ -105,7 +138,7 @@
                 class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 id="user-menu"
                 aria-haspopup="true"
-                @click="toggleButton('navLayanan')"
+                @click="toggleButton('navUserOption')"
               >
                 <span class="sr-only">Open user menu</span>
                 <img
@@ -115,19 +148,9 @@
                 />
               </button>
             </div>
-            <!--
-            Profile dropdown panel, show/hide based on dropdown state.
-
-            Entering: "transition ease-out duration-100"
-              From: "transform opacity-0 scale-95"
-              To: "transform opacity-100 scale-100"
-            Leaving: "transition ease-in duration-75"
-              From: "transform opacity-100 scale-100"
-              To: "transform opacity-0 scale-95"
-          -->
             <div
               class="origin-top-right absolute right-0 mt-2 w-40 rounded shadow-xl bg-white divide-y divide-gray-300 text-left"
-              v-bind:class="[navLayanan ? 'hidden' : '']"
+              v-bind:class="[navUserOption ? 'hidden' : '']"
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="user-menu"
@@ -217,6 +240,7 @@ export default {
     return {
       toggle: true,
       navLayanan: true,
+      navUserOption: true,
     }
   },
   methods: {
@@ -227,6 +251,9 @@ export default {
           break
         case 'navLayanan':
           this.navLayanan = !this.navLayanan
+          break
+        case 'navUserOption':
+          this.navUserOption = !this.navUserOption
           break
         default:
           break
