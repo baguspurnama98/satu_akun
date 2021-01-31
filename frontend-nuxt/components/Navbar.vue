@@ -77,7 +77,7 @@
               >
             </div>
             <div
-              class="origin-top-right absolute right-0 mt-2 w-40 rounded shadow-xl bg-white divide-y divide-gray-300 text-left"
+              class="origin-top-right absolute mt-2 w-40 rounded shadow-xl bg-white divide-y divide-gray-300 text-left"
               v-bind:class="[navLayanan ? 'hidden' : '']"
               role="menu"
               aria-orientation="vertical"
