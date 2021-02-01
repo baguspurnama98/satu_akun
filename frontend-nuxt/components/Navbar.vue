@@ -50,7 +50,7 @@
               to="/"
               class="text-white no-underline hover:text-white hover:no-underline"
             >
-              <span class="pl-2"><i class="em em-grinning"></i>Satu Akun</span>
+              <span class="pl-2 text-2xl font-bold">Bisa Patungan</span>
             </NuxtLink>
           </div>
         </div>
@@ -109,15 +109,15 @@
             </div>
           </div>
 
-          <!-- <button
-            class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+          <button
+            class="p-1 rounded-full hover:shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
           >
             <span class="sr-only">View notifications</span>
-          
+
             <svg
               class="h-6 w-6"
               xmlns="http://www.w3.org/2000/svg"
-              fill=""
+              fill="none"
               viewBox="0 0 24 24"
               stroke="white"
               aria-hidden="true"
@@ -129,7 +129,7 @@
                 d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
               />
             </svg>
-          </button> -->
+          </button>
 
           <!-- Profile dropdown -->
           <div class="ml-3 relative">
@@ -160,27 +160,13 @@
                   href="#"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   role="menuitem"
-                  >Edit</a
+                  >Campaign Saya</a
                 >
                 <a
                   href="#"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   role="menuitem"
-                  >Duplicate</a
-                >
-              </div>
-              <div class="py-1">
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                  role="menuitem"
-                  >Archive</a
-                >
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                  role="menuitem"
-                  >Move</a
+                  >Riwayat Patungan</a
                 >
               </div>
               <div class="py-1">
@@ -188,13 +174,13 @@
                   href="#"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   role="menuitem"
-                  >Share</a
+                  >Ubah Profil</a
                 >
                 <a
                   href="#"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   role="menuitem"
-                  >Add to favorites</a
+                  >Pengaturan</a
                 >
               </div>
               <div class="py-1">
@@ -202,7 +188,7 @@
                   href="#"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   role="menuitem"
-                  >Delete</a
+                  >Keluar</a
                 >
               </div>
             </div>
@@ -250,9 +236,15 @@ export default {
           this.toggle = !this.toggle
           break
         case 'navLayanan':
+          if (this.navUserOption === false) {
+            this.navUserOption = true
+          }
           this.navLayanan = !this.navLayanan
           break
         case 'navUserOption':
+          if (this.navLayanan === false) {
+            this.navLayanan = true
+          }
           this.navUserOption = !this.navUserOption
           break
         default:

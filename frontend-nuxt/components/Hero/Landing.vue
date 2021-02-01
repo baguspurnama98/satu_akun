@@ -1,48 +1,54 @@
 <template>
   <div class="lg:px-10">
-    <div
-      class="flex flex-col items-center justify-center bg-white min-h-screen min-w-screen"
-    >
+    <section>
       <div
-        class="flex flex-col flex-col-reverse items-center justify-center p-10 mx-auto lg:flex-row lg:max-w-6xl lg:p-0"
+        class="flex flex-col items-center justify-center bg-white min-h-screen min-w-screen"
       >
-        <div class="w-full lg:pr-10 rounded-lg md:w-2/3 lg:w-1/2 group">
-          <div class="relative">
-            <img
-              src="~/assets/img/home_cinema.svg"
-              class="z-10 object-cover w-full h-full"
-            />
-          </div>
-        </div>
         <div
-          class="container flex flex-col w-full px-5 lg:pr-12 mb-16 text-2xl text-gray-700 lg:w-1/2 sm:px-0 md:px-10 sm:items-center lg:items-start lg:mb-0"
+          class="flex flex-col flex-col-reverse items-center justify-center p-10 mx-auto lg:flex-row lg:max-w-6xl lg:p-0"
         >
-          <h1
-            class="font-sans text-4xl font-extrabold leading-none text-black sm:text-5xl xl:text-6xl sm:text-center lg:text-left"
+          <div class="w-full lg:pr-10 rounded-lg md:w-2/3 lg:w-1/2 group">
+            <div class="relative">
+              <img
+                src="~/assets/img/home_cinema.svg"
+                class="z-10 object-cover w-full h-full"
+              />
+            </div>
+          </div>
+          <div
+            class="container flex flex-col w-full px-5 lg:pr-12 mb-16 text-2xl text-gray-700 lg:w-1/2 sm:px-0 md:px-10 sm:items-center lg:items-start lg:mb-0"
           >
-            <span class="">
-              <!-- <span
+            <h1
+              class="font-sans text-4xl font-extrabold leading-none text-black sm:text-5xl xl:text-6xl sm:text-center lg:text-left"
+            >
+              <span class="">
+                <!-- <span
                 class="relative bottom-0 left-0 inline-block w-full h-4 mb-1 -ml-1 transform -skew-x-3 bg-yellow-200"
               ></span> -->
-              <span class="">Watch Together,</span>
-            </span>
-            <span class="block text-yellow-400">Pay Together.</span>
-          </h1>
-          <p
-            class="block mt-6 text-base text-gray-600 xl:text-lg sm:text-center lg:text-left"
-          >
-            Bergabung untuk berlangganan platform premium secara patungan.
-          </p>
-          <div class="relative flex items-center mt-10">
-            <a
-              href="#_"
-              class="flex items-center self-start px-5 py-3 rounded-md text-base leading-tight text-white inline-block transition duration-150 ease-in-out bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
-              >Lihat Platform</a
+                <span class="">Watch Together,</span>
+              </span>
+              <span class="block text-yellow-400">Pay Together.</span>
+            </h1>
+            <p
+              class="block mt-6 text-base text-gray-600 xl:text-lg sm:text-center lg:text-left"
             >
+              Bergabung untuk berlangganan platform premium secara patungan.
+            </p>
+            <div class="relative flex items-center mt-10">
+              <a
+                href="#section2"
+                class="flex items-center self-start px-5 py-3 rounded-md text-base leading-tight text-white inline-block transition duration-150 ease-in-out bg-green-400 hover:bg-green-500 focus:bg-green-600"
+                >Mulai Patungan</a
+              >
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <section id="section2">
+      <div></div>
+    </section>
   </div>
 </template>
 
