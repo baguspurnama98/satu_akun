@@ -1,6 +1,8 @@
 <template>
   <div class="lg:px-10">
-    <section>
+    <section
+      class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+    >
       <div
         class="flex flex-col items-center justify-center bg-white min-h-screen min-w-screen"
       >
@@ -46,17 +48,34 @@
       </div>
     </section>
 
-    <section id="section2">
-      <div></div>
+    <section
+      id="section2"
+      class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+    >
+      <!-- <div class=" "> -->
+      <div
+        class="flex flex-col items-center justify-center bg-white min-h-screen min-w-screen"
+      >
+        <div class="">
+          <div class="grid grid-cols-4 xs:grid-cols-2 gap-4">
+            <CardCampaign v-for="index in 8" :key="index" />
+          </div>
+          <!-- <CardCampaign /> -->
+
+          <!-- <CardCampaign /> -->
+        </div>
+      </div>
+      <!-- </div> -->
     </section>
   </div>
 </template>
 
 <script>
+import CardCampaign from '../CardCampaign.vue'
 export default {
   name: 'Landing',
   data() {
-    return {}
+    items: [{ message: 'Foo' }, { message: 'Bar' }]
   },
   methods: {},
 }

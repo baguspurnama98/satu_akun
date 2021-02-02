@@ -1,5 +1,9 @@
 <template>
-  <nav v-click-outside @clicked-outside="toggleButton()" class="p-4 sticky w-full z-10 top-0 shadow-lg bg-indigo-500 mb-6">
+  <nav
+    v-click-outside
+    @clicked-outside="toggleButton()"
+    class="p-4 sticky w-full z-10 top-0 shadow-lg bg-indigo-500 mb-6"
+  >
     <div
       class="container px-4 mx-auto flex flex-wrap items-center justify-between"
     >
@@ -164,7 +168,6 @@
               </div>
             </div>
           </li>
-          
         </ul>
       </div>
     </div>
@@ -188,16 +191,16 @@ export default {
           this.toggle = !this.toggle
           break
         case 'navLayanan':
-          this.navUserOption = true;
+          this.navUserOption = true
           this.navLayanan = !this.navLayanan
           break
         case 'navUserOption':
-          this.navLayanan = true;
+          this.navLayanan = true
           this.navUserOption = !this.navUserOption
           break
         default:
-          this.navUserOption = true;
-          this.navLayanan = true;
+          this.navUserOption = true
+          this.navLayanan = true
           break
       }
     },
