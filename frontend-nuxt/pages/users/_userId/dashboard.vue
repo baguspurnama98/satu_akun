@@ -7,6 +7,7 @@
 
 <script>
 import Landing from '@/components/Hero/Landing'
+import CardCampaign from '@/components/CardCampaign'
 export default {
   layout: 'default',
   components: { Landing },

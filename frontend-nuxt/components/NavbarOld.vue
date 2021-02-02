@@ -45,7 +45,7 @@
 
       <div
         id="nav-content"
-        class="w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block pt-6 lg:pt-0 relative"
+        class="w-full flex-grow lg:flex lg:items-center lg:w-auto pt-6 lg:pt-0 relative"
         v-bind:class="[toggle ? 'hidden' : '']"
       >
         <ul class="list-reset lg:flex justify-end flex-1 items-center">

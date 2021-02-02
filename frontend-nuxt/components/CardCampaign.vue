@@ -62,7 +62,7 @@
 
       <div class="col-span-3 row-span-1">
         <div
-          class="grid grid-cols-3 gap-4 flex items-center justify-between leading-tight p-1 md:p-2"
+          class="grid grid-cols-3 gap-4 items-center justify-between leading-tight p-1 md:p-2"
         >
           <div class="col-span-2 flex align-bottom flex-col leading-none">
             <div class="flex flex-row justify-between items-center">

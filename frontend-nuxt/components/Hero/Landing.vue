@@ -34,9 +34,12 @@
         </button>
       </div>
       <!-- min-h-screen min-w-screen -->
-      <div class="flex flex-col items-center bg-white pt-8">
+      <div
+        class="flex flex-col min-h-screen min-w-screen items-center bg-white pt-8"
+      >
+        <!-- flex-col -->
         <div
-          class="flex flex-col flex-col-reverse items-center justify-center p-10 mx-auto lg:flex-row lg:max-w-6xl lg:p-0 xs:p-0 xs:top-0"
+          class="flex flex-col-reverse items-center justify-center p-10 mx-auto lg:flex-row lg:max-w-6xl lg:p-0 xs:p-0 xs:top-0"
         >
           <div class="w-full lg:pr-10 rounded-lg md:w-2/3 lg:w-1/2 group">
             <div class="relative xs:p-10">
@@ -68,7 +71,7 @@
             <div class="relative flex items-center mt-10">
               <a
                 href="#section2"
-                class="flex items-center self-start px-5 py-3 rounded-md text-base leading-tight text-white inline-block transition duration-150 ease-in-out bg-green-400 hover:bg-green-500 focus:bg-green-600"
+                class="flex items-center self-start px-5 py-3 rounded-md text-base leading-tight text-white transition duration-150 ease-in-out bg-green-400 hover:bg-green-500 focus:bg-green-600"
                 >Mulai Patungan</a
               >
             </div>
@@ -76,42 +79,12 @@
         </div>
       </div>
     </section>
-
-    <section
-      id="section2"
-      class="container px-4 pb-5 pt-4 mx-auto flex flex-wrap items-center justify-between"
-    >
-      <div
-        class="flex flex-col items-center justify-center bg-white min-h-screen min-w-screen"
-      >
-        <div class="text-center mb-5">
-          <h1
-            class="font-sans text-3xl font-extrabold tracking-wider leading-none text-black uppercase"
-          >
-            Berpatungan lebih murah
-          </h1>
-          <p
-            class="text-black-300 tracking-widest font-sans text-1xl font-thin"
-          >
-            Yuk mulai patungan aja!
-          </p>
-        </div>
-        <div class="grid grid-cols-4 xs:grid-cols-2 gap-4">
-          <CardCampaign v-for="index in 8" :key="index" v-bind:id="index" />
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 
 <script>
-import CardCampaign from '../CardCampaign.vue'
 export default {
   name: 'Landing',
-  data() {
-    items: [{ message: 'Foo' }, { message: 'Bar' }]
-  },
-  methods: {},
 }
 </script>
 

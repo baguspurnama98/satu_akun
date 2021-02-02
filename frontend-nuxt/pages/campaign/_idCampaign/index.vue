@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import DetailCampaign from '@/components/Hero/DetailCampaign'
+import DetailCampaign from '@/components/DetailCampaign'
 export default {
   layout: 'default',
   components: { DetailCampaign },
