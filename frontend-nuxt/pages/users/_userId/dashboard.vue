@@ -8,7 +8,7 @@
 <script>
 import Landing from '@/components/Hero/Landing'
 export default {
-  layout: 'default2',
+  layout: 'default',
   components: { Landing },
 }
 </script>

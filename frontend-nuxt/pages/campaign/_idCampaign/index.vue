@@ -1,3 +1,22 @@
 <template>
-  <p>Hallllo</p>
+  <div>
+    <!-- Content disini -->
+    <DetailCampaign />
+  </div>
 </template>
+
+<script>
+import DetailCampaign from '@/components/Hero/DetailCampaign'
+export default {
+  layout: 'default',
+  components: { DetailCampaign },
+}
+</script>
+
+<style>
+/* Sample `apply` at-rules with Tailwind CSS
+.container {
+@apply min-h-screen flex justify-center items-center text-center mx-auto;
+}
+*/
+</style>

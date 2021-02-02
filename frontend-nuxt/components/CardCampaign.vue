@@ -2,7 +2,7 @@
   <div
     class="flex flex-col overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out mb-2"
   >
-    <a href="#">
+    <a href="/campaign/1">
       <div class="col-span-4 relative">
         <img
           src="https://picsum.photos/640/400/?random"
@@ -24,7 +24,24 @@
       </div>
 
       <div class="col-span-3 row-span-1">
-        <h1 class="text-sm px-2">Lama Campaign: <span>1 Bulan</span></h1>
+        <!-- <h1 class="text-sm px-2">Lama Campaign: <span>1 Bulan</span></h1> -->
+        <div class="flex-1 inline-flex items-center">
+          <svg
+            class="h-5 w-5 text-black-300 mx-2"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="{2}"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <p><span class="text-gray-900 font-bold">1</span> Bulan</p>
+        </div>
       </div>
 
       <div class="col-span-3 row-span-1">

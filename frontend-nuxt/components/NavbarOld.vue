@@ -13,7 +13,7 @@
           to="/"
           class="text-white no-underline hover:text-white hover:no-underline"
         >
-          <span class="text-2xl pl-2"
+          <span class="text-2xl pl-2 font-medium"
             ><i class="em em-grinning"></i>Berpatungan.com</span
           >
         </NuxtLink>
@@ -51,7 +51,7 @@
         <ul class="list-reset lg:flex justify-end flex-1 items-center">
           <li class="nav-item relative text-right">
             <button
-              class="pl-3 pr-2 py-2 mx-2 my-1 rounded inline-flex items-center leading-snug text-white hover:bg-gray-900 hover:text-gray-100"
+              class="pl-3 pr-2 py-2 mx-2 my-1 border-0 rounded inline-flex items-center leading-snug text-white text-md font-medium hover:bg-indigo-700 hover:text-gray-100"
               aria-haspopup="true"
               aria-expanded="true"
               @click="toggleButton('navLayanan')"
@@ -107,7 +107,7 @@
           </li>
           <li class="nav-item relative text-right">
             <button
-              class="px-3 py-2 mx-2 my-1 rounded inline-flex items-center leading-snug text-white hover:bg-gray-900 hover:text-gray-100"
+              class="px-3 py-2 mx-2 my-1 rounded inline-flex items-center leading-snug text-white text-md font-medium hover:bg-indigo-700 hover:text-gray-100"
               href="#pablo"
             >
               <span>Tentang Kami</span>
@@ -117,7 +117,7 @@
           <!-- Profile dropdown -->
           <li class="nav-item ml-0 mt-2 lg:mt-0 text-right">
             <button
-              class="px-6 py-2 md:mx-2 mx-0 rounded inline-flex bg-white hover:bg-gray-900 hover:text-white"
+              class="px-6 py-2 md:mx-2 mx-0 rounded inline-flex bg-white hover:bg-yellow-400 hover:text-black"
               type="button"
               @click="toggleButton('navUserOption')"
             >
