@@ -1,15 +1,16 @@
 <template>
-    <div>
-        <!-- Content disini -->
-        <Landing />
-    </div>
+  <div>
+    <!-- Content disini -->
+    <Landing />
+  </div>
 </template>
 
 <script>
-import Landing from "@/components/Hero/Landing";
+import Landing from '@/components/Hero/Landing'
 export default {
-    layout: 'default',
-    components: { Landing },}
+  layout: 'default2',
+  components: { Landing },
+}
 </script>
 
 <style>

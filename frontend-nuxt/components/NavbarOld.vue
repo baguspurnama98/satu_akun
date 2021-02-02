@@ -14,7 +14,7 @@
           class="text-white no-underline hover:text-white hover:no-underline"
         >
           <span class="text-2xl pl-2"
-            ><i class="em em-grinning"></i>Bisa Patungan</span
+            ><i class="em em-grinning"></i>Berpatungan.com</span
           >
         </NuxtLink>
       </div>
