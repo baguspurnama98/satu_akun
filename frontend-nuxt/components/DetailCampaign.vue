@@ -2,87 +2,49 @@
   <div
     class="container px-4 mx-auto flex flex-wrap items-center justify-between"
   >
-    <!-- <div>
-      <h1>Judul Campaign</h1>
-    </div> -->
-    <div>
+    <div
+      class="z-0 relative grid grid-cols-1 w-full sm:grid-cols-2 sm:px-5 sm:py-5 sm:gap-x-8 md:py-5"
+    >
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 sm:px-8 sm:py-12 sm:gap-x-8 md:py-16"
+        class="z-10 col-start-1 row-start-1 px-4 sm:pt-5 pt-40 bg-gradient-to-t from-black sm:bg-none"
       >
-        <div
-          class="relative z-10 col-start-1 row-start-1 px-4 pt-40 pb-3 bg-gradient-to-t from-black sm:bg-none"
+        <p
+          class="text-md xs:tetx-xs font-medium text-white sm:mb-1 sm:text-gray-500"
         >
-          <p class="text-sm font-medium text-white sm:mb-1 sm:text-gray-500">
-            Entire house
-          </p>
-          <h2
-            class="text-xl font-semibold text-white sm:text-2xl sm:leading-7 sm:text-black md:text-3xl"
+          Netflix
+        </p>
+        <h2
+          class="text-xl font-semibold text-white sm:text-2xl sm:leading-7 sm:text-black md:text-3xl"
+        >
+          Patungan Beli Akun Dicoding selama 1 tahun bebas kelas apa saja yang
+          ada, yuk murah meriah
+        </h2>
+      </div>
+
+      <div class="col-start-1 row-start-3 space-y-3 px-4 xs:py-4">
+        <p class="flex items-center text-black text-md xs:text-sm font-normal">
+          <img
+            alt="Placeholder"
+            class="block rounded-full mr-2"
+            src="https://picsum.photos/48/48/?random"
+          />
+          Dibuat oleh
+          <a
+            class="text-md xs:text-sm px-1 font-medium text-indigo-500"
+            href="#"
           >
-            Beach House in Collingwood
-          </h2>
-        </div>
-        <div class="col-start-1 row-start-2 px-4 sm:pb-16">
-          <div
-            class="flex items-center text-sm font-medium my-5 sm:mt-2 sm:mb-4"
-          >
-            <svg
-              width="20"
-              height="20"
-              fill="currentColor"
-              class="text-violet-600"
-            >
-              <path
-                d="M9.05 3.691c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.372 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.363-1.118l-2.8-2.034c-.784-.57-.381-1.81.587-1.81H7.03a1 1 0 00.95-.69L9.05 3.69z"
-              />
-            </svg>
-            <div class="ml-1">
-              <span class="text-black">4.94</span>
-              <span class="sm:hidden md:inline">(128)</span>
-            </div>
-            <div class="text-base font-normal mx-2">·</div>
-            <div>Collingwood, Ontario</div>
-          </div>
-          <hr class="w-16 border-gray-300 hidden sm:block" />
-        </div>
-        <div class="col-start-1 row-start-3 space-y-3 px-4">
-          <p class="flex items-center text-black text-sm font-medium">
+            Bagus Purnama Putra
+          </a>
+        </p>
+      </div>
+      <div class="col-start-1 row-start-1 flex sm:col-start-2 sm:row-span-3">
+        <div class="w-full grid">
+          <div class="relative col-span-3 row-span-2 md:col-span-2">
             <img
-              src="https://picsum.photos/32/32/?random"
+              src="https://picsum.photos/640/400/?random"
               alt=""
-              class="w-6 h-6 rounded-full mr-2 bg-gray-100"
+              class="absolute inset-0 w-full h-full object-cover bg-gray-100 rounded-lg"
             />
-            Hosted by Kevin Francis
-          </p>
-          <button
-            type="button"
-            class="bg-violet-100 text-violet-700 text-base font-semibold px-6 py-2 rounded-lg"
-          >
-            Check availability
-          </button>
-        </div>
-        <div class="col-start-1 row-start-1 flex sm:col-start-2 sm:row-span-3">
-          <div class="w-full grid grid-cols-3 grid-rows-2 gap-2">
-            <div class="relative col-span-3 row-span-2 md:col-span-2">
-              <img
-                src="https://picsum.photos/32/32/?random"
-                alt=""
-                class="absolute inset-0 w-full h-full object-cover bg-gray-100 sm:rounded-lg"
-              />
-            </div>
-            <div class="relative hidden md:block">
-              <img
-                src="https://picsum.photos/32/32/?random"
-                alt=""
-                class="absolute inset-0 w-full h-full object-cover rounded-lg bg-gray-100"
-              />
-            </div>
-            <div class="relative hidden md:block">
-              <img
-                src="https://picsum.photos/32/32/?random"
-                alt=""
-                class="absolute inset-0 w-full h-full object-cover rounded-lg bg-gray-100"
-              />
-            </div>
           </div>
         </div>
       </div>
@@ -91,6 +53,6 @@
 </template>
 <script>
 export default {
-  name: 'Landing',
+  name: 'Detail_Campaign',
 }
 </script>

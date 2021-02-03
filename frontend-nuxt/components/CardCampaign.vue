@@ -30,7 +30,7 @@
       </div>
 
       <div class="col-span-3 row-span-1">
-        <a class="text-sm xs:text-xs px-2 text-gray-700" href="#">
+        <a class="text-sm xs:text-xs px-2" href="#">
           <span class="font-medium text-indigo-500">Bagus Purnama Putra</span>
         </a>
       </div>
@@ -85,25 +85,6 @@
         <div
           class="grid grid-cols-3 gap-4 items-center justify-between leading-tight px-2 pb-2"
         >
-          <!-- <div class="col-span-2 flex align-bottom flex-col leading-none">
-            <div class="flex flex-row justify-between items-center">
-              <a
-                class="flex items-center no-underline hover:underline text-black"
-                href="#"
-              >
-                <img
-                  alt="Placeholder"
-                  class="block rounded-full"
-                  src="https://picsum.photos/32/32/?random"
-                />
-                <span class="ml-1 text-sm xs:text-xs">Bagus Purnama Putra</span>
-              </a>
-            </div>
-          </div> -->
-          <!-- <div class="col-start-1 col-end-3">
-            <span class="text-sm xs:text-xs">Tenggang waktu:</span>
-          </div> -->
-
           <div class="col-end-7 col-span-2">
             <span class="text-red-900 text-sm xs:text-xs">3 hari lagi </span>
           </div>
