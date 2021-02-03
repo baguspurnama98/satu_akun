@@ -34,9 +34,7 @@
         </button>
       </div>
       <!-- min-h-screen min-w-screen -->
-      <div
-        class="flex flex-col min-h-screen min-w-screen items-center bg-white pt-8"
-      >
+      <div class="flex flex-col items-center bg-white pt-8">
         <!-- flex-col -->
         <div
           class="flex flex-col-reverse items-center justify-center p-10 mx-auto lg:flex-row lg:max-w-6xl lg:p-0 xs:p-0 xs:top-0"

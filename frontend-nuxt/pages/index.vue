@@ -5,7 +5,7 @@
     <!-- component campaign -->
     <section
       id="section2"
-      class="container px-4 pb-5 pt-4 mx-auto flex flex-wrap items-center justify-between"
+      class="container px-4 pb-5 mx-auto flex flex-wrap items-center justify-between"
     >
       <div
         class="flex flex-col items-center justify-center bg-white min-h-screen min-w-screen"
@@ -22,7 +22,7 @@
             Yuk mulai patungan aja!
           </p>
         </div>
-        <div class="grid grid-cols-4 xs:grid-cols-2 gap-4">
+        <div class="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 gap-4">
           <CardCampaign v-for="index in 8" :key="index" v-bind:id="index" />
         </div>
       </div>
