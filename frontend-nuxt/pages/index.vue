@@ -23,7 +23,11 @@
           </p>
         </div>
         <div class="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 gap-4">
-          <CardCampaign v-for="index in 8" :key="index" v-bind:id="index" />
+          <CardCampaign
+            v-for="item in items"
+            :key="item.title"
+            :title="item.title"
+          />
         </div>
       </div>
     </section>
@@ -195,12 +199,27 @@
     </section>
   </div>
 </template>
-
 <script>
 import Landing from '@/components/Hero/Landing'
 export default {
   layout: 'default',
   components: { Landing },
+  data() {
+    return {
+      items: [
+        { title: 'Sharing Account Netflix 1 Bulan' },
+        { title: 'Belajar Coding Javascript' },
+        { title: 'Disney Hotstar' },
+        {
+          title:
+            'Patungan Beli Akun Dicoding selama 1 tahun bebas kelas apa saja yang ada, yuk murah meriah',
+        },
+        { title: 'Sharing Account Netflix 1 Bulan' },
+        { title: 'Belajar Coding Javascript' },
+        { title: 'Disney Hotstar' },
+      ],
+    }
+  },
 }
 </script>
 

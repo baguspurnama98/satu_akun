@@ -11,12 +11,10 @@
         />
 
         <div
-          class="bg-indigo-500 absolute bottom-0 right-0 p-2 rounded-l-lg xs:p-1"
+          class="bg-indigo-500 absolute bottom-0 right-0 p-2 rounded-tl-lg xs:p-1"
         >
-          <p
-            class="lg:font-bold sm:font-semibold xs:font-medium text-white text-md sm:text-sm xs:text-xs"
-          >
-            Rp. 53.000/orang
+          <p class="font-semibold text-white text-md sm:text-sm xs:text-xs">
+            Rp. 53.000<span class="font-normal">/orang</span>
           </p>
         </div>
       </div>
@@ -25,17 +23,16 @@
         <header
           class="flex items-center justify-between leading-tight pt-1 px-2"
         >
-          <h1 class="text-md xs:text-xs font-medium">
-            Sharing Account Netflix 1 Bulan
+          <h1 class="text-lg xs:text-xs font-medium truncate">
+            {{ title }}
           </h1>
         </header>
       </div>
 
       <div class="col-span-3 row-span-1">
-        <h1 class="text-sm xs:text-xs px-2 text-gray-700">
-          by
+        <a class="text-sm xs:text-xs px-2 text-gray-700" href="#">
           <span class="font-medium text-indigo-500">Bagus Purnama Putra</span>
-        </h1>
+        </a>
       </div>
 
       <div class="col-span-3 row-span-1">
@@ -120,6 +117,7 @@
 <script>
 export default {
   name: 'CardCampaign',
+  props: ['title'],
 }
 </script>
 <style>
