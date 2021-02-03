@@ -42,12 +42,12 @@
             </h2>
             <nav class="list-none mb-10">
               <li>
-                <a class="text-gray-600 hover:text-gray-800 cursor-pointer"
+                <a class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
                   >cs@satuakun.id</a
                 >
               </li>
               <li>
-                <a class="text-gray-600 hover:text-gray-800 cursor-pointer"
+                <a class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
                   >085155144278</a
                 >
               </li>
@@ -61,17 +61,17 @@
             </h2>
             <nav class="list-none mb-10">
               <li>
-                <a class="text-gray-600 hover:text-gray-800 cursor-pointer"
+                <a class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
                   >Kebijakan Privasi</a
                 >
               </li>
               <li>
-                <a class="text-gray-600 hover:text-gray-800 cursor-pointer"
+                <a class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
                   >FAQ</a
                 >
               </li>
               <li>
-                <a class="text-gray-600 hover:text-gray-800 cursor-pointer"
+                <a class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
                   >Skema Harga</a
                 >
               </li>

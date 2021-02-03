@@ -7,10 +7,11 @@
 
 <script>
 import Landing from '@/components/Hero/Landing'
-import CardCampaign from '@/components/CardCampaign'
+import CardCampaign from '@/components/Campaign/CardCampaign'
+
 export default {
   layout: 'default',
-  components: { Landing },
+  components: { Landing, CardCampaign },
 }
 </script>
 

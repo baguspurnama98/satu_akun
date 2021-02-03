@@ -1,28 +1,28 @@
 <template>
   <div>
     <!-- Content disini -->
-    <Landing />
+    <Landing class="my-12"/>
     <!-- component campaign -->
     <section
       id="section2"
-      class="container px-4 pb-5 mx-auto flex flex-wrap items-center justify-between"
+      class="container px-4 my-12 mx-auto flex flex-wrap items-center justify-between"
     >
       <div
         class="flex flex-col items-center justify-center bg-white min-h-screen min-w-screen"
       >
-        <div class="text-center mb-5">
+        <div class="text-center mb-10">
           <h1
-            class="font-sans text-3xl font-extrabold tracking-wider leading-none text-black uppercase"
+            class="font-sans text-3xl font-extrabold tracking-wider leading-none text-black uppercase mb-4"
           >
             Berpatungan lebih murah
           </h1>
           <p
-            class="text-black-300 tracking-widest font-sans text-1xl font-thin"
+            class="text-gray-700 tracking-widest font-sans leading-relaxed text-base"
           >
             Yuk mulai patungan aja!
           </p>
         </div>
-        <div class="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 gap-4">
+        <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-6 gap-4">
           <CardCampaign
             v-for="item in items"
             :key="item.title"
@@ -32,7 +32,7 @@
       </div>
     </section>
     <!-- component hero keunggulan -->
-    <section class="text-gray-700 body-font">
+    <section class="text-gray-700 body-font my-12">
       <div class="container px-5 mx-auto flex flex-wrap">
         <div class="text-center mb-10">
           <h1
@@ -49,7 +49,7 @@
         <div class="flex flex-wrap -m-4">
           <div class="p-4 lg:w-1/2 md:w-full">
             <div
-              class="flex border-2 rounded-lg border-gray-200 p-8 sm:flex-row flex-col"
+              class="flex border rounded-lg border-gray-400 p-8 sm:flex-row flex-col"
             >
               <div
                 class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-500 flex-shrink-0"
@@ -78,7 +78,7 @@
           </div>
           <div class="p-4 lg:w-1/2 md:w-full">
             <div
-              class="flex border-2 rounded-lg border-gray-200 p-8 sm:flex-row flex-col"
+              class="flex border rounded-lg border-gray-400 p-8 sm:flex-row flex-col"
             >
               <div
                 class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-red-100 text-red-500 flex-shrink-0"
@@ -108,7 +108,7 @@
           </div>
           <div class="p-4 lg:w-1/2 md:w-full">
             <div
-              class="flex border-2 rounded-lg border-gray-200 p-8 sm:flex-row flex-col"
+              class="flex border rounded-lg border-gray-400 p-8 sm:flex-row flex-col"
             >
               <div
                 class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-green-100 text-green-500 flex-shrink-0"
@@ -152,7 +152,7 @@
           </div>
           <div class="p-4 lg:w-1/2 md:w-full">
             <div
-              class="flex border-2 rounded-lg border-gray-200 p-8 sm:flex-row flex-col"
+              class="flex border rounded-lg border-gray-400 p-8 sm:flex-row flex-col"
             >
               <div
                 class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0"
@@ -201,9 +201,11 @@
 </template>
 <script>
 import Landing from '@/components/Hero/Landing'
+import CardCampaign from '@/components/Campaign/CardCampaign'
+
 export default {
   layout: 'default',
-  components: { Landing },
+  components: { Landing, CardCampaign },
   data() {
     return {
       items: [
