@@ -26,23 +26,25 @@
         </div>
         <div class="flex-1 inline-flex items-center mt-1">
           <svg
-            class="h-5 w-5 xs:w-4 xs:h-4 text-black-300 mr-1"
+            class="h-5 w-5"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
-            viewBox="0 -2 25 25"
+            viewBox="0 0 24 24"
             stroke="currentColor"
           >
             <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="{2}"
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <p class="text-md xs:text-xs">
+          <p class="text-md sm:text-sm ml-1">
             <span class="text-gray-900 font-medium">1</span> Tahun
           </p>
         </div>
+        <p class="text-sm">
+          Berakhir <span class="font-bold">10 Februari 2021</span>
+        </p>
         <p class="flex items-center text-black text-md xs:text-sm font-normal">
           Oleh:
           <a
@@ -123,11 +125,6 @@
               </a>
             </span>
           </div>
-          <div class="col-auto">
-            <p class="text-xs text-right">
-              Berakhir <span class="font-bold">10 Februari 2021</span>
-            </p>
-          </div>
         </div>
       </div>
       <div class="col-start-1 row-start-1 flex sm:col-start-2 sm:row-span-3">
@@ -189,37 +186,37 @@
         >
           <!-- Bakal di looping dari props data dari backend, siapa yg tergabung saat ini, ada pengecekan sudah beneran aktif atau tidak -->
           <div
-            class="flex justify-start cursor-pointer text-gray-700 bg-gray-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2"
+            class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2"
           >
             <span class="bg-green-400 h-2 w-2 m-2 rounded-full"></span>
             <div class="font-medium px-2 truncate">Bagus Alexander</div>
           </div>
           <div
-            class="flex justify-start cursor-pointer text-gray-700 bg-gray-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2"
+            class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2"
           >
             <span class="bg-green-400 h-2 w-2 m-2 rounded-full"></span>
             <div class="font-medium px-2 truncate">Jesse Purnama</div>
           </div>
           <!-- ingat ada gray nih, bisa styling class based on data active or pending -->
           <div
-            class="flex justify-start cursor-pointer text-gray-700 bg-gray-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2"
+            class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2"
           >
             <span class="bg-gray-400 h-2 w-2 m-2 rounded-full"></span>
             <div class="font-medium px-2 truncate">Anastasya Eka</div>
           </div>
           <div
-            class="flex justify-start cursor-pointer text-gray-700 bg-green-100 rounded-md px-2 py-2 xs:mb-2"
+            class="flex justify-start cursor-pointer text-gray-700 bg-green-200 rounded-md px-2 py-2 xs:mb-2"
           >
             <!-- kalau ada slot kosong nanti maka penambahan kelas hidden di span berikut, dan kelas di atasnya ada penambahan kelas background nya hijau, hovernya di hapus -->
             <!-- bisa diimplementasiin styling class seleksi kondisi -->
             <!-- <span class="bg-green-400 h-2 w-2 m-2 rounded-full"></span> -->
-            <div class="font-medium px-2 italic">Slot Kosong</div>
+            <div class="font-medium px-2 font-bold">Slot Kosong</div>
           </div>
           <div
-            class="flex justify-start cursor-pointer text-gray-700 bg-green-100 rounded-md px-2 py-2 xs:mb-2"
+            class="flex justify-start cursor-pointer text-gray-700 bg-green-200 rounded-md px-2 py-2 xs:mb-2"
           >
             <!-- <span class="bg-green-400 h-2 w-2 m-2 rounded-full"></span> -->
-            <div class="font-medium px-2 italic">Slot Kosong</div>
+            <div class="font-medium px-2 font-bold">Slot Kosong</div>
           </div>
         </div>
         <!-- <div class="text-right pr-3">
@@ -231,7 +228,7 @@
       </div>
       <div class="text-center my-5 md:my-10">
         <button
-          class="w-1/2 xs:w-full py-2 rounded text-white inline-block shadow-xs bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700 font-bold"
+          class="w-1/2 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700 font-bold"
           type="submit"
         >
           Daftar
