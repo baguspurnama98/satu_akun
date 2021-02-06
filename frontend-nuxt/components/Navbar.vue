@@ -6,9 +6,7 @@
   >
     <div class="container max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        <div
-          class="absolute inset-y-0 left-0 flex items-center block sm:hidden"
-        >
+        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <button
             class="relative inline-flex items-center justify-center ml-2 p-2 rounded-md text-gray-400 hover:text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             @click="toggleButton('toggle')"
@@ -225,7 +223,7 @@
       <!-- <div
         class="absolute overflow-hidden shadow-lg border-t-4 bg-white mb-4 rounded-b-lg rounded-t border-red-light w-full md:w-1/4"
       >
-        <div class="px-6 py-4 mb-2 mt-4 mb-8">
+        <div class="px-6 py-4 mb-2 mt-4 ">
           <div class="flex space-x-4 px-2">
             <a
               href="#"
