@@ -4,15 +4,15 @@
       class="container px-4 mx-auto flex flex-wrap items-center justify-between"
     >
       <div
-        class="relative items-center text-gray-600 mt-10 xs:mt-5 mb-10 xs:mb-5 w-1/2 xs:w-full mx-auto"
+        class="relative items-center text-gray-900 mb-10 xs:mb-5 w-1/2 xs:w-full mx-auto"
       >
         <input
           type="search"
           name="serch"
-          placeholder="Search"
-          class="bg-gray-200 w-full h-10 px-5 pr-10 rounded-full text-sm focus:outline-none border"
+          placeholder="Cari apa?"
+          class="bg-gray-100 w-full h-10 px-5 py-6 pr-10 rounded-full text-md focus:outline-none shadow-md"
         />
-        <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
+        <button type="submit" class="absolute right-0 top-0 mt-4 mr-4">
           <svg
             class="h-4 w-4 fill-current"
             xmlns="http://www.w3.org/2000/svg"
@@ -64,10 +64,10 @@
             >
               Bergabung untuk berlangganan platform premium secara patungan.
             </p>
-            <div class="relative flex items-center mt-10">
+            <div class="relative flex mt-10 mx-auto md:ml-0">
               <a
                 href="#section2"
-                class="flex items-center self-start px-5 py-3 rounded-md text-base leading-tight text-white transition duration-150 ease-in-out bg-indigo-400 hover:bg-indigo-500 focus:bg-indigo-600"
+                class="flex items-center px-5 py-3 rounded-md text-base text-white transition bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
                 >Mulai Patungan
                 <svg class="ml-2 animate-bounce w-4 h-4 text-amber-900" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 26 26" stroke="currentColor">
                   <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>

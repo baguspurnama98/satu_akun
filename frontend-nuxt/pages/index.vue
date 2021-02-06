@@ -12,7 +12,7 @@
       >
         <div class="text-center mb-10">
           <h1
-            class="font-sans text-3xl font-extrabold tracking-wider leading-none text-black uppercase mb-4"
+            class="font-sans text-3xl font-bold tracking-wider leading-none text-black mb-4"
           >
             Berpatungan lebih murah
           </h1>
@@ -177,7 +177,7 @@
                   layanan mumpuni, <i>harga mahasiswa</i>. Coba lihat detail
                   penawaran yang kami berikan di skema harga.
                 </p>
-                <a class="mt-3 text-indigo-500 inline-flex items-center" href=""
+                <a class="mt-3 text-indigo-500 inline-flex items-center" href="/pricing"
                   >Selengkapnya
                   <svg
                     fill="none"

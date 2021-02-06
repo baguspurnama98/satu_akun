@@ -33,8 +33,8 @@
             stroke="currentColor"
           >
             <path
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
+              stroke-linecap="round"
+              stroke-linejoin="round"
               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
@@ -62,7 +62,7 @@
               class="inline-flex lg:ml-auto lg:mt-0 sm:mt-6 w-full md:w-auto"
             >
               <!-- Nanti ambil data dari database, kalau dia punya ig, maka class hidden di nonaktifin -->
-              <a class="text-gray-500">
+              <a class="text-gray-500 hover:text-gray-800 cursor-pointer">
                 <svg
                   fill="currentColor"
                   stroke-linecap="round"
@@ -76,7 +76,7 @@
                   ></path>
                 </svg>
               </a>
-              <a class="ml-3 text-gray-500">
+              <a class="ml-3 text-gray-500 hover:text-gray-800 cursor-pointer">
                 <svg
                   fill="currentColor"
                   stroke-linecap="round"
@@ -90,7 +90,7 @@
                   ></path>
                 </svg>
               </a>
-              <a class="ml-3 text-gray-500">
+              <a class="ml-3 text-gray-500 hover:text-gray-800 cursor-pointer">
                 <svg
                   fill="none"
                   stroke="currentColor"
@@ -106,7 +106,7 @@
                   ></path>
                 </svg>
               </a>
-              <a class="ml-3 text-gray-500">
+              <a class="ml-3 text-gray-500 hover:text-gray-800 cursor-pointer">
                 <svg
                   fill="currentColor"
                   stroke="currentColor"
@@ -146,9 +146,9 @@
     <div
       class="relative grid grid-cols-1 w-full sm:px-5 sm:py-5 sm:gap-x-8 md:py-5"
     >
-      <div class="pl-3 my-5">
+      <div class="px-3 my-5">
         <h1
-          class="font-semibold text-xl text-gray-700 subpixel-antialiased text-center"
+          class="font-semibold text-2xl text-gray-700 subpixel-antialiased text-center pb-4"
         >
           Deskripsi
         </h1>
@@ -158,7 +158,10 @@
         <div class="w-full">
           <span>Harga yang harus dibayarkan: 53 ribu</span>
         </div> -->
-        <p class="my-3">
+        <p
+          class="my-3 text-justify"
+          v-bind:class="[detail ? 'line-clampin' : '']"
+        >
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and
@@ -169,15 +172,29 @@
           more recently with desktop publishing software like Aldus PageMaker
           including versions of Lorem Ipsum.
         </p>
+        <button
+          v-if="detail === true"
+          class="border-none bg-none cursor-pointer hover:underline text-indigo-500 focus:outline-none"
+          @click="showDetail()"
+        >
+          Lihat Selengkapnya
+        </button>
+        <button
+          v-else
+          class="border-none bg-none cursor-pointer hover:underline text-indigo-500 focus:outline-none"
+          @click="showDetail()"
+        >
+          Lihat Lebih Sedikit
+        </button>
       </div>
     </div>
     <div class="w-full border border-gray-300 border-opacity-50 sm:mx-5"></div>
     <div
       class="relative grid grid-cols-1 w-full sm:px-5 sm:py-5 sm:gap-x-8 md:py-5"
     >
-      <div class="col-start-1 pl-3 mt-5 mb-2">
+      <div class="col-start-1 px-3 mt-5 mb-2">
         <h1
-          class="font-semibold text-xl text-gray-700 subpixel-antialiased text-center"
+          class="font-semibold text-2xl text-gray-700 subpixel-antialiased text-center pb-4"
         >
           Daftar Peserta
         </h1>
@@ -210,13 +227,13 @@
             <!-- kalau ada slot kosong nanti maka penambahan kelas hidden di span berikut, dan kelas di atasnya ada penambahan kelas background nya hijau, hovernya di hapus -->
             <!-- bisa diimplementasiin styling class seleksi kondisi -->
             <!-- <span class="bg-green-400 h-2 w-2 m-2 rounded-full"></span> -->
-            <div class="font-medium px-2 font-bold">Slot Kosong</div>
+            <div class="px-2 font-bold">Slot Kosong</div>
           </div>
           <div
             class="flex justify-start cursor-pointer text-gray-700 bg-green-200 rounded-md px-2 py-2 xs:mb-2"
           >
             <!-- <span class="bg-green-400 h-2 w-2 m-2 rounded-full"></span> -->
-            <div class="font-medium px-2 font-bold">Slot Kosong</div>
+            <div class="px-2 font-bold">Slot Kosong</div>
           </div>
         </div>
         <!-- <div class="text-right pr-3">
@@ -228,7 +245,7 @@
       </div>
       <div class="text-center my-5 md:my-10">
         <button
-          class="w-1/2 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700 font-bold"
+          class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
           type="submit"
         >
           Daftar
@@ -240,5 +257,25 @@
 <script>
 export default {
   name: 'Detail_Campaign',
+  data() {
+    return {
+      detail: true,
+    }
+  },
+  methods: {
+    showDetail() {
+      this.detail = !this.detail
+    },
+  },
 }
 </script>
+
+<style scoped>
+.line-clampin {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+</style>

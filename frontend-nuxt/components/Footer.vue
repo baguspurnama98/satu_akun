@@ -1,7 +1,7 @@
 <template>
   <!-- component footer -->
   <footer>
-    <div class="mt-24 bg-indigo-100">
+    <div class="mt-20 bg-indigo-100">
       <div class="container px-5 py-8 flex flex-wrap mx-auto items-center">
         <div
           class="w-1/4 xs:w-full flex-shrink-0 md:mx-0 mx-auto text-center md:text-left"
@@ -71,9 +71,9 @@
                 >
               </li>
               <li>
-                <a class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
-                  >Skema Harga</a
-                >
+                <NuxtLink exact to="/pricing" class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
+                  >Skema Harga
+                </NuxtLink>
               </li>
             </nav>
           </div>
@@ -82,7 +82,7 @@
         <span
           class="inline-flex lg:ml-auto lg:mt-0 mt-6 w-full justify-center md:justify-start md:w-auto"
         >
-          <a class="text-gray-500">
+          <a class="text-gray-500 hover:text-gray-800 cursor-pointer">
             <svg
               fill="currentColor"
               stroke-linecap="round"
@@ -96,7 +96,7 @@
               ></path>
             </svg>
           </a>
-          <a class="ml-3 text-gray-500">
+          <a class="ml-3 text-gray-500 hover:text-gray-800 cursor-pointer">
             <svg
               fill="currentColor"
               stroke-linecap="round"
@@ -110,7 +110,7 @@
               ></path>
             </svg>
           </a>
-          <a class="ml-3 text-gray-500">
+          <a class="ml-3 text-gray-500 hover:text-gray-800 cursor-pointer">
             <svg
               fill="none"
               stroke="currentColor"
@@ -126,7 +126,7 @@
               ></path>
             </svg>
           </a>
-          <a class="ml-3 text-gray-500">
+          <a class="ml-3 text-gray-500 hover:text-gray-800 cursor-pointer">
             <svg
               fill="currentColor"
               stroke="currentColor"

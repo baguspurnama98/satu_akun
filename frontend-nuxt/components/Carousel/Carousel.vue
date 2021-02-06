@@ -2,8 +2,9 @@
     <div class="mx-auto relative">
         <!-- Slides -->
         <div v-for="slide in slides" :key="slide">
+            <!-- bakal diubah nanti paddingnya yaa, ini disesuaikan kontennya (text 1/5) -->
             <div v-show="activeSlide === slide"
-                class="p-24 font-bold text-5xl h-64 flex items-center bg-indigo-500 text-white rounded-lg">
+                class="p-48 font-bold text-5xl flex items-center bg-indigo-500 text-white rounded-lg">
                 <span class="w-12 text-center" v-text="slide"></span>
                 <span class="text-indigo-300">/</span>
                 <span class="w-12 text-center" v-text="slides.length"></span>
@@ -29,14 +30,13 @@
         </div>
 
         <!-- Buttons -->
-        <div class="absolute w-full flex items-center justify-center px-4">
+        <div class="w-full flex items-center justify-center px-4">
             <div v-for="slide in slides" :key="slide">
                 <button class="flex-1 w-4 h-2 mt-4 mx-2 mb-0 rounded-full overflow-hidden transition-colors duration-200 ease-out hover:bg-indigo-600 hover:shadow-lg"
                 :class="{ 
                     'bg-red-600': activeSlide === slide,
                     'bg-indigo-300': activeSlide !== slide 
-                }" 
-                @click.prevent="activeSlide = slide"
+                }"
                 ></button>
             </div>
         </div>

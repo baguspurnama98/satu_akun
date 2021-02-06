@@ -85,22 +85,13 @@
                   href="#"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   role="menuitem"
-                  >Netflix</a
+                  >Cari Campaign</a
                 >
                 <a
                   href="#"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   role="menuitem"
-                  >Spotify</a
-                >
-              </div>
-
-              <div class="py-1">
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                  role="menuitem"
-                  >Udemy</a
+                  >Buat Campaign</a
                 >
               </div>
             </div>
@@ -115,13 +106,15 @@
           </li>
 
           <!-- Profile dropdown -->
+          <!-- Jika account login true, maka yang ditampilkan adalah nama yang masuk dan disesuaikan dengan dropdownnya -->
           <li class="nav-item ml-0 mt-2 lg:mt-0 text-right">
             <button
               class="px-6 py-2 md:mx-2 mx-0 rounded inline-flex bg-white hover:bg-yellow-400 hover:text-black"
               type="button"
               @click="toggleButton('navUserOption')"
             >
-              <span>Masuk</span>
+              <span v-if="account_login">Dashboard</span>
+              <span v-else>Masuk</span>
             </button>
             <div
               class="origin-top-right absolute right-0 mt-2 w-40 rounded shadow-xl bg-white divide-y divide-gray-300 text-left"
@@ -130,42 +123,60 @@
               aria-orientation="vertical"
               aria-labelledby="user-menu"
             >
-              <div class="py-1">
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                  role="menuitem"
-                  >Campaign Saya</a
-                >
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                  role="menuitem"
-                  >Riwayat Patungan</a
-                >
-              </div>
-              <div class="py-1">
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                  role="menuitem"
-                  >Ubah Profil</a
-                >
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                  role="menuitem"
-                  >Pengaturan</a
-                >
-              </div>
-              <div class="py-1">
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                  role="menuitem"
-                  >Keluar</a
-                >
-              </div>
+              <template v-if="account_login">
+                <div class="py-1">
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                    role="menuitem"
+                    >Campaign Saya</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                    role="menuitem"
+                    >Riwayat Patungan</a
+                  >
+                </div>
+                <div class="py-1">
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                    role="menuitem"
+                    >Ubah Profil</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                    role="menuitem"
+                    >Pengaturan</a
+                  >
+                </div>
+                <div class="py-1">
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                    role="menuitem"
+                    >Keluar</a
+                  >
+                </div>
+              </template>
+              <template v-else>
+                <div class="py-1">
+                  <NuxtLink
+                    exact to="/account/login"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                    role="menuitem"
+                    >Masuk
+                  </NuxtLink>
+                  <a
+                    exact to="/account/register"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                    role="menuitem"
+                    >Daftar</a
+                  >
+                </div>
+              </template>
             </div>
           </li>
         </ul>
@@ -175,13 +186,16 @@
 </template>
 
 <script>
+import Template from '../../frontend/src/components/Template.vue'
 export default {
+  components: { Template },
   name: 'Navbar',
   data() {
     return {
       toggle: true,
       navLayanan: true,
       navUserOption: true,
+      account_login: false,
     }
   },
   methods: {

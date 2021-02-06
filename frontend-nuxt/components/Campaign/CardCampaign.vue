@@ -2,7 +2,7 @@
   <div
     class="flex flex-col justify-between rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out mb-2"
   >
-    <a href="/campaign/1">
+    <NuxtLink exact to="/campaign/1">
       <div class="col-span-4 relative">
         <img
           src="https://picsum.photos/640/400/?random"
@@ -11,10 +11,10 @@
         />
 
         <div
-          class="bg-indigo-500 absolute bottom-0 right-0 p-2 rounded-tl-md xs:py-1"
+          class="bg-indigo-500 absolute bottom-0 right-0 p-3 rounded-tl-md xs:py-1"
         >
           <p class="font-bold text-white text-md sm:text-sm xs:text-xs">
-            Rp53.000<span class="font-normal">/orang</span>
+            Rp 53.000<span class="font-normal">/orang</span>
           </p>
         </div>
       </div>
@@ -95,7 +95,7 @@
           </div>
         </div>
       </div>
-    </a>
+    </NuxtLink>
   </div>
 </template>
 <script>
