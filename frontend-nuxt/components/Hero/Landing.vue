@@ -40,7 +40,7 @@
           class="flex flex-col-reverse items-center justify-center p-10 mx-auto lg:flex-row lg:max-w-6xl lg:p-0 xs:p-0 xs:top-0"
         >
           <div class="w-full lg:pr-10 rounded-lg md:w-2/3 lg:w-1/2 group">
-            <div class="relative xs:p-10">
+            <div class="relative xs:px-10">
               <img
                 src="~/assets/img/home_cinema.svg"
                 class="z-10 object-cover w-full h-full"
@@ -53,12 +53,10 @@
             <h1
               class="font-sans text-4xl font-extrabold leading-none text-black sm:text-5xl xl:text-6xl sm:text-center lg:text-left"
             >
-              <span class="">
                 <!-- <span
                 class="relative bottom-0 left-0 inline-block w-full h-4 mb-1 -ml-1 transform -skew-x-3 bg-yellow-200"
               ></span> -->
-                <span class="">Watch Together,</span>
-              </span>
+              <span class="">Watch Together,</span>
               <span class="block text-yellow-400">Pay Together.</span>
             </h1>
             <p
@@ -69,9 +67,12 @@
             <div class="relative flex items-center mt-10">
               <a
                 href="#section2"
-                class="flex items-center self-start px-5 py-3 rounded-md text-base leading-tight text-white transition duration-150 ease-in-out bg-green-400 hover:bg-green-500 focus:bg-green-600"
-                >Mulai Patungan</a
-              >
+                class="flex items-center self-start px-5 py-3 rounded-md text-base leading-tight text-white transition duration-150 ease-in-out bg-indigo-400 hover:bg-indigo-500 focus:bg-indigo-600"
+                >Mulai Patungan
+                <svg class="ml-2 animate-bounce w-4 h-4 text-amber-900" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 26 26" stroke="currentColor">
+                  <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+              </a>
             </div>
           </div>
         </div>
@@ -81,8 +82,14 @@
 </template>
 
 <script>
+import Carousel from '@/components/Carousel/Carousel'
+
 export default {
   name: 'Landing',
+  data() {
+    return {
+    }
+  }
 }
 </script>
 
