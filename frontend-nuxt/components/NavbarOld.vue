@@ -88,7 +88,7 @@
                   >Cari Campaign</a
                 >
                 <a
-                  href="#"
+                  href="/campaign/create"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   role="menuitem"
                   >Buat Campaign</a
@@ -164,13 +164,15 @@
               <template v-else>
                 <div class="py-1">
                   <NuxtLink
-                    exact to="/account/login"
+                    exact
+                    to="/account/login"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                     role="menuitem"
                     >Masuk
                   </NuxtLink>
                   <a
-                    exact to="/account/register"
+                    exact
+                    to="/account/register"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                     role="menuitem"
                     >Daftar</a
