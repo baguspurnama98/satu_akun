@@ -2,11 +2,11 @@
   <div
     class="container px-4 mx-auto flex flex-wrap items-center justify-between"
   >
-    <div class="m-3 w-full">
-      <h3 class="font-bold py-3 text-xl">Checkout</h3>
+    <div class="w-full">
+      <h3 class="font-bold py-3 text-4xl text-indigo-500">Checkout</h3>
       <div class="">
         <div class="bg-blue-100 p-3 rounded-lg">
-          <p class="xs:text-xs text-center">
+          <p class="xs:text-sm text-center">
             Segera lakukan pembayaran agar proses pendaftaran Anda valid.<br />
             Pastikan Anda melakukan transfer hingga 3 digit terakhir untuk
             memudahkan kami melakukan validasi pembayaran Anda.
@@ -14,7 +14,7 @@
         </div>
 
         <div
-          class="border rounded-lg grid grid-cols-2 my-5 mx-56 xs:mx-0 py-3 xs:text-xs"
+          class="border rounded-lg grid grid-cols-2 my-5 mx-2 lg:mx-56 py-3 xs:text-sm"
         >
           <div class="pl-5 xs:pl-2">
             <span class="font-semibold">Provider/PLatform</span>
@@ -45,7 +45,7 @@
           </div>
           <div>
             <span class="mr-5">:</span>
-            <span>{{ formatRupiah(price, 'Rp. ') }}</span>
+            <span>{{ formatRupiah(price, 'Rp ') }}</span>
           </div>
           <!--  -->
           <div class="pl-5 xs:pl-2">
@@ -69,8 +69,7 @@
           </div>
           <div class="inline-flex items-center">
             <span class="mr-6">:</span>
-            <span>12354453234675</span>
-
+            <span @click.stop.prevent="copyToClipboard" class="cursor-pointer">12354453234675</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -101,7 +100,7 @@
           </div>
           <div class="inline-flex items-center">
             <span class="mr-6">:</span>
-            <span>{{ formatRupiah(total, 'Rp. ') }}</span>
+            <span @click.stop.prevent="copyToClipboard" class="cursor-pointer">{{ formatRupiah(total, 'Rp ') }}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -122,11 +121,11 @@
         </div>
 
         <div class="bg-blue-100 p-3 rounded-lg">
-          <p class="xs:text-xs text-center">
+          <p class="xs:text-sm text-center">
             Segera lakukan pembayaran sebelum pukul
             <span class="font-bold">14.00</span>
           </p>
-          <p class="xs:text-xs text-center">
+          <p class="xs:text-sm text-center">
             Setelah melakukan pembayaran, kirimkan bukti pembayaran ke WhatsApp
             Berpatungan.com
           </p>
@@ -188,7 +187,7 @@ export default {
       }
 
       rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah
-      return prefix === undefined ? rupiah : rupiah ? 'Rp. ' + rupiah : ''
+      return prefix === undefined ? rupiah : rupiah ? 'Rp ' + rupiah : ''
     },
   },
 }

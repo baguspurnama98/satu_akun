@@ -49,4 +49,10 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
+
+  loadingIndicator: {
+    name: 'chasing-dots',
+    color: '#667EEA',
+    background: 'white'
+  }
 }

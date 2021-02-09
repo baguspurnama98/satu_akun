@@ -52,7 +52,7 @@
               class="flex border rounded-lg border-gray-400 p-8 sm:flex-row flex-col"
             >
               <div
-                class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-500 flex-shrink-0"
+                class="w-16 h-16 mr-8 mb-0 xs:mx-auto mb-4 inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-500 flex-shrink-0"
               >
                 <svg
                   fill="currentColor"
@@ -81,7 +81,7 @@
               class="flex border rounded-lg border-gray-400 p-8 sm:flex-row flex-col"
             >
               <div
-                class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-red-100 text-red-500 flex-shrink-0"
+                class="w-16 h-16 mr-8 mb-0 xs:mx-auto mb-4 inline-flex items-center justify-center rounded-full bg-red-100 text-red-500 flex-shrink-0"
               >
                 <svg
                   fill="currentColor"
@@ -111,7 +111,7 @@
               class="flex border rounded-lg border-gray-400 p-8 sm:flex-row flex-col"
             >
               <div
-                class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-green-100 text-green-500 flex-shrink-0"
+                class="w-16 h-16 mr-8 mb-0 xs:mx-auto mb-4 inline-flex items-center justify-center rounded-full bg-green-100 text-green-500 flex-shrink-0"
               >
                 <svg
                   fill="currentColor"
@@ -155,7 +155,7 @@
               class="flex border rounded-lg border-gray-400 p-8 sm:flex-row flex-col"
             >
               <div
-                class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0"
+                class="w-16 h-16 mr-8 mb-0 xs:mx-auto mb-4 inline-flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0"
               >
                 <svg
                   fill="currentColor"

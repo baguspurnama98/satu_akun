@@ -2,18 +2,18 @@
   <div>
     <!-- Content disini -->
     <!-- component login -->
-    <div class="flex items-center justify-center">
+    <div class="flex items-center justify-center mt-12">
         <div class="w-full max-w-md">
-            <form class="shadow-lg rounded-md px-12 pt-6 pb-8 mb-4">
+            <form class="shadow-lg rounded-md px-8 xs:px-4 pt-6 pb-8 mb-4 mx-4">
                 <!-- @csrf -->
                 <div class="text-gray-700 text-3xl flex justify-center py-2 mb-8">
                     Silakan Masuk
                 </div>
                 <div class="mb-4">
-                    <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 leading-tight focus:outline-none" name="email" type="email" required autofocus placeholder="Email" />
+                    <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 leading-tight focus:border-indigo-500 focus:outline-none" name="email" type="email" required autofocus placeholder="Email" />
                 </div>
                 <div class="mb-6">
-                    <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 mb-3 leading-tight focus:outline-none" type="password" placeholder="Password" name="password" required autocomplete="current-password" />
+                    <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 mb-3 leading-tight focus:border-indigo-500 focus:outline-none" type="password" placeholder="Password" name="password" required autocomplete="current-password" />
                 </div>
                 <div class="flex items-center justify-between">
                     <button class="px-6 py-2 rounded text-white inline-block shadow-lg bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700" type="submit">

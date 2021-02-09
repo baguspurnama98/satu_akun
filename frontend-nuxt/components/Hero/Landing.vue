@@ -64,7 +64,7 @@
             >
               Bergabung untuk berlangganan platform premium secara patungan.
             </p>
-            <div class="relative flex mt-10 mx-auto md:ml-0">
+            <div class="relative flex mt-10 mx-auto lg:ml-0">
               <a
                 href="#section2"
                 class="flex items-center px-5 py-3 rounded-md text-base text-white transition bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
