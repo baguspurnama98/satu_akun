@@ -146,8 +146,8 @@
 </template>
 <script>
 export default {
-  name: 'Create_Campaign',
-  components: { VueTailWindPicker: () => import('vue-tailwind-picker') },
+  name: 'Checkout_Campaign',
+
   data() {
     return {
       price: '53000',

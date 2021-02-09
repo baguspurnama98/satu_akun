@@ -210,62 +210,7 @@
         </div>
 
         <div class="sm:col-span-2 xs:pl-4">
-          <div class="grid grid-cols-2 gap-2">
-            <div class="w-full rounded-lg border p-2">
-              <VueTailWindPicker
-                :init="false"
-                @change="(v) => (value = v)"
-                class="inline-flex items-center"
-              >
-                <svg
-                  class="h-4 w-4 justify-self-center"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-                <input
-                  v-model="value"
-                  placeholder="Pilih tanggal mulai"
-                  class="ml-2 focus:outline-none w-full xs:text-xs"
-                />
-              </VueTailWindPicker>
-            </div>
-            <div class="w-full rounded-lg border p-2">
-              <VueTailWindPicker
-                :init="false"
-                @change="(v) => (value = v)"
-                class="inline-flex items-center"
-              >
-                <svg
-                  class="h-4 w-4 justify-self-center"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-                <input
-                  v-model="value"
-                  placeholder="Pilih tanggal berakhir"
-                  class="ml-2 focus:outline-none w-full xs:text-xs"
-                />
-              </VueTailWindPicker>
-            </div>
-          </div>
+          <!-- Input durasi bingung bentuknya gmn-->
         </div>
       </div>
 
@@ -324,12 +269,8 @@
 <script>
 export default {
   name: 'Create_Campaign',
-  components: { VueTailWindPicker: () => import('vue-tailwind-picker') },
-  data() {
-    return {
-      value: '',
-    }
-  },
+
+  data() {},
   methods: {},
 }
 </script>
