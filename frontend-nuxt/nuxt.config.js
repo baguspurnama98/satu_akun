@@ -20,9 +20,7 @@ export default {
   css: ['~/assets/css/main.css'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [
-    '~/plugins/close-event.client.js'
-  ],
+  plugins: ['~/plugins/close-event.client.js', '~/plugins/v-tailwind-picker'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,

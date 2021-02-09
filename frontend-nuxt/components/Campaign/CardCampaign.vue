@@ -48,14 +48,12 @@
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round" 
-                stroke-linejoin="round" 
+                stroke-linecap="round"
+                stroke-linejoin="round"
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <p class="ml-1 text-sm">
-              1 Bulan
-            </p>
+            <p class="ml-1 text-sm">1 Bulan</p>
           </div>
         </div>
 
