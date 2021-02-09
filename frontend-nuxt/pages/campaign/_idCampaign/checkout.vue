@@ -17,7 +17,7 @@
           class="border rounded-lg grid grid-cols-2 my-5 mx-2 lg:mx-56 py-3 xs:text-sm"
         >
           <div class="pl-5 xs:pl-2">
-            <span class="font-semibold">Provider/PLatform</span>
+            <span class="font-semibold">Provider/Platform</span>
           </div>
           <div>
             <span class="mr-5">:</span>
@@ -45,7 +45,7 @@
           </div>
           <div>
             <span class="mr-5">:</span>
-            <span>{{ formatRupiah(price, 'Rp ') }}</span>
+            <span>{{ formatRupiah(price, 'Rp. ') }}</span>
           </div>
           <!--  -->
           <div class="pl-5 xs:pl-2">
@@ -69,7 +69,9 @@
           </div>
           <div class="inline-flex items-center">
             <span class="mr-6">:</span>
-            <span @click.stop.prevent="copyToClipboard" class="cursor-pointer">12354453234675</span>
+            <span @click.stop.prevent="copyToClipboard" class="cursor-pointer"
+              >12354453234675</span
+            >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -100,7 +102,11 @@
           </div>
           <div class="inline-flex items-center">
             <span class="mr-6">:</span>
-            <span @click.stop.prevent="copyToClipboard" class="cursor-pointer">{{ formatRupiah(total, 'Rp ') }}</span>
+            <span
+              @click.stop.prevent="copyToClipboard"
+              class="cursor-pointer"
+              >{{ formatRupiah(total, 'Rp. ') }}</span
+            >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -141,6 +147,37 @@
         Saya sudah transfer
       </button>
     </div>
+    <!-- Notification -->
+    <div
+      class="container px-4 mx-auto flex flex-wrap items-center justify-between absolute"
+      v-bind:class="[showAlertCopied ? 'hidden' : '']"
+    >
+      <div class="mx-auto">
+        <div class="bg-white rounded-lg border-gray-300 border p-3 shadow-lg">
+          <div class="flex flex-row">
+            <div class="px-2">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 1792 1792"
+                fill="#44C997"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"
+                />
+              </svg>
+            </div>
+            <div class="ml-2 mr-6">
+              <span class="font-semibold">Successfully Copied!</span>
+              <!-- <span class="block text-gray-500"
+                >Anyone with a link can now view this file</span
+              > -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -151,9 +188,13 @@ export default {
     return {
       price: '53000',
       total: '53234',
+      showAlertCopied: true,
     }
   },
   methods: {
+    handleAlertCopied() {
+      this.showAlertCopied = !this.showAlertCopied
+    },
     copyToClipboard() {
       let testingCodeToCopy = document.querySelector('#testing-code')
       testingCodeToCopy.setAttribute('type', 'text') // 不是 hidden 才能複製
@@ -161,8 +202,9 @@ export default {
 
       try {
         var successful = document.execCommand('copy')
-        var msg = successful ? 'successful' : 'unsuccessful'
-        alert('copied ' + msg)
+        // var msg = successful ? 'successful' : 'unsuccessful'
+        this.showAlertCopied = !this.showAlertCopied
+        setTimeout(() => (this.showAlertCopied = true), 600)
       } catch (err) {
         alert('Oops, unable to copy')
       }
@@ -187,7 +229,7 @@ export default {
       }
 
       rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah
-      return prefix === undefined ? rupiah : rupiah ? 'Rp ' + rupiah : ''
+      return prefix === undefined ? rupiah : rupiah ? 'Rp. ' + rupiah : ''
     },
   },
 }

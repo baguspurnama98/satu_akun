@@ -22,7 +22,8 @@
             class="flex items-center text-black text-md xs:text-sm font-normal"
           >
             <p class="font-bold text-2xl">
-              Rp. 53.000<span class="font-normal">/orang</span>
+              {{ formatRupiah(price, 'Rp. ')
+              }}<span class="font-normal">/orang</span>
             </p>
           </div>
           <div class="flex-1 inline-flex items-center mt-1">
@@ -282,11 +283,29 @@ export default {
   data() {
     return {
       detail: true,
+      price: '53000',
     }
   },
   methods: {
     showDetail() {
       this.detail = !this.detail
+    },
+    formatRupiah(angka, prefix) {
+      var number_string = String(angka)
+          .replace(/[^,\d]/g, '')
+          .toString(),
+        split = number_string.split(','),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substr(0, sisa),
+        ribuan = split[0].substr(sisa).match(/\d{3}/gi)
+
+      if (ribuan) {
+        let separator = sisa ? '.' : ''
+        rupiah += separator + ribuan.join('.')
+      }
+
+      rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah
+      return prefix === undefined ? rupiah : rupiah ? 'Rp. ' + rupiah : ''
     },
   },
 }
