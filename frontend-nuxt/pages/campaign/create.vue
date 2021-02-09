@@ -179,7 +179,7 @@
               type="number"
               name="price"
               id="price"
-              class="border focus:outline-none focus:ring focus:border-indigo-400 p-2 xs:ml-4 xs:text-xs block w-full pl-16 pr-12 rounded-lg"
+              class="border focus:outline-none focus:ring focus:border-indigo-400 p-2 xs:ml-4 xs:text-xs block w-full pl-16 rounded-lg"
               placeholder="0"
             />
           </div>
