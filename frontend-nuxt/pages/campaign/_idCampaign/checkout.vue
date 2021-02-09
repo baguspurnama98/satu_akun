@@ -7,7 +7,7 @@
       <div class="">
         <div class="bg-blue-100 p-3 rounded-lg">
           <p class="xs:text-xs text-center">
-            Segera lakukan pembayaran agar proses pendaftaran Anda valid.
+            Segera lakukan pembayaran agar proses pendaftaran Anda valid.<br />
             Pastikan Anda melakukan transfer hingga 3 digit terakhir untuk
             memudahkan kami melakukan validasi pembayaran Anda.
           </p>
@@ -68,7 +68,7 @@
             <span class="font-semibold">Nomor Rekening</span>
           </div>
           <div class="inline-flex items-center">
-            <span class="mr-5">:</span>
+            <span class="mr-6">:</span>
             <span>12354453234675</span>
 
             <svg
@@ -76,7 +76,7 @@
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              class="h-4 w-4 xs:h-3 xs:w-3 ml-1 justify-self-center font-semibold cursor-pointer bg-yellow-200"
+              class="h-4 w-4 xs:h-3 xs:w-3 ml-1 justify-self-center font-semibold cursor-pointer rounded-lg bg-yellow-200"
               @click.stop.prevent="copyToClipboard"
             >
               <path
@@ -100,15 +100,14 @@
             <span class="font-semibold">Total Pembayaran</span>
           </div>
           <div class="inline-flex items-center">
-            <span class="mr-5">:</span>
-
+            <span class="mr-6">:</span>
             <span>{{ formatRupiah(total, 'Rp. ') }}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              class="h-4 w-4 xs:h-3 xs:w-3 ml-1 justify-self-center font-semibold cursor-pointer bg-yellow-200"
+              class="h-4 w-4 xs:h-3 xs:w-3 ml-1 justify-self-center font-semibold cursor-pointer rounded-lg bg-yellow-200"
               @click.stop.prevent="copyToClipboard"
             >
               <path
