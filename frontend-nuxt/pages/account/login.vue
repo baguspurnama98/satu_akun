@@ -1,48 +1,88 @@
+<
 <template>
-  <div>
-    <!-- Content disini -->
-    <!-- component login -->
-    <div class="flex items-center justify-center mt-12">
-        <div class="w-full max-w-md">
-            <form class="shadow-lg rounded-md px-8 xs:px-4 pt-6 pb-8 mb-4 mx-4">
-                <!-- @csrf -->
-                <div class="text-gray-700 text-3xl flex justify-center py-2 mb-8">
-                    Silakan Masuk
-                </div>
-                <div class="mb-4">
-                    <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 leading-tight focus:border-indigo-500 focus:outline-none" name="email" type="email" required autofocus placeholder="Email" />
-                </div>
-                <div class="mb-6">
-                    <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 mb-3 leading-tight focus:border-indigo-500 focus:outline-none" type="password" placeholder="Password" name="password" required autocomplete="current-password" />
-                </div>
-                <div class="flex items-center justify-between">
-                    <button class="px-6 py-2 rounded text-white inline-block shadow-lg bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700" type="submit">
-                        Masuk
-                    </button>
-                    <a class="inline-block align-baseline font-normal text-sm text-indigo-500 hover:text-indigo-800" href="#">
-                        Butuh Bantuan?
-                    </a>
-                </div>
-            </form>
+  <div
+    class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+  >
+    <div
+      class="flex items-center h-auto py-20 xs:py-10 w-full lg:justify-center"
+    >
+      <div
+        class="flex flex-col overflow-hidden bg-white min-w-full h-4/5 rounded-md shadow-lg md:flex-row md:flex-1 lg:max-w-screen-md"
+      >
+        <div
+          class="py-6 px-6 text-white bg-indigo-500 w-1/2 xs:w-full relative xs:hidden"
+        >
+          <div class="my-3 text-4xl font-bold tracking-wider text-center">
+            <a href="#">Berpatungan.com</a>
+          </div>
+          <p class="mt-6 font-normal text-center text-gray-300 md:mt-0">
+            Dengan Berpatungan, kamu bisa berlangganan akun premium lebih
+            murah!<br />
+            Ayo segera berpatungan!
+          </p>
+          <div class="absolute inset-x-0 bottom-0 py-3">
+            <p class="flex flex-col items-center justify-center text-center">
+              <span
+                >Belum punya akun?
+                <a href="/account/register" class="underline">Daftar!</a></span
+              >
+            </p>
+          </div>
         </div>
+        <div class="p-5 bg-white md:flex-1">
+          <h3 class="font-bold py-3 text-4xl text-indigo-500">Masuk</h3>
+          <form action="#" class="flex flex-col space-y-5">
+            <div class="flex flex-col space-y-1">
+              <label for="email" class="text-sm font-semibold text-gray-500"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                autofocus
+                class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-indigo-400 focus:outline-none focus:ring"
+              />
+            </div>
+            <div class="flex flex-col space-y-1">
+              <div class="flex items-center justify-between">
+                <label
+                  for="password"
+                  class="text-sm font-semibold text-gray-500"
+                  >Password</label
+                >
+                <a
+                  href="#"
+                  class="text-sm text-blue-600 hover:underline focus:text-blue-800"
+                  >Lupa Password?</a
+                >
+              </div>
+              <input
+                type="password"
+                id="password"
+                class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-indigo-400 focus:outline-none focus:ring"
+              />
+            </div>
+            <div class="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="remember"
+                class="w-4 h-4 transition duration-300 rounded focus:ring-2 focus:ring-offset-0 focus:outline-none focus:ring-blue-200"
+              />
+              <label for="remember" class="text-sm font-semibold text-gray-500"
+                >Ingat saya</label
+              >
+            </div>
+            <div>
+              <button
+                type="submit"
+                class="w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
+              >
+                Masuk
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </template>
-
-<script>
-import Carousel from '@/components/Carousel/Carousel'
-
-export default {
-    name: 'Login',
-    layout: 'default',
-    components: { Carousel },
-}
-</script>
-
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-</style>

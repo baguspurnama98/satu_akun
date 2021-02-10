@@ -196,21 +196,19 @@ export default {
       this.showAlertCopied = !this.showAlertCopied
     },
     copyToClipboard() {
-      let testingCodeToCopy = document.querySelector('#testing-code')
-      testingCodeToCopy.setAttribute('type', 'text') // 不是 hidden 才能複製
-      testingCodeToCopy.select()
+      let dataToCopy = document.querySelector('#testing-code')
+      dataToCopy.setAttribute('type', 'text')
+      dataToCopy.select()
 
       try {
         var successful = document.execCommand('copy')
-        // var msg = successful ? 'successful' : 'unsuccessful'
+
         this.showAlertCopied = !this.showAlertCopied
         setTimeout(() => (this.showAlertCopied = true), 600)
       } catch (err) {
         alert('Oops, unable to copy')
       }
-
-      /* unselect the range */
-      testingCodeToCopy.setAttribute('type', 'hidden')
+      dataToCopy.setAttribute('type', 'hidden')
       window.getSelection().removeAllRanges()
     },
 

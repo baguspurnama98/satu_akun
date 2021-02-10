@@ -4,15 +4,12 @@
   >
     <div class="w-full">
       <h3 class="font-bold py-3 text-4xl text-indigo-500">Buat Campaign</h3>
-      <div class="bg-blue-100 p-3 rounded-lg xs:text-sm">
+      <div class="bg-blue-100 p-3 rounded-lg xs:text-sm xs:text-justify">
         <p>
           Pastikan campaign Anda sesuai dengan
-          <b>syarat dan ketentuan Berpatungan.com</b>. 
-        </p>
-        <p>
-            Berpatungan menghimbau
-            untuk menjalankan campaign yang wajar atau campaign Anda dapat
-            diturunkan oleh Berpatungan.com sesuai S&K yang berlaku.
+          <b>syarat dan ketentuan Berpatungan.com</b>. Berpatungan menghimbau
+          untuk menjalankan campaign yang wajar atau campaign Anda dapat
+          diturunkan oleh Berpatungan.com sesuai S&K yang berlaku.
         </p>
       </div>
     </div>
@@ -32,9 +29,7 @@
       <div class="mb-3">
         <p class="text-sm">Format gambar .jpg .jpeg .png</p>
       </div>
-      <div
-        class="pb-5 flex flex-wrap items-center justify-between"
-      >
+      <div class="pb-5 flex flex-wrap items-center justify-between">
         <div
           id="empty-cover-art"
           class="rounded w-full py-16 xs:py-8 text-center opacity-50 md:border-solid md:border md:border-gray-400"
@@ -61,8 +56,10 @@
       </div>
     </section>
 
-    <h5 class="font-semibold py-3 px-6 xs:px-4 text-xl inline text-gray-600 xs:text-md">
-        Informasi Campaign
+    <h5
+      class="font-semibold py-3 px-6 xs:px-4 text-xl inline text-gray-600 xs:text-md"
+    >
+      Informasi Campaign
     </h5>
     <section
       class="mx-3 mb-10 w-full py-5 px-6 xs:px-4 rounded-b-md shadow-md bg-white"
@@ -76,7 +73,7 @@
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
             >Wajib</span
           >
-          <p class="text-xs md:pr-20 xs:pr-0">
+          <p class="text-xs lg:pr-20 md:pr-10 xs:pr-0">
             Tulis judul campaign Anda dengan singkat, padat dan jelas
           </p>
         </div>
@@ -84,7 +81,7 @@
           <div>
             <input
               type="text"
-              class="w-full appearance-none border rounded w-full py-3 px-3 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500 xs:text-sm"
+              class="appearance-none border rounded w-full py-3 px-3 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500 xs:text-sm"
               placeholder="Contoh: Akun Sharing Netflix 1 Bulan"
             />
           </div>
@@ -100,7 +97,7 @@
             class="bg-gray-200 p-1 ml-1 rounded-md w-auto text-gray-600 text-xs font-semibold"
             >Opsional</span
           >
-          <p class="text-xs md:pr-20 xs:pr-0">
+          <p class="text-xs lg:pr-20 md:pr-10 xs:pr-0">
             Tulis deskripsi campaign Anda sedetail mungkin
           </p>
         </div>
@@ -108,7 +105,7 @@
         <div class="md:col-span-2">
           <div>
             <textarea
-              class="w-full h-96 appearance-none border rounded w-full py-3 px-3 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500 xs:text-sm"
+              class="w-full h-96 appearance-none border rounded py-3 px-3 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500 xs:text-sm"
               placeholder=""
               rows="5"
             />
@@ -117,8 +114,10 @@
       </div>
     </section>
 
-    <h5 class="font-semibold py-3 px-6 xs:px-4 text-xl inline text-gray-600 xs:text-md">
-        Harga Campaign
+    <h5
+      class="font-semibold py-3 px-6 xs:px-4 text-xl inline text-gray-600 xs:text-md"
+    >
+      Harga Campaign
     </h5>
     <section
       class="mx-3 mb-10 w-full py-5 px-6 xs:px-4 rounded-b-md shadow-md bg-white"
@@ -132,7 +131,7 @@
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
             >Wajib</span
           >
-          <p class="text-xs md:pr-20">
+          <p class="text-xs lg:pr-20 md:pr-10 xs:pr-0">
             Masukan total slot yang Anda buka untuk campaign
           </p>
         </div>
@@ -159,7 +158,7 @@
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
             >Wajib</span
           >
-          <p class="text-xs md:pr-20">
+          <p class="text-xs lg:pr-20 md:pr-10 xs:pr-0">
             Anda bebas menentukan harga setiap slot yang harus dikeluarkan
             anggota campaign. Pastikan harga yang Anda tawarkan cukup masuk
             akal.
@@ -185,8 +184,10 @@
       </div>
     </section>
 
-    <h5 class="font-semibold py-3 px-6 xs:px-4 text-xl inline text-gray-600 xs:text-md">
-        Waktu Campaign
+    <h5
+      class="font-semibold py-3 px-6 xs:px-4 text-xl inline text-gray-600 xs:text-md"
+    >
+      Waktu Campaign
     </h5>
     <section
       class="mx-3 mb-10 w-full py-5 px-6 xs:px-4 rounded-b-md shadow-md bg-white"
@@ -200,7 +201,7 @@
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
             >Wajib</span
           >
-          <p class="text-xs md:pr-20">
+          <p class="text-xs lg:pr-20 md:pr-10 xs:pr-0">
             Pilih durasi/lama dari platform anda berjalan
           </p>
         </div>
@@ -208,20 +209,24 @@
         <div class="md:col-span-2 xs:pl-4">
           <div class="grid grid-cols-3 gap-2">
             <label class="inline-flex items-center py-2 xs:py-0">
-                <!-- Harus ada pengecekan, jika bulan yg dipilih, maka max nya 12, jika hari maka maks nya 31 -->
+              <!-- Harus ada pengecekan, jika bulan yg dipilih, maka max nya 12, jika hari maka maks nya 31 -->
               <input
                 type="number"
                 min="1"
                 max="12"
                 class="w-full border focus:outline-none focus:ring focus:border-indigo-400 p-2 rounded xs:text-sm"
                 placeholder="Contoh: 2"
-            />
+              />
             </label>
             <label class="inline-flex items-center py-2 xs:py-0">
-              <select class="w-full border focus:outline-none focus:ring focus:border-indigo-400 py-2 rounded xs:text-sm" name="range_period" id="range_period">
-                    <option value="months">Bulan</option>
-                    <option value="years">Tahun</option>
-                </select>
+              <select
+                class="w-full border focus:outline-none focus:ring focus:border-indigo-400 py-2 rounded xs:text-sm"
+                name="range_period"
+                id="range_period"
+              >
+                <option value="months">Bulan</option>
+                <option value="years">Tahun</option>
+              </select>
             </label>
           </div>
         </div>
@@ -236,7 +241,7 @@
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
             >Wajib</span
           >
-          <p class="text-xs md:pr-20">
+          <p class="text-xs lg:pr-20 md:pr-10 xs:pr-0">
             Pilih lama campaign Anda aktif pada Berpatungan.com
           </p>
         </div>
@@ -284,9 +289,7 @@ export default {
   name: 'Create_Campaign',
 
   data() {
-      return {
-          
-      }
+    return {}
   },
   methods: {},
 }

@@ -14,7 +14,7 @@
         />
         <button type="submit" class="absolute right-0 top-0 mt-4 mr-4">
           <svg
-            class="h-4 w-4 fill-current"
+            class="h-4 w-4 fill-current focus:outline-none hover:scale-100"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             version="1.1"
@@ -53,7 +53,7 @@
             <h1
               class="font-sans text-4xl font-extrabold leading-none text-black sm:text-5xl xl:text-6xl sm:text-center lg:text-left"
             >
-                <!-- <span
+              <!-- <span
                 class="relative bottom-0 left-0 inline-block w-full h-4 mb-1 -ml-1 transform -skew-x-3 bg-yellow-200"
               ></span> -->
               <span class="">Watch Together,</span>
@@ -69,7 +69,15 @@
                 href="#section2"
                 class="flex items-center px-5 py-3 rounded-md text-base text-white transition bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
                 >Mulai Patungan
-                <svg class="ml-2 animate-bounce w-4 h-4 text-amber-900" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 26 26" stroke="currentColor">
+                <svg
+                  class="ml-2 animate-bounce w-4 h-4 text-amber-900"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 26 26"
+                  stroke="currentColor"
+                >
                   <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
                 </svg>
               </a>
@@ -87,9 +95,8 @@ import Carousel from '@/components/Carousel/Carousel'
 export default {
   name: 'Landing',
   data() {
-    return {
-    }
-  }
+    return {}
+  },
 }
 </script>
 

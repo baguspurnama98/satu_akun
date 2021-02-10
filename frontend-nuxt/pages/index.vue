@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Content disini -->
-    <Landing class="my-12"/>
+    <Landing class="my-12" />
     <!-- component campaign -->
     <section
       id="section2"
@@ -22,7 +22,9 @@
             Yuk mulai patungan aja!
           </p>
         </div>
-        <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-6 gap-4">
+        <div
+          class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-6 gap-4"
+        >
           <CardCampaign
             v-for="item in items"
             :key="item.title"
@@ -52,7 +54,7 @@
               class="flex border rounded-lg border-gray-400 p-8 sm:flex-row flex-col"
             >
               <div
-                class="w-16 h-16 mr-8 mb-0 xs:mx-auto mb-4 inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-500 flex-shrink-0"
+                class="w-16 h-16 mr-8 xs:mx-auto mb-4 inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-500 flex-shrink-0"
               >
                 <svg
                   fill="currentColor"
@@ -81,7 +83,7 @@
               class="flex border rounded-lg border-gray-400 p-8 sm:flex-row flex-col"
             >
               <div
-                class="w-16 h-16 mr-8 mb-0 xs:mx-auto mb-4 inline-flex items-center justify-center rounded-full bg-red-100 text-red-500 flex-shrink-0"
+                class="w-16 h-16 mr-8 xs:mx-auto mb-4 inline-flex items-center justify-center rounded-full bg-red-100 text-red-500 flex-shrink-0"
               >
                 <svg
                   fill="currentColor"
@@ -111,7 +113,7 @@
               class="flex border rounded-lg border-gray-400 p-8 sm:flex-row flex-col"
             >
               <div
-                class="w-16 h-16 mr-8 mb-0 xs:mx-auto mb-4 inline-flex items-center justify-center rounded-full bg-green-100 text-green-500 flex-shrink-0"
+                class="w-16 h-16 mr-8 xs:mx-auto mb-4 inline-flex items-center justify-center rounded-full bg-green-100 text-green-500 flex-shrink-0"
               >
                 <svg
                   fill="currentColor"
@@ -155,7 +157,7 @@
               class="flex border rounded-lg border-gray-400 p-8 sm:flex-row flex-col"
             >
               <div
-                class="w-16 h-16 mr-8 mb-0 xs:mx-auto mb-4 inline-flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0"
+                class="w-16 h-16 mr-8 xs:mx-auto mb-4 inline-flex items-center justify-center rounded-full bg-orange-100 text-orange-500 flex-shrink-0"
               >
                 <svg
                   fill="currentColor"
@@ -177,7 +179,9 @@
                   layanan mumpuni, <i>harga mahasiswa</i>. Coba lihat detail
                   penawaran yang kami berikan di skema harga.
                 </p>
-                <a class="mt-3 text-indigo-500 inline-flex items-center" href="/pricing"
+                <a
+                  class="mt-3 text-indigo-500 inline-flex items-center"
+                  href="/pricing"
                   >Selengkapnya
                   <svg
                     fill="none"
