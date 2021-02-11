@@ -2,7 +2,7 @@
   <nav
     v-click-outside
     @clicked-outside="toggleButton()"
-    class="p-4 sticky w-full z-10 top-0 shadow-lg bg-indigo-500 mb-6"
+    class="p-4 sticky w-full z-10 top-0 shadow-lg bg-indigo-500"
   >
     <div
       class="container px-4 mx-auto flex flex-wrap items-center justify-between"

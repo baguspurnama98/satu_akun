@@ -22,7 +22,7 @@
             class="flex items-center text-black text-md xs:text-sm font-normal"
           >
             <p class="font-bold text-2xl">
-              Rp. 53.000<span class="font-normal">/orang</span>
+              Rp 53.000<span class="font-normal">/orang</span>
             </p>
           </div>
           <div class="flex-1 inline-flex items-center mt-1">

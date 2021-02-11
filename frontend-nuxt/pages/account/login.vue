@@ -20,7 +20,7 @@
                         Masuk
                     </button>
                     <a class="inline-block align-baseline font-normal text-sm text-indigo-500 hover:text-indigo-800" href="#">
-                        Butuh Bantuan?
+                        Butuh bantuan?
                     </a>
                 </div>
             </form>

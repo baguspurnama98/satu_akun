@@ -1,10 +1,10 @@
 <template>
   <!-- component footer -->
   <footer>
-    <div class="mt-20 bg-indigo-100">
+    <div class="bg-indigo-100">
       <div class="container px-5 py-8 flex flex-wrap mx-auto items-center">
         <div
-          class="w-1/4 xs:w-full flex-shrink-0 md:mx-0 mx-auto text-center md:text-left"
+          class="w-1/2 lg:w-1/4 xs:w-full flex-shrink-0 md:mx-0 mx-auto text-center md:text-left"
         >
           <a
             class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"

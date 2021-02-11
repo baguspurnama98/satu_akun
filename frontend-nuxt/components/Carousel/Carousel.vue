@@ -17,14 +17,14 @@
                 <button 
                     class="bg-indigo-100 text-indigo-500 hover:text-red-500 font-bold hover:shadow-lg rounded-full w-12 h-12 -ml-6"
                     v-on:click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1">
-                    <span>&#8592;</span>
+                    <span class="text-2xl">&#8592;</span>
                 </button>
             </div>
             <div class="flex items-center justify-end w-1/2">
                 <button 
                     class="bg-indigo-100 text-indigo-500 hover:text-red-500 font-bold hover:shadow rounded-full w-12 h-12 -mr-6"
                     @click.prevent="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1">
-                    <span>&#8594;</span>
+                    <span class="text-2xl">&#8594;</span>
                 </button>
             </div>        
         </div>
