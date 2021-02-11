@@ -14,7 +14,8 @@
           class="bg-indigo-500 absolute bottom-0 right-0 p-3 rounded-tl-md xs:py-1"
         >
           <p class="font-bold text-white text-md sm:text-sm xs:text-xs">
-            Rp 53.000<span class="font-normal">/orang</span>
+            {{ formatRupiah(price, 'Rp. ')
+            }}<span class="font-normal">/orang</span>
           </p>
         </div>
       </div>
@@ -100,6 +101,30 @@
 export default {
   name: 'CardCampaign',
   props: ['title'],
+  data() {
+    return {
+      price: '53000',
+    }
+  },
+  methods: {
+    formatRupiah(angka, prefix) {
+      var number_string = String(angka)
+          .replace(/[^,\d]/g, '')
+          .toString(),
+        split = number_string.split(','),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substr(0, sisa),
+        ribuan = split[0].substr(sisa).match(/\d{3}/gi)
+
+      if (ribuan) {
+        let separator = sisa ? '.' : ''
+        rupiah += separator + ribuan.join('.')
+      }
+
+      rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah
+      return prefix === undefined ? rupiah : rupiah ? 'Rp. ' + rupiah : ''
+    },
+  },
 }
 </script>
 <style>

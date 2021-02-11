@@ -65,7 +65,7 @@
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
             >Wajib</span
           >
-          <p class="text-xs md:pr-20 xs:pr-0">
+          <p class="text-xs lg:pr-20 md:pr-10 xs:pr-0">
             Tulis judul campaign Anda dengan singkat, padat dan jelas
           </p>
         </div>
@@ -73,7 +73,7 @@
           <div>
             <input
               type="text"
-              class="w-full appearance-none border rounded w-full py-3 px-3 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500 xs:text-sm"
+              class="appearance-none border rounded w-full py-3 px-3 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500 xs:text-sm"
               placeholder="Contoh: Akun Sharing Netflix 1 Bulan"
             />
           </div>
@@ -87,7 +87,7 @@
             class="bg-gray-200 p-1 ml-1 rounded-md w-auto text-gray-600 text-xs font-semibold"
             >Opsional</span
           >
-          <p class="text-xs md:pr-20 xs:pr-0">
+          <p class="text-xs lg:pr-20 md:pr-10 xs:pr-0">
             Tulis deskripsi campaign Anda sedetail mungkin
           </p>
         </div>
@@ -95,7 +95,7 @@
         <div class="md:col-span-2">
           <div>
             <textarea
-              class="w-full h-96 appearance-none border rounded w-full py-3 px-3 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500 xs:text-sm"
+              class="w-full h-96 appearance-none border rounded py-3 px-3 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500 xs:text-sm"
               placeholder=""
               rows="5"
             />
@@ -212,7 +212,7 @@
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
             >Wajib</span
           >
-          <p class="text-xs md:pr-20">
+          <p class="text-xs lg:pr-20 md:pr-10 xs:pr-0">
             Pilih lama campaign Anda aktif pada Berpatungan.com
           </p>
         </div>
@@ -260,7 +260,7 @@ export default {
   name: "Create_Campaign",
 
   data() {
-    return {};
+    return {}
   },
   methods: {},
 };
