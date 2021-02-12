@@ -149,7 +149,7 @@
               <img
                 src="https://picsum.photos/640/400/?random"
                 alt=""
-                class="absolute inset-0 w-full h-full object-cover bg-gray-100 rounded-md"
+                class="absolute inset-0 w-full h-full object-cover bg-gray-100 rounded-lg"
               />
             </div>
           </div>
@@ -266,7 +266,7 @@
       </div>
     </div>
     <div
-      class="container px-4 mx-auto flex flex-wrap items-center justify-between bg-white w-full text-center pt-6 sm:hidden sticky bottom-0 min-w-screen"
+      class="container px-4 mx-auto flex flex-wrap items-center justify-between bg-white w-full text-center pt-5 sm:hidden sticky bottom-0 min-w-screen"
     >
       <a
         class="w-1/3 xs:w-full mb-4 mt-7 py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
