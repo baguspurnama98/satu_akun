@@ -1,0 +1,240 @@
+<template>
+  <div
+    class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+  >
+    <div class="w-full">
+      <h3 class="font-bold py-3 text-4xl text-indigo-500">Checkout</h3>
+      <div class="">
+        <div class="bg-blue-100 p-3 rounded-lg">
+          <p class="xs:text-sm text-center">
+            Segera lakukan pembayaran agar proses pendaftaran Anda valid.<br />
+            Pastikan Anda melakukan transfer hingga 3 digit terakhir untuk
+            memudahkan kami melakukan validasi pembayaran Anda.
+          </p>
+        </div>
+
+        <div
+          class="border rounded-lg grid grid-cols-2 my-5 mx-2 lg:mx-56 py-3 xs:text-sm"
+        >
+          <div class="pl-5 xs:pl-2">
+            <span class="font-semibold">Provider/Platform</span>
+          </div>
+          <div>
+            <span class="mr-5">:</span>
+            <span>Netflix</span>
+          </div>
+          <!--  -->
+          <div class="pl-5 xs:pl-2">
+            <span class="font-semibold">Judul Campaign</span>
+          </div>
+          <div>
+            <span class="mr-5">:</span>
+            <span>1 Bulan Netflix</span>
+          </div>
+          <!--  -->
+          <div class="pl-5 xs:pl-2">
+            <span class="font-semibold">Durasi</span>
+          </div>
+          <div>
+            <span class="mr-5">:</span>
+            <span>1 Bulan </span>
+          </div>
+          <!--  -->
+          <div class="pl-5 xs:pl-2">
+            <span class="font-semibold">Nominal</span>
+          </div>
+          <div>
+            <span class="mr-5">:</span>
+            <span>{{ formatRupiah(price, 'Rp. ') }}</span>
+          </div>
+          <!--  -->
+          <div class="pl-5 xs:pl-2">
+            <span class="font-semibold">Kode Unik</span>
+          </div>
+          <div>
+            <span class="mr-5">:</span>
+            <span>234</span>
+          </div>
+          <!--  -->
+          <div class="pl-5 xs:pl-2">
+            <span class="font-semibold">Bank Tujuan</span>
+          </div>
+          <div>
+            <span class="mr-5">:</span>
+            <span>BCA</span>
+          </div>
+          <!--  -->
+          <div class="pl-5 xs:pl-2">
+            <span class="font-semibold">Nomor Rekening</span>
+          </div>
+          <div class="inline-flex items-center">
+            <span class="mr-6">:</span>
+            <span @click.stop.prevent="copyToClipboard" class="cursor-pointer"
+              >12354453234675</span
+            >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              class="h-4 w-4 xs:h-3 xs:w-3 ml-1 justify-self-center font-semibold cursor-pointer rounded-lg bg-yellow-200"
+              @click.stop.prevent="copyToClipboard"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
+              />
+            </svg>
+          </div>
+          <!--  -->
+          <div class="pl-5 xs:pl-2">
+            <span class="font-semibold">Nama Rekening</span>
+          </div>
+          <div>
+            <span class="mr-5">:</span>
+            <span>PT. Berpatungan</span>
+          </div>
+          <!--  -->
+          <div class="pl-5 xs:pl-2">
+            <span class="font-semibold">Total Pembayaran</span>
+          </div>
+          <div class="inline-flex items-center">
+            <span class="mr-6">:</span>
+            <span
+              @click.stop.prevent="copyToClipboard"
+              class="cursor-pointer"
+              >{{ formatRupiah(total, 'Rp. ') }}</span
+            >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              class="h-4 w-4 xs:h-3 xs:w-3 ml-1 justify-self-center font-semibold cursor-pointer rounded-lg bg-yellow-200"
+              @click.stop.prevent="copyToClipboard"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
+              />
+            </svg>
+            <input type="hidden" id="testing-code" :value="total" />
+          </div>
+        </div>
+
+        <div class="bg-blue-100 p-3 rounded-lg">
+          <p class="xs:text-sm text-center">
+            Segera lakukan pembayaran sebelum pukul
+            <span class="font-bold">14.00</span>
+          </p>
+          <p class="xs:text-sm text-center">
+            Setelah melakukan pembayaran, kirimkan bukti pembayaran ke WhatsApp
+            Berpatungan.com
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full text-center my-5 md:my-10">
+      <button
+        class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
+        type="submit"
+      >
+        Saya sudah transfer
+      </button>
+    </div>
+    <!-- Notification -->
+    <div
+      class="container px-4 mx-auto flex flex-wrap items-center justify-between absolute"
+      v-bind:class="[showAlertCopied ? 'hidden' : '']"
+    >
+      <div class="mx-auto">
+        <div class="bg-white rounded-lg border-gray-300 border p-3 shadow-lg">
+          <div class="flex flex-row">
+            <div class="px-2">
+              <svg
+                width="25"
+                height="25"
+                viewBox="0 0 1792 1792"
+                fill="#34d399"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"
+                />
+              </svg>
+            </div>
+            <div class="ml-2 mr-6">
+              <span class="">Successfully Copied!</span>
+              <!-- <span class="block text-gray-500"
+                >Anyone with a link can now view this file</span
+              > -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  name: 'Checkout_Campaign',
+
+  data() {
+    return {
+      price: '53000',
+      total: '53234',
+      showAlertCopied: true,
+    }
+  },
+  methods: {
+    handleAlertCopied() {
+      this.showAlertCopied = !this.showAlertCopied
+    },
+    copyToClipboard() {
+      let dataToCopy = document.querySelector('#testing-code')
+      dataToCopy.setAttribute('type', 'text')
+      dataToCopy.select()
+
+      try {
+        var successful = document.execCommand('copy')
+
+        this.showAlertCopied = !this.showAlertCopied
+        setTimeout(() => (this.showAlertCopied = true), 600)
+      } catch (err) {
+        alert('Oops, unable to copy')
+      }
+      dataToCopy.setAttribute('type', 'hidden')
+      window.getSelection().removeAllRanges()
+    },
+
+    formatRupiah(angka, prefix) {
+      var number_string = String(angka)
+          .replace(/[^,\d]/g, '')
+          .toString(),
+        split = number_string.split(','),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substr(0, sisa),
+        ribuan = split[0].substr(sisa).match(/\d{3}/gi)
+
+      if (ribuan) {
+        let separator = sisa ? '.' : ''
+        rupiah += separator + ribuan.join('.')
+      }
+
+      rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah
+      return prefix === undefined ? rupiah : rupiah ? 'Rp. ' + rupiah : ''
+    },
+  },
+}
+</script>
+
+<style scoped>
+input:checked + svg {
+  display: block;
+}
+</style>

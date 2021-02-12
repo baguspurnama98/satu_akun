@@ -1,9 +1,9 @@
 <template>
-<div id="app" class="font-sans">
-    <Navbar />
-    <router-view/>
-    <Footer />
-  </div>
+    <div id="app" class="font-sans">
+        <Navbar />
+        <router-view/>
+        <Footer />
+    </div>
 </template>
 
 <script>

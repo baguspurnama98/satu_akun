@@ -13,6 +13,11 @@
 |
 */
 
-$router->get('/', function () use ($router) {
+$router->get('/lumen-version', function () use ($router) {
     return $router->app->version();
+});
+
+$router->group(['prefix' => 'api/v1'], function () use ($router) {
+    $router->post('/send_email' ,'Mailcontroller@send_mail');
+
 });
