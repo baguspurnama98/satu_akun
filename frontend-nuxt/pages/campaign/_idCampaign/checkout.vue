@@ -157,10 +157,10 @@
           <div class="flex flex-row">
             <div class="px-2">
               <svg
-                width="24"
-                height="24"
+                width="25"
+                height="25"
                 viewBox="0 0 1792 1792"
-                fill="#44C997"
+                fill="#34d399"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
@@ -169,7 +169,7 @@
               </svg>
             </div>
             <div class="ml-2 mr-6">
-              <span class="font-semibold">Successfully Copied!</span>
+              <span class="">Successfully Copied!</span>
               <!-- <span class="block text-gray-500"
                 >Anyone with a link can now view this file</span
               > -->
