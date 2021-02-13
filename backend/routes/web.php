@@ -18,6 +18,10 @@ $router->get('/lumen-version', function () use ($router) {
 });
 
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
-    $router->post('/send_email' ,'Mailcontroller@send_mail');
+    $router->post('send_email' ,'Mailcontroller@send_mail');
 
+    $router->post('register', 'AuthController@register');
+    $router->post('login', 'AuthController@login');
+    $router->get('profile', 'UserController@profile');
+    $router->get('users', 'UserController@allUsers');
 });
