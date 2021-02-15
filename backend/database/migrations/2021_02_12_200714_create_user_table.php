@@ -18,6 +18,8 @@ class CreateUserTable extends Migration
             $table->string('name');
             $table->string('email')->unique()->notNullable();
             $table->string('password');
+            $table->string('otp')->nullable()->default(null);
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }
