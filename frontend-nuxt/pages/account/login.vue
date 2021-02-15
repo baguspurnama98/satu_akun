@@ -22,7 +22,7 @@
                     <button class="px-6 py-2 rounded text-white inline-block shadow-lg bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700" type="submit">
                         Masuk
                     </button>
-                    <!-- Kenapa kita ga provide lupa password? Karena kita gabisa otomatis kirim link ke email mereka, harus manual -->
+                    <!-- Kenapa kita ga provide lupa password? Karena kita gabisa otomatis kirim link ke email mereka, harus manual -- knp ngga bisa? bukannya tinggal pake request api by email user pake findOrFail, kalo nemu send email smtp ke email tsb(?)koreksi kalo salah... -->
                     <a class="inline-block align-baseline font-normal text-sm text-indigo-500 hover:text-indigo-800" href="#">
                         Butuh bantuan?
                     </a>
