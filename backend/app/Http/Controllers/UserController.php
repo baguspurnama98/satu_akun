@@ -15,8 +15,9 @@ class UserController extends Controller
      * @return void
      */
     public function __construct()
-    {
-        $this->middleware('auth');
+    {   
+        // uncomment this to enable auth for entire class
+        // $this->middleware('auth');
     }
 
     /**
@@ -26,6 +27,7 @@ class UserController extends Controller
      */
     public function profile()
     {
+        $this->middleware('auth');
         return response()->json(['user' => Auth::user()], 200);
     }
 
@@ -36,6 +38,10 @@ class UserController extends Controller
      */
     public function allUsers()
     {
-         return response()->json(['users' =>  User::all()], 200);
+        return response()->json(['users' => User::all()], 200);
+    }
+
+    public function getUser($id_user) {
+        return response()->json(['users' => User::with('social_media')->find($id_user)], 200);
     }
 }
