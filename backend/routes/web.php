@@ -13,15 +13,30 @@
 |
 */
 
-$router->get('/lumen-version', function () use ($router) {
+$router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'api/v1'], function () use ($router) {
-    $router->post('send_email' ,'Mailcontroller@send_mail');
 
-    $router->post('register', 'AuthController@register');
-    $router->post('login', 'AuthController@login');
+// menggunakan as untuk dapat dipanggil di controller full path url nya
+$router->group(['prefix' => 'auth'], function () use ($router) {
+    $router->get('validate/{id_user}/{otp}', [
+        'as' => 'validate', 
+        'uses' => 'AuthController@validateOTP'
+    ]);
+});
+
+
+// kelompok prefix API
+$router->group(['prefix' => 'api/v1'], function () use ($router) {
+    // Auth API
+    $router->group(['prefix' => 'auth'], function () use ($router) {
+        $router->post('register', 'AuthController@register');
+        $router->post('login', 'AuthController@login');
+    });
+    
     $router->get('profile', 'UserController@profile');
     $router->get('users', 'UserController@allUsers');
+
+    $router->get('user/{id_user}', 'UserController@getUser');
 });

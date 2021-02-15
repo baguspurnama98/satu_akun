@@ -23,7 +23,7 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'name', 'email', 'otp', 'status'
     ];
 
     /**
@@ -55,5 +55,13 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+
+    /**
+     * relation
+     */
+    public function social_media() {
+        return $this->hasMany(SocialMedia::class);
     }
 }
