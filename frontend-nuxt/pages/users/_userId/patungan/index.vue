@@ -1,22 +1,22 @@
 <template>
   <div
-    class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+    class="relative container px-4 mx-auto flex flex-wrap items-center justify-between"
     v-click-outside
     @clicked-outside="showDetail()"
   >
-    <div class="w-full">
+    <div class="relative w-full">
       <h3 class="font-bold pb-3 text-4xl xs:text-2xl text-indigo-500">
         Patungan Saya
       </h3>
 
       <div
-        class="my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 xs:pr-0 lg:px-8"
+        class="relative my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 xs:pr-0 lg:px-8"
       >
         <div
-          class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 py-6 rounded-bl-lg rounded-br-lg"
+          class="relative align-middle inline-block min-w-full min-h-full pb-20 shadow overflow-hidden bg-white shadow-dashboard px-8 py-6 rounded-bl-lg rounded-br-lg"
         >
           <table
-            class="min-w-full"
+            class="min-w-full relative"
             v-click-outside
             @clicked-outside="showDetail()"
           >
@@ -48,7 +48,7 @@
             </thead>
             <!-- Bingung gimana caranya click-outsidenya berjalan maksimal -->
             <tbody
-              class="bg-white"
+              class="bg-white relative"
               v-click-outside
               @clicked-outside="showDetail()"
             >
@@ -123,7 +123,7 @@
                 >
                   <div class="group inline-block relative">
                     <button
-                      class="items-center px-4 xs:px-3 py-2 border text-blue-500 rounded transition duration-300 focus:outline-none flex font-semibold"
+                      class="items-center px-4 xs:px-3 py-2 border bg-white text-blue-500 rounded transition duration-300 focus:outline-none flex font-semibold"
                       @click="showDetail(index)"
                       :disabled="
                         patungan.status == 'pending' ||
@@ -133,7 +133,7 @@
                         'disabled:opacity-50 bg-gray-300 border-gray-500':
                           patungan.status == 'pending' ||
                           patungan.status == 'refund',
-                        'border-indigo-500 hover:border-indigo-700':
+                        'border-indigo-400 hover:border-indigo-700':
                           patungan.status != 'pending' ||
                           patungan.status == 'refund',
                       }"
@@ -162,7 +162,7 @@
                       </svg>
                     </button>
                     <ul
-                      class="bg-white text-gray-800 border cursor-pointer rounded transform absolute divide-y transition duration-300 ease-in-out mt-1 origin-left z-50 min-w-auto xs text-left"
+                      class="bg-white text-gray-800 border cursor-pointer rounded transform absolute divide-y transition duration-300 ease-in-out mt-1 origin-left z-50 min-w-auto text-left"
                       :class="{
                         '': activeDetail == index,
                         hidden: activeDetail != index,
@@ -171,7 +171,10 @@
                       <li
                         class="px-2 py-1 hover:bg-gray-100 w-full border-none"
                       >
-                        <div class="inline-flex items-center">
+                        <a
+                          class="inline-flex items-center"
+                          href="patungan/1/detail"
+                        >
                           <svg
                             class="w-4 h-4 mr-1"
                             xmlns="http://www.w3.org/2000/svg"
@@ -193,7 +196,7 @@
                             />
                           </svg>
                           <span class="text-sm"> Detail Campaign </span>
-                        </div>
+                        </a>
                       </li>
                       <li
                         class="px-2 py-1 hover:bg-gray-100 w-full border-none"
@@ -241,15 +244,29 @@ export default {
       detail: false,
       dataPatungan: [
         {
-          title: 'Sharing Account Netflix 1 Bulan',
+          title: 'Sharing Account Netflix 1 Tahun',
           member: 3,
           totalMember: 4,
           status: 'aktif',
           dateEnd: new Date(),
         },
         {
+          title: 'Sharing Account Netflix 3 Bulan',
+          member: 4,
+          totalMember: 4,
+          status: 'selesai',
+          dateEnd: new Date(),
+        },
+        {
+          title: 'Sharing Account Netflix 1 Bulan',
+          member: 4,
+          totalMember: 4,
+          status: 'refund',
+          dateEnd: new Date(),
+        },
+        {
           title: 'Belajar Coding Javascript',
-          member: 3,
+          member: 1,
           totalMember: 4,
           status: 'pending',
           dateEnd: new Date(),
@@ -257,7 +274,7 @@ export default {
         {
           title:
             'Patungan Beli Akun Dicoding selama 1 tahun bebas kelas apa saja yang ada, yuk murah meriah',
-          member: 3,
+          member: 4,
           totalMember: 4,
           status: 'berlangsung',
           dateEnd: new Date(),
