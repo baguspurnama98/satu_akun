@@ -1,4 +1,6 @@
 {
     "git.ignoreLimitWarning": true,
-    "prettier.bracketSpacing": false
+    "prettier.bracketSpacing": false,
+    "prettier.printWidth": 2000,
+    "html.format.wrapLineLength": 1000000000000
 }
