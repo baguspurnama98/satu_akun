@@ -4,21 +4,21 @@
     <h3 class="font-bold py-3 text-4xl text-indigo-500">Daftar Campaign</h3>
     <div class="overflow-auto">
       <table class="table-auto w-full text-left whitespace-no-wrap">
-        <thead>
+        <thead class="bg-gray-200">
           <tr>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">Judul</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Pengguna Aktif</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Dana Terkumpul</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Status</th>
-            <th class="w-10 title-font tracking-wider text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
+            <th class="px-5 py-4 title-font tracking-wider font-medium text-gray-900 text-sm rounded-tl rounded-bl">Judul</th>
+            <th class="px-5 py-4 title-font tracking-wider font-medium text-gray-900 text-sm">Pengguna Aktif</th>
+            <th class="px-5 py-4 title-font tracking-wider font-medium text-gray-900 text-sm">Dana Terkumpul</th>
+            <th class="px-5 py-4 title-font tracking-wider font-medium text-gray-900 text-sm">Status</th>
+            <th class="w-10 title-font tracking-wider text-gray-900 text-sm rounded-tr rounded-br"></th>
           </tr>
         </thead>
         <tbody>
             <tr v-for="item in campaigns" :key="item.title">
-                <td class="border-t-2 border-gray-200 px-4 py-3">{{ item.title }}</td>
-                <td class="border-t-2 border-gray-200 px-4 py-3">{{ item.slot }}</td>
-                <td class="border-t-2 border-gray-200 px-4 py-3">{{ item.dana_terkumpul }}</td>
-                <td class="border-t-2 border-gray-200 px-4 py-3">{{ item.status }}</td>
+                <td class="border-t-2 border-gray-200 px-5 py-4">{{ item.title }}</td>
+                <td class="border-t-2 border-gray-200 px-5 py-4">{{ item.slot }}</td>
+                <td class="border-t-2 border-gray-200 px-5 py-4">{{ item.dana_terkumpul }}</td>
+                <td class="border-t-2 border-gray-200 px-5 py-4">{{ item.status }}</td>
                 <td class="border-t-2 border-gray-200 w-10 text-center">
                     <div class="flex-auto flex space-x-3">
                         <!-- ini untuk ngedit -->
@@ -29,7 +29,9 @@
                             </svg>
                         </a>
                         <!-- ini utk lihat campaign (ketika sudah berlangsung) -->
-                        <a v-if="item.status != 'aktif'" class="w-1/3 py-1 px-2 flex items-center justify-center rounded-md bg-indigo-500 text-white cursor-pointer">
+                        <a v-if="item.status != 'aktif'" class="w-1/3 py-1 px-2 flex items-center justify-center rounded-md bg-indigo-500 text-white cursor-pointer"
+                            :href="`/users/${item.id}/campaign/${item.id}`"
+                        >
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                                 <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
@@ -51,32 +53,41 @@
 </template>
 
 <script>
-import Template from '../../../../../frontend/src/components/Template.vue'
 
 export default {
     // title ini harus di truncate
-  components: { Template },
+  components: { },
   layout: 'default',
   data() {
       return {
           campaigns: [
               { 
+                  id: 1,
                   title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
                   slot: '3/5',
                   dana_terkumpul: 'Rp 400.000',
                   status: 'aktif',
               },
               {
+                  id: 2,
                   title: 'Ut enim ad minim veniam, quis nostrud exercitation.',
                   slot: '4/5',
                   dana_terkumpul: 'Rp 500.000',
                   status: 'expired',
               },
               {
+                  id: 3,
                   title: 'Duis aute irure dolor in reprehenderit in voluptate.',
                   slot: '5/5',
                   dana_terkumpul: 'Rp 300.000',
                   status: 'berlangsung',
+              },
+              {
+                  id: 4,
+                  title: 'Duis aute irure dolor in reprehenderit in voluptate.',
+                  slot: '5/5',
+                  dana_terkumpul: 'Rp 300.000',
+                  status: 'selesai',
               }
           ]
       }
