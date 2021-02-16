@@ -173,7 +173,7 @@
                       >
                         <a
                           class="inline-flex items-center"
-                          href="patungan/1/detail"
+                          href="patungan/1/"
                         >
                           <svg
                             class="w-4 h-4 mr-1"

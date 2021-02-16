@@ -12,7 +12,7 @@
       >
         <div class="text-center mb-10">
           <h1
-            class="font-sans text-3xl font-bold tracking-wider leading-none text-black mb-4"
+            class="font-sans text-3xl font-bold text-black mb-4"
           >
             Berpatungan lebih murah
           </h1>
