@@ -4,10 +4,10 @@
       class="container px-4 mx-auto flex flex-wrap items-center justify-between"
     >
       <div
-        class="z-0 relative grid grid-cols-1 w-full sm:grid-cols-2 sm:px-5 sm:py-5 sm:gap-x-8 md:py-5"
+        class="z-0 relative grid grid-cols-1 col-span-2 w-full sm:grid-cols-2 sm:px-5 sm:py-5 sm:gap-x-8 md:py-5"
       >
         <div
-          class="z-10 col-start-1 row-start-1 px-4 sm:pt-5 pt-40 bg-gradient-to-t from-black sm:bg-none"
+          class="z-10 col-start-2 row-start-1 px-4 sm:pt-5 pt-40 bg-gradient-to-t from-black sm:bg-none"
         >
           <h2
             class="text-xl font-semibold text-white sm:text-2xl leading-tight sm:text-black md:text-3xl my-5"
@@ -17,7 +17,7 @@
           </h2>
         </div>
 
-        <div class="col-start-1 row-start-3 space-y-3 px-4 xs:py-4">
+        <div class="col-start-2 row-start-3 space-y-3 px-4 xs:py-4">
           <div
             class="flex items-center text-black text-md xs:text-sm font-normal"
           >
@@ -60,15 +60,17 @@
             </a>
           </p>
 
-        <icon-social></icon-social>
+          <icon-social></icon-social>
         </div>
-        <div class="col-start-1 row-start-1 flex sm:col-start-2 sm:row-span-3">
+        <div
+          class="col-start-1 col-span-2 row-start-1 flex sm:col-span-1 sm:col-start-1 sm:row-span-3"
+        >
           <div class="w-full grid">
-            <div class="relative col-span-3 row-span-2 md:col-span-2">
+            <div class="relative col-span-1 row-span-1 md:col-span-2">
               <img
                 src="https://picsum.photos/640/400/?random"
-                alt=""
-                class="absolute inset-0 w-full h-full object-cover bg-gray-100 rounded-lg"
+                alt="..."
+                class="absolute inset-0 w-full h-full object-cover bg-gray-100 rounded-lg z-0"
               />
             </div>
           </div>
