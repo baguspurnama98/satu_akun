@@ -131,7 +131,7 @@
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      class="h-4 w-4 ml-3 z-10"
+                      class="h-4 w-4 ml-3"
                       :class="{
                         'transform rotate-180 transition duration-500 ease-in-out':
                           activeDetail == index,
@@ -148,7 +148,7 @@
                     </svg>
                   </button>
                   <ul
-                    class="bg-white text-gray-800 border cursor-pointer rounded transform absolute divide-y transition duration-300 ease-in-out mt-1 origin-left z-50 right-0 min-w-auto"
+                    class="bg-white text-gray-800 border cursor-pointer rounded transform absolute divide-y transition duration-300 ease-in-out mt-1 origin-left z-10 right-0 min-w-auto"
                     :class="{
                       '': activeDetail == index,
                       hidden: activeDetail != index,

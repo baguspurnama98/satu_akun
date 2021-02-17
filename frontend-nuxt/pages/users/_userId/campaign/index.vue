@@ -156,7 +156,10 @@
                     }"
                   >
                     <li class="px-2 py-2 hover:bg-gray-100 w-full border-none">
-                      <a class="inline-flex items-center" href="detail/1">
+                      <a
+                        class="inline-flex items-center"
+                        href="/users/1/campaign/1"
+                      >
                         <svg
                           class="w-4 h-4 mr-2"
                           xmlns="http://www.w3.org/2000/svg"
