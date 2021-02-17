@@ -16,6 +16,13 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
+  // untuk generate file robots.txt, disable dulu
+
+//   robots: {
+//     UserAgent: '*',
+//     Disallow: '/signin',
+//   },
+
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: ['~/assets/css/main.css'],
 
@@ -30,6 +37,7 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/moment',
+    '@nuxtjs/pwa',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -40,16 +48,30 @@ export default {
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+    // untuk generate file env
+    '@nuxtjs/dotenv',
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    baseURL: process.env.API_DEV_URL,
+  },
 
   // Content module configuration (https://go.nuxtjs.dev/config-content)
   content: {},
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
+
+  pwa: {
+    workbox: {
+    //    dev: true // or use a global variable to track the current NODE_ENV, etc to determine dev mode
+    }
+  },
+
+//   router: {
+//     middleware: 'auth',
+//   },
 
   loadingIndicator: {
     name: 'chasing-dots',

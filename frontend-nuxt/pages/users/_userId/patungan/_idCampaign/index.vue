@@ -35,8 +35,7 @@
 import CampaignDashboard from '@/components/Campaign/Dashboard/Campaign'
 
 export default {
-  // title ini harus di truncate
-
+  // pasang ini jika ingin tidak bisa diakses kalau belum login
   components: { CampaignDashboard },
   layout: 'default',
   data() {

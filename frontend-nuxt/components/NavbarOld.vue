@@ -147,11 +147,11 @@
                   >
                 </div>
                 <div class="py-1">
-                  <a
-                    href="#"
+                  <span
+                    @click="logout"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                     role="menuitem"
-                    >Keluar</a
+                    >Keluar</span
                   >
                 </div>
               </template>
@@ -189,7 +189,11 @@ export default {
       toggle: true,
       navLayanan: true,
       navUserOption: true,
-      account_login: true,
+    }
+  },
+  computed: {
+    account_login() {
+        return this.$store.state.token;
     }
   },
   methods: {
@@ -212,6 +216,17 @@ export default {
           break
       }
     },
+
+    logout() {
+        this.$axios.$post(process.env.API_DEV_URL + 'auth/logout')
+          .then(resp => {
+            this.$store.dispatch('logout');
+            this.$router.push('/');
+          })
+          .catch(errors => {
+            console.dir(errors);
+          });
+    }
   },
   watch: {
     $route(to, from) {

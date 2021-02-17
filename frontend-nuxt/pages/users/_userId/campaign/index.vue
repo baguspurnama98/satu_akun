@@ -102,7 +102,7 @@
                     v-if="patungan.status === 'selesai'"
                   ></span>
                   <span
-                    class="relative text-xs font-bold cursor-pointer capitalize text-white m-0"
+                    class="relative text-xs font-bold capitalize text-white m-0"
                     >{{ patungan.status }}</span
                   >
                 </span>
@@ -110,7 +110,7 @@
               <td class="border-t-2 border-gray-200 px-4 py-3">
                 <div class="group inline-block relative">
                   <button
-                    class="items-center px-1 py-0.5 border bg-white text-blue-500 rounded transition duration-300 focus:outline-none flex font-semibold"
+                    class="items-center px-2 py-1 border bg-white text-indigo-500 rounded transition duration-300 focus:outline-none flex font-semibold"
                     @click="showDetail(index)"
                     :disabled="
                       patungan.status == 'pending' ||
@@ -149,7 +149,7 @@
                     </svg>
                   </button>
                   <ul
-                    class="bg-white text-gray-800 border cursor-pointer rounded transform absolute divide-y transition duration-300 ease-in-out mt-1 origin-left z-50 right-0 min-w-auto"
+                    class="shadow-md bg-white text-gray-800 cursor-pointer rounded transform absolute divide-y transition duration-300 ease-in-out mt-1 origin-left z-50 right-0 min-w-auto"
                     :class="{
                       '': activeDetail == index,
                       hidden: activeDetail != index,
