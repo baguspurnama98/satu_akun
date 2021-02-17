@@ -52,6 +52,7 @@
               />
             </svg>
           </div>
+          <input type="hidden" id="copy-input" :value="12354453234675" />
         </div>
         <div
           class="border rounded-lg grid grid-cols-2 gap-1 m-2 lg:mx-56 py-3 xs:text-sm"
@@ -107,6 +108,7 @@
             <span
               @click.stop.prevent="copyToClipboard"
               class="cursor-pointer text-3xl font-semibold xs:text-xl"
+              id="testing-code"
               >{{ formatRupiah(total, 'Rp. ') }}</span
             >
             <svg
@@ -176,9 +178,10 @@
         Saya sudah transfer
       </a>
     </div>
+    <input type="hidden" id="copy-input" :value="total" />
     <!-- Notification -->
     <div
-      class="container min-h-screen absolute px-4 pt-40 mx-auto flex flex-wrap items-start justify-between"
+      class="container h-screen fixed px-4 my-auto mx-auto flex flex-wrap justify-between"
       v-bind:class="[showAlertCopied ? 'hidden' : '']"
     >
       <div class="mx-auto">
@@ -222,7 +225,7 @@ export default {
       this.showAlertCopied = !this.showAlertCopied
     },
     copyToClipboard() {
-      let dataToCopy = document.querySelector('#testing-code')
+      let dataToCopy = document.querySelector('#copy-input')
       dataToCopy.setAttribute('type', 'text')
       dataToCopy.select()
 
