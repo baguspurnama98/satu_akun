@@ -86,6 +86,19 @@ class AuthController extends Controller
     }
 
 
+    public function logout () {
+        Auth::logout();
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    // https://jwt-auth.readthedocs.io/en/develop/quick-start/
+    // https://dev.to/ndiecodes/build-a-jwt-authenticated-api-with-lumen-2afm
+    // https://dev.to/stefant123/secure-authentication-in-nuxt-spa-with-laravel-as-back-end-19a9
+    public function refreshToken() {
+        return $this->respondWithToken(Auth::refresh());
+    }
+
+
     /**
      * update status user status from 0 to 1
      */
