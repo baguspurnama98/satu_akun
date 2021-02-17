@@ -29,6 +29,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/moment',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -53,6 +54,6 @@ export default {
   loadingIndicator: {
     name: 'chasing-dots',
     color: '#667EEA',
-    background: 'white'
-  }
+    background: 'white',
+  },
 }

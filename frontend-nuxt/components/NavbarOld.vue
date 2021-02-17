@@ -2,7 +2,7 @@
   <nav
     v-click-outside
     @clicked-outside="toggleButton()"
-    class="p-4 sticky w-full z-10 top-0 shadow-lg bg-indigo-500"
+    class="p-3 sticky w-full z-10 top-0 shadow-lg bg-indigo-500"
   >
     <div
       class="container px-4 mx-auto flex flex-wrap items-center justify-between"
@@ -132,7 +132,7 @@
                     >Campaign Saya
                   </NuxtLink>
                   <a
-                    href="#"
+                    href="/users/2/patungan"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                     role="menuitem"
                     >Patungan Saya</a
@@ -207,18 +207,17 @@ export default {
           this.navUserOption = !this.navUserOption
           break
         default:
-          this.toggle = true,
-          this.navUserOption = true
+          ;(this.toggle = true), (this.navUserOption = true)
           this.navLayanan = true
           break
       }
     },
   },
-  watch:{
-    $route (to, from) {
-        this.toggleButton();
-    }
-} 
+  watch: {
+    $route(to, from) {
+      this.toggleButton()
+    },
+  },
 }
 </script>
 <style scoped>
