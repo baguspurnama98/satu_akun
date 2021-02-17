@@ -2,59 +2,20 @@
   <div
     class="container px-4 mx-auto flex flex-wrap items-center justify-between"
   >
-    <div class="w-full">
-      <h3 class="font-bold py-3 text-4xl text-indigo-500">Buat Campaign</h3>
-      <div class="bg-blue-100 p-3 rounded-lg xs:text-sm xs:text-justify">
+    <div class="w-full mb-5">
+      <h3 class="font-bold pb-3 text-4xl text-indigo-500">Buat Campaign</h3>
+      <div class="bg-blue-100 p-3 rounded-lg xs:text-sm">
         <p>
           Pastikan campaign Anda sesuai dengan
-          <b>syarat dan ketentuan Berpatungan.com</b>. Berpatungan menghimbau
-          untuk menjalankan campaign yang wajar atau campaign Anda dapat
-          diturunkan oleh Berpatungan.com sesuai S&K yang berlaku.
+          <b>syarat dan ketentuan Berpatungan.com</b>.
+        </p>
+        <p>
+          Berpatungan menghimbau untuk menjalankan campaign yang wajar atau
+          campaign Anda dapat diturunkan oleh Berpatungan.com sesuai S&K yang
+          berlaku.
         </p>
       </div>
     </div>
-
-    <section
-      class="mx-3 mb-10 w-full pt-2 py-5 px-6 my-4 rounded-b-md shadow-md bg-white"
-    >
-      <div class="mt-4 mb-1 xs:my-2">
-        <h5 class="font-semibold py-3 text-lg inline xs:text-sm">
-          Upload Foto
-        </h5>
-        <span
-          class="bg-gray-200 p-1 ml-1 rounded-md w-auto text-gray-600 text-xs font-semibold"
-          >Opsional</span
-        >
-      </div>
-      <div class="mb-3">
-        <p class="text-sm">Format gambar .jpg .jpeg .png</p>
-      </div>
-      <div class="pb-5 flex flex-wrap items-center justify-between">
-        <div
-          id="empty-cover-art"
-          class="rounded w-full py-16 xs:py-8 text-center opacity-50 md:border-solid md:border md:border-gray-400"
-        >
-          <svg
-            class="mx-auto feather feather-image"
-            xmlns="http://www.w3.org/2000/svg"
-            width="40"
-            height="40"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-            <polyline points="21 15 16 10 5 21"></polyline>
-          </svg>
-          <input type="file" class="text-sm border rounded w-full py-3 px-3" />
-          <!-- <div class="py-4">Tambah Foto</div> -->
-        </div>
-      </div>
-    </section>
 
     <h5
       class="font-semibold py-3 px-6 xs:px-4 text-xl inline text-gray-600 xs:text-md"
@@ -131,7 +92,7 @@
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
             >Wajib</span
           >
-          <p class="text-xs lg:pr-20 md:pr-10 xs:pr-0">
+          <p class="text-xs md:pr-20">
             Masukan total slot yang Anda buka untuk campaign
           </p>
         </div>
@@ -158,7 +119,7 @@
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
             >Wajib</span
           >
-          <p class="text-xs lg:pr-20 md:pr-10 xs:pr-0">
+          <p class="text-xs md:pr-20">
             Anda bebas menentukan harga setiap slot yang harus dikeluarkan
             anggota campaign. Pastikan harga yang Anda tawarkan cukup masuk
             akal.
@@ -201,7 +162,7 @@
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
             >Wajib</span
           >
-          <p class="text-xs lg:pr-20 md:pr-10 xs:pr-0">
+          <p class="text-xs md:pr-20">
             Pilih durasi/lama dari platform anda berjalan
           </p>
         </div>
@@ -224,6 +185,7 @@
                 name="range_period"
                 id="range_period"
               >
+                <option value="days">Hari</option>
                 <option value="months">Bulan</option>
                 <option value="years">Tahun</option>
               </select>
@@ -274,10 +236,65 @@
       </div>
     </section>
 
+    <section
+      class="mx-3 w-full pt-2 py-5 px-6 my-4 rounded-b-md shadow-md bg-white"
+    >
+      <div class="mt-4 mb-1 xs:my-2">
+        <h5 class="font-semibold py-3 text-lg inline xs:text-sm">
+          Upload Foto
+        </h5>
+        <span
+          class="bg-gray-200 p-1 ml-1 rounded-md w-auto text-gray-600 text-xs font-semibold"
+          >Opsional</span
+        >
+      </div>
+      <div class="mb-3">
+        <p class="text-sm">Format gambar .jpg .jpeg .png</p>
+      </div>
+      <div class="pb-5 flex flex-wrap items-center justify-between">
+        <div
+          id="empty-cover-art"
+          class="rounded w-full px-4 py-16 xs:py-8 text-center md:border-solid md:border md:border-gray-400"
+        >
+          <svg
+            class="mx-auto h-12 w-12 text-gray-500 m-3"
+            stroke="currentColor"
+            fill="none"
+            viewBox="0 0 48 48"
+            aria-hidden="true"
+          >
+            <path
+              d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <input type="file" class="text-sm border rounded w-full p-3" />
+          <!-- <div class="py-4">Tambah Foto</div> -->
+        </div>
+      </div>
+    </section>
+    <label class="flex items-center pl-3 py-3 xs:pl-0">
+      <input
+        type="checkbox"
+        name="expired"
+        class="form-tick h-6 w-6 xs:h-5 xs:w-5 focus:outline-none text-gray-600"
+        v-model="terms"
+      />
+      <span class="ml-3 xs:ml-2 text-gray-700 xs:text-sm"
+        >Kamu menyetujui
+        <a href="" class="text-red-500">Syarat dan Ketentuan</a> yang berlaku
+        pada layanan ini</span
+      >
+    </label>
+
     <div class="w-full text-center my-5 md:my-10">
       <button
         class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
         type="submit"
+        v-bind:class="[isDisabled ? 'opacity-50' : '']"
+        :disabled="isDisabled"
       >
         Daftar
       </button>
@@ -289,9 +306,15 @@ export default {
   name: 'Create_Campaign',
 
   data() {
-    return {}
+    return {
+      terms: false,
+    }
   },
-  methods: {},
+  computed: {
+    isDisabled: function () {
+      return !this.terms
+    },
+  },
 }
 </script>
 

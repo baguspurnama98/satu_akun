@@ -7,6 +7,10 @@ module.exports = {
       ...defaultTheme.screens,
     },
   },
-  variants: {},
+  variants: {
+    extend: {
+        opacity: ['disabled'],
+    }
+  },
   plugins: [],
 }

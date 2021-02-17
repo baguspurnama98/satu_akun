@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavbarOld />
-    <Nuxt class="mt-14"/>
+    <Nuxt class="my-12 min-h-screen"/>
     <Footer />
   </div>
 </template>

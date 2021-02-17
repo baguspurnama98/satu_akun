@@ -2,7 +2,7 @@
   <nav
     v-click-outside
     @clicked-outside="toggleButton()"
-    class="p-4 sticky w-full z-10 top-0 shadow-lg bg-indigo-500 mb-6"
+    class="p-3 sticky w-full z-10 top-0 shadow-lg bg-indigo-500"
   >
     <div
       class="container px-4 mx-auto flex flex-wrap items-center justify-between"
@@ -125,17 +125,17 @@
             >
               <template v-if="account_login">
                 <div class="py-1">
-                  <a
-                    href="#"
+                  <NuxtLink
+                    to="/users/1221/campaign/"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                     role="menuitem"
-                    >Campaign Saya</a
-                  >
+                    >Campaign Saya
+                  </NuxtLink>
                   <a
-                    href="#"
+                    href="/users/2/patungan"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                     role="menuitem"
-                    >Riwayat Patungan</a
+                    >Patungan Saya</a
                   >
                 </div>
                 <div class="py-1">
@@ -143,13 +143,7 @@
                     href="#"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                     role="menuitem"
-                    >Ubah Profil</a
-                  >
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                    role="menuitem"
-                    >Pengaturan</a
+                    >Riwayat Transaksi</a
                   >
                 </div>
                 <div class="py-1">
@@ -195,7 +189,7 @@ export default {
       toggle: true,
       navLayanan: true,
       navUserOption: true,
-      account_login: false,
+      account_login: true,
     }
   },
   methods: {
@@ -213,18 +207,17 @@ export default {
           this.navUserOption = !this.navUserOption
           break
         default:
-          this.toggle = true,
-          this.navUserOption = true
+          ;(this.toggle = true), (this.navUserOption = true)
           this.navLayanan = true
           break
       }
     },
   },
-  watch:{
-    $route (to, from) {
-        this.toggleButton();
-    }
-} 
+  watch: {
+    $route(to, from) {
+      this.toggleButton()
+    },
+  },
 }
 </script>
 <style scoped>

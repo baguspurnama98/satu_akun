@@ -1,48 +1,58 @@
 <template>
-  <div class="flex flex-col items-center">
-    <!-- Content disini -->
-    <div class="rounded-t-xl overflow-hidden p-10">
-      <table class="table-auto">
-        <thead>
-          <tr>
-            <th class="px-4 py-2 text-emerald-600">Title</th>
-            <th class="px-4 py-2 text-emerald-600">Author</th>
-            <th class="px-4 py-2 text-emerald-600">Views</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium">Intro to CSS</td>
-            <td class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium">Adam</td>
-            <td class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium">858</td>
-          </tr>
-          <tr class="bg-emerald-200">
-            <td class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium">A Long and Winding Tour of the History of UI Frameworks and Tools and the Impact on Design</td>
-            <td class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium">Adam</td>
-            <td class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium">112</td>
-          </tr>
-          <tr>
-            <td class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium">Intro to JavaScript</td>
-            <td class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium">Chris</td>
-            <td class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium">1,280</td>
-          </tr>
-        </tbody>
-      </table>
+  <!-- This example requires Tailwind CSS v2.0+ -->
+  <div class="flex flex-col mx-4 lg:mx-8 lg:items-center">
+    <div class="overflow-x-auto">
+      <div class="align-middle inline-block min-w-full">
+        <div class="overflow-hidden p-2 lg:p-10">
+          <table class="min-w-full table-auto">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="px-4 py-3 text-gray-700">Potongan Admin</th>
+                <th scope="col" class="px-4 py-3 text-gray-700">Harga Minimum</th>
+                <th scope="col" class="px-4 py-3 text-gray-700">Harga Maksimum</th>
+                <th scope="col" class="px-4 py-3 text-gray-700">Admin Minimum</th>
+                <th scope="col" class="px-4 py-3 text-gray-700">Admin Maksimum</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="px-4 py-3 border border-gray-500">20%</td>
+                <td class="px-4 py-3 border border-gray-500">Rp 10.000</td>
+                <td class="px-4 py-3 border border-gray-500">Rp 79.999</td>
+                <td class="px-4 py-3 border border-gray-500">Rp 2.000</td>
+                <td class="px-4 py-3 border border-gray-500">Rp 4.800</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 border border-gray-500">6%</td>
+                <td class="px-4 py-3 border border-gray-500">Rp 80.000</td>
+                <td class="px-4 py-3 border border-gray-500">Rp 499.999</td>
+                <td class="px-4 py-3 border border-gray-500">Rp 4.800</td>
+                <td class="px-4 py-3 border border-gray-500">Rp 6.500</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 border border-gray-500">1,3%</td>
+                <td class="px-4 py-3 border border-gray-500" style="white-space: nowrap">
+                  Rp 500.000
+                </td>
+                <td class="px-4 py-3 border border-gray-500">Rp &infin;</td>
+                <td class="px-4 py-3 border border-gray-500">Rp 6.500</td>
+                <td class="px-4 py-3 border border-gray-500">Rp 9.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-    
-    <!-- Tata cara pembayaran di sini -->
-    <Carousel />
-
   </div>
 </template>
 
 <script>
-import Carousel from '@/components/Carousel/Carousel'
+import Carousel from "@/components/Carousel/Carousel";
 
 export default {
-  layout: 'default',
+  layout: "default",
   components: { Carousel },
-}
+};
 </script>
 
 <style>
