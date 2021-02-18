@@ -1,7 +1,7 @@
 <template>
   <nav
+    id="nav"
     v-click-outside
-    @clicked-outside="toggleButton()"
     class="p-3 sticky w-full z-50 top-0 shadow-lg bg-indigo-500"
   >
     <div
@@ -149,7 +149,7 @@
                 <div class="py-1">
                   <span
                     @click="logout"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                    class="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                     role="menuitem"
                     >Keluar</span
                   >
@@ -193,7 +193,7 @@ export default {
   },
   computed: {
     account_login() {
-        return this.$store.state.token;
+        return this.$store.state.auth.token;
     }
   },
   methods: {
@@ -201,6 +201,8 @@ export default {
       switch (value) {
         case 'toggle':
           this.toggle = !this.toggle
+          this.navUserOption = true
+          this.navLayanan = true
           break
         case 'navLayanan':
           this.navUserOption = true
@@ -218,9 +220,9 @@ export default {
     },
 
     logout() {
-        this.$axios.$post(process.env.API_DEV_URL + 'auth/logout')
+        this.$axios.$get(process.env.API_DEV_URL + 'auth/logout')
           .then(resp => {
-            this.$store.dispatch('logout');
+            this.$store.dispatch('auth/logout');
             this.$router.push('/');
           })
           .catch(errors => {
@@ -232,6 +234,15 @@ export default {
     $route(to, from) {
       this.toggleButton()
     },
+  },
+  mounted() {
+      const form = document.getElementById('nav');
+      // agar event hanya bekerja pada element nav saja  
+      form.addEventListener('clicked-outside', e => {
+          if (e.detail.tag == 'nav') {
+            this.toggleButton()
+          }
+      });
   },
 }
 </script>

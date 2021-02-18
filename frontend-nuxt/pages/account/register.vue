@@ -7,8 +7,8 @@
   <div
     class="min-w-screen min-h-screen flex items-start justify-center px-5 py-5"
   >
-    <div
-      class="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden"
+    <form @submit.prevent="register"
+      class="bg-gray-100 text-gray-500 rounded-3xl shadow-lg overflow-hidden"
       style="max-width: 1000px"
     >
       <div class="md:flex w-full">
@@ -20,65 +20,39 @@
             <h1 class="font-bold text-3xl text-indigo-500">Daftar</h1>
           </div>
           <div>
-            <div class="flex -mx-3">
-              <div class="w-full px-3 mb-3">
-                <label for="" class="text-xs font-semibold px-1">Email</label>
-                <div class="flex">
-                  <div
-                    class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
-                  >
-                    <i class="mdi mdi-email-outline text-gray-400 text-lg"></i>
-                  </div>
-                  <input
-                    type="email"
-                    class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                    placeholder="johnsmith@example.com"
-                  />
-                </div>
-              </div>
+            <div class="mb-4">
+                <label for="name" class="text-sm font-semibold text-gray-600">Nama</label>
+                <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 focus:border-indigo-500 focus:outline-none" name="name" type="text" required autofocus placeholder="Nama" 
+                v-model="form.name"/>
             </div>
-            <div class="flex -mx-3">
-              <div class="w-full px-3 mb-3">
-                <label for="" class="text-xs font-semibold px-1"
-                  >Password</label
-                >
-                <div class="flex">
-                  <div
-                    class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
-                  >
-                    <i class="mdi mdi-lock-outline text-gray-400 text-lg"></i>
-                  </div>
-                  <input
-                    type="password"
-                    class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                    placeholder="************"
-                  />
-                </div>
-              </div>
+            <div class="mb-4">
+                <label for="email" class="text-sm font-semibold text-gray-600">Email</label>
+                <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 focus:border-indigo-500 focus:outline-none" name="email" type="email" required autofocus placeholder="Email" 
+                v-model="form.email"/>
             </div>
-            <div class="flex -mx-3">
-              <div class="w-full px-3 mb-12">
-                <label for="" class="text-xs font-semibold px-1"
-                  >WhatsApp</label
-                >
-                <div class="flex">
-                  <div
-                    class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
-                  >
-                    <i class="mdi mdi-email-outline text-gray-400 text-lg"></i>
-                  </div>
-                  <input
-                    type="text"
-                    class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                    placeholder="08123456xxxx"
-                  />
-                </div>
-              </div>
+            <div class="mb-4">
+                <label for="password" class="text-sm font-semibold text-gray-600">Password</label>
+                <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 focus:border-indigo-500 focus:outline-none" type="password" placeholder="Password" name="password" required autocomplete="current-password" 
+                v-model="form.password"/>
             </div>
-            <div class="flex -mx-3">
-              <div class="w-full px-3 mb-5">
+            <div class="mb-4">
+                <label for="password_confirmation" class="text-sm font-semibold text-gray-600">Konfirmasi Password</label>
+                <span v-if="isPassConfirm" class="ml-1 text-xs font-medium text-red-500">Password tidak sama</span>
+                <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 focus:border-indigo-500 focus:outline-none" type="password" placeholder="Password" name="password_confirmation" required autocomplete="current-password" 
+                v-model="form.password_confirmation"/>
+            </div>
+            <div class="mb-4">
+                <label for="whatsapp" class="text-sm font-semibold text-gray-600">WhatsApp</label>
+                <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 mb-3 focus:border-indigo-500 focus:outline-none" type="tel" placeholder="08123456xxxx" name="whatsapp" required 
+                v-model="form.whatsapp"/>
+            </div>
+            
+            <div class="flex">
+              <div class="w-full px-3 my-5">
                 <button
-                  class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                  class="px-6 py-2 w-full rounded text-white inline-block shadow-lg bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700" type="submit"
+                  v-bind:class="[isDisabled ? 'opacity-50' : '']"
+                  :disabled="isDisabled"
                 >
                   Daftar Sekarang
                 </button>
@@ -87,7 +61,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 
@@ -97,7 +71,44 @@
 export default {
   name: 'Register',
   layout: 'default',
-  // components: { Carousel },
+  data() {
+      return {
+          form: {
+              name: '',
+              email: '',
+              password: '',
+              whatsapp: '',
+              password_confirmation: ''
+          }
+      }
+  },
+  computed: {
+      isDisabled() {
+          return !this.form.name || !this.form.email || !this.form.password || this.form.whatsapp.length < 11 || this.form.password !== this.form.password_confirmation
+      },
+      isPassConfirm() {
+          return this.form.password !== this.form.password_confirmation
+      }
+  },
+  methods: {
+    register() {
+      this.$axios
+        .$post(process.env.API_DEV_URL + 'auth/register', {
+          name: this.form.name,
+          email: this.form.email,
+          password: this.form.password,
+          password_confirmation: this.form.password_confirmation,
+          whatsapp: this.form.whatsapp
+        })
+        .then((res) => {
+          // berhasil, tampilkan sesuatu
+          this.$router.push(`/account/validate-otp/${res.user.id}`)
+        })
+        .catch((errors) => {
+          console.log(errors)
+        })
+    },
+  },
 }
 </script>
 

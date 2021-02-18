@@ -33,7 +33,8 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->group(['prefix' => 'auth'], function () use ($router) {
         $router->post('register', 'AuthController@register');
         $router->post('login', 'AuthController@login');
-        $router->post('logout', 'AuthController@logout');
+        $router->get('logout', 'AuthController@logout');
+        $router->get('validate/{id_user}/{otp}', 'AuthController@validateOTP');
         $router->post('refresh', 'AuthController@refreshToken');
     });
     

@@ -1,8 +1,6 @@
 <template>
   <div
     class="relative container px-4 mx-auto"
-    v-click-outside
-    @clicked-outside="showDetail()"
   >
     <div class="relative w-full">
       <h3 class="font-bold pb-3 text-4xl xs:text-2xl text-indigo-500">
@@ -12,8 +10,6 @@
       <div class="relative overflow-auto pb-20">
         <table
           class="relative table-auto w-full text-left whitespace-no-wrap"
-          v-click-outside
-          @clicked-outside="showDetail()"
         >
           <thead>
             <tr>
@@ -47,8 +43,6 @@
           <!-- Bingung gimana caranya click-outsidenya berjalan maksimal -->
           <tbody
             class="bg-white relative text-sm"
-            v-click-outside
-            @clicked-outside="showDetail()"
           >
             <tr
               v-for="(patungan, index) in dataPatungan"
@@ -108,7 +102,9 @@
                 </span>
               </td>
               <td class="border-t-2 border-gray-200 px-4 py-3">
-                <div class="group inline-block relative">
+                <div class="group inline-block relative"
+                v-click-outside
+                @clicked-outside="showDetail()">
                   <button
                     class="items-center px-2 py-1 border bg-white text-indigo-500 rounded transition duration-300 focus:outline-none flex font-semibold"
                     @click="showDetail(index)"
@@ -268,7 +264,6 @@ export default {
   },
   methods: {
     showDetail(value) {
-      console.log(value)
       if (value === this.activeDetail) {
         this.activeDetail = null
       } else {

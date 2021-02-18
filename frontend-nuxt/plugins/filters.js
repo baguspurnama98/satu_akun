@@ -16,7 +16,7 @@ Vue.filter('formatRupiah', (nominal) => {
   }
 
   rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah
-  return rupiah ? 'Rp. ' + rupiah : ''
+  return rupiah ? 'Rp ' + rupiah : ''
 })
 
 Vue.filter('formatDate', (date) => {

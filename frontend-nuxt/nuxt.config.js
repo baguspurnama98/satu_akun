@@ -27,7 +27,12 @@ export default {
   css: ['~/assets/css/main.css'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: ['~/plugins/close-event.client.js', '~/plugins/filters.js'],
+  // Vuex persisted hanya berlaku di ssr: false (client-side)  
+  plugins: [
+      '~/plugins/close-event.client.js', 
+      '~/plugins/filters.js',
+      { src: '~/plugins/vuex-persist', ssr: false },
+  ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -69,9 +74,9 @@ export default {
     },
   },
 
-  //   router: {
-  //     middleware: 'auth',
-  //   },
+  router: {
+    middleware: 'auth',
+  },
 
   loadingIndicator: {
     name: 'chasing-dots',

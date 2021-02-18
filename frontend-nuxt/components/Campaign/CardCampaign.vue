@@ -7,7 +7,7 @@
         <img
           src="https://picsum.photos/640/400/?random"
           alt="Placeholder"
-          class="rounded-t-lg object-cover h-48 xs:h-24 w-full"
+          class="rounded-t-lg object-cover h-48 xs:h-32 w-full"
         />
 
         <div

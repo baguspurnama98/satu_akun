@@ -38,7 +38,7 @@
             Tulis judul campaign Anda dengan singkat, padat dan jelas
           </p>
         </div>
-        <div class="md:col-span-2">
+        <div class="sm:col-span-2">
           <div>
             <input
               type="text"
@@ -63,7 +63,7 @@
           </p>
         </div>
 
-        <div class="md:col-span-2">
+        <div class="sm:col-span-2">
           <div>
             <textarea
               class="w-full h-96 appearance-none border rounded py-3 px-3 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500 xs:text-sm"
@@ -97,7 +97,7 @@
           </p>
         </div>
 
-        <div class="md:col-span-2">
+        <div class="sm:col-span-2">
           <div>
             <input
               type="number"
@@ -126,7 +126,7 @@
           </p>
         </div>
 
-        <div class="md:col-span-2">
+        <div class="sm:col-span-2">
           <div class="mt-1 relative rounded-md shadow-sm">
             <div
               class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
@@ -167,7 +167,7 @@
           </p>
         </div>
 
-        <div class="md:col-span-2 xs:pl-4">
+        <div class="sm:col-span-2 xs:pl-4">
           <div class="grid grid-cols-3 gap-2">
             <label class="inline-flex items-center py-2 xs:py-0">
               <!-- Harus ada pengecekan, jika bulan yg dipilih, maka max nya 12, jika hari maka maks nya 31 -->
@@ -208,7 +208,7 @@
           </p>
         </div>
 
-        <div class="md:col-span-2 xs:pl-4">
+        <div class="sm:col-span-2 xs:pl-4">
           <div class="grid grid-cols-3 gap-2">
             <label class="inline-flex items-center py-2 xs:py-0">
               <input

@@ -71,7 +71,7 @@
                 <h2 class="text-gray-900 text-lg title-font font-medium mb-3">
                   Mudah dan legal untuk patungan
                 </h2>
-                <p class="leading-relaxed text-base">
+                <p class="leading-relaxed text-sm">
                   Kami carikan kamu teman patungan untuk membeli akun premium.
                   "Kasih wording yang tepat"
                 </p>
@@ -100,7 +100,7 @@
                 <h2 class="text-gray-900 text-lg title-font font-medium mb-3">
                   Pembayaran apa saja gak pakai ribet
                 </h2>
-                <p class="leading-relaxed text-base">
+                <p class="leading-relaxed text-sm">
                   Tidak perlu pakai kartu kredit, cukup bayar pakai media
                   pembayaran apa saja. Tidak perlu upload bukti pembayaran
                   (Wording)
@@ -130,7 +130,7 @@
                 <h2 class="text-gray-900 text-lg title-font font-medium mb-3">
                   Data kamu aman
                 </h2>
-                <p class="leading-relaxed text-base">
+                <p class="leading-relaxed text-sm">
                   Kami berusaha semaksimal mungkin jaga keamanan dan menghindari
                   penipuan. Pastikan kamu baca mekanisme keamanan dan kebijakan
                   privasi layanan Satu Akun
@@ -144,7 +144,7 @@
                     stroke-linejoin="round"
                     stroke-width="2"
                     class="w-4 h-4 ml-2"
-                    viewBox="0 0 24 24"
+                    viewBox="0 0 20 20"
                   >
                     <path d="M5 12h14M12 5l7 7-7 7"></path>
                   </svg>
@@ -174,7 +174,7 @@
                 <h2 class="text-gray-900 text-lg title-font font-medium mb-3">
                   Harga bersaing
                 </h2>
-                <p class="leading-relaxed text-base">
+                <p class="leading-relaxed text-sm">
                   Kami coba berikan harga yang kompetitif dengan kualitas
                   layanan mumpuni, <i>harga mahasiswa</i>. Coba lihat detail
                   penawaran yang kami berikan di skema harga.
@@ -190,7 +190,7 @@
                     stroke-linejoin="round"
                     stroke-width="2"
                     class="w-4 h-4 ml-2"
-                    viewBox="0 0 24 24"
+                    viewBox="0 0 20 20"
                   >
                     <path d="M5 12h14M12 5l7 7-7 7"></path>
                   </svg>

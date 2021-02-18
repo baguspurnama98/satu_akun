@@ -11,6 +11,7 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    private $URL_dev_otp = 'http://localhost:3000/account/validate-otp/';
     /**
      * Store a new user.
      *
@@ -21,8 +22,9 @@ class AuthController extends Controller
     {
         //validate incoming request 
         $this->validate($request, [
-            'name' => 'required|string',
+            'name' => 'string',
             'email' => 'required|email|unique:users',
+            'whatsapp' => 'unique:users',
             'password' => 'required|confirmed',
         ]);
 
@@ -30,16 +32,19 @@ class AuthController extends Controller
             $user = new User();
             $user->name = $request->input('name');
             $user->email = $request->input('email');
+            $user->whatsapp = $request->input('whatsapp');
             $plainPassword = $request->input('password');
             $user->otp = $this->generateNumericOTP(6);
             $user->password = app('hash')->make($plainPassword);
             $user->save();
             
             // sending OTP to email
+            // $url = route('validate', [ 'id_user' => $user->id, 'otp' => $user->otp ]);
+            $url = $this->URL_dev_otp . $user->id;
             $data = [
                 'name' => $user->name,
                 'otp' => $user->otp,
-                'url' => route('validate', [ 'id_user' => $user->id, 'otp' => $user->otp ])
+                'url' => $url,
             ];
             $this->sendEmailOTP($data, $user);
 
@@ -48,7 +53,7 @@ class AuthController extends Controller
 
         } catch (\Exception $e) {
             // return error message
-            return response()->json(['message' => 'User Registration Failed!'], 409);
+            return response()->json(['message' => $e], 409);
         }
     }
 
@@ -87,7 +92,10 @@ class AuthController extends Controller
 
 
     public function logout () {
-        Auth::logout();
+        try {
+            Auth::logout();
+        } catch (\Exception $e) {
+        }
         return response()->json(['message' => 'Successfully logged out']);
     }
 
