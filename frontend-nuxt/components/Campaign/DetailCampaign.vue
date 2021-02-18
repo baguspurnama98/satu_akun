@@ -46,7 +46,9 @@
           </div>
           <p class="text-sm">
             Berakhir
-            <span class="font-bold text-red-700">10 Februari 2021</span>
+            <span class="font-bold text-red-700">{{
+              new Date() | formatDate
+            }}</span>
           </p>
           <p
             class="flex items-center text-black text-md xs:text-sm font-normal"

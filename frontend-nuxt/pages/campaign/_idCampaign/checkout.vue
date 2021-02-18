@@ -109,7 +109,7 @@
               @click.stop.prevent="copyToClipboard"
               class="cursor-pointer text-3xl font-semibold xs:text-xl"
               id="testing-code"
-              >{{ formatRupiah(total, 'Rp. ') }}</span
+              >{{ total | formatRupiah }}</span
             >
             <svg
               xmlns="http://www.w3.org/2000/svg"

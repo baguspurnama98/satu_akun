@@ -272,12 +272,6 @@ export default {
     },
   },
 
-  // filters: { // untuk dapetin "3 hours ago"
-  //   moments(val) {
-  //     return moment(val, 'DD/MM/YYYY').fromNow()
-  //   },
-  // },
-
   watch: {
     $route(to, from) {
       this.showDetail()

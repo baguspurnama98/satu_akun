@@ -38,3 +38,9 @@ Vue.filter('formatDate', (date) => {
   var splitted = dateNew.split('/')
   return `${splitted[0]} ${monthNames[splitted[1] - 1]} ${splitted[2]}`
 })
+
+// filters: { // untuk dapetin "3 hours ago"
+//   moments(val) {
+//     return moment(val, 'DD/MM/YYYY').fromNow()
+//   },
+// },
