@@ -11,6 +11,7 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    private $URL_dev_otp = 'http://localhost:3000/account/validate-otp/';
     /**
      * Store a new user.
      *
@@ -21,8 +22,9 @@ class AuthController extends Controller
     {
         //validate incoming request 
         $this->validate($request, [
-            'name' => 'required|string',
+            'name' => 'string',
             'email' => 'required|email|unique:users',
+            'whatsapp' => 'unique:users',
             'password' => 'required|confirmed',
         ]);
 
@@ -30,16 +32,19 @@ class AuthController extends Controller
             $user = new User();
             $user->name = $request->input('name');
             $user->email = $request->input('email');
+            $user->whatsapp = $request->input('whatsapp');
             $plainPassword = $request->input('password');
             $user->otp = $this->generateNumericOTP(6);
             $user->password = app('hash')->make($plainPassword);
             $user->save();
             
             // sending OTP to email
+            // $url = route('validate', [ 'id_user' => $user->id, 'otp' => $user->otp ]);
+            $url = $this->URL_dev_otp . $user->id;
             $data = [
                 'name' => $user->name,
                 'otp' => $user->otp,
-                'url' => route('validate', [ 'id_user' => $user->id, 'otp' => $user->otp ])
+                'url' => $url,
             ];
             $this->sendEmailOTP($data, $user);
 
@@ -48,7 +53,7 @@ class AuthController extends Controller
 
         } catch (\Exception $e) {
             // return error message
-            return response()->json(['message' => 'User Registration Failed!'], 409);
+            return response()->json(['message' => $e], 409);
         }
     }
 
@@ -83,6 +88,22 @@ class AuthController extends Controller
             // return error message
             return response()->json(['message' => 'User Login Failed!'], 409);
         }
+    }
+
+
+    public function logout () {
+        try {
+            Auth::logout();
+        } catch (\Exception $e) {
+        }
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    // https://jwt-auth.readthedocs.io/en/develop/quick-start/
+    // https://dev.to/ndiecodes/build-a-jwt-authenticated-api-with-lumen-2afm
+    // https://dev.to/stefant123/secure-authentication-in-nuxt-spa-with-laravel-as-back-end-19a9
+    public function refreshToken() {
+        return $this->respondWithToken(Auth::refresh());
     }
 
 

@@ -4,10 +4,10 @@
       class="container px-4 mx-auto flex flex-wrap items-center justify-between"
     >
       <div
-        class="z-0 relative grid grid-cols-1 w-full sm:grid-cols-2 sm:px-5 sm:py-5 sm:gap-x-8 md:py-5"
+        class="z-0 relative grid grid-cols-1 col-span-2 w-full sm:grid-cols-2 sm:px-5 sm:py-5 sm:gap-x-8 md:py-5"
       >
         <div
-          class="z-10 col-start-1 row-start-1 px-4 sm:pt-5 pt-40 bg-gradient-to-t from-black sm:bg-none"
+          class="z-10 col-start-2 row-start-1 px-4 sm:pt-5 pt-40 bg-gradient-to-t from-black sm:bg-none"
         >
           <h2
             class="text-xl font-semibold text-white sm:text-2xl leading-tight sm:text-black md:text-3xl my-5"
@@ -17,13 +17,13 @@
           </h2>
         </div>
 
-        <div class="col-start-1 row-start-3 space-y-3 px-4 xs:py-4">
+        <div class="col-start-2 row-start-3 space-y-3 px-4 xs:py-4">
           <div
             class="flex items-center text-black text-md xs:text-sm font-normal"
           >
             <p class="font-bold text-2xl">
-              {{ formatRupiah(price, 'Rp. ')
-              }}<span class="font-normal">/orang</span>
+              {{ price | formatRupiah }}
+              <span class="font-normal">/orang</span>
             </p>
           </div>
           <div class="flex-1 inline-flex items-center mt-1">
@@ -46,7 +46,9 @@
           </div>
           <p class="text-sm">
             Berakhir
-            <span class="font-bold text-red-700">10 Februari 2021</span>
+            <span class="font-bold text-red-700">{{
+              new Date() | formatDate
+            }}</span>
           </p>
           <p
             class="flex items-center text-black text-md xs:text-sm font-normal"
@@ -60,15 +62,17 @@
             </a>
           </p>
 
-        <icon-social></icon-social>
+          <icon-social></icon-social>
         </div>
-        <div class="col-start-1 row-start-1 flex sm:col-start-2 sm:row-span-3">
+        <div
+          class="col-start-1 col-span-2 row-start-1 flex sm:col-span-1 sm:col-start-1 sm:row-span-3"
+        >
           <div class="w-full grid">
-            <div class="relative col-span-3 row-span-2 md:col-span-2">
+            <div class="relative col-span-1 row-span-1 md:col-span-2">
               <img
                 src="https://picsum.photos/640/400/?random"
-                alt=""
-                class="absolute inset-0 w-full h-full object-cover bg-gray-100 rounded-lg"
+                alt="..."
+                class="absolute inset-0 w-full h-full object-cover bg-gray-100 rounded-lg z-0"
               />
             </div>
           </div>
@@ -87,12 +91,7 @@
           >
             Deskripsi
           </h1>
-          <!-- <div class="w-full ">
-          <span>Lama kampanye akun: 1 bulan</span>
-        </div>
-        <div class="w-full">
-          <span>Harga yang harus dibayarkan: 53 ribu</span>
-        </div> -->
+
           <p
             class="my-3 text-justify"
             v-bind:class="[detail ? 'line-clampin' : '']"
@@ -211,23 +210,6 @@ export default {
   methods: {
     showDetail() {
       this.detail = !this.detail
-    },
-    formatRupiah(angka, prefix) {
-      var number_string = String(angka)
-          .replace(/[^,\d]/g, '')
-          .toString(),
-        split = number_string.split(','),
-        sisa = split[0].length % 3,
-        rupiah = split[0].substr(0, sisa),
-        ribuan = split[0].substr(sisa).match(/\d{3}/gi)
-
-      if (ribuan) {
-        let separator = sisa ? '.' : ''
-        rupiah += separator + ribuan.join('.')
-      }
-
-      rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah
-      return prefix === undefined ? rupiah : rupiah ? 'Rp. ' + rupiah : ''
     },
   },
 }

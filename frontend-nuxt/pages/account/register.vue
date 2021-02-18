@@ -1,17 +1,114 @@
 <template>
-  <div class="flex flex-col justify-center items-center">
-    <!-- Content disini -->
-    <Carousel />
+  <!-- <div class="flex flex-col justify-center items-center"> -->
+  <!-- Content disini -->
+  <!-- <Carousel /> -->
+
+  <!-- </div> -->
+  <div
+    class="min-w-screen min-h-screen flex items-start justify-center px-5 py-5"
+  >
+    <form @submit.prevent="register"
+      class="bg-gray-100 text-gray-500 rounded-3xl shadow-lg overflow-hidden"
+      style="max-width: 1000px"
+    >
+      <div class="md:flex w-full">
+        <div class="hidden md:block w-1/2 bg-indigo-500 py-10 px-10">
+          <img src="~/assets/img/press_play.svg" />
+        </div>
+        <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
+          <div class="text-center mb-5">
+            <h1 class="font-bold text-3xl text-indigo-500">Daftar</h1>
+          </div>
+          <div>
+            <div class="mb-4">
+                <label for="name" class="text-sm font-semibold text-gray-600">Nama</label>
+                <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 focus:border-indigo-500 focus:outline-none" name="name" type="text" required autofocus placeholder="Nama" 
+                v-model="form.name"/>
+            </div>
+            <div class="mb-4">
+                <label for="email" class="text-sm font-semibold text-gray-600">Email</label>
+                <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 focus:border-indigo-500 focus:outline-none" name="email" type="email" required autofocus placeholder="Email" 
+                v-model="form.email"/>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="text-sm font-semibold text-gray-600">Password</label>
+                <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 focus:border-indigo-500 focus:outline-none" type="password" placeholder="Password" name="password" required autocomplete="current-password" 
+                v-model="form.password"/>
+            </div>
+            <div class="mb-4">
+                <label for="password_confirmation" class="text-sm font-semibold text-gray-600">Konfirmasi Password</label>
+                <span v-if="isPassConfirm" class="ml-1 text-xs font-medium text-red-500">Password tidak sama</span>
+                <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 focus:border-indigo-500 focus:outline-none" type="password" placeholder="Password" name="password_confirmation" required autocomplete="current-password" 
+                v-model="form.password_confirmation"/>
+            </div>
+            <div class="mb-4">
+                <label for="whatsapp" class="text-sm font-semibold text-gray-600">WhatsApp</label>
+                <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 mb-3 focus:border-indigo-500 focus:outline-none" type="tel" placeholder="08123456xxxx" name="whatsapp" required 
+                v-model="form.whatsapp"/>
+            </div>
+            
+            <div class="flex">
+              <div class="w-full px-3 my-5">
+                <button
+                  class="px-6 py-2 w-full rounded text-white inline-block shadow-lg bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700" type="submit"
+                  v-bind:class="[isDisabled ? 'opacity-50' : '']"
+                  :disabled="isDisabled"
+                >
+                  Daftar Sekarang
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
 </template>
 
 <script>
-import Carousel from '@/components/Carousel/Carousel'
+// import Carousel from '@/components/Carousel/Carousel'
 
 export default {
-    name: 'Register',
-    layout: 'default',
-    components: { Carousel },
+  name: 'Register',
+  layout: 'default',
+  data() {
+      return {
+          form: {
+              name: '',
+              email: '',
+              password: '',
+              whatsapp: '',
+              password_confirmation: ''
+          }
+      }
+  },
+  computed: {
+      isDisabled() {
+          return !this.form.name || !this.form.email || !this.form.password || this.form.whatsapp.length < 11 || this.form.password !== this.form.password_confirmation
+      },
+      isPassConfirm() {
+          return this.form.password !== this.form.password_confirmation
+      }
+  },
+  methods: {
+    register() {
+      this.$axios
+        .$post(process.env.API_DEV_URL + 'auth/register', {
+          name: this.form.name,
+          email: this.form.email,
+          password: this.form.password,
+          password_confirmation: this.form.password_confirmation,
+          whatsapp: this.form.whatsapp
+        })
+        .then((res) => {
+          // berhasil, tampilkan sesuatu
+          this.$router.push(`/account/validate-otp/${res.user.id}`)
+        })
+        .catch((errors) => {
+          console.log(errors)
+        })
+    },
+  },
 }
 </script>
 

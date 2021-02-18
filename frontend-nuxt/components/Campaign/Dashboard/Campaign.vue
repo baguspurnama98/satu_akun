@@ -4,11 +4,13 @@
       <div class="lg:w-4/5 mx-auto flex flex-wrap">
         <img
           alt="ecommerce"
-          class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-          src="https://dummyimage.com/400x400"
+          class="lg:w-1/2 w-full lg:h-full h-64 object-cover object-center rounded"
+          src="https://picsum.photos/400/400/?random"
         />
         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 px-5 mt-6 lg:mt-0">
-          <h2 class="text-sm title-font text-gray-500 tracking-widest">Campaign Akun</h2>
+          <h2 class="text-sm title-font text-gray-500 tracking-widest">
+            Campaign Akun
+          </h2>
           <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
             The Catcher in the Rye
           </h1>
@@ -19,10 +21,37 @@
             </span>
           </div>
           <div class="py-3 mb-3">
-              <!-- Deskripsi -->
-            <p class="leading-relaxed">Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean shorts keytar banjo tattooed umami cardigan.</p>
-        
-
+            <!-- Deskripsi -->
+            <p
+              class="leading-relaxed text-justify"
+              :class="[detail ? 'line-clampin' : '']"
+            >
+              Fam locavore kickstarter distillery. Mixtape chillwave tumeric
+              sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo
+              juiceramps cornhole raw denim forage brooklyn. Everyday carry +1
+              seitan poutine tumeric. Gastropub blue bottle austin listicle
+              pour-over, neutra jean shorts keytar banjo tattooed umami
+              cardigan.Fam locavore kickstarter distillery. Mixtape chillwave
+              tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam
+              indxgo juiceramps cornhole raw denim forage brooklyn. Everyday
+              carry +1 seitan poutine tumeric. Gastropub blue bottle austin
+              listicle pour-over, neutra jean shorts keytar banjo tattooed umami
+              cardigan.
+            </p>
+            <button
+              v-if="detail === true"
+              class="border-none bg-none cursor-pointer hover:underline text-indigo-500 focus:outline-none"
+              @click="showDetail()"
+            >
+              Lihat selengkapnya
+            </button>
+            <button
+              v-else
+              class="border-none bg-none cursor-pointer hover:underline text-indigo-500 focus:outline-none"
+              @click="showDetail()"
+            >
+              Lihat lebih ringkas
+            </button>
             <!-- Template ini hanya akan muncul ketika yang login adalah pemilik host atau slot dan status sudah berlangsung atau selesai -->
             <template v-if="true">
               <!-- disini isinya element informasi akun -->
@@ -36,32 +65,30 @@
               </div>
               <div class="border-t border-gray-200">
                 <dl>
-                  <div
-                    class="bg-gray-50 py-2 sm:grid sm:grid-cols-3 sm:gap-4"
-                  >
-                    <dt class="text-sm font-medium text-gray-600">Alamat Email</dt>
+                  <div class="bg-gray-50 py-2 sm:grid sm:grid-cols-3 sm:gap-4">
+                    <dt class="text-sm font-medium text-gray-600">
+                      Alamat Email
+                    </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0">
-                      Margot Foster
+                      baguspurnama98@gmail.com
                     </dd>
                   </div>
                 </dl>
                 <dl>
-                  <div
-                    class="bg-gray-50 py-2 sm:grid sm:grid-cols-3 sm:gap-4"
-                  >
+                  <div class="bg-gray-50 py-2 sm:grid sm:grid-cols-3 sm:gap-4">
                     <dt class="text-sm font-medium text-gray-600">Password</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0">
-                      Margot Foster
+                      yukNonton#01
                     </dd>
                   </div>
                 </dl>
                 <dl>
-                  <div
-                    class="bg-gray-50 py-2 sm:grid sm:grid-cols-3 sm:gap-4"
-                  >
-                    <dt class="text-sm font-medium text-gray-600">Nomor Telepon</dt>
+                  <div class="bg-gray-50 py-2 sm:grid sm:grid-cols-3 sm:gap-4">
+                    <dt class="text-sm font-medium text-gray-600">
+                      Nomor Telepon
+                    </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0">
-                      Margot Foster
+                      0897432123124
                     </dd>
                   </div>
                 </dl>
@@ -100,25 +127,40 @@
 </template>
 
 <script>
-import IconSocial from "../../Profil/IconSocial";
+import IconSocial from '../../Profil/IconSocial'
 export default {
-  name: "DashboardCampaign",
+  name: 'DashboardCampaign',
 
   components: { IconSocial },
   // status: aktif, ekspired, berlangsung, refund
   // ini bakal dapatin data si pemilik host juga
-  props: ["postTitle"],
+  props: ['postTitle'],
   // kita pakai props, data disini hanya sebagai contoh
   data() {
     return {
+      detail: true,
       campaign: {
-        status: "aktif",
-        judul: "Apa Mau Loe Haah? Gak suka?",
-        host: "Anastasya Eka",
-        dana_terkumpul: "Rp 20.000",
+        status: 'aktif',
+        judul: 'Apa Mau Loe Haah? Gak suka?',
+        host: 'Anastasya Eka',
+        dana_terkumpul: 'Rp 20.000',
       },
-    };
+    }
   },
-  methods: {},
-};
+  methods: {
+    showDetail() {
+      this.detail = !this.detail
+    },
+  },
+}
 </script>
+
+<style scoped>
+.line-clampin {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+</style>

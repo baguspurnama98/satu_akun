@@ -1,5 +1,7 @@
 <template>
-  <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
+  <div
+    class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+  >
     <div class="w-full mb-5">
       <h3 class="font-bold pb-3 text-4xl text-indigo-500">Buat Campaign</h3>
       <div class="bg-blue-100 p-3 rounded-lg xs:text-sm">
@@ -8,19 +10,26 @@
           <b>syarat dan ketentuan Berpatungan.com</b>.
         </p>
         <p>
-          Berpatungan menghimbau untuk menjalankan campaign yang wajar atau campaign Anda
-          dapat diturunkan oleh Berpatungan.com sesuai S&K yang berlaku.
+          Berpatungan menghimbau untuk menjalankan campaign yang wajar atau
+          campaign Anda dapat diturunkan oleh Berpatungan.com sesuai S&K yang
+          berlaku.
         </p>
       </div>
     </div>
 
-    <h5 class="font-semibold py-3 px-6 xs:px-4 text-xl inline text-gray-600 xs:text-md">
+    <h5
+      class="font-semibold py-3 px-6 xs:px-4 text-xl inline text-gray-600 xs:text-md"
+    >
       Informasi Campaign
     </h5>
-    <section class="mx-3 mb-10 w-full py-5 px-6 xs:px-4 rounded-b-md shadow-md bg-white">
+    <section
+      class="mx-3 mb-10 w-full py-5 px-6 xs:px-4 rounded-b-md shadow-md bg-white"
+    >
       <div class="grid grid-cols-3 xs:grid-cols-1 gap-4 xs:gap-2">
         <div class="col-span-1">
-          <h6 class="font-semibold py-3 text-lg inline xs:text-sm">Judul Campaign</h6>
+          <h6 class="font-semibold py-3 text-lg inline xs:text-sm">
+            Judul Campaign
+          </h6>
           <span
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
             >Wajib</span
@@ -29,7 +38,7 @@
             Tulis judul campaign Anda dengan singkat, padat dan jelas
           </p>
         </div>
-        <div class="md:col-span-2">
+        <div class="sm:col-span-2">
           <div>
             <input
               type="text"
@@ -42,7 +51,9 @@
 
       <div class="grid grid-cols-3 xs:grid-cols-1 gap-4 xs:gap-2 mt-4">
         <div class="col-span-1">
-          <h6 class="font-semibold py-3 text-lg inline xs:text-sm">Deskripsi</h6>
+          <h6 class="font-semibold py-3 text-lg inline xs:text-sm">
+            Deskripsi
+          </h6>
           <span
             class="bg-gray-200 p-1 ml-1 rounded-md w-auto text-gray-600 text-xs font-semibold"
             >Opsional</span
@@ -52,7 +63,7 @@
           </p>
         </div>
 
-        <div class="md:col-span-2">
+        <div class="sm:col-span-2">
           <div>
             <textarea
               class="w-full h-96 appearance-none border rounded py-3 px-3 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500 xs:text-sm"
@@ -64,21 +75,29 @@
       </div>
     </section>
 
-    <h5 class="font-semibold py-3 px-6 xs:px-4 text-xl inline text-gray-600 xs:text-md">
+    <h5
+      class="font-semibold py-3 px-6 xs:px-4 text-xl inline text-gray-600 xs:text-md"
+    >
       Harga Campaign
     </h5>
-    <section class="mx-3 mb-10 w-full py-5 px-6 xs:px-4 rounded-b-md shadow-md bg-white">
+    <section
+      class="mx-3 mb-10 w-full py-5 px-6 xs:px-4 rounded-b-md shadow-md bg-white"
+    >
       <div class="grid grid-cols-3 xs:grid-cols-1 gap-4 xs:gap-2">
         <div class="col-span-1">
-          <h6 class="font-semibold py-3 text-lg inline xs:text-sm">Jumlah Slot</h6>
+          <h6 class="font-semibold py-3 text-lg inline xs:text-sm">
+            Jumlah Slot
+          </h6>
           <span
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
             >Wajib</span
           >
-          <p class="text-xs md:pr-20">Masukan total slot yang Anda buka untuk campaign</p>
+          <p class="text-xs md:pr-20">
+            Masukan total slot yang Anda buka untuk campaign
+          </p>
         </div>
 
-        <div class="md:col-span-2">
+        <div class="sm:col-span-2">
           <div>
             <input
               type="number"
@@ -93,18 +112,21 @@
 
       <div class="grid grid-cols-3 xs:grid-cols-1 gap-4 xs:gap-2 mt-4">
         <div class="col-span-1">
-          <h6 class="font-semibold py-3 text-lg inline xs:text-sm">Harga/slot</h6>
+          <h6 class="font-semibold py-3 text-lg inline xs:text-sm">
+            Harga/slot
+          </h6>
           <span
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
             >Wajib</span
           >
           <p class="text-xs md:pr-20">
-            Anda bebas menentukan harga setiap slot yang harus dikeluarkan anggota
-            campaign. Pastikan harga yang Anda tawarkan cukup masuk akal.
+            Anda bebas menentukan harga setiap slot yang harus dikeluarkan
+            anggota campaign. Pastikan harga yang Anda tawarkan cukup masuk
+            akal.
           </p>
         </div>
 
-        <div class="md:col-span-2">
+        <div class="sm:col-span-2">
           <div class="mt-1 relative rounded-md shadow-sm">
             <div
               class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
@@ -123,21 +145,29 @@
       </div>
     </section>
 
-    <h5 class="font-semibold py-3 px-6 xs:px-4 text-xl inline text-gray-600 xs:text-md">
+    <h5
+      class="font-semibold py-3 px-6 xs:px-4 text-xl inline text-gray-600 xs:text-md"
+    >
       Waktu Campaign
     </h5>
-    <section class="mx-3 mb-10 w-full py-5 px-6 xs:px-4 rounded-b-md shadow-md bg-white">
+    <section
+      class="mx-3 mb-10 w-full py-5 px-6 xs:px-4 rounded-b-md shadow-md bg-white"
+    >
       <div class="grid grid-cols-3 xs:grid-cols-1 gap-4 xs:gap-2">
         <div class="col-span-1">
-          <h6 class="font-semibold py-3 text-lg inline xs:text-sm">Durasi Campaign</h6>
+          <h6 class="font-semibold py-3 text-lg inline xs:text-sm">
+            Durasi Campaign
+          </h6>
           <span
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
             >Wajib</span
           >
-          <p class="text-xs md:pr-20">Pilih durasi/lama dari platform anda berjalan</p>
+          <p class="text-xs md:pr-20">
+            Pilih durasi/lama dari platform anda berjalan
+          </p>
         </div>
 
-        <div class="md:col-span-2 xs:pl-4">
+        <div class="sm:col-span-2 xs:pl-4">
           <div class="grid grid-cols-3 gap-2">
             <label class="inline-flex items-center py-2 xs:py-0">
               <!-- Harus ada pengecekan, jika bulan yg dipilih, maka max nya 12, jika hari maka maks nya 31 -->
@@ -155,6 +185,7 @@
                 name="range_period"
                 id="range_period"
               >
+                <option value="days">Hari</option>
                 <option value="months">Bulan</option>
                 <option value="years">Tahun</option>
               </select>
@@ -177,7 +208,7 @@
           </p>
         </div>
 
-        <div class="md:col-span-2 xs:pl-4">
+        <div class="sm:col-span-2 xs:pl-4">
           <div class="grid grid-cols-3 gap-2">
             <label class="inline-flex items-center py-2 xs:py-0">
               <input
@@ -205,9 +236,13 @@
       </div>
     </section>
 
-    <section class="mx-3 w-full pt-2 py-5 px-6 my-4 rounded-b-md shadow-md bg-white">
+    <section
+      class="mx-3 w-full pt-2 py-5 px-6 my-4 rounded-b-md shadow-md bg-white"
+    >
       <div class="mt-4 mb-1 xs:my-2">
-        <h5 class="font-semibold py-3 text-lg inline xs:text-sm">Upload Foto</h5>
+        <h5 class="font-semibold py-3 text-lg inline xs:text-sm">
+          Upload Foto
+        </h5>
         <span
           class="bg-gray-200 p-1 ml-1 rounded-md w-auto text-gray-600 text-xs font-semibold"
           >Opsional</span
@@ -248,8 +283,9 @@
         v-model="terms"
       />
       <span class="ml-3 xs:ml-2 text-gray-700 xs:text-sm"
-        >Kamu menyetujui <a href="" class="text-red-500">Syarat dan Ketentuan</a> yang
-        berlaku pada layanan ini</span
+        >Kamu menyetujui
+        <a href="" class="text-red-500">Syarat dan Ketentuan</a> yang berlaku
+        pada layanan ini</span
       >
     </label>
 
@@ -267,19 +303,19 @@
 </template>
 <script>
 export default {
-  name: "Create_Campaign",
+  name: 'Create_Campaign',
 
   data() {
     return {
       terms: false,
-    };
+    }
   },
   computed: {
     isDisabled: function () {
-      return !this.terms;
+      return !this.terms
     },
   },
-};
+}
 </script>
 
 <style scoped>

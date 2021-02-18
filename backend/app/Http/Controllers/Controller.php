@@ -9,6 +9,7 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     //Add this method to the Controller class
+    // https://jwt-auth.readthedocs.io/en/develop/quick-start/
     protected function respondWithToken($token)
     {
         return response()->json([
