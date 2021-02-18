@@ -104,7 +104,7 @@
                 </span>
               </td>
               <td class="border-t-2 border-gray-200 px-4 py-3">
-                {{ changeDateFormat(patungan.dateEnd) }}
+                {{ patungan.dateEnd | formatDate }}
               </td>
               <td class="border-t-2 border-gray-200 px-4 py-3">
                 <div class="group inline-block relative">
@@ -214,7 +214,6 @@
   </div>
 </template>
 <script>
-import moment from 'moment'
 export default {
   layout: 'default',
 
@@ -270,26 +269,6 @@ export default {
       } else {
         this.activeDetail = value
       }
-    },
-
-    changeDateFormat(date) {
-      const monthNames = [
-        'Januari',
-        'Februari',
-        'Maret',
-        'April',
-        'Mei',
-        'Juni',
-        'Juli',
-        'Agustus',
-        'September',
-        'Oktober',
-        'November',
-        'Desember',
-      ]
-      let dateNew = moment(date).format('DD/MM/YYYY')
-      var splitted = dateNew.split('/')
-      return `${splitted[0]} ${monthNames[splitted[1] - 1]} ${splitted[2]}`
     },
   },
 

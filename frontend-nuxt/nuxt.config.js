@@ -18,16 +18,16 @@ export default {
 
   // untuk generate file robots.txt, disable dulu
 
-//   robots: {
-//     UserAgent: '*',
-//     Disallow: '/signin',
-//   },
+  //   robots: {
+  //     UserAgent: '*',
+  //     Disallow: '/signin',
+  //   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: ['~/assets/css/main.css'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: ['~/plugins/close-event.client.js'],
+  plugins: ['~/plugins/close-event.client.js', '~/plugins/filters.js'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -65,13 +65,13 @@ export default {
 
   pwa: {
     workbox: {
-    //    dev: true // or use a global variable to track the current NODE_ENV, etc to determine dev mode
-    }
+      //    dev: true // or use a global variable to track the current NODE_ENV, etc to determine dev mode
+    },
   },
 
-//   router: {
-//     middleware: 'auth',
-//   },
+  //   router: {
+  //     middleware: 'auth',
+  //   },
 
   loadingIndicator: {
     name: 'chasing-dots',

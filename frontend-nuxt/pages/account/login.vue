@@ -4,8 +4,8 @@
     <!-- Content disini -->
     <!-- component login -->
     <div class="flex items-center justify-center mt-12">
-        <div class="w-full max-w-md">
-            <form @submit.prevent="login" class="shadow-lg rounded-md px-8 xs:px-4 pt-6 pb-8 mb-4 mx-4">
+        <div class="w-full max-w-md py-5">
+            <form @submit.prevent="login" class="bg-gray-100 shadow-lg rounded-md px-8 xs:px-4 pt-6 pb-8 mb-4 mx-4 ">
                 <!-- @csrf -->
                 <div class="text-indigo-500 text-3xl font-semibold flex justify-center py-2 mb-6">
                     Silakan Masuk
