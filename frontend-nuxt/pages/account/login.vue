@@ -69,7 +69,7 @@ export default {
   },
   async mounted() {
     // sudah di set base URL itu axiosnya API_DEV_URL, coba pelajari di internet
-    // nth kenapa pada proses development, selalu kena cors, maka terpaksa pakai process.env.API_DEV_URL
+    // nth kenapa pada proses development, selalu kena cors, maka terpaksa pakai process.env.API_DEV_URL -- hipotesisku karena di env mu ngga pake http, ini udh aku tambahin
     console.log(process.env.API_DEV_URL)
     const trials = await this.$axios
       .$get(process.env.API_DEV_URL + 'users')
