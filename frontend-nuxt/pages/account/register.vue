@@ -7,11 +7,11 @@
       class="bg-gray-100 text-gray-500 rounded-3xl shadow-lg overflow-hidden"
       style="max-width: 1000px"
     >
-      <div class="md:flex w-full">
-        <div class="w-1/2 bg-indigo-500 py-10 px-10 flex items-stretch">
+      <div class="grid grid-flow-col grid-cols-2 xs:grid-cols-1 w-full">
+        <div class="bg-indigo-500 py-10 px-10 flex items-stretch xs:hidden">
           <img src="~/assets/img/press_play.svg" class="self-center" />
         </div>
-        <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
+        <div class="w-full py-10 px-5 md:px-10">
           <div class="text-center mb-5">
             <h1 class="font-bold text-3xl text-indigo-500">Daftar</h1>
           </div>
@@ -102,31 +102,33 @@
             <div class="">
               <div class="w-full px-3 my-5">
                 <button
-                  class="inline px-6 py-2 w-full rounded text-white shadow-lg bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
+                  class="px-6 py-2 w-full rounded text-white shadow-lg bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
                   type="submit"
                   v-bind:class="[isDisabled ? 'opacity-50' : '']"
                   :disabled="isDisabled"
                 >
-                  <svg
-                    v-if="loading"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="animate-spin w-5 h-5 p-0 mr-1 inline-block"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    viewBox="0 0 100 100"
-                    preserveAspectRatio="xMidYMid"
-                  >
-                    <circle
-                      cx="50"
-                      cy="50"
-                      fill="none"
-                      stroke="#d5ccc2"
-                      stroke-width="15"
-                      r="35"
-                      stroke-dasharray="164.93361431346415 56.97787143782138"
-                      transform="matrix(1,0,0,1,0,0)"
-                    ></circle>
-                  </svg>
-                  Daftar Sekarang
+                  <div class="inline-flex items-center">
+                    <svg
+                      v-if="loading"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="animate-spin w-4 h-4 p-0 mr-1"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      viewBox="0 0 100 100"
+                      preserveAspectRatio="xMidYMid"
+                    >
+                      <circle
+                        cx="50"
+                        cy="50"
+                        fill="none"
+                        stroke="#d5ccc2"
+                        stroke-width="15"
+                        r="35"
+                        stroke-dasharray="164.93361431346415 56.97787143782138"
+                        transform="matrix(1,0,0,1,0,0)"
+                      ></circle>
+                    </svg>
+                    Daftar Sekarang
+                  </div>
                 </button>
               </div>
             </div>
