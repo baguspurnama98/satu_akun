@@ -43,3 +43,5 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
     $router->get('user/{id_user}', 'UserController@getUser');
 });
+
+// php -S localhost:8000 -t public
