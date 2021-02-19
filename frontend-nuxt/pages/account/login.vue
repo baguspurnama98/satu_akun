@@ -84,16 +84,28 @@ export default {
           this.$store.dispatch('auth/setToken', { token, expires_in })
           // this.$router.push({name: 'secret'});
           console.log({ token, expires_in })
+          this.getProfile({ token, expires_in })
           this.$router.push('/')
         })
         .catch((errors) => {
           this.loading = false
-          if(errors.response.status === 404){
+          if(errors.response.status === 404 || errors.response.status === 401){
             this.errorStatus=true
           }
           console.log(errors.response.status)
         })
     },
+    async getProfile(token){
+      const config = {
+        headers: { Authorization: `Bearer ${token}` }
+      };
+      const profile = await this.$axios
+        .$get(process.env.API_DEV_URL + 'profile',null, config )
+        .catch((err) => console.log(err))
+      console.log(profile)
+      this.$store.dispatch('getUserProfile', profile.user)
+      console.log(this.$store.state.user)
+    }
   },
   async mounted() {
     // sudah di set base URL itu axiosnya API_DEV_URL, coba pelajari di internet
