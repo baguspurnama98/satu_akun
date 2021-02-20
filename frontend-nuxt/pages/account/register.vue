@@ -34,6 +34,11 @@
               <label for="email" class="text-sm font-semibold text-gray-600"
                 >Email</label
               >
+              <span
+                v-if="isEmailAlready"
+                class="ml-1 text-xs font-medium text-red-500"
+                >Email sudah digunakan</span
+              >
               <input
                 class="appearance-none border rounded w-full py-3 px-3 text-gray-900 focus:border-indigo-500 focus:outline-none"
                 name="email"
@@ -82,6 +87,11 @@
             <div class="mb-4">
               <label for="whatsapp" class="text-sm font-semibold text-gray-600"
                 >WhatsApp</label
+              >
+              <span
+                v-if="isEmailAlready"
+                class="ml-1 text-xs font-medium text-red-500"
+                >WhatsApp sudah digunakan</span
               >
               <span
                 v-if="isPhoneConfirm"
@@ -147,6 +157,8 @@ export default {
     return {
       loading: false,
       isPhoneConfirm: false,
+      isEmailAlready: false,
+      isWaAlready: false,
       form: {
         name: '',
         email: '',
@@ -190,8 +202,19 @@ export default {
             this.$router.push(`/account/validate-otp/${res.user.id}`)
           })
           .catch((errors) => {
-            console.log(errors)
+            // console.log(errors.response)
             this.loading = false
+            const {email, whatsapp} = errors.response.data
+            if (email) {
+                // sudah ada email yg sama
+                this.isEmailAlready = true
+                // setTimeout(()=>{
+                //     this.$router.push('/account/login')
+                // }, 5000)
+            }
+            if (whatsapp) {
+                this.isWaAlready = true
+            }
           })
       } else {
         this.isPhoneConfirm = true

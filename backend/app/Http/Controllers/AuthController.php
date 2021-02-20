@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Jobs\MailJob;
 //import auth facades
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 use App\Models\User;
 
@@ -46,7 +46,10 @@ class AuthController extends Controller
                 'otp' => $user->otp,
                 'url' => $url,
             ];
-            $this->sendEmailOTP($data, $user);
+            // $this->sendEmailOTP($data, $user);
+            $emailJob = (new MailJob($user, $data));
+            // masuk ke queue biar gak bloking
+            dispatch($emailJob);
 
             // return successful response
             return response()->json(['user' => $user, 'message' => 'CREATED'], 201);
@@ -74,7 +77,7 @@ class AuthController extends Controller
         
         try {
             $user = User::where('email', $request->email)->first();
-            if ($user->status === 0) return response()->json(['message' => 'Not Validated'], 401);
+            if ($user->status === 0) return response()->json(['id_user' => $user->id, 'message' => 'Not Validated'], 401);
 
             $credentials = $request->only(['email', 'password']);
 
@@ -106,6 +109,22 @@ class AuthController extends Controller
         return $this->respondWithToken(Auth::refresh());
     }
 
+
+    public function resendOTP($id_user) {
+        $user = User::findOrFail($id_user);
+        $user->otp = $this->generateNumericOTP(6);
+        $user->save();
+
+        $url = $this->URL_dev_otp . $user->id;
+        $data = [
+            'name' => $user->name,
+            'otp' => $user->otp,
+            'url' => $url,
+        ];
+        $emailJob = (new MailJob($user, $data));
+        // masuk ke queue biar gak bloking
+        dispatch($emailJob);
+    }
 
     /**
      * update status user status from 0 to 1
@@ -141,23 +160,5 @@ class AuthController extends Controller
     } 
 
 
-    // https://medium.com/@easyselva/sending-mail-in-lumen-via-smtp-ded1079767cb
-    // https://stackoverflow.com/questions/38601527/how-to-use-cpanel-email-accounts-to-send-confirmation-emails-in-laravel
     
-    private function sendEmailOTP($data, $user) {
-        $from_email = 'noreply@baguspurnama.com';
-        $surname = 'noreply';
-
-        /**
-         * @param 'templates.mail' = blade email yang bakal di kirim kan ke email
-         * @param $data berisi array, di dalamnya ada name, name bakal di echo dalam template
-         * @param $from_email harus sama dengan domain pada ENV, (domain.com)
-         */
-        Mail::send('mails.otp', $data, function($message) use($user, $from_email, $surname) {
-            // to
-            $message->to($user->email, $user->name)->subject('Authentikasi Patungan');
-            // from
-            $message->from($from_email, $surname);
-        });
-    }
 }

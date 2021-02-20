@@ -29,14 +29,31 @@ $router->group(['prefix' => 'auth'], function () use ($router) {
 
 // kelompok prefix API
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
+    
     // Auth API
     $router->group(['prefix' => 'auth'], function () use ($router) {
         $router->post('register', 'AuthController@register');
         $router->post('login', 'AuthController@login');
         $router->get('logout', 'AuthController@logout');
+        // OTP
         $router->get('validate/{id_user}/{otp}', 'AuthController@validateOTP');
+        $router->get('resend-otp/{id_user}', 'AuthController@resendOTP');
+
         $router->post('refresh', 'AuthController@refreshToken');
     });
+
+    // Campaign
+    $router->group(['prefix' => 'campaign'], function () use ($router) {
+        // $router->get('store', 'CampaignController@allCategories');
+
+
+        // Categories
+        $router->group(['prefix' => 'categories'], function () use ($router) {
+            $router->get('/', 'CampaignController@allCategories');
+            $router->post('store', 'CampaignController@storeCategories');
+        });
+    });
+
     
     $router->get('profile', 'UserController@profile');
     $router->get('users', 'UserController@allUsers');

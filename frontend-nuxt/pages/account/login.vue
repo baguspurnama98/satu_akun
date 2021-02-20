@@ -19,7 +19,8 @@
                     <input class="appearance-none border rounded w-full py-3 px-3 text-gray-900 mb-0 focus:border-indigo-500 focus:outline-none" type="password" placeholder="Password" name="password" required autocomplete="current-password" 
                     v-model="form.password" @keydown="errorStatus = false" />
                 </div>
-                <span class="text-red-700 pl-3 text-sm" v-if="errorStatus">Email/password Anda salah</span>
+                <span class="text-red-500 font-medium py-2 text-xs" v-if="errorStatus">{{ errorMessage }}</span>
+                <span v-if="errorCode == 401" class="text-indigo-500 font-medium py-2 underline text-sm cursor-pointer" @click.prevent="resendOtp">Kirim ulang OTP?</span>
                 <div class="mt-4 mb-3 flex items-center justify-between">
                     <button class=" px-6 py-2 w-1/3 rounded text-white shadow-lg bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700" type="submit">
                     <span class="inline-flex items-center p-0 m-0">
@@ -64,8 +65,11 @@
 export default {
   data() {
     return {
-       loading: false,
-       errorStatus:false,
+      loading: false,
+      errorStatus: false,
+      errorCode: '',
+      errorMessage: 'Pengguna tidak ditemukan',
+      idUser: '',
       form: {
         email: '',
         password: '',
@@ -85,31 +89,53 @@ export default {
           // this.$router.push({name: 'secret'});
           console.log({ token, expires_in })
           this.getProfile({ token, expires_in })
-          this.$router.push('/')
+          console.log(this.$router)
+          // jangan kembali ke otp
+          if (this.$router.history._startLocation != "/account/validate-otp/2") {
+              this.$router.back()
+          } else {
+              this.$router.push('/')
+          }
         })
         .catch((errors) => {
           this.loading = false
-          if(errors.response.status === 404 || errors.response.status === 401){
-            this.errorStatus=true
+          const { status, data } = errors.response
+          if (status === 404 || status === 401) {
+            this.errorStatus = true
+            this.errorCode = status
           }
-          console.log(errors.response.status)
+          if (status === 401) {
+            this.errorMessage = 'Akun belum divalidasi'
+            this.idUser = data['id_user']
+          }
         })
     },
-    async getProfile(token){
+    async getProfile(token) {
       const config = {
-        headers: { Authorization: `Bearer ${token}` }
-      };
+        headers: { Authorization: `Bearer ${token}` },
+      }
       const profile = await this.$axios
-        .$get(process.env.API_DEV_URL + 'profile',null, config )
+        .$get(process.env.API_DEV_URL + 'profile', null, config)
         .catch((err) => console.log(err))
       console.log(profile)
       this.$store.dispatch('getUserProfile', profile.user)
       console.log(this.$store.state.user)
-    }
+    },
+    resendOtp() {
+      let id_user = this.idUser
+      this.$axios
+        .$get(process.env.API_DEV_URL + `auth/resend-otp/${id_user}`)
+        .then((resp) => {
+            window.location.replace(`/account/validate-otp/${id_user}`)
+        })
+        .catch((errors) => {
+          console.dir(errors)
+        })
+    },
   },
   async mounted() {
     // sudah di set base URL itu axiosnya API_DEV_URL, coba pelajari di internet
-    // nth kenapa pada proses development, selalu kena cors, maka terpaksa pakai process.env.API_DEV_URL 
+    // nth kenapa pada proses development, selalu kena cors, maka terpaksa pakai process.env.API_DEV_URL
     //-B- menurutku emg hrs pake environment, biar terpusat atur urlnya trs hipotesisku kena cors waktu dev karena di env mu ngga pake http, ini udh aku tambahin
     // console.log(process.env.API_DEV_URL)
     const trials = await this.$axios

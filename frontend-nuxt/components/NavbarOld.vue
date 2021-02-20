@@ -131,12 +131,12 @@
                     role="menuitem"
                     >Campaign Saya
                   </NuxtLink>
-                  <a
-                    href="/users/2/patungan"
+                  <NuxtLink
+                    to="/users/2/patungan"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                     role="menuitem"
-                    >Patungan Saya</a
-                  >
+                    >Patungan Saya
+                  </NuxtLink>
                 </div>
                 <div class="py-1">
                   <a
@@ -230,7 +230,7 @@ export default {
         .$get(process.env.API_DEV_URL + 'auth/logout')
         .then((resp) => {
           this.$store.dispatch('auth/logout')
-          this.$router.push('/')
+          window.location.reload()
         })
         .catch((errors) => {
           console.dir(errors)
