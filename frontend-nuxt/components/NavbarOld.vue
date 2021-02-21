@@ -113,7 +113,7 @@
               type="button"
               @click="toggleButton('navUserOption')"
             >
-              <span v-if="account_login">Dashboard</span>
+              <span v-if="account_login">{{ getName }}</span>
               <span v-else>Masuk</span>
             </button>
             <div
@@ -131,12 +131,12 @@
                     role="menuitem"
                     >Campaign Saya
                   </NuxtLink>
-                  <a
-                    href="/users/2/patungan"
+                  <NuxtLink
+                    to="/users/2/patungan"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                     role="menuitem"
-                    >Patungan Saya</a
-                  >
+                    >Patungan Saya
+                  </NuxtLink>
                 </div>
                 <div class="py-1">
                   <a
@@ -189,12 +189,18 @@ export default {
       toggle: true,
       navLayanan: true,
       navUserOption: true,
+      name: null,
     }
   },
   computed: {
     account_login() {
-        return this.$store.state.auth.token;
-    }
+      return this.$store.state.auth.token
+    },
+    getName() {
+      const name = this.$store.state.user.name
+      var firstName = name.split(' ')[0]
+      return firstName
+    },
   },
   methods: {
     toggleButton(value) {
@@ -220,15 +226,16 @@ export default {
     },
 
     logout() {
-        this.$axios.$get(process.env.API_DEV_URL + 'auth/logout')
-          .then(resp => {
-            this.$store.dispatch('auth/logout');
-            this.$router.push('/');
-          })
-          .catch(errors => {
-            console.dir(errors);
-          });
-    }
+      this.$axios
+        .$get(process.env.API_DEV_URL + 'auth/logout')
+        .then((resp) => {
+          this.$store.dispatch('auth/logout')
+          window.location.reload()
+        })
+        .catch((errors) => {
+          console.dir(errors)
+        })
+    },
   },
   watch: {
     $route(to, from) {
@@ -236,13 +243,13 @@ export default {
     },
   },
   mounted() {
-      const form = document.getElementById('nav');
-      // agar event hanya bekerja pada element nav saja  
-      form.addEventListener('clicked-outside', e => {
-          if (e.detail.tag == 'nav') {
-            this.toggleButton()
-          }
-      });
+    const form = document.getElementById('nav')
+    // agar event hanya bekerja pada element nav saja
+    form.addEventListener('clicked-outside', (e) => {
+      if (e.detail.tag == 'nav') {
+        this.toggleButton()
+      }
+    })
   },
 }
 </script>

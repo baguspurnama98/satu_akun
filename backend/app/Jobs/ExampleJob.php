@@ -5,6 +5,7 @@ namespace App\Jobs;
 class ExampleJob extends Job
 {
     /**
+     * https://lumen.laravel.com/docs/8.x/queues
      * Create a new job instance.
      *
      * @return void

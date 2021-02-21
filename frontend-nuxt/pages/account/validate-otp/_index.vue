@@ -6,6 +6,9 @@
         <span class="text-sm text-gray-700"
           >OTP telah dikirimkan pada email saat kamu mendaftar</span
         >
+        <span v-if="errorMessage != ''" class="text-xs font-medium text-red-500"
+          >{{errorMessage}}</span
+        >
       </div>
       <div class="flex justify-between">
         <div v-for="(l, i) in pinlength" :key="`codefield_${i}`">
@@ -33,6 +36,7 @@ export default {
   data() {
     return {
       pinlength: 6,
+      errorMessage: '',
     };
   },
   methods: {
@@ -60,10 +64,10 @@ export default {
         code = code + document.getElementById(`codefield_${i}`).value;
       }
       if (code.length == this.pinlength) {
-        this.validatePin(code);
+        this.validateOtp(code);
       }
     },
-    validatePin(code) {
+    validateOtp(code) {
       // Check pin on server
       let id_user = this.$route.params.index
       this.$axios.$get(process.env.API_DEV_URL + `auth/validate/${id_user}/${code}`)
@@ -72,8 +76,14 @@ export default {
               this.$router.push(`/account/login`)
           })
           .catch(errors => {
-            console.dir(errors);
+            const {message} = errors.response.data
+            if (errors.response.status == 409) {
+                this.errorMessage = message
+            }
           });
+    },
+    mounted() {
+
     },
   },
   mounted() {

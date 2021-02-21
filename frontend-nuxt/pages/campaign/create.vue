@@ -52,6 +52,34 @@
       <div class="grid grid-cols-3 xs:grid-cols-1 gap-4 xs:gap-2 mt-4">
         <div class="col-span-1">
           <h6 class="font-semibold py-3 text-lg inline xs:text-sm">
+            Durasi Campaign
+          </h6>
+          <span
+            class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
+            >Wajib</span
+          >
+          <p class="text-xs md:pr-20">
+            Pilih kategori campaign Anda
+          </p>
+        </div>
+
+        <div class="sm:col-span-2 xs:pl-4">
+          <div class="grid grid-cols-3 gap-2">
+            <label class="inline-flex items-center py-2 xs:py-0">
+              <select
+                class="w-full border capitalize focus:outline-none focus:ring focus:border-indigo-400 py-2 rounded xs:text-sm"
+                name="categories"
+              >
+                <option v-for="(val) in categories" :key="val.id" :value="val.categories" class="capitalize">{{val.categories}}</option>
+              </select>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-3 xs:grid-cols-1 gap-4 xs:gap-2 mt-4">
+        <div class="col-span-1">
+          <h6 class="font-semibold py-3 text-lg inline xs:text-sm">
             Deskripsi
           </h6>
           <span
@@ -197,7 +225,7 @@
       <div class="grid grid-cols-3 xs:grid-cols-1 gap-4 xs:gap-2 mt-4">
         <div class="col-span-1">
           <h6 class="font-semibold py-3 text-lg inline xs:text-sm">
-            Batas Expired Campaign
+            Expired Campaign
           </h6>
           <span
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
@@ -304,16 +332,31 @@
 <script>
 export default {
   name: 'Create_Campaign',
-
+    // semua form akan disimpan dalam campaign atribute
+    // categories disini gunanya untuk dropdown
   data() {
     return {
       terms: false,
+      categories: '',
+      campaign: {
+          categories: '',
+      }
     }
   },
   computed: {
     isDisabled: function () {
       return !this.terms
     },
+  },
+  async mounted() {
+      await this.$axios.$get(process.env.API_DEV_URL + 'campaign/categories')
+          .then(resp => {
+              const {categories} = resp
+              this.categories = categories
+          })
+          .catch(errors => {
+            console.log(errors)
+          });
   },
 }
 </script>
