@@ -105,6 +105,8 @@ $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 // https://github.com/fruitcake/laravel-cors
 $app->register(Fruitcake\Cors\CorsServiceProvider::class);
 
+$app->register(App\Providers\OptimusServiceProvider::class);
+
 
 $app->register(Illuminate\Mail\MailServiceProvider::class);
 $app->configure('mail');

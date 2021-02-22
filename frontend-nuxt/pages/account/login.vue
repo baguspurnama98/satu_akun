@@ -89,9 +89,11 @@ export default {
           // this.$router.push({name: 'secret'});
           console.log({ token, expires_in })
           this.getProfile({ token, expires_in })
-          console.log(this.$router)
           // jangan kembali ke otp
-          if (this.$router.history._startLocation != "/account/validate-otp/2") {
+            //   
+          if (this.$router.history._startLocation.split('/').indexOf('validate-otp') != -1) {
+                //   aku jadi error wkwkw
+                // skenarionya aku langsung buka link dari gmail dan semua tab hp ku ttg situs ini udah dihapus, jadi pas -2 dah rusak
               this.$router.go(-2) // aku ubah 2 link sebelumnya, u/ mengatasi ketika dia daftar, biar tidak langsung ke halaman checkout
           } else {
               this.$router.push('/')

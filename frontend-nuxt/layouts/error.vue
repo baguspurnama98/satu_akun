@@ -680,13 +680,14 @@
               Opss! Halaman Tidak Ditemukan
             </h1>
             <div class="flex justify-center">
-              <NuxtLink
-                to="/"
+              <!-- harus href agar reload -->
+              <a
+                href="/"
                 class="inline-flex items-center px-5 py-3 rounded-md text-base text-white transition bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
                 style="background: #524eee; font-family: 'Poppins', sans-serif"
               >
                 Kembali ke beranda
-              </NuxtLink>
+              </a>
             </div>
           </div>
         </div>
