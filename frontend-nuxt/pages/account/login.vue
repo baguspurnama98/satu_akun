@@ -20,7 +20,7 @@
                     v-model="form.password" @keydown="errorStatus = false" />
                 </div>
                 <span class="text-red-500 font-medium py-2 text-xs" v-if="errorStatus">{{ errorMessage }}</span>
-                <span v-if="errorCode == 401" class="text-indigo-500 font-medium py-2 underline text-sm cursor-pointer" @click.prevent="resendOtp">Kirim ulang OTP?</span>
+                <span v-if="errorCode == 401 && errorStatus == true" class="text-indigo-500 font-medium py-2 underline text-sm cursor-pointer" @click.prevent="resendOtp">Kirim ulang OTP?</span>
                 <div class="mt-4 mb-3 flex items-center justify-between">
                     <button class=" px-6 py-2 w-1/3 rounded text-white shadow-lg bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700" type="submit">
                     <span class="inline-flex items-center p-0 m-0">
@@ -68,7 +68,7 @@ export default {
       loading: false,
       errorStatus: false,
       errorCode: '',
-      errorMessage: 'Pengguna tidak ditemukan',
+      errorMessage: '',
       idUser: '',
       form: {
         email: '',
@@ -89,10 +89,12 @@ export default {
           // this.$router.push({name: 'secret'});
           console.log({ token, expires_in })
           this.getProfile({ token, expires_in })
-          console.log(this.$router)
           // jangan kembali ke otp
-          if (this.$router.history._startLocation != "/account/validate-otp/2") {
-              this.$router.back()
+            //   
+          if (this.$router.history._startLocation.split('/').indexOf('validate-otp') != -1) {
+                //   aku jadi error wkwkw
+                // skenarionya aku langsung buka link dari gmail dan semua tab hp ku ttg situs ini udah dihapus, jadi pas -2 dah rusak
+              this.$router.go(-2) // aku ubah 2 link sebelumnya, u/ mengatasi ketika dia daftar, biar tidak langsung ke halaman checkout
           } else {
               this.$router.push('/')
           }
@@ -100,11 +102,12 @@ export default {
         .catch((errors) => {
           this.loading = false
           const { status, data } = errors.response
-          if (status === 404 || status === 401) {
+          if (status === 404 || status === 401 || status === 409) {
             this.errorStatus = true
             this.errorCode = status
+            this.errorMessage = 'Pengguna tidak ditemukan';
           }
-          if (status === 401) {
+          if (status === 401) { // kalo kayak gini, bearti ketika salah password akan muncul pesan ini
             this.errorMessage = 'Akun belum divalidasi'
             this.idUser = data['id_user']
           }

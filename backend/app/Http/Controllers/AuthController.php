@@ -7,11 +7,28 @@ use App\Jobs\MailJob;
 //import auth facades
 use Illuminate\Support\Facades\Auth;
 
+
+// import Optimus for hashid
+use Jenssegers\Optimus\Optimus;
+
 use App\Models\User;
 
 class AuthController extends Controller
 {
     private $URL_dev_otp = 'http://localhost:3000/account/validate-otp/';
+
+    private function decode($id)
+    {
+        $optimus = new Optimus(1580030173, 59260789, 1163945558);
+        return $optimus->decode($id);
+    }
+
+    private function encode($id)
+    {
+        $optimus = new Optimus(1580030173, 59260789, 1163945558);
+        return $optimus->encode($id);
+    }
+
     /**
      * Store a new user.
      *
@@ -40,7 +57,7 @@ class AuthController extends Controller
             
             // sending OTP to email
             // $url = route('validate', [ 'id_user' => $user->id, 'otp' => $user->otp ]);
-            $url = $this->URL_dev_otp . $user->id;
+            $url = $this->URL_dev_otp . $this->encode($user->id);
             $data = [
                 'name' => $user->name,
                 'otp' => $user->otp,
@@ -52,6 +69,8 @@ class AuthController extends Controller
             dispatch($emailJob);
 
             // return successful response
+            $user['id'] = $this->encode($user->id);
+            $user['otp'] = '';
             return response()->json(['user' => $user, 'message' => 'CREATED'], 201);
 
         } catch (\Exception $e) {
@@ -77,7 +96,7 @@ class AuthController extends Controller
         
         try {
             $user = User::where('email', $request->email)->first();
-            if ($user->status === 0) return response()->json(['id_user' => $user->id, 'message' => 'Not Validated'], 401);
+            if ($user->status === 0) return response()->json(['id_user' => $this->encode($user->id), 'message' => 'Not Validated'], 401);
 
             $credentials = $request->only(['email', 'password']);
 
@@ -94,7 +113,8 @@ class AuthController extends Controller
     }
 
 
-    public function logout () {
+    public function logout (Optimus $optimus) {
+        return response()->json(['message' => $optimus->decode(1)]);
         try {
             Auth::logout();
         } catch (\Exception $e) {
@@ -111,7 +131,7 @@ class AuthController extends Controller
 
 
     public function resendOTP($id_user) {
-        $user = User::findOrFail($id_user);
+        $user = User::findOrFail($this->decode($id_user));
         $user->otp = $this->generateNumericOTP(6);
         $user->save();
 
@@ -130,8 +150,9 @@ class AuthController extends Controller
      * update status user status from 0 to 1
      */
     public function validateOTP($id_user, $otp) {
+        // setiap id_user harus di decode dan di encode dulu
         try {
-            $user = User::where(['id' => $id_user, 'otp' => $otp])->first();
+            $user = User::where(['id' => $this->decode($id_user), 'otp' => $otp])->first();
             $user->status = 1;
             $user->save();
         } catch (\Exception $e) {

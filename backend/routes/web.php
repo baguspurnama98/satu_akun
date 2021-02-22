@@ -28,6 +28,7 @@ $router->group(['prefix' => 'auth'], function () use ($router) {
 
 
 // kelompok prefix API
+// Nyoba pakai throttle tapi tidak berhasil hehe
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
     
     // Auth API

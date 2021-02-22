@@ -18,7 +18,7 @@ class CreateSocialMediaTable extends Migration
             $table->string('username')->notNullable();
             $table->string('type')->notNullable();
             // reference to id from table users
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

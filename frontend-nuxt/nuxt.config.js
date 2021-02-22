@@ -27,11 +27,11 @@ export default {
   css: ['~/assets/css/main.css'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  // Vuex persisted hanya berlaku di ssr: false (client-side)  
+  // Vuex persisted hanya berlaku di ssr: false (client-side)
   plugins: [
-      '~/plugins/close-event.client.js', 
-      '~/plugins/filters.js',
-      { src: '~/plugins/vuex-persist', ssr: false },
+    '~/plugins/close-event.client.js',
+    '~/plugins/filters.js',
+    { src: '~/plugins/vuex-persist', ssr: false },
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
