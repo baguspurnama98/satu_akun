@@ -18,9 +18,10 @@ class CreateUserTable extends Migration
             $table->string('name');
             $table->string('email')->unique()->notNullable()->index();
             $table->string('password');
-            $table->string('whatsapp')->default(null);
+            $table->string('whatsapp')->nullable()->default(null);
             $table->string('otp')->nullable()->default(null);
             $table->tinyInteger('status')->default(0);
+            $table->string('role')->default('u'); // u for user, a for admin
             $table->timestamps();
         });
     }

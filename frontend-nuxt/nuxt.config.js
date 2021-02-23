@@ -31,6 +31,7 @@ export default {
   plugins: [
     '~/plugins/close-event.client.js',
     '~/plugins/filters.js',
+
     { src: '~/plugins/vuex-persist', ssr: false },
   ],
 

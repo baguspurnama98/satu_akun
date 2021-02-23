@@ -52,83 +52,32 @@
       <div class="grid grid-cols-3 xs:grid-cols-1 gap-4 xs:gap-2 mt-4">
         <div class="col-span-1">
           <h6 class="font-semibold py-3 text-lg inline xs:text-sm">
-            Kategori Campaign
+            Durasi Campaign
           </h6>
           <span
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
             >Wajib</span
           >
-          <p class="text-xs lg:pr-20 md:pr-10 xs:pr-0">
-            Pilih kategori campaign yang sesuai
-          </p>
+          <p class="text-xs md:pr-20">Pilih kategori campaign yang sesuai</p>
         </div>
-        <div class="sm:col-span-2">
-          <div class="group inline-block w-1/3 xs:w-full">
-            <button
-              class="outline-none focus:outline-none border px-3 py-1 bg-white rounded-md flex items-center w-full"
-            >
-              <span
-                class="pr-1 flex-1 text-gray-500 text-left"
-                v-if="campaign.categories === ''"
-                >Pilih Kategori</span
+
+        <div class="sm:col-span-2 xs:pl-4">
+          <div class="grid grid-cols-3 gap-2">
+            <label class="inline-flex items-center py-2 xs:py-0">
+              <select
+                class="w-full border capitalize focus:outline-none focus:ring focus:border-indigo-400 py-2 rounded xs:text-sm"
+                name="categories"
               >
-              <span class="pr-1 flex-1 text-left" v-else>{{
-                campaign.categories
-              }}</span>
-              <span>
-                <svg
-                  class="fill-current h-4 w-4 transform group-hover:-rotate-180 transition duration-500 ease-in-out"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
+                <option
+                  v-for="val in categories"
+                  :key="val.id"
+                  :value="val.categories"
+                  class="capitalize"
                 >
-                  <path
-                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                  />
-                </svg>
-              </span>
-            </button>
-            <ul
-              class="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32"
-            >
-              <li
-                v-for="item in categories"
-                :key="item.id"
-                class="rounded-sm px-3 py-2 relative hover:bg-gray-200 cursor-pointer text-md xs:text-sm"
-              >
-                <button
-                  class="w-full text-left flex items-center outline-none focus:outline-none"
-                  v-if="item.sub"
-                >
-                  <span class="pr-5 flex-1"> {{ item.name }}</span>
-                  <span class="mr-auto">
-                    <svg
-                      class="fill-current h-4 w-4 transition duration-500 ease-in-out"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                      />
-                    </svg>
-                  </span>
-                </button>
-                <span v-else @click="setSelectedCategory(item.name)">{{
-                  item.name
-                }}</span>
-                <ul
-                  class="bg-white border rounded-sm absolute top-0 right-0 transition duration-300 ease-in-out origin-top-left min-w-32"
-                >
-                  <li
-                    class="px-3 py-2 hover:bg-gray-200"
-                    v-for="child in item.sub"
-                    :key="child.id"
-                    @click="setSelectedCategory(child.name)"
-                  >
-                    {{ child.name }}
-                  </li>
-                </ul>
-              </li>
-            </ul>
+                  {{ val.categories }}
+                </option>
+              </select>
+            </label>
           </div>
         </div>
       </div>
@@ -388,9 +337,12 @@
 <script>
 export default {
   name: 'Create_Campaign',
+  // semua form akan disimpan dalam campaign atribute
+  // categories disini gunanya untuk dropdown
   data() {
     return {
       terms: false,
+      categories: '',
       campaign: {
         title: '',
         categories: '',
@@ -401,53 +353,6 @@ export default {
         expired: '',
         img: '',
       },
-      categories: [
-        {
-          name: 'Entertaintment ',
-          sub: [
-            {
-              name: 'Netflix',
-            },
-            {
-              name: 'Spotify',
-            },
-            {
-              name: 'Youtube Premium',
-            },
-            {
-              name: 'Joox',
-            },
-            {
-              name: 'VIU',
-            },
-          ],
-        },
-        {
-          name: 'Edukasi',
-          sub: [
-            {
-              name: 'Datacamp',
-            },
-            {
-              name: 'Dicoding',
-            },
-            {
-              name: 'Kahn Academy',
-            },
-            {
-              name: 'Ruang Guru',
-            },
-            {
-              name: 'Code Politan',
-            },
-            {
-              name: 'Udemy',
-            },
-          ],
-        },
-        { name: 'Hobi', sub: [{ name: 'Gaming' }, { name: 'Memasak' }] },
-        { name: 'Lain-lain' },
-      ],
     }
   },
   computed: {
@@ -455,18 +360,13 @@ export default {
       return !this.terms
     },
   },
-  methods: {
-    setSelectedCategory(item) {
-      this.campaign.categories = item
-    },
-  },
-
   async mounted() {
     await this.$axios
       .$get(process.env.API_DEV_URL + 'campaign/categories')
       .then((resp) => {
         const { categories } = resp
         this.categories = categories
+        console.log(this.categories)
       })
       .catch((errors) => {
         console.log(errors)
@@ -478,30 +378,5 @@ export default {
 <style scoped>
 input:checked + svg {
   display: block;
-}
-
-li > ul {
-  transform: translatex(100%) scale(0);
-}
-li:hover > ul {
-  transform: translatex(101%) scale(1);
-}
-li > button svg {
-  transform: rotate(-90deg);
-}
-li:hover > button svg {
-  transform: rotate(-270deg);
-}
-.group:hover .group-hover\:scale-100 {
-  transform: scale(1);
-}
-.group:hover .group-hover\:-rotate-180 {
-  transform: rotate(180deg);
-}
-.scale-0 {
-  transform: scale(0);
-}
-.min-w-32 {
-  min-width: 8rem;
 }
 </style>
