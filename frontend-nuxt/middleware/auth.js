@@ -11,7 +11,7 @@ export default function ({ store, redirect, route }) {
 
     let regexRoute = new RegExp(list_of_not_allowed_name_route.join('|'))
 
-    console.log(store.state.auth.token)
+    // console.log(store.state.auth.token)
 
     if (!store.state.auth.token && regexRoute.test(route.path)) {
         return redirect('/account/login');
