@@ -26,8 +26,8 @@
           class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-6 gap-4"
         >
           <CardCampaign
-            v-for="item in items"
-            :key="item.title"
+            v-for="(item, id) in items"
+            :key="id"
             :title="item.title"
           />
         </div>
