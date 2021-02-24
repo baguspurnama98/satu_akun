@@ -4,11 +4,11 @@
     class="container px-4 my-12 mx-auto flex flex-wrap items-center justify-between"
   >
     <div class="grid grid-cols-3 xs:grid-cols-1 gap-4 w-full">
-      <a
-        class="flex flex-col items-center justify-center bg-white p-4 shadow rounded-lg hover:bg-indigo-300 cursor-pointer"
+      <span
+        @click.prevent="trailBackslash(item.route)"
+        class="flex flex-col items-center justify-center bg-white p-4 shadow-md rounded-lg hover:bg-yellow-300 cursor-pointer"
         v-for="item in menu"
         :key="item.name"
-        v-bind:href="item.route"
       >
         <div
           class="inline-flex shadow-lg border border-gray-200 rounded-full overflow-hidden h-40 w-40"
@@ -22,7 +22,7 @@
         </div>
 
         <h2 class="mt-4 font-bold text-xl">{{ item.name }}</h2>
-      </a>
+      </span>
     </div>
   </div>
 </template>
@@ -38,5 +38,20 @@ export default {
       ],
     }
   },
+  methods: {
+      /**
+       * menghandle trailing backslash
+       * pada href maupun nuxtlink ekspetasi routing bergantung pada backslash
+       * localhost:8000/admin -> /user/ (tidak ada backslash di ujung admin)
+       * localhost:8000/admin/ -> /admin/user/
+       */
+      trailBackslash: function(routeName) {
+        let path = this.$route.path.endsWith('/') ? routeName : `admin/${routeName}`
+        this.$router.push(path)
+      },
+  },
+  mounted() {
+      console.log(this.$route)
+  }
 }
 </script>

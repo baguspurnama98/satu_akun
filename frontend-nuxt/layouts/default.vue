@@ -10,7 +10,7 @@
 <script>
 export default {
     mounted() {
-        console.log(this.$store.state.token)
+        // console.log(this.$store.state.token)
     },
 }
 </script>

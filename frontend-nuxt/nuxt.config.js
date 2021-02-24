@@ -31,6 +31,7 @@ export default {
   plugins: [
     '~/plugins/close-event.client.js',
     '~/plugins/filters.js',
+    '~/plugins/datatable.js',
 
     { src: '~/plugins/vuex-persist', ssr: false },
   ],
@@ -70,7 +71,19 @@ export default {
   build: {},
 
   pwa: {
+    manifest: {
+        name: 'Kita Patungan Indonesia',
+        short_name: 'Kita Patungan',
+        lang: 'id',
+        display: 'standalone',
+    },
+    meta: {
+        nativeUI: true,
+    },
     workbox: {
+        autoRegister: true,
+        clientsClaim: true,
+        skipWaiting: true,
       //    dev: true // or use a global variable to track the current NODE_ENV, etc to determine dev mode
     },
   },

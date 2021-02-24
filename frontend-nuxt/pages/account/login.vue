@@ -20,28 +20,18 @@
                     v-model="form.password" @keydown="errorStatus = false" />
                 </div>
                 <span class="text-red-500 font-medium py-2 text-xs" v-if="errorStatus">{{ errorMessage }}</span>
-                <span v-if="errorCode == 401 && errorStatus == true" class="text-indigo-500 font-medium py-2 underline text-sm cursor-pointer" @click.prevent="resendOtp">Kirim ulang OTP?</span>
+                <span v-if="errorCode == 404 && errorStatus == true" class="text-indigo-500 font-medium py-2 underline text-sm cursor-pointer" @click.prevent="resendOtp">Kirim ulang OTP?</span>
                 <div class="mt-4 mb-3 flex items-center justify-between">
                     <button class=" px-6 py-2 w-1/3 rounded text-white shadow-lg bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700" type="submit">
                     <span class="inline-flex items-center p-0 m-0">
-                    <svg
-                    v-if="loading"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="animate-spin w-4 h-4 p-0 mr-1"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    viewBox="0 0 100 100"
-                    preserveAspectRatio="xMidYMid"
-                  >
-                    <circle
-                      cx="50"
-                      cy="50"
-                      fill="none"
-                      stroke="#d5ccc2"
-                      stroke-width="15"
-                      r="35"
-                      stroke-dasharray="164.93361431346415 56.97787143782138"
-                      transform="matrix(1,0,0,1,0,0)"
-                    ></circle>
+                    <svg v-if="loading" 
+                        class="animate-spin -ml-1 mr-3 h-4 w-4 text-white" 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        fill="none" 
+                        viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
                   </svg>
                         Masuk</span>
                     </button>
@@ -96,7 +86,7 @@ export default {
                 // skenarionya aku langsung buka link dari gmail dan semua tab hp ku ttg situs ini udah dihapus, jadi pas -2 dah rusak
               this.$router.go(-2) // aku ubah 2 link sebelumnya, u/ mengatasi ketika dia daftar, biar tidak langsung ke halaman checkout
           } else {
-              this.$router.push('/')
+              window.location.replace('/')
           }
         })
         .catch((errors) => {
@@ -107,7 +97,7 @@ export default {
             this.errorCode = status
             this.errorMessage = 'Pengguna tidak ditemukan';
           }
-          if (status === 401) { // kalo kayak gini, bearti ketika salah password akan muncul pesan ini
+          if (status === 404) { // kalo kayak gini, bearti ketika salah password akan muncul pesan ini
             this.errorMessage = 'Akun belum divalidasi'
             this.idUser = data['id_user']
           }
@@ -121,7 +111,7 @@ export default {
         .$get(process.env.API_DEV_URL + 'profile', null, config)
         .catch((err) => console.log(err))
       console.log(profile)
-      this.$store.dispatch('getUserProfile', profile.user)
+      await this.$store.dispatch('getUserProfile', profile.user)
       console.log(this.$store.state.user)
     },
     resendOtp() {
@@ -137,14 +127,6 @@ export default {
     },
   },
   async mounted() {
-    // sudah di set base URL itu axiosnya API_DEV_URL, coba pelajari di internet
-    // nth kenapa pada proses development, selalu kena cors, maka terpaksa pakai process.env.API_DEV_URL
-    //-B- menurutku emg hrs pake environment, biar terpusat atur urlnya trs hipotesisku kena cors waktu dev karena di env mu ngga pake http, ini udh aku tambahin
-    // console.log(process.env.API_DEV_URL)
-    const trials = await this.$axios
-      .$get(process.env.API_DEV_URL + 'users')
-      .catch((err) => console.log(err))
-    console.log(trials)
   },
 }
 </script>

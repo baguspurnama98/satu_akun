@@ -113,7 +113,8 @@
               type="button"
               @click="toggleButton('navUserOption')"
             >
-              <span v-if="account_login">{{ getName }}</span>
+              <span v-if="account_login && user_role === 'u'">{{ getName }}</span>
+              <span v-else-if="account_login && user_role === 'a'">{{ getName }}</span>
               <span v-else>Masuk</span>
             </button>
             <div
@@ -124,28 +125,44 @@
               aria-labelledby="user-menu"
             >
               <template v-if="account_login">
-                <div class="py-1">
-                  <NuxtLink
-                    to="/users/1221/campaign/"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                    role="menuitem"
-                    >Campaign Saya
-                  </NuxtLink>
-                  <NuxtLink
-                    to="/users/2/patungan"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                    role="menuitem"
-                    >Patungan Saya
-                  </NuxtLink>
-                </div>
-                <div class="py-1">
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                    role="menuitem"
-                    >Riwayat Transaksi</a
-                  >
-                </div>
+                <!-- Menu untuk User -->
+                <template v-if="user_role === 'u'">
+                    <div class="py-1">
+                    <NuxtLink
+                        to="/users/1221/campaign/"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                        role="menuitem"
+                        >Campaign Saya
+                    </NuxtLink>
+                    <NuxtLink
+                        to="/users/2/patungan"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                        role="menuitem"
+                        >Patungan Saya
+                    </NuxtLink>
+                    </div>
+                    <div class="py-1">
+                    <a
+                        href="#"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                        role="menuitem"
+                        >Riwayat Transaksi</a
+                    >
+                    </div>
+                </template>
+
+                <!-- Menu untuk Admin -->
+                <template v-if="user_role === 'a'">
+                    <div class="py-1">
+                    <NuxtLink
+                        to="/admin/"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                        role="menuitem"
+                        >Dashboard
+                    </NuxtLink>
+                    </div>
+                </template>
+              
                 <div class="py-1">
                   <span
                     @click="logout"
@@ -155,6 +172,7 @@
                   >
                 </div>
               </template>
+
               <template v-else>
                 <div class="py-1">
                   <NuxtLink
@@ -190,6 +208,7 @@ export default {
       navLayanan: true,
       navUserOption: true,
       name: null,
+      user_role: null
     }
   },
   computed: {
@@ -197,7 +216,7 @@ export default {
       return this.$store.state.auth.token
     },
     getName() {
-      const name = this.$store.state.user.name
+      const name = this.$store.state.user.name || ''
       var firstName = name.split(' ')[0]
       return firstName
     },
@@ -230,6 +249,7 @@ export default {
         .$get(process.env.API_DEV_URL + 'auth/logout')
         .then((resp) => {
           this.$store.dispatch('auth/logout')
+          this.$store.dispatch('delUserProfile')
           window.location.reload()
         })
         .catch((errors) => {
@@ -250,6 +270,10 @@ export default {
         this.toggleButton()
       }
     })
+
+    if (this.account_login) {
+        this.user_role = this.$store.state.user.role
+    }
   },
 }
 </script>

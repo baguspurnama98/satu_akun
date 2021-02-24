@@ -8,6 +8,10 @@ export const actions = {
   getUserProfile(context, dataUser) {
     context.commit('setUserProfile', dataUser)
   },
+
+  delUserProfile(context) {
+    context.commit('setUserProfile', null)
+  },
 }
 
 export const mutations = {

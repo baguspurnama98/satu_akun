@@ -96,7 +96,7 @@ class AuthController extends Controller
         
         try {
             $user = User::where('email', $request->email)->first();
-            if ($user->status === 0) return response()->json(['id_user' => $this->encode($user->id), 'message' => 'Not Validated'], 401);
+            if ($user->status === 0) return response()->json(['id_user' => $this->encode($user->id), 'message' => 'Not Validated'], 404);
 
             $credentials = $request->only(['email', 'password']);
 
@@ -160,7 +160,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'User Validation Failed!'], 409);
         }
         // Harusnya redirect ke halaman login
-
+        $user['otp'] = '';
         return response()->json(['user' => $user, 'message' => 'VALIDATE'], 201);
     }
 
@@ -179,7 +179,6 @@ class AuthController extends Controller
         }
         return $result; 
     } 
-
 
     
 }
