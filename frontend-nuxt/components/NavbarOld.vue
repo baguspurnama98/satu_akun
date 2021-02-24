@@ -82,7 +82,7 @@
             >
               <div class="py-1">
                 <a
-                  href="#"
+                  href="/campaign/show/all"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   role="menuitem"
                   >Cari Campaign</a

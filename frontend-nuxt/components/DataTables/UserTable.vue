@@ -1,29 +1,37 @@
 <template>
   <div class="w-full">
-    <label>Filter:</label>
+    <label>Search:</label>
     <input class="form-control" v-model="filters.name.value" />
-    <!-- Tablenya masih belum rapi ya, nanti aku rapiin stylingnya -->
+
     <v-table
       :data="users"
       :filters="filters"
-      class="w-full"
+      class="w-full text-left wrapper xs:block"
       :hideSortIcons="false"
       :currentPage.sync="currentPage"
       :pageSize="2"
       @totalPagesChanged="totalPages = $event"
     >
-      <thead slot="head">
-        <v-th :sortKey="nameLength" defaultSort="desc">Nama</v-th>
+      <thead slot="head" class="border-t-2 bg-gray-200 py-6">
+        <v-th :sortKey="nameLength" defaultSort="desc" class="pl-3 py-2"
+          >Nama</v-th
+        >
         <v-th :sortKey="nameLength">Email</v-th>
         <v-th :sortKey="nameLength">Telp</v-th>
         <v-th :sortKey="nameLength">Status</v-th>
         <th>Aksi</th>
       </thead>
       <tbody slot="body" slot-scope="{ displayData }">
-        <tr v-for="row in displayData" :key="row.id">
-          <td>{{ row.name }}</td>
-          <td>{{ row.email }}</td>
-          <td>{{ row.telp }}</td>
+        <tr
+          v-for="row in displayData"
+          :key="row.id"
+          class="border-t-2 hover:bg-gray-200"
+        >
+          <td class="px-3 truncate" style="max-width: 150px">{{ row.name }}</td>
+          <td class="px-3 truncate" style="max-width: 150px">
+            {{ row.email }}
+          </td>
+          <td class="px-3">{{ row.telp }}</td>
 
           <td class="px-4 py-3 text-xs">
             <span
@@ -53,7 +61,7 @@
           </td>
           <td>
             <button
-              class="px-2 py-1 bg-indigo-400 rounded-md text-sm font-medium"
+              class="px-2 py-1 bg-indigo-400 rounded-md text-sm font-medium text-white hover:bg-indigo-600"
             >
               Detail
             </button>
@@ -113,6 +121,10 @@ export default {
 }
 </script>
 <style>
+table {
+  overflow-x: scroll;
+  white-space: nowrap;
+}
 svg {
   display: inline-flex !important;
 }
@@ -123,12 +135,48 @@ ul.pagination {
 }
 
 .form-control {
-  border-radius: 10px;
+  border-radius: 5px;
   border: solid 1px rgb(202, 190, 190);
   padding: 0.3rem 0.8rem;
   margin-bottom: 20px;
 }
 .form-control:focus {
   outline: none;
+}
+
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 10px;
+  margin-top: 50px !important;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #007bff;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+
+.page-link:hover {
+  background-color: #b2f5ea;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: auto;
+  background-color: #fff;
+}
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
 }
 </style>
