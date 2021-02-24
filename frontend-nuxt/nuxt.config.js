@@ -71,7 +71,19 @@ export default {
   build: {},
 
   pwa: {
+    manifest: {
+        name: 'Kita Patungan Indonesia',
+        short_name: 'Kita Patungan',
+        lang: 'id',
+        display: 'standalone',
+    },
+    meta: {
+        nativeUI: true,
+    },
     workbox: {
+        autoRegister: true,
+        clientsClaim: true,
+        skipWaiting: true,
       //    dev: true // or use a global variable to track the current NODE_ENV, etc to determine dev mode
     },
   },
