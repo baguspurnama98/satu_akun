@@ -80,14 +80,17 @@ export default {
           console.log({ token, expires_in })
           this.getProfile({ token, expires_in })
           // jangan kembali ke otp
-            //   
-          if (this.$router.history._startLocation.split('/').indexOf('validate-otp') != -1) {
-                //   aku jadi error wkwkw
-                // skenarionya aku langsung buka link dari gmail dan semua tab hp ku ttg situs ini udah dihapus, jadi pas -2 dah rusak
-              this.$router.go(-2) // aku ubah 2 link sebelumnya, u/ mengatasi ketika dia daftar, biar tidak langsung ke halaman checkout
-          } else {
-              window.location.replace('/')
-          }
+            // 
+        
+          // if (this.$router.history._startLocation.split('/').indexOf('validate-otp') != -1) {
+          //       //   aku jadi error wkwkw
+          //       // skenarionya aku langsung buka link dari gmail dan semua tab hp ku ttg situs ini udah dihapus, jadi pas -2 dah rusak
+          //     this.$router.back() // aku ubah 2 link sebelumnya, u/ mengatasi ketika dia daftar, biar tidak langsung ke halaman checkout
+          // } else {
+          //     window.location.replace('/')
+          
+          // }  proses direct routingnya aku pindah ke getProfile, soalnya error trs buat dptin datausernya
+         
         })
         .catch((errors) => {
           this.loading = false
@@ -97,22 +100,35 @@ export default {
             this.errorCode = status
             this.errorMessage = 'Pengguna tidak ditemukan';
           }
-          if (status === 404) { // kalo kayak gini, bearti ketika salah password akan muncul pesan ini
+          if (status === 404) { 
             this.errorMessage = 'Akun belum divalidasi'
             this.idUser = data['id_user']
           }
         })
     },
-    async getProfile(token) {
+    getProfile(token) {
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       }
-      const profile = await this.$axios
-        .$get(process.env.API_DEV_URL + 'profile', null, config)
-        .catch((err) => console.log(err))
-      console.log(profile)
-      await this.$store.dispatch('getUserProfile', profile.user)
-      console.log(this.$store.state.user)
+      this.$axios
+      .$get(process.env.API_DEV_URL + 'profile', null, config)
+      .then((res)=>{
+      this.$store.dispatch('getUserProfile', res.user)
+      
+      const histURL = this.$router.history._startLocation.split('/')
+      const lastURL = histURL[histURL.length - 1]
+
+       if (lastURL == 'checkout') {  // disini aku coba nyelesaiin masalah skenariomu
+           this.$router.go(-2)
+        } 
+        else if(lastURL == 'create'){
+          window.location.replace(this.$nuxt.context.from.fullPath)
+        }
+         else {
+          window.location.replace('/')  
+        }
+      })
+      .catch((err) => console.log(err))
     },
     resendOtp() {
       let id_user = this.idUser

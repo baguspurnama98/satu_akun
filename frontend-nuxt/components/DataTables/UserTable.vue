@@ -1,33 +1,41 @@
 <template>
-  <div class="w-full">
-    <label>Filter:</label>
+  <div class="w-full" v-click-outside @clicked-outside="showModalBlock()">
+    <label>Search:</label>
     <input class="form-control" v-model="filters.name.value" />
-    <!-- Tablenya masih belum rapi ya, nanti aku rapiin stylingnya -->
+
     <v-table
       :data="users"
       :filters="filters"
-      class="w-full"
+      class="w-full text-left wrapper xs:block"
       :hideSortIcons="false"
       :currentPage.sync="currentPage"
       :pageSize="2"
       @totalPagesChanged="totalPages = $event"
     >
-      <thead slot="head">
-        <v-th :sortKey="nameLength" defaultSort="desc">Nama</v-th>
+      <thead slot="head" class="border-t-2 bg-gray-200 py-6">
+        <v-th :sortKey="indexChar" defaultSort="asc" class="pl-3 py-2"
+          >Nama</v-th
+        >
         <v-th :sortKey="nameLength">Email</v-th>
         <v-th :sortKey="nameLength">Telp</v-th>
         <v-th :sortKey="nameLength">Status</v-th>
         <th>Aksi</th>
       </thead>
       <tbody slot="body" slot-scope="{ displayData }">
-        <tr v-for="row in displayData" :key="row.id">
-          <td>{{ row.name }}</td>
-          <td>{{ row.email }}</td>
-          <td>{{ row.telp }}</td>
+        <tr
+          v-for="row in displayData"
+          :key="row.id"
+          class="border-t-2 hover:bg-gray-200"
+        >
+          <td class="px-3 truncate" style="max-width: 150px">{{ row.name }}</td>
+          <td class="px-3 truncate" style="max-width: 150px">
+            {{ row.email }}
+          </td>
+          <td class="px-3">{{ row.telp }}</td>
 
-          <td class="px-4 py-3 text-xs">
+          <td class="px-3 py-2 text-xs">
             <span
-              class="relative h-full px-3 py-1 font-semibold text-green-900 leading-tight text-center inline-block"
+              class="relative h-full px-3 py-1 font-semibold leading-tight text-center inline-block"
             >
               <span
                 aria-hidden
@@ -42,7 +50,7 @@
               ></span
               ><span
                 aria-hidden
-                class="absolute inset-0 bg-indigo-500 rounded-full"
+                class="absolute inset-0 bg-gray-600 rounded-full"
                 v-if="row.status === 'non-aktif'"
               ></span>
               <span
@@ -51,11 +59,27 @@
               >
             </span>
           </td>
-          <td>
-            <button
-              class="px-2 py-1 bg-indigo-400 rounded-md text-sm font-medium"
+          <td class="justify-between px-2 py-3">
+            <a
+              class="px-2 py-1 bg-green-400 rounded-md text-sm font-medium text-white hover:bg-green-600 focus:outline-none mr-2 text-center"
+              :href="'https://wa.me/62' + row.telp"
+              target="_blank"
             >
-              Detail
+              WhatsApp</a
+            >
+
+            <button
+              class="px-2 py-1 bg-indigo-500 rounded-md text-sm font-medium text-white hover:bg-indigo-600 focus:outline-none text-center"
+              v-if="row.status === 'terblokir'"
+            >
+              Aktifkan
+            </button>
+            <button
+              class="px-2 py-1 bg-red-500 rounded-md text-sm font-medium text-white hover:bg-red-600 focus:outline-none text-center"
+              v-else
+              @click.prevent="showModalBlock(row.name)"
+            >
+              Blokir
             </button>
           </td>
         </tr>
@@ -64,55 +88,101 @@
     <smart-pagination
       :currentPage.sync="currentPage"
       :totalPages="totalPages"
+      class="text-right"
     />
+    <div
+      class="container mx-auto flex justify-center w-full"
+      :class="[modalBlock ? 'hidden' : '']"
+    >
+      <div
+        class="bg-white fixed rounded-md shadow-lg mx-auto xs:mx-5 self-center z-100"
+      >
+        <div class="w-96 border-t-8 border-red-600 rounded-md flex">
+          <div class="w-1/3 pt-6 flex justify-center">
+            <svg
+              class="w-16 h-16 bg-red-600 text-white p-3 rounded-full"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+              />
+            </svg>
+          </div>
+          <div class="w-full pt-9 pr-4">
+            <h3 class="font-bold text-red-500 pt-5">Blokir Akun ?</h3>
+            <p class="py-2 text-sm text-gray-600">
+              Yakin lakukan pemblokiran terhadap akun ini?
+            </p>
+          </div>
+        </div>
+
+        <div class="p-4 flex space-x-4">
+          <button
+            @click.prevent="showModalBlock()"
+            class="w-1/2 px-3 py-2 text-center bg-gray-200 text-gray-700 hover:bg-gray-200 hover:text-black font-bold rounded-md text-sm focus:outline-none"
+          >
+            Batal
+          </button>
+          <button
+            class="w-1/2 px-3 py-2 text-center text-white bg-red-600 rounded-md hover:bg-red-700 hover:text-white font-bold text-sm focus:outline-none"
+            @click.prevent="blockUser()"
+          >
+            Blokir
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 export default {
   name: 'DataTableUser',
+  props: ['users'],
   data() {
     return {
+      modalBlock: true,
+      userSelected: '',
       currentPage: 1,
       totalPages: 3,
       filters: {
         name: { value: '', keys: ['name', 'email'] },
       },
-      users: [
-        {
-          name: 'Alexander Tobing',
-          email: 'alex@gmail.com',
-          telp: '0234265433',
-          status: 'aktif',
-        },
-        {
-          name: 'Apri Eka',
-          email: 'Apri@gmail.com',
-          telp: '0234265433',
-          status: 'terblokir',
-        },
-        {
-          name: 'Bagus Purnama',
-          email: 'bagus@gmail.com',
-          telp: '0234265433',
-          status: 'non-aktif',
-        },
-      ],
     }
   },
   methods: {
     nameLength(row) {
       return row.name.length
     },
+    indexChar(row) {
+      return row.name.charCodeAt(0) - 96
+    },
     dateSort(a, b) {
       let date1 = new Date(a.registered).getTime()
       let date2 = new Date(b.registered).getTime()
-
       return date1 - date2
+    },
+    showModalBlock(id) {
+      this.modalBlock = !this.modalBlock
+      this.userSelected = id
+    },
+    blockUser() {
+      alert(this.userSelected)
+      //post request
     },
   },
 }
 </script>
 <style>
+table {
+  overflow-x: scroll;
+  white-space: nowrap;
+}
 svg {
   display: inline-flex !important;
 }
@@ -123,12 +193,49 @@ ul.pagination {
 }
 
 .form-control {
-  border-radius: 10px;
+  border-radius: 5px;
   border: solid 1px rgb(202, 190, 190);
   padding: 0.3rem 0.8rem;
   margin-bottom: 20px;
 }
 .form-control:focus {
   outline: none;
+}
+
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 10px;
+  margin-top: 50px !important;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #007bff;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  z-index: 0 !important;
+}
+
+.page-link:hover {
+  background-color: #b2f5ea;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: auto;
+  background-color: #fff;
+}
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
 }
 </style>
