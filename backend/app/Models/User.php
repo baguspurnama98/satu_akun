@@ -61,7 +61,13 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
     /**
      * relation
      */
-    public function social_media() {
+    public function social_media() 
+    {
         return $this->hasMany(SocialMedia::class);
+    }
+
+    public function transactions() 
+    {
+        return $this->hasMany(Transaction::class);
     }
 }
