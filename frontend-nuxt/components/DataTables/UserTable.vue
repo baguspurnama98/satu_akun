@@ -33,7 +33,7 @@
           </td>
           <td class="px-3">{{ row.telp }}</td>
 
-          <td class="px-4 py-3 text-xs">
+          <td class="px-3 py-2 text-xs">
             <span
               class="relative h-full px-3 py-1 font-semibold leading-tight text-center inline-block"
             >
@@ -88,15 +88,16 @@
     <smart-pagination
       :currentPage.sync="currentPage"
       :totalPages="totalPages"
+      class="text-right"
     />
     <div
       class="container mx-auto flex justify-center w-full"
       :class="[modalBlock ? 'hidden' : '']"
     >
       <div
-        class="bg-white fixed rounded-lg shadow-lg mx-auto xs:mx-5 self-center z-100"
+        class="bg-white fixed rounded-md shadow-lg mx-auto xs:mx-5 self-center z-100"
       >
-        <div class="w-96 border-t-8 border-red-600 rounded-lg flex">
+        <div class="w-96 border-t-8 border-red-600 rounded-md flex">
           <div class="w-1/3 pt-6 flex justify-center">
             <svg
               class="w-16 h-16 bg-red-600 text-white p-3 rounded-full"
@@ -124,12 +125,12 @@
         <div class="p-4 flex space-x-4">
           <button
             @click.prevent="showModalBlock()"
-            class="w-1/2 px-4 py-3 text-center bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-black font-bold rounded-lg text-sm focus:outline-none"
+            class="w-1/2 px-3 py-2 text-center bg-gray-200 text-gray-700 hover:bg-gray-200 hover:text-black font-bold rounded-md text-sm focus:outline-none"
           >
             Batal
           </button>
           <button
-            class="w-1/2 px-4 py-3 text-center text-white bg-red-600 rounded-lg hover:bg-red-700 hover:text-white font-bold text-sm focus:outline-none"
+            class="w-1/2 px-3 py-2 text-center text-white bg-red-600 rounded-md hover:bg-red-700 hover:text-white font-bold text-sm focus:outline-none"
             @click.prevent="blockUser()"
           >
             Blokir

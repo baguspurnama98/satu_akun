@@ -11,6 +11,7 @@ export default function ({ store, redirect, route }) {
 
     const regexRoute = new RegExp(list_of_not_allowed_name_route.join('|'))
     const admin = new RegExp('admin')
+    const checkout = new RegExp('checkout')
 
 
     // console.log(store.state.auth.token)
@@ -21,9 +22,14 @@ export default function ({ store, redirect, route }) {
         return redirect('/account/login');
     }
 
-    // jika lewat login, tapi bukan admin
     let role = store.state.user ? store.state.user.role : null;
+    // jika lewat login, tapi bukan admin
     if (role != "a" && admin.test(route.path)) {
         return redirect('/restricted');
     }
+
+     // jika lewat checkout, tapi bukan user
+     if (role != "u" && checkout.test(route.path)) {
+         return redirect('/restricted');
+     }
 }

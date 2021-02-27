@@ -2,6 +2,7 @@
   <div
     class="container px-4 my-12 mx-auto flex-wrap items-center justify-between min-h-screen"
   >
+    <breadcrumb :breadcrumbs="breadcrumbs" class="pb-4"></breadcrumb>
     <h3 class="font-bold pb-3 text-4xl text-indigo-500 xs:text-2xl">
       Pilih status campaign
     </h3>
@@ -46,6 +47,7 @@ export default {
         { img: 'refund-icon.svg', name: 'Refund', route: 'refund/' },
         { img: 'expired-icon.svg', name: 'Kadaluarsa', route: 'expired/' },
       ],
+      breadcrumbs: [],
     }
   },
   methods: {
@@ -63,7 +65,25 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$route)
+    const fullPath = this.$route.fullPath;
+    const params = fullPath.substring(1).split("/");
+
+    let path = "";
+    let crumbs = [];
+
+    params.forEach((param, index) => {
+      path = `${path}/${param}`;
+      const match = this.$router.match(path);
+
+      //   Jika name route tidak null dan name route belum ada di crumbs
+      if (
+        match.name !== null &&
+        crumbs.map((val) => val.name).indexOf(match.name) === -1
+      ) {
+        crumbs.push(match);
+      }
+    });
+    this.breadcrumbs = crumbs;
   },
 }
 </script>
