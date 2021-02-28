@@ -23,11 +23,12 @@
                 d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
               ></path>
             </svg>
-            <span class="ml-3 text-xl">satu_akun</span>
+            <span class="ml-3 text-xl">Patungin.com</span>
           </a>
           <p class="mt-2 text-sm text-gray-600">
             Kami, sekelompok anak muda berlatar belakang IT, membuat platform
             beserta fasiltas-fasilitasnya untuk patungan membeli akun berbayar.
+            (Wording)
           </p>
         </div>
 
@@ -42,12 +43,14 @@
             </h2>
             <nav class="list-none mb-10">
               <li>
-                <a class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
+                <a
+                  class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
                   >cs@satuakun.id</a
                 >
               </li>
               <li>
-                <a class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
+                <a
+                  class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
                   >085155144278</a
                 >
               </li>
@@ -61,17 +64,22 @@
             </h2>
             <nav class="list-none mb-10">
               <li>
-                <a class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
+                <a
+                  class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
                   >Kebijakan Privasi</a
                 >
               </li>
               <li>
-                <a class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
+                <a
+                  class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
                   >FAQ</a
                 >
               </li>
               <li>
-                <NuxtLink exact to="/pricing" class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
+                <NuxtLink
+                  exact
+                  to="/pricing"
+                  class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
                   >Skema Harga
                 </NuxtLink>
               </li>

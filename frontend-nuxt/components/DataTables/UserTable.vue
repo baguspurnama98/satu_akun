@@ -9,7 +9,7 @@
       class="w-full text-left wrapper xs:block"
       :hideSortIcons="false"
       :currentPage.sync="currentPage"
-      :pageSize="2"
+      :pageSize="10"
       @totalPagesChanged="totalPages = $event"
     >
       <thead slot="head" class="border-t-2 bg-gray-200 py-6">
@@ -31,38 +31,49 @@
           <td class="px-3 truncate" style="max-width: 150px">
             {{ row.email }}
           </td>
-          <td class="px-3">{{ row.telp }}</td>
+          <td class="px-3">{{ row.whatsapp }}</td>
 
-          <td class="px-3 py-2 text-xs">
+          <td class="px-4 py-3 text-xs">
             <span
               class="relative h-full px-3 py-1 font-semibold leading-tight text-center inline-block"
             >
               <span
                 aria-hidden
                 class="absolute inset-0 bg-red-600 rounded-full"
-                v-if="row.status === 'terblokir'"
+                v-if="row.status === 2"
               ></span>
 
               <span
                 aria-hidden
                 class="absolute inset-0 bg-yellow-500 rounded-full"
-                v-if="row.status === 'aktif'"
+                v-if="row.status === 1"
               ></span
               ><span
                 aria-hidden
                 class="absolute inset-0 bg-gray-600 rounded-full"
-                v-if="row.status === 'non-aktif'"
+                v-if="row.status === 0"
               ></span>
               <span
                 class="relative text-xs font-bold capitalize text-white m-0"
-                >{{ row.status }}</span
+                v-if="row.status === 0"
+                >Non-Aktif</span
+              >
+              <span
+                class="relative text-xs font-bold capitalize text-white m-0"
+                v-if="row.status === 1"
+                >Aktif</span
+              >
+              <span
+                class="relative text-xs font-bold capitalize text-white m-0"
+                v-if="row.status === 2"
+                >Terblokir</span
               >
             </span>
           </td>
           <td class="justify-between px-2 py-3">
             <a
               class="px-2 py-1 bg-green-400 rounded-md text-sm font-medium text-white hover:bg-green-600 focus:outline-none mr-2 text-center"
-              :href="'https://wa.me/62' + row.telp"
+              :href="'https://wa.me/62' + row.whatsapp"
               target="_blank"
             >
               WhatsApp</a
@@ -88,16 +99,15 @@
     <smart-pagination
       :currentPage.sync="currentPage"
       :totalPages="totalPages"
-      class="text-right"
     />
     <div
       class="container mx-auto flex justify-center w-full"
       :class="[modalBlock ? 'hidden' : '']"
     >
       <div
-        class="bg-white fixed rounded-md shadow-lg mx-auto xs:mx-5 self-center z-100"
+        class="bg-white fixed rounded-lg shadow-lg mx-auto xs:mx-5 self-center z-100"
       >
-        <div class="w-96 border-t-8 border-red-600 rounded-md flex">
+        <div class="w-96 border-t-8 border-red-600 rounded-lg flex">
           <div class="w-1/3 pt-6 flex justify-center">
             <svg
               class="w-16 h-16 bg-red-600 text-white p-3 rounded-full"
@@ -124,13 +134,13 @@
 
         <div class="p-4 flex space-x-4">
           <button
-            @click.prevent="showModalBlock()"
-            class="w-1/2 px-3 py-2 text-center bg-gray-200 text-gray-700 hover:bg-gray-200 hover:text-black font-bold rounded-md text-sm focus:outline-none"
+            @click.prevent="showModalBlock(row.name)"
+            class="w-1/2 px-4 py-3 text-center bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-black font-bold rounded-lg text-sm focus:outline-none"
           >
             Batal
           </button>
           <button
-            class="w-1/2 px-3 py-2 text-center text-white bg-red-600 rounded-md hover:bg-red-700 hover:text-white font-bold text-sm focus:outline-none"
+            class="w-1/2 px-4 py-3 text-center text-white bg-red-600 rounded-lg hover:bg-red-700 hover:text-white font-bold text-sm focus:outline-none"
             @click.prevent="blockUser()"
           >
             Blokir
@@ -159,18 +169,27 @@ export default {
     nameLength(row) {
       return row.name.length
     },
+
     indexChar(row) {
       return row.name.charCodeAt(0) - 96
     },
+
     dateSort(a, b) {
       let date1 = new Date(a.registered).getTime()
       let date2 = new Date(b.registered).getTime()
       return date1 - date2
     },
+
     showModalBlock(id) {
-      this.modalBlock = !this.modalBlock
-      this.userSelected = id
+      if (id !== null) {
+        this.modalBlock = !this.modalBlock
+        this.userSelected = id
+      } else {
+        this.modalBlock = true
+        this.userSelected = ''
+      }
     },
+
     blockUser() {
       alert(this.userSelected)
       //post request

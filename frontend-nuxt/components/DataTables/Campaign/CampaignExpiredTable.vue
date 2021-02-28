@@ -1,12 +1,12 @@
 <template>
-  <div class="w-full">
+  <div class="w-full relative">
     <label>Search:</label>
     <input class="form-control" v-model="filters.name.value" />
 
     <v-table
       :data="campaigns"
       :filters="filters"
-      class="w-full text-left wrapper xs:block"
+      class="w-full text-left flex-wrap xs:block"
       :hideSortIcons="false"
       :currentPage.sync="currentPage"
       :pageSize="2"
@@ -79,7 +79,7 @@
 </template>
 <script>
 export default {
-  name: 'DataTableUser',
+  name: 'CampaignActiveTable',
   data() {
     return {
       currentPage: 1,

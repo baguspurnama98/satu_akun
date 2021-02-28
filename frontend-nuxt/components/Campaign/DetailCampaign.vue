@@ -176,7 +176,7 @@
         <div class="text-center my-5 md:my-10 xs:hidden">
           <a
             class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
-            href="/campaign/1/checkout"
+            href="/campaign/1/checkout/1"
           >
             Daftar
           </a>
@@ -188,7 +188,7 @@
     >
       <a
         class="w-1/3 xs:w-full mb-4 mt-7 py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
-        href="/campaign/1/checkout"
+        href="/campaign/1/checkout/1"
       >
         Daftar
       </a>

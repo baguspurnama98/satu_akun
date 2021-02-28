@@ -14,7 +14,7 @@
           class="text-white no-underline hover:text-white hover:no-underline"
         >
           <span class="text-2xl pl-2 font-medium"
-            ><i class="em em-grinning"></i>Berpatungan.com</span
+            ><i class="em em-grinning"></i>Patungin.com</span
           >
         </NuxtLink>
       </div>
@@ -113,8 +113,12 @@
               type="button"
               @click="toggleButton('navUserOption')"
             >
-              <span v-if="account_login && user_role === 'u'">{{ getName }}</span>
-              <span v-else-if="account_login && user_role === 'a'">{{ getName }}</span>
+              <span v-if="account_login && user_role === 'u'">{{
+                getName
+              }}</span>
+              <span v-else-if="account_login && user_role === 'a'">{{
+                getName
+              }}</span>
               <span v-else>Masuk</span>
             </button>
             <div
@@ -127,42 +131,42 @@
               <template v-if="account_login">
                 <!-- Menu untuk User -->
                 <template v-if="user_role === 'u'">
-                    <div class="py-1">
+                  <div class="py-1">
                     <NuxtLink
-                        to="/users/1221/campaign/"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                        role="menuitem"
-                        >Campaign Saya
+                      to="/users/1221/campaign/"
+                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                      role="menuitem"
+                      >Campaign Saya
                     </NuxtLink>
                     <NuxtLink
-                        to="/users/2/patungan"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                        role="menuitem"
-                        >Patungan Saya
+                      to="/users/2/patungan"
+                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                      role="menuitem"
+                      >Patungan Saya
                     </NuxtLink>
-                    </div>
-                    <div class="py-1">
+                  </div>
+                  <div class="py-1">
                     <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                        role="menuitem"
-                        >Riwayat Transaksi</a
+                      href="#"
+                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                      role="menuitem"
+                      >Riwayat Transaksi</a
                     >
-                    </div>
+                  </div>
                 </template>
 
                 <!-- Menu untuk Admin -->
                 <template v-if="user_role === 'a'">
-                    <div class="py-1">
+                  <div class="py-1">
                     <NuxtLink
-                        to="/admin/"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                        role="menuitem"
-                        >Dashboard
+                      to="/admin/"
+                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                      role="menuitem"
+                      >Dashboard
                     </NuxtLink>
-                    </div>
+                  </div>
                 </template>
-              
+
                 <div class="py-1">
                   <span
                     @click="logout"
@@ -208,7 +212,7 @@ export default {
       navLayanan: true,
       navUserOption: true,
       name: null,
-      user_role: null
+      user_role: null,
     }
   },
   computed: {
@@ -272,7 +276,7 @@ export default {
     })
 
     if (this.account_login) {
-        this.user_role = this.$store.state.user.role
+      this.user_role = this.$store.state.user.role
     }
   },
 }
