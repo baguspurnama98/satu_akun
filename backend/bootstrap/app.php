@@ -98,14 +98,22 @@ $app->routeMiddleware([
 
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
+// $app->register(App\Providers\EventServiceProvider::class);
+
+
 // For JWT add this
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
 
 // https://github.com/fruitcake/laravel-cors
 $app->register(Fruitcake\Cors\CorsServiceProvider::class);
 
+// Hasid pakai optimus
 $app->register(App\Providers\OptimusServiceProvider::class);
+
+// https://github.com/irazasyed/larasupport
+$app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
+// https://github.com/flipboxstudio/lumen-generator
+$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 
 
 $app->register(Illuminate\Mail\MailServiceProvider::class);

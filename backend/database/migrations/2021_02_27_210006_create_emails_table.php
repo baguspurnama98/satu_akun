@@ -15,6 +15,11 @@ class CreateEmailsTable extends Migration
     {
         Schema::create('emails', function (Blueprint $table) {
             $table->id();
+            
+            $table->string('email');
+            $table->string('info');
+            $table->boolean('status')->default(0); // digunakan atau tidak
+
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();

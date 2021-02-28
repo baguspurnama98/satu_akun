@@ -31,4 +31,7 @@ class Campaign extends Model
         return $this->hasMany(CampaignMembers::class);
     }
 
+
+    // https://arianacosta.com/php/laravel/tutorial-full-text-search-laravel-5/
+
 }

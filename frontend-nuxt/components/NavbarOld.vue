@@ -13,7 +13,7 @@
           to="/"
           class="text-white no-underline hover:text-white hover:no-underline"
         >
-          <span class="text-2xl pl-2 font-medium"
+          <span class="text-2xl pl-2 tracking-wide logo"
             ><i class="em em-grinning"></i>Patungin.com</span
           >
         </NuxtLink>
