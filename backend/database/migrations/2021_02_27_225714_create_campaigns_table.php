@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSocialMediaTable extends Migration
+class CreateCampaignsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateSocialMediaTable extends Migration
      */
     public function up()
     {
-        Schema::create('socialmedias', function (Blueprint $table) {
+        Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
-            $table->string('username')->notNullable();
-            $table->string('type')->notNullable();
-            // reference to id from table users
-            $table->unsignedBigInteger('user_id')->index();
-            $table->foreign('user_id')->references('id')->on('users');
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();
@@ -33,6 +28,6 @@ class CreateSocialMediaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('socialmedias');
+        Schema::dropIfExists('campaigns');
     }
 }
