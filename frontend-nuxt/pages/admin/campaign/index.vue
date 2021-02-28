@@ -55,7 +55,10 @@
         </div>
       </nav>
     </div>
-    <div v-if="menuActive == 'active'" class="px-3 overflow-auto">
+    <div
+      v-if="menuActive == 'active'"
+      class="px-3 overflow-x-auto overflow-y-visible h-screen"
+    >
       <CampaignActiveTable />
     </div>
     <div v-if="menuActive == 'going-on'" class="px-3 overflow-auto">

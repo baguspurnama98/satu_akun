@@ -9,7 +9,7 @@
       class="w-full text-left flex-wrap xs:block"
       :hideSortIcons="false"
       :currentPage.sync="currentPage"
-      :pageSize="2"
+      :pageSize="10"
       @totalPagesChanged="totalPages = $event"
     >
       <thead slot="head" class="border-t-2 bg-gray-200 py-6">
@@ -121,7 +121,13 @@
                     <span class="text-sm"> Detail Campaign </span>
                   </a>
                 </li>
-                <li class="px-2 py-2 hover:bg-gray-100 w-full border-none">
+                <li
+                  class="px-2 py-2 hover:bg-gray-100 w-full border-none"
+                  :class="{
+                    '': row.member != row.gathered,
+                    hidden: row.member == row.gathered,
+                  }"
+                >
                   <a
                     class="inline-flex items-center"
                     href="https://wa.me/628976634788?text=Saya%20ingin%20melaporkan%20campaign%20dengan%20ID:%20ID_Campaign"
@@ -145,7 +151,13 @@
                     <span class="text-sm"> Ubah Jadi Expired </span>
                   </a>
                 </li>
-                <li class="px-2 py-2 hover:bg-gray-100 w-full border-none">
+                <li
+                  class="px-2 py-2 hover:bg-gray-100 w-full border-none"
+                  :class="{
+                    '': row.member == row.gathered,
+                    hidden: row.member != row.gathered,
+                  }"
+                >
                   <a
                     class="inline-flex items-center"
                     href="https://wa.me/628976634788?text=Saya%20ingin%20melaporkan%20campaign%20dengan%20ID:%20ID_Campaign"
