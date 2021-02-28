@@ -7,7 +7,7 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'Berpatungan',
+    title: 'Patungin.com',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -72,18 +72,18 @@ export default {
 
   pwa: {
     manifest: {
-        name: 'Kita Patungan Indonesia',
-        short_name: 'Kita Patungan',
-        lang: 'id',
-        display: 'standalone',
+      name: 'Kita Patungan Indonesia',
+      short_name: 'Kita Patungan',
+      lang: 'id',
+      display: 'standalone',
     },
     meta: {
-        nativeUI: true,
+      nativeUI: true,
     },
     workbox: {
-        autoRegister: true,
-        clientsClaim: true,
-        skipWaiting: true,
+      autoRegister: true,
+      clientsClaim: true,
+      skipWaiting: true,
       //    dev: true // or use a global variable to track the current NODE_ENV, etc to determine dev mode
     },
   },

@@ -1,16 +1,12 @@
 <template>
-  <div
-    class="relative container px-4 mx-auto"
-  >
+  <div class="relative container px-4 mx-auto">
     <div class="relative w-full">
       <h3 class="font-bold pb-3 text-4xl xs:text-2xl text-indigo-500">
         Patungan Saya
       </h3>
 
       <div class="relative overflow-auto pb-20">
-        <table
-          class="relative table-auto w-full text-left whitespace-no-wrap"
-        >
+        <table class="relative table-auto w-full text-left whitespace-no-wrap">
           <thead>
             <tr>
               <th
@@ -31,6 +27,11 @@
               <th
                 class="px-4 py-3 title-font tracking-wider font-medium text-gray-600 text-sm bg-gray-100"
               >
+                Status Pembayaran
+              </th>
+              <th
+                class="px-4 py-3 title-font tracking-wider font-medium text-gray-600 text-sm bg-gray-100"
+              >
                 Tanggal Berakhir
               </th>
 
@@ -40,9 +41,7 @@
             </tr>
           </thead>
           <!-- Bingung gimana caranya click-outsidenya berjalan maksimal -->
-          <tbody
-            class="bg-white relative text-sm"
-          >
+          <tbody class="bg-white relative text-sm">
             <tr
               v-for="(patungan, index) in dataPatungan"
               :key="patungan.title"
@@ -97,13 +96,40 @@
                   >
                 </span>
               </td>
+              <td class="border-t-2 border-gray-200 px-4 py-3 text-xs">
+                <span
+                  class="relative h-full px-3 py-1 font-semibold text-green-900 leading-tight text-center inline-block"
+                >
+                  <span
+                    aria-hidden
+                    class="absolute inset-0 text-red-700 font-semibold"
+                    v-if="patungan.payment === 0"
+                  >
+                    Belum Bayar</span
+                  >
+                  <span
+                    aria-hidden
+                    class="absolute inset-0 text-gray-700 font-semibold"
+                    v-if="patungan.payment === 1"
+                    >Pending</span
+                  >
+                  <span
+                    aria-hidden
+                    class="absolute inset-0 text-green-500 font-semibold"
+                    v-if="patungan.payment === 2"
+                    >Terbayar</span
+                  >
+                </span>
+              </td>
               <td class="border-t-2 border-gray-200 px-4 py-3">
                 {{ patungan.dateEnd | formatDate }}
               </td>
               <td class="border-t-2 border-gray-200 px-4 py-3">
-                <div class="group inline-block relative"
-                    v-click-outside
-                    @clicked-outside="showDetail()">
+                <div
+                  class="group inline-block relative"
+                  v-click-outside
+                  @clicked-outside="showDetail()"
+                >
                   <button
                     class="items-center px-2 py-1 border bg-white text-indigo-500 rounded transition duration-300 focus:outline-none flex font-semibold"
                     @click="showDetail(index)"
@@ -223,12 +249,14 @@ export default {
           member: 3,
           totalMember: 4,
           status: 'aktif',
+          payment: 0,
           dateEnd: new Date(),
         },
         {
           title: 'Sharing Account Netflix 3 Bulan',
           member: 4,
           totalMember: 4,
+          payment: 1,
           status: 'selesai',
           dateEnd: new Date(),
         },
@@ -237,6 +265,7 @@ export default {
           member: 4,
           totalMember: 4,
           status: 'refund',
+          payment: 2,
           dateEnd: new Date(),
         },
         {
@@ -244,6 +273,7 @@ export default {
           member: 1,
           totalMember: 4,
           status: 'pending',
+          payment: 2,
           dateEnd: new Date(),
         },
         {
@@ -252,6 +282,7 @@ export default {
           member: 4,
           totalMember: 4,
           status: 'berlangsung',
+          payment: 1,
           dateEnd: new Date(),
         },
       ],

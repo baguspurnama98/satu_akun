@@ -21,10 +21,17 @@ class CreateTransactionsTable extends Migration
             $table->foreign('campaign_id')->references('id')->on('campaigns');  
 
             // tambahkan atribut/kolom lain disini
+            $table->string('bank');
+            $table->string('no_transaction')->nullable();
+            $table->string('type', 5); // 'in' / 'out'
+            $table->double('nominal');
+            $table->double('unique_code');
+            $table->double('total_nominal');
+            $table->string('no_rek_origin');
+            $table->string('no_rek_destination');
 
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
-            $table->index(['user_id', 'campaign_id']);
             $table->timestamps();
         });
     }
