@@ -10,9 +10,18 @@ class Transaction extends Model
 
     // yang dengan mudah di isi/ di lihat dari kolom kolom tabel
     protected $fillable = [
-        'kolom1',
-        'kolom2',
-        'kolom3',
+        'campaign_id',
+        'user_id',
+        'bank',
+        'no_transaction',
+        'type',
+        'nominal',
+        'unique_code',
+        'total_nominal',
+        'no_rek_origin',
+        'no_rek_destination',
+        'updated_by',
+        'created_by',
     ];
 
     // yang gak akan ditampilkan atribut nya diluar dari lingkungan lumen/laravel

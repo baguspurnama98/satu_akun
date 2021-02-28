@@ -10,9 +10,20 @@ class Campaign extends Model
 
     // yang dengan mudah di isi/ di lihat dari kolom kolom tabel
     protected $fillable = [
-        'kolom1',
-        'kolom2',
-        'kolom3',
+        'email_id',
+        'categories_id',
+        'title',
+        'description',
+        'expired_date',
+        'duration_date',
+        'durasi',
+        'status',
+        'slot_capacity',
+        'slot_price',
+        'media_url',
+        'password_email',
+        'updated_by',
+        'created_by',
     ];
 
     // yang gak akan ditampilkan atribut nya diluar dari lingkungan lumen/laravel

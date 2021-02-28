@@ -1,20 +1,22 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 
-class CampaignMember extends Model 
+class CampaignReport extends Model
 {
     // defenisi tabel yg digunakan di database
-    protected $table = 'campaign_members';
+    protected $table = 'campaign_reports';
 
     // yang dengan mudah di isi/ di lihat dari kolom kolom tabel
     protected $fillable = [
         'user_id',
         'campaign_id',
-        'is_host',
-        'is_pay',
-        'info',
+        'title',
+        'report',
+        'response',
+        'status',
         'updated_by',
         'created_by',
     ];
@@ -23,16 +25,4 @@ class CampaignMember extends Model
     protected $hidden = [
         // 'password',
     ];
-
-
-    /**
-     * relasi yang digunakan misal:
-     * campaign berelasi (punya id_campaign) pada tabel campaign member
-     * berarti yang punya adalah si campaign, dan campaign members belongsTo si campaign
-     */
-    public function campaigns()
-    {
-        return $this->belongsTo(Campaign::class);
-    }
-
 }

@@ -10,9 +10,11 @@ class Email extends Model
 
     // yang dengan mudah di isi/ di lihat dari kolom kolom tabel
     protected $fillable = [
-        'kolom1',
-        'kolom2',
-        'kolom3',
+        'email',
+        'info',
+        'status',
+        'updated_by',
+        'created_by',
     ];
 
     // yang gak akan ditampilkan atribut nya diluar dari lingkungan lumen/laravel

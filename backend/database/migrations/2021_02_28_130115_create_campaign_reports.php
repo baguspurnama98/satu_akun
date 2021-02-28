@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTransactionsTable extends Migration
+class CreateCampaignReports extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,17 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('campaign_reports', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('campaign_id')->index();
             $table->foreign('campaign_id')->references('id')->on('campaigns');  
 
-            // tambahkan atribut/kolom lain disini
-            $table->string('bank');
-            $table->string('no_transaction')->nullable();
-            $table->string('type', 5); // 'in' / 'out'
-            $table->double('nominal');
-            $table->double('unique_code');
-            $table->double('total_nominal');
-            $table->string('no_rek_origin');
-            $table->string('no_rek_destination');
+            $table->string('title');
+            $table->text('report');
+            $table->text('response');
+            $table->tinyInteger('status');
 
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
@@ -43,6 +38,6 @@ class CreateTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('campaign_reports');
     }
 }

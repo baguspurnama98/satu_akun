@@ -14,6 +14,8 @@ class CampaignCategories extends Model
      */
     protected $fillable = [
         'categories',
+        'updated_by',
+        'created_by',
     ];
 
     /**
