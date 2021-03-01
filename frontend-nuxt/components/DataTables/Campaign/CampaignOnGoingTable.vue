@@ -144,6 +144,25 @@
                     <span class="text-sm"> WhatsApp </span>
                   </a>
                 </li>
+                <li class="px-2 py-2 hover:bg-gray-100 w-full border-none">
+                  <a class="inline-flex items-center" href="#">
+                    <svg
+                      class="w-4 h-4 mr-2"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
+                    </svg>
+                    <span class="text-sm"> Tambah Informasi Akun </span>
+                  </a>
+                </li>
                 <li
                   class="px-2 py-2 hover:bg-gray-100 w-full border-none"
                   :class="{
@@ -168,10 +187,10 @@
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+                        d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z"
                       />
                     </svg>
-                    <span class="text-sm"> Ubah Jadi <b>Expired</b> </span>
+                    <span class="text-sm"> Proses <b>Refund</b> </span>
                   </a>
                 </li>
                 <li
@@ -198,10 +217,10 @@
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                       />
                     </svg>
-                    <span class="text-sm"> Ubah Jadi <b>Berlangsung</b> </span>
+                    <span class="text-sm"> Ubah Jadi <b>Selesai</b> </span>
                   </a>
                 </li>
               </ul>
