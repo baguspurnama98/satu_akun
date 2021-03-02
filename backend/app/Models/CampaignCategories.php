@@ -21,9 +21,9 @@ class CampaignCategories extends Model
     /**
      * relation
      */
-    // public function campaign()
-    // {
-    //     return $this->belongsTo(Campaign::class);
-    // }
+    public function campaigns()
+    {
+        return $this->belongsTo(Campaign::class);
+    }
 
 }

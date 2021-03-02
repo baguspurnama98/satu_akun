@@ -22,5 +22,8 @@ class Email extends Model
         // 'password',
     ];
 
-
+    public function campaigns()
+    {
+        return $this->hasMany(Campaign::class);
+    }
 }

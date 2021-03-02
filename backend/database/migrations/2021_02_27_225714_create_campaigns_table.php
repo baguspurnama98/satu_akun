@@ -28,8 +28,8 @@ class CreateCampaignsTable extends Migration
             $table->string('durasi');
             $table->tinyInteger('status')->default(0);
             $table->integer('slot_capacity');
-            $table->string('slot_price');
-            $table->string('media_url');
+            $table->double('slot_price');
+            $table->string('media_url')->nullable();
             $table->string('password_email');
 
             $table->string('created_by')->nullable();

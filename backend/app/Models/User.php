@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
+// import Optimus for hashid
+use Jenssegers\Optimus\Optimus;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -33,9 +35,33 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
      */
     protected $hidden = [
         'password',
+        'id',
     ];
 
 
+    protected function decode($id)
+    {
+        $optimus = new Optimus(1580030173, 59260789, 1163945558);
+        return $optimus->decode($id);
+    }
+
+    protected function encode($id)
+    {
+        $optimus = new Optimus(1580030173, 59260789, 1163945558);
+        return $optimus->encode($id);
+    }
+
+    protected $appends = ['hashid'];
+
+    /**
+     * Kegunaan ini mengoveride value yang keluar dari model
+     * camelCase -> di transform jadi camel_case
+     */
+    public function getHashIdAttribute()
+    {
+        return $this->encode($this->attributes['id']);
+    }
+    
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
@@ -69,5 +95,15 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
     public function transactions() 
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function campaign_members()
+    {
+        return $this->hasMany(CampaignMember::class);
+    }
+
+    public function campaign_reports()
+    {
+        return $this->hasMany(CampaignReport::class);
     }
 }

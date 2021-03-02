@@ -25,4 +25,18 @@ class CampaignReport extends Model
     protected $hidden = [
         // 'password',
     ];
+
+
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function campaigns()
+    {
+        return $this->belongsTo(Campaign::class);
+    }
+
+
 }
