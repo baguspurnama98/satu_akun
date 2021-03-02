@@ -36,7 +36,7 @@
       <div class="flex items-center justify-between">
         <div class="w-full text-center">
           <h3 class="font-bold pb-3 text-4xl text-indigo-500 xs:text-2xl">
-            Pilih status campaign
+            Pilih Status Campaign
           </h3>
         </div>
       </div>
@@ -96,7 +96,7 @@ export default {
         { img: 'going-icon.svg', name: 'Berlangsung', route: 'going-on' },
         { img: 'finish-icon.svg', name: 'Selesai', route: 'finish' },
         { img: 'refund-icon.svg', name: 'Refund', route: 'refund' },
-        { img: 'expired-icon.svg', name: 'Kadaluarsa', route: 'expired' },
+        { img: 'expired-icon.svg', name: 'Expired', route: 'expired' },
       ],
       breadcrumbs: [],
     }

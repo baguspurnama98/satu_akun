@@ -108,6 +108,7 @@
         :totalPages="totalPages"
       />
     </div>
+    <!-- Modal Block -->
     <div
       class="container mx-auto flex justify-center justify-items-start items-start w-full absolute z-100 inset-0"
       :class="[modalBlock ? 'hidden' : '']"
