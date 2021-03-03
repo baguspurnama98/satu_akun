@@ -3,6 +3,9 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
+// import Optimus for hashid
+use Jenssegers\Optimus\Optimus;
+
 class CampaignMember extends Model 
 {
     // defenisi tabel yg digunakan di database
@@ -24,6 +27,32 @@ class CampaignMember extends Model
         // 'password',
     ];
 
+    protected function decode($id)
+    {
+        $optimus = new Optimus(1580030173, 59260789, 1163945558);
+        return $optimus->decode($id);
+    }
+
+    protected function encode($id)
+    {
+        $optimus = new Optimus(1580030173, 59260789, 1163945558);
+        return $optimus->encode($id);
+    }
+
+
+    /**
+     * Kegunaan ini mengoveride value yang keluar dari model
+     * camelCase -> di transform jadi camel_case
+     */
+    public function getUserIdAttribute($value)
+    {
+        return $this->encode($value);
+    }
+
+    public function setUserIdAttribute($value)
+    {
+        $this->attributes['user_id'] = $this->decode($value);
+    }
 
     /**
      * relasi yang digunakan misal:
@@ -32,7 +61,12 @@ class CampaignMember extends Model
      */
     public function campaigns()
     {
-        return $this->belongsTo(Campaign::class);
+        return $this->belongsTo(Campaign::class, 'campaign_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

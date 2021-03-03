@@ -45,14 +45,23 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
     // Campaign
     $router->group(['prefix' => 'campaign'], function () use ($router) {
-        // $router->get('store', 'CampaignController@allCategories');
-
 
         // Categories
         $router->group(['prefix' => 'categories'], function () use ($router) {
             $router->get('/', 'CampaignController@allCategories');
             $router->post('store', 'CampaignController@storeCategories');
         });
+
+        /**
+         * kelompok kelompok campaign harus di defenisikan sebelum rootnya
+         * Static route "/api/v1/campaign/categories" is shadowed by previously defined variable
+         */
+        
+         
+        $router->get('/', 'CampaignController@allCampaigns');
+        $router->get('/{id_campaign}', 'CampaignController@campaign');
+        $router->post('store', 'CampaignController@createCampaign');
+        $router->post('update/{id_campaign}', 'CampaignController@updateCampaign');
     });
 
     
@@ -63,3 +72,4 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 });
 
 // php -S localhost:8000 -t public
+// sudah bisa php artisan serve

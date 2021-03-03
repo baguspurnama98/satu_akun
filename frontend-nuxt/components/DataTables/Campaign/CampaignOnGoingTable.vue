@@ -22,7 +22,7 @@
             >Nama Campaign</v-th
           >
           <v-th :sortKey="nameLength">Host</v-th>
-          <v-th :sortKey="nameLength">Status Pemabayaran</v-th>
+          <v-th :sortKey="nameLength">Email Tertaut</v-th>
 
           <v-th :sortKey="nameLength">Tanggal Pembuatan</v-th>
           <v-th :sortKey="dateSort" defaultSort="desc">Tanggal Kadaluarsa</v-th>
@@ -140,7 +140,7 @@
                     <a
                       class="inline-flex items-center"
                       href="#"
-                      @click="showFormRefund(row.id)"
+                      @click="showForm(row.id)"
                     >
                       <svg
                         class="w-4 h-4 mr-2"
@@ -156,14 +156,21 @@
                           d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                         />
                       </svg>
-                      <span class="text-sm"> Update Pembayaran </span>
+                      <span class="text-sm"> Tambah Informasi Akun </span>
                     </a>
                   </li>
-                  <li class="px-2 py-2 hover:bg-gray-200 w-full border-none">
+                  <li
+                    class="px-2 py-2 hover:bg-gray-200 w-full border-none"
+                    :class="{
+                      '': row.member != row.gathered,
+                      hidden: row.member == row.gathered,
+                    }"
+                  >
                     <a
                       class="inline-flex items-center"
                       href="#"
-                      @click.prevent="showModal('email')"
+                      @click="showModal('refund')"
+                      ref="non"
                     >
                       <svg
                         class="w-4 h-4 mr-2"
@@ -176,10 +183,39 @@
                           stroke-linecap="round"
                           stroke-linejoin="round"
                           stroke-width="2"
-                          d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+                          d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z"
                         />
                       </svg>
-                      <span class="text-sm"> Non-Aktikan Email </span>
+                      <span class="text-sm"> Proses <b>Refund</b> </span>
+                    </a>
+                  </li>
+                  <li
+                    class="px-2 py-2 hover:bg-gray-200 w-full border-none"
+                    :class="{
+                      '': row.member == row.gathered,
+                      hidden: row.member != row.gathered,
+                    }"
+                  >
+                    <a
+                      class="inline-flex items-center"
+                      href="#"
+                      @click="showModal('selesai')"
+                    >
+                      <svg
+                        class="w-4 h-4 mr-2"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span class="text-sm"> Ubah Jadi <b>Selesai</b> </span>
                     </a>
                   </li>
                 </ul>
@@ -256,7 +292,7 @@
               <h3
                 class="font-bold text-indigo-500 pt-5 capitalize text-3xl xs:text-xl sm:text-2xl"
               >
-                Form Refund
+                Form Informasi Akun
               </h3>
             </div>
 
@@ -265,6 +301,11 @@
             >
               <div class="flex flex-col mb-1">
                 <label class="leading-loose text-md">Email</label>
+                <!-- <input
+                  type="text"
+                  class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                  placeholder="Pilih Email"
+                /> -->
                 <select
                   class="w-full border focus:outline-none focus:ring focus:border-indigo-400 px-4 py-2 rounded-md sm:text-sm"
                   name="range_period"
@@ -312,7 +353,7 @@
 
           <div class="p-4 flex space-x-4">
             <button
-              @click="showFormRefund('')"
+              @click="showForm('')"
               class="w-1/2 px-4 py-3 text-center bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-black font-bold rounded-lg text-sm focus:outline-none"
             >
               Batal
@@ -409,11 +450,22 @@ export default {
       alert('open new tab detail campaign by id campaign')
     },
     handleProccess() {
-      alert('proses post request refund')
+      if (this.modal.text == 'refund') {
+        alert('proses post request refund')
+      }
+
+      if (this.modal.text == 'selesai') {
+        alert('proses post request selesai')
+      }
     },
-    showFormRefund(id) {
-      this.activeDetail = null
-      this.form.status = !this.form.status
+    showForm(id) {
+      if (id !== '') {
+        alert(id)
+        this.activeDetail = null
+        this.form.status = !this.form.status
+      } else {
+        this.form.status = !this.form.status
+      }
     },
     saveInfoAccount() {
       alert('post request save info account')

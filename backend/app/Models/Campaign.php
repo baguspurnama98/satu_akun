@@ -3,6 +3,10 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
+
+// import Optimus for hashid
+use Jenssegers\Optimus\Optimus;
+
 class Campaign extends Model 
 {
     // defenisi tabel yg digunakan di database
@@ -28,9 +32,34 @@ class Campaign extends Model
 
     // yang gak akan ditampilkan atribut nya diluar dari lingkungan lumen/laravel
     protected $hidden = [
-        // 'password',
+        // 'password_email',
     ];
 
+    protected function decode($id)
+    {
+        $optimus = new Optimus(1580030173, 59260789, 1163945558);
+        return $optimus->decode($id);
+    }
+
+    protected function encode($id)
+    {
+        $optimus = new Optimus(1580030173, 59260789, 1163945558);
+        return $optimus->encode($id);
+    }
+
+    /**
+     * Kegunaan ini mengoveride value yang keluar dari model
+     * camelCase -> di transform jadi camel_case
+     */
+    public function getIdAttribute($value)
+    {
+        return $this->encode($value);
+    }
+
+    public function setIdAttribute($value)
+    {
+        $this->attributes['id'] = $this->decode($value);
+    }
 
     /**
      * relasi yang digunakan misal:
@@ -39,10 +68,34 @@ class Campaign extends Model
      */
     public function campaign_members()
     {
-        return $this->hasMany(CampaignMembers::class);
+        return $this->hasMany(CampaignMember::class);
     }
 
+    public function campaign_reports()
+    {
+        return $this->hasMany(CampaignReport::class);
+    }
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    /**
+     * with default
+     * https://laravel.com/docs/8.x/eloquent-relationships#default-models
+     */
+    public function emails()
+    {
+        return $this->belongsTo(Email::class);
+    }
+
+    public function categories()
+    {
+        // return $this->belongsTo(Post::class, 'foreign_key', 'owner_key');
+        return $this->belongsTo(CampaignCategories::class, 'categories_id');
+    }
+    
     // https://arianacosta.com/php/laravel/tutorial-full-text-search-laravel-5/
 
 }

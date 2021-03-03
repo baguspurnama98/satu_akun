@@ -36,7 +36,7 @@
       <div class="flex items-center justify-between">
         <div class="w-full text-center">
           <h3 class="font-bold pb-3 text-4xl text-indigo-500 xs:text-2xl">
-            Pilih status campaign
+            Pilih Status Campaign
           </h3>
         </div>
       </div>
@@ -55,22 +55,19 @@
         </div>
       </nav>
     </div>
-    <div
-      v-if="menuActive == 'active'"
-      class="px-3 overflow-x-auto overflow-y-visible h-screen"
-    >
+    <div v-if="menuActive == 'active'" class="datatables-campaign">
       <CampaignActiveTable />
     </div>
-    <div v-if="menuActive == 'going-on'" class="px-3 overflow-auto">
-      <CampaignGoingOnTable />
+    <div v-if="menuActive == 'going-on'" class="datatables-campaign">
+      <CampaignOnGoingTable />
     </div>
-    <div v-if="menuActive == 'finish'" class="px-3 overflow-auto">
+    <div v-if="menuActive == 'finish'" class="datatables-campaign">
       <CampaignFinishTable />
     </div>
-    <div v-if="menuActive == 'refund'" class="px-3 overflow-auto">
+    <div v-if="menuActive == 'refund'" class="datatables-campaign">
       <CampaingRefundTable />
     </div>
-    <div v-if="menuActive == 'expired'" class="px-3 overflow-auto">
+    <div v-if="menuActive == 'expired'" class="datatables-campaign">
       <CampaignExpiredTable />
     </div>
   </div>
@@ -78,7 +75,7 @@
 
 <script>
 import CampaignActiveTable from '@/components/DataTables/Campaign/CampaignActiveTable'
-import CampaignGoingOnTable from '@/components/DataTables/Campaign/CampaignGoingOnTable'
+import CampaignOnGoingTable from '@/components/DataTables/Campaign/CampaignOnGoingTable'
 import CampaignFinishTable from '@/components/DataTables/Campaign/CampaignFinishTable'
 import CampaingRefundTable from '@/components/DataTables/Campaign/CampaingRefundTable'
 import CampaignExpiredTable from '@/components/DataTables/Campaign/CampaignExpiredTable'
@@ -86,7 +83,7 @@ import CampaignExpiredTable from '@/components/DataTables/Campaign/CampaignExpir
 export default {
   components: {
     CampaignActiveTable,
-    CampaignGoingOnTable,
+    CampaignOnGoingTable,
     CampaignFinishTable,
     CampaingRefundTable,
     CampaignExpiredTable,
@@ -99,7 +96,7 @@ export default {
         { img: 'going-icon.svg', name: 'Berlangsung', route: 'going-on' },
         { img: 'finish-icon.svg', name: 'Selesai', route: 'finish' },
         { img: 'refund-icon.svg', name: 'Refund', route: 'refund' },
-        { img: 'expired-icon.svg', name: 'Kadaluarsa', route: 'expired' },
+        { img: 'expired-icon.svg', name: 'Expired', route: 'expired' },
       ],
       breadcrumbs: [],
     }
@@ -144,3 +141,8 @@ export default {
   },
 }
 </script>
+<style lang="postcss">
+.datatables-campaign {
+  @apply px-3 overflow-auto h-screen;
+}
+</style>

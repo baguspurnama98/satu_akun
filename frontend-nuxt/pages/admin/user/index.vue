@@ -49,6 +49,7 @@ export default {
     this.$nextTick(() => {
       this.$nuxt.$loading.start()
     })
+
     this.$axios
       .$get(process.env.API_DEV_URL + 'users')
       .then((resp) => {
