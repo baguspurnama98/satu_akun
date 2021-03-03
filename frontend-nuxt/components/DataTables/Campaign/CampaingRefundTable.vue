@@ -22,7 +22,7 @@
             >Nama Campaign</v-th
           >
           <v-th :sortKey="nameLength">Host</v-th>
-          <v-th :sortKey="nameLength">Status Pemabayaran</v-th>
+          <v-th :sortKey="nameLength">Status Pembayaran</v-th>
 
           <v-th :sortKey="nameLength">Tanggal Pembuatan</v-th>
           <v-th :sortKey="dateSort" defaultSort="desc">Tanggal Kadaluarsa</v-th>
@@ -40,9 +40,11 @@
             <td class="px-3 truncate" style="max-width: 150px">
               {{ row.host }}
             </td>
-            <!-- aku tambah informasi email, biar admin tau email suatu campaign dengan mudah -->
-            <td class="px-3 truncate" style="max-width: 150px">
-              baguspurnama@gmail.com
+
+            <td class="px-3" style="max-width: 150px">
+              <span class="px-2 py-1 rounded-full bg-green-400 text-sm"
+                >ini status</span
+              >
             </td>
             <td class="px-3">{{ row.created | formatDate }}</td>
 

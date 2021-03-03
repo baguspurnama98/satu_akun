@@ -1,16 +1,20 @@
 <template>
   <div>
     <CampaignDashboard :user_role="user_role" />
-    <!-- Content ini bakal ada untuk semua tipe pengguna, in atau out -->
-    <!-- Kalau in, kita yg bayar ke host, kalau out mereka yang bayar ke kita -->
+
     <div class="container mx-auto flex items-center mt-6">
       <div class="lg:w-3/5 w-full mx-auto px-4 my-4 overflow-auto">
-        <h3 class="text-lg leading-6 font-medium text-gray-900">
-          Riwayat Transaksi
-        </h3>
-        <p class="mt-1 mb-5 max-w-2xl text-sm text-gray-600">
-          Detail personal campaign yang dapat digunakan.
-        </p>
+        <div class="inline-flex w-full justify-between mb-5">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Bagus Purnama <span>(Host)</span>
+          </h3>
+          <button
+            class="text-white px-2 py-1 text-sm rounded-lg shadow-md bg-indigo-400 hover:bg-indigo-600 focus:outline-none"
+          >
+            Tambah
+          </button>
+        </div>
+
         <div class="flex border-t border-gray-200 py-2">
           <span class="text-gray-600 pr-6">IN</span>
           <span class="text-gray-600">20 Oktober 2020</span>
