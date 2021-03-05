@@ -2,10 +2,7 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-
-
-// import Optimus for hashid
-use Jenssegers\Optimus\Optimus;
+use Illuminate\Support\Str;
 
 class Campaign extends Model 
 {
@@ -35,30 +32,11 @@ class Campaign extends Model
         // 'password_email',
     ];
 
-    protected function decode($id)
-    {
-        $optimus = new Optimus(1580030173, 59260789, 1163945558);
-        return $optimus->decode($id);
-    }
+    protected $appends = ['slug'];
 
-    protected function encode($id)
+    public function getSlugAttribute()
     {
-        $optimus = new Optimus(1580030173, 59260789, 1163945558);
-        return $optimus->encode($id);
-    }
-
-    /**
-     * Kegunaan ini mengoveride value yang keluar dari model
-     * camelCase -> di transform jadi camel_case
-     */
-    public function getIdAttribute($value)
-    {
-        return $this->encode($value);
-    }
-
-    public function setIdAttribute($value)
-    {
-        $this->attributes['id'] = $this->decode($value);
+        return Str::slug($this->attributes['title']);
     }
 
     /**

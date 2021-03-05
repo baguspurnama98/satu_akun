@@ -95,7 +95,10 @@
               </div>
             </template>
           </div>
-          <div class="flex mt-6 items-center pt-5 border-t-2 border-gray-100">
+          <div
+            class="flex mt-6 items-center pt-5 border-t-2 border-gray-100"
+            v-if="user_role == 'u'"
+          >
             <!-- Batalkan dan Edit hanya aktif ketika dia adalah host dan status masih aktif -->
             <button
               class="flex ml-auto text-white bg-red-500 border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded"
@@ -134,7 +137,7 @@ export default {
   components: { IconSocial },
   // status: aktif, ekspired, berlangsung, refund
   // ini bakal dapatin data si pemilik host juga
-  props: ['postTitle'],
+  props: ['postTitle', 'user_role'],
   // kita pakai props, data disini hanya sebagai contoh
   data() {
     return {
@@ -147,6 +150,7 @@ export default {
       },
     }
   },
+
   methods: {
     showDetail() {
       this.detail = !this.detail

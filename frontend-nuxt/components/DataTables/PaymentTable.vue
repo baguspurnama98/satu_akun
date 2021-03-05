@@ -9,7 +9,7 @@
       <input class="form-control" v-model="filters.name.value" />
 
       <v-table
-        :data="users"
+        :data="payments"
         :filters="filters"
         class="w-full text-left wrapper xs:block"
         :hideSortIcons="false"
@@ -21,9 +21,10 @@
           <v-th :sortKey="indexChar" defaultSort="asc" class="pl-3 py-2"
             >Nama</v-th
           >
-          <v-th :sortKey="nameLength">Email</v-th>
-          <v-th :sortKey="nameLength">Telp</v-th>
-          <v-th :sortKey="nameLength">Status</v-th>
+          <v-th :sortKey="nameLength">Biaya</v-th>
+          <v-th :sortKey="nameLength">Total Terkumpul</v-th>
+          <v-th :sortKey="nameLength">Total Pencairan</v-th>
+          <v-th :sortKey="nameLength">Status Pencairan</v-th>
           <th>Aksi</th>
         </thead>
         <tbody slot="body" slot-scope="{ displayData }">
@@ -32,13 +33,16 @@
             :key="row.id"
             class="border-t-2 hover:bg-gray-200"
           >
-            <td class="px-3 truncate" style="max-width: 150px">
+            <td class="px-3 truncate" style="max-width: 200px">
               {{ row.name }}
             </td>
-            <td class="px-3 truncate" style="max-width: 150px">
-              {{ row.email }}
+            <td class="px-3">
+              {{ row.price | formatRupiah }}
             </td>
-            <td class="px-3">{{ row.whatsapp }}</td>
+            <td class="px-3">
+              {{ row.amount_collected | formatRupiah }}
+            </td>
+            <td class="px-3">{{ row.withdrawal | formatRupiah }}</td>
 
             <td class="px-4 py-3 text-xs">
               <span
@@ -46,45 +50,31 @@
               >
                 <span
                   aria-hidden
-                  class="bg-red-600 rounded-full text-xs font-bold capitalize text-white m-0 px-2 py-1"
-                  v-if="row.status === 2"
-                  >Terblokir</span
+                  class="bg-indigo-600 rounded-full px-2 py-1 text-sm text-white"
+                  v-if="row.status === 50"
+                  >50%</span
                 >
                 <span
                   aria-hidden
-                  class="bg-yellow-500 rounded-full text-xs font-bold capitalize text-white m-0 px-2 py-1"
-                  v-if="row.status === 1"
-                  >Aktif</span
-                ><span
+                  class="bg-indigo-700 rounded-full px-2 py-1 text-sm text-white"
+                  v-if="row.status === 75"
+                  >75%</span
+                >
+                <span
                   aria-hidden
-                  class="bg-gray-600 rounded-full text-xs font-bold capitalize text-white m-0 px-2 py-1"
-                  v-if="row.status === 0"
-                  >Non-Aktif</span
+                  class="bg-indigo-800 rounded-full px-2 py-1 text-sm text-white"
+                  v-if="row.status === 100"
+                  >100%</span
                 >
               </span>
             </td>
             <td class="justify-between px-2 py-3">
               <a
                 class="px-2 py-1 bg-green-400 rounded-md text-sm font-medium text-white hover:bg-green-600 focus:outline-none mr-2 text-center"
-                :href="'https://wa.me/62' + row.whatsapp"
-                target="_blank"
+                href="1"
               >
-                WhatsApp</a
+                Detail</a
               >
-
-              <button
-                class="px-2 py-1 bg-indigo-500 rounded-md text-sm font-medium text-white hover:bg-indigo-600 focus:outline-none text-center"
-                v-if="row.status === 'terblokir'"
-              >
-                Aktifkan
-              </button>
-              <button
-                class="px-2 py-1 bg-red-500 rounded-md text-sm font-medium text-white hover:bg-red-600 focus:outline-none text-center"
-                v-else
-                @click="showModalBlock(row.name)"
-              >
-                Blokir
-              </button>
             </td>
           </tr>
         </tbody>
@@ -147,8 +137,8 @@
 </template>
 <script>
 export default {
-  name: 'DataTableUser',
-  props: ['users'],
+  name: 'PaymentTable',
+  props: ['payments'],
   data() {
     return {
       modalBlock: true,
@@ -253,5 +243,10 @@ ul.pagination {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
+}
+
+th {
+  cursor: pointer;
+  @apply px-2;
 }
 </style>

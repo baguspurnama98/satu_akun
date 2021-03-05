@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 //import auth facades
+
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 // import Optimus for hashid
@@ -22,6 +24,11 @@ class Controller extends BaseController
         ], 200);
     }
 
+    protected function getToken($token)
+    {
+        return $token;
+    }
+
     protected function decode($id)
     {
         // new Optimus(1580030173, 59260789, 1163945558)
@@ -33,5 +40,16 @@ class Controller extends BaseController
     {
         $optimus = new Optimus(1580030173, 59260789, 1163945558);
         return $optimus->encode($id);
+    }
+
+    protected function convertDateTime($dateTime)
+    {
+        Carbon::setLocale('id');
+        return Carbon::parse($dateTime)->format('d/M/Y H:i');
+    }
+
+    protected function formatRupiah($value)
+    {
+        return "Rp " . number_format($value, 0, ",", ".") . ',-';
     }
 }

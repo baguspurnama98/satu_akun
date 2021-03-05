@@ -77,6 +77,8 @@ export default {
     validateOtp(code) {
       // Check pin on server
       let id_user = this.$route.params.index
+      let token = this.$route.query.t
+      this.$axios.setToken(token, 'Bearer');
       this.$axios
         .$get(process.env.API_DEV_URL + `auth/validate/${id_user}/${code}`)
         .then((resp) => {
