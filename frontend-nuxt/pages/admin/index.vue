@@ -8,7 +8,7 @@
     <div class="grid grid-cols-4 xs:grid-cols-2 gap-6 w-full">
       <span
         @click.prevent="trailBackslash(item.route)"
-        class="flex flex-col items-center justify-center bg-white p-4 shadow-md rounded-lg transform hover:scale-105 cursor-pointer text-gray-900 hover:text-black"
+        class="flex flex-col items-center justify-center bg-white p-4 m-4 shadow-md rounded-lg transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer text-gray-900 hover:text-black"
         v-for="item in menu"
         :key="item.name"
       >

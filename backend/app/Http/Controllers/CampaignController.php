@@ -26,7 +26,6 @@ class CampaignController extends Controller
     }
 
     public function campaign($id_campaign, $slug = null) {
-        
         $campaign = Campaign::with(['campaign_members.users', 'categories'])->withCount('campaign_members as total_members')->findOrFail($id_campaign);
         return response()->json(['campaigns' => $campaign], 200);
     }
