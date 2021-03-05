@@ -10,6 +10,7 @@
       <div>
         <button
           class="px-4 py-2 rounded text-white shadow-lg bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700 font-bold"
+          @click="showModal(null, 'add')"
         >
           <span class="inline-flex items-center p-0 m-0">
             <svg
@@ -34,20 +35,38 @@
 
     <div>
       <!-- <div v-if="users.length == 0"></div> -->
-      <EmailTable :users="users" />
+      <EmailTable :emails="emails" @clicked="showModal" :todo="todo" />
+      <EmailModal
+        :status="showModalStatus"
+        @clicked="showModal"
+        :todo="todo"
+        :selected="selected"
+      />
     </div>
   </div>
 </template>
 <script>
 import EmailTable from '@/components/DataTables/EmailTable'
 import Breadcrumb from '@/components/Breadcrumb'
+import EmailModal from '@/components/Modal/ManageEmail'
 
 export default {
-  components: { EmailTable, Breadcrumb },
+  components: { EmailTable, Breadcrumb, EmailModal },
   data() {
     return {
-      users: [],
+      emails: [
+        {
+          email: 'akun1@patungin.com',
+          pass: '123',
+          id: 1,
+          status: 1,
+        },
+        { email: 'akun2patungin.com', pass: '123', id: 2, status: 0 },
+      ],
       breadcrumbs: [],
+      showModalStatus: false,
+      todo: 'edit',
+      selected: '',
     }
   },
 
@@ -76,16 +95,29 @@ export default {
       this.$nuxt.$loading.start()
     })
 
-    this.$axios
-      .$get(process.env.API_DEV_URL + 'users')
-      .then((resp) => {
-        this.users = resp.users
-        console.log(resp)
-        setTimeout(() => this.$nuxt.$loading.finish(), 5000)
-      })
-      .catch((errors) => {
-        console.log(errors)
-      })
+    // this.$axios
+    //   .$get(process.env.API_DEV_URL + 'users')
+    //   .then((resp) => {
+    //     this.users = resp.users
+    //     console.log(resp)
+    //     setTimeout(() => this.$nuxt.$loading.finish(), 5000)
+    //   })
+    //   .catch((errors) => {
+    //     console.log(errors)
+    //   })
+  },
+
+  methods: {
+    showModal(data, status) {
+      if (data != undefined) {
+        this.selected = data
+        console.log(this.selected)
+      } else {
+        this.selected = ''
+      }
+      this.todo = status
+      this.showModalStatus = !this.showModalStatus
+    },
   },
 }
 </script>

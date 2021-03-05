@@ -1,15 +1,11 @@
 <template>
   <div>
-    <div
-      class="w-full relative z-0"
-      v-click-outside
-      @clicked-outside="showModalBlock('outside')"
-    >
+    <div class="w-full relative z-0">
       <label>Search:</label>
       <input class="form-control" v-model="filters.name.value" />
 
       <v-table
-        :data="users"
+        :data="emails"
         :filters="filters"
         class="w-full text-left wrapper xs:block"
         :hideSortIcons="false"
@@ -34,14 +30,29 @@
               {{ row.email }}
             </td>
             <td class="px-3">
-              {{ row.status }}
+              <span
+                class="relative h-full px-3 py-1 font-semibold leading-tight text-center inline-block"
+              >
+                <span
+                  aria-hidden
+                  class="bg-yellow-600 rounded-full px-2 py-1 text-sm text-white"
+                  v-if="row.status === 1"
+                  >Aktif</span
+                >
+                <span
+                  aria-hidden
+                  class="bg-red-700 rounded-full px-2 py-1 text-sm text-white"
+                  v-if="row.status === 0"
+                  >Non-Aktif</span
+                >
+              </span>
             </td>
 
             <td class="px-4 py-3 text-xs">
               <div class="inline-flex">
                 <button
                   class="px-2 py-1 text-white bg-green-400 hover:bg-green-600 focus:outline-none rounded-lg mr-2 shadow-md text-md"
-                  @click="handleEdit(index)"
+                  @click="onClickEdit(row, 'edit')"
                 >
                   <span class="inline-flex">
                     <svg
@@ -99,23 +110,23 @@
 <script>
 export default {
   name: 'EmailTable',
-  props: ['users'],
+  props: ['emails'],
   data() {
     return {
       currentPage: 1,
       totalPages: 3,
       filters: {
-        name: { value: '', keys: ['name', 'email'] },
+        name: { value: '', keys: ['email'] },
       },
     }
   },
   methods: {
     nameLength(row) {
-      return row.name.length
+      return row.email.length
     },
 
     indexChar(row) {
-      return row.name.charCodeAt(0) - 96
+      return row.email.charCodeAt(0) - 96
     },
 
     dateSort(a, b) {
@@ -123,12 +134,11 @@ export default {
       let date2 = new Date(b.registered).getTime()
       return date1 - date2
     },
-    handleEdit(id) {
-      alert('edit email id: ' + id)
-    },
-
     handleDelete(id) {
       alert('delete email id: ' + id)
+    },
+    onClickEdit(data, todo) {
+      this.$emit('clicked', data, todo)
     },
   },
 }
