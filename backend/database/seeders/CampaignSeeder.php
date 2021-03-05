@@ -8,8 +8,25 @@ use App\Models\CampaignMember;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
+
+// import Optimus for hashid
+use Jenssegers\Optimus\Optimus;
+
 class CampaignSeeder extends Seeder
 {
+
+    protected function decode($id)
+    {
+        $optimus = new Optimus(1580030173, 59260789, 1163945558);
+        return $optimus->decode($id);
+    }
+
+    protected function encode($id)
+    {
+        $optimus = new Optimus(1580030173, 59260789, 1163945558);
+        return $optimus->encode($id);
+    }
+
     /**
      * Run the database seeds.
      *
@@ -43,8 +60,8 @@ class CampaignSeeder extends Seeder
         ]);
 
         CampaignMember::create([
-            'user_id' => '1',
-            'campaign_id' => '1',
+            'user_id' => $this->encode(1),
+            'campaign_id' => $this->encode(1),
             'is_host' => '1',
             'is_pay' => '1',
             'info' => 'Ini Dummy',

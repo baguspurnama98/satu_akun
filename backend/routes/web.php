@@ -59,9 +59,11 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         
          
         $router->get('/', 'CampaignController@allCampaigns');
-        $router->get('/{id_campaign}', 'CampaignController@campaign');
+        $router->get('/{id_campaign}[/{slug}]', 'CampaignController@campaign');
         $router->post('store', 'CampaignController@createCampaign');
         $router->post('update/{id_campaign}', 'CampaignController@updateCampaign');
+
+        $router->get('rsvp/{id_campaign}/{id_user}', 'CampaignController@assignMemberToCampaign');
     });
 
     

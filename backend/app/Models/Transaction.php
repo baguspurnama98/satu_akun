@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Optimus\Optimus;
 
 class Transaction extends Model 
 {
@@ -29,6 +30,24 @@ class Transaction extends Model
         // 'password',
     ];
 
+
+    protected function decode($id)
+    {
+        $optimus = new Optimus(1580030173, 59260789, 1163945558);
+        return $optimus->decode($id);
+    }
+
+    protected function encode($id)
+    {
+        $optimus = new Optimus(1580030173, 59260789, 1163945558);
+        return $optimus->encode($id);
+    }
+
+    // Generate No Transaction from ID transaction
+    public function setNoTransactionAttribute($value)
+    {
+        $this->attributes['no_transaction'] = $this->encode($value);
+    }
 
     /**
      * relasi yang digunakan misal:

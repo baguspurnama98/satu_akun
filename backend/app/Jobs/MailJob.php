@@ -15,6 +15,7 @@ class MailJob extends Job
      */
     protected $user;
     protected $data;
+    protected $type;
 
 
     /**
@@ -24,11 +25,12 @@ class MailJob extends Job
      *
      * @return void
      */
-    public function __construct(User $user, $data)
+    public function __construct(User $user, $data, $type)
     {
         // https://laravel.com/docs/8.x/queues#handling-relationships
         $this->user = $user->withoutRelations();
         $this->data = $data;
+        $this->type = $type;
     }
 
     /**
@@ -39,7 +41,12 @@ class MailJob extends Job
     public function handle()
     {
         //
-        $this->sendEmailOTP($this->data, $this->user);
+        if ($this->type === 'otp') {
+            $this->sendEmailOTP($this->data, $this->user);
+        } else {
+            $this->sendTransactionUser($this->data, $this->user);
+        }
+        
     }
 
 
@@ -58,7 +65,25 @@ class MailJob extends Job
          */
         Mail::send('mails.otp', $data, function($message) use($user, $from_email, $surname) {
             // to
-            $message->to($user->email, $user->name)->subject('Authentikasi Patungan');
+            $message->to($user->email, $user->name)->subject('Authentikasi Patungin');
+            // from
+            $message->from($from_email, $surname);
+        });
+    }
+
+    private function sendTransactionUser($data, $user)
+    {
+        $from_email = 'invoice@baguspurnama.com';
+        $surname = 'Patungin';
+
+        /**
+         * @param 'templates.mail' = blade email yang bakal di kirim kan ke email
+         * @param $data berisi array, di dalamnya ada name, url, total, desc, created_at
+         * @param $from_email harus sama dengan domain pada ENV, (domain.com)
+         */
+        Mail::send('mails.transaction', $data, function($message) use($user, $from_email, $surname) {
+            // to
+            $message->to($user->email, $user->name)->subject('Invoice Patungin');
             // from
             $message->from($from_email, $surname);
         });

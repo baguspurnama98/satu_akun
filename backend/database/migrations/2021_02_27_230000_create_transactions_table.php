@@ -27,8 +27,9 @@ class CreateTransactionsTable extends Migration
             $table->double('nominal');
             $table->double('unique_code');
             $table->double('total_nominal');
-            $table->string('no_rek_origin');
-            $table->string('no_rek_destination');
+            $table->string('no_rek_origin')->nullable();
+            $table->string('no_rek_destination')->nullable();
+            $table->boolean('status')->default(0);
 
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();

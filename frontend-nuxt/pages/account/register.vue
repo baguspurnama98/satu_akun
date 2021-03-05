@@ -188,7 +188,7 @@ export default {
           })
           .then((res) => {
             // berhasil, tampilkan sesuatu
-            this.$router.push(`/account/validate-otp/${res.user.id}`)
+            this.$router.push(`/account/validate-otp/${res.user.id}?t=${res.user.token}`)
           })
           .catch((errors) => {
             // console.log(errors.response)

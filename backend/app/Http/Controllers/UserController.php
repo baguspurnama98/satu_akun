@@ -43,6 +43,6 @@ class UserController extends Controller
     }
 
     public function getUser($id_user) {
-        return response()->json(['users' => User::with('social_media')->find($this->decode($id_user))], 200);
+        return response()->json(['users' => User::with('social_media')->find($id_user)], 200);
     }
 }
