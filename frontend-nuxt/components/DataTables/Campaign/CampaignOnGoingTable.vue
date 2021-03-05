@@ -140,7 +140,7 @@
                     <a
                       class="inline-flex items-center"
                       href="#"
-                      @click="showForm(row.id)"
+                      @click.prevent="showForm(row.id)"
                     >
                       <svg
                         class="w-4 h-4 mr-2"
@@ -265,7 +265,7 @@
 
         <div class="p-4 flex space-x-4">
           <button
-            @click="showModal('')"
+            @click.prevent="showModal('')"
             class="w-1/2 px-4 py-3 text-center bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-black font-bold rounded-lg text-sm focus:outline-none"
           >
             Batal

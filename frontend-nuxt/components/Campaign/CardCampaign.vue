@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col justify-between rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out mb-2"
+    class="flex flex-col justify-between rounded-lg shadow-md bg-white hover:shadow-xl transition duration-150 ease-in-out my-1 xl:mx-1"
   >
     <NuxtLink exact to="/campaign/1">
       <div class="col-span-4 relative">
