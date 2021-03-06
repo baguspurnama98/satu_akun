@@ -64,7 +64,7 @@
             >
               Platform yang memfasilitasi pencarian teman dalam berlanggaan
               bersama di penyedia layanan hiburan hingga edukasi/pembelajaran
-              dengan proses yang mudah, aman, legal* dan murah.
+              dengan proses yang mudah, aman, dan murah.
             </p>
             <div class="relative flex mt-10 mx-auto lg:ml-0">
               <a

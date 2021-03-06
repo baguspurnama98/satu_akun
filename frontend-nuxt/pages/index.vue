@@ -12,7 +12,7 @@
       >
         <div class="text-center mb-10">
           <h1 class="font-sans text-3xl font-bold text-black mb-4">
-            Patungin lebih murah
+            Patungin aja lebih murah
           </h1>
           <p
             class="text-gray-700 tracking-widest font-sans leading-relaxed text-base"
@@ -24,9 +24,9 @@
           class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-6 gap-4"
         >
           <CardCampaign
-            v-for="(item, id) in items"
+            v-for="(campaign, id) in campaigns"
             :key="id"
-            :title="item.title"
+            :campaign="campaign"
           />
         </div>
       </div>
@@ -41,9 +41,9 @@
             <b>Patungin</b> aja
           </h1>
           <p class="text-base leading-relaxed">
-            Merdeka dalam akses apa saja melalui patungan. Kamu bisa patungan
+            Merdeka dalam akses apa saja melalui Patungin. Kamu bisa patungan
             akun tanpa ada batasan slot, patungan akun platform apa saja, hingga
-            jaminan tanpa penipuan
+            jaminan tanpa penipuan.
           </p>
         </div>
         <div class="flex flex-wrap -m-4">
@@ -222,15 +222,20 @@ export default {
         { title: 'Belajar Coding Javascript' },
         { title: 'Disney Hotstar' },
       ],
+      campaigns: [],
     }
+  },
+
+  mounted() {
+    this.$axios
+      .$get(process.env.API_DEV_URL + `campaign/`)
+      .then((resp) => {
+        this.campaigns = resp.campaigns
+        console.log(this.campaigns)
+      })
+      .catch((errors) => {
+        console.dir(errors)
+      })
   },
 }
 </script>
-
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-</style>
