@@ -12,8 +12,7 @@
           <h2
             class="text-xl font-semibold text-white sm:text-2xl leading-tight sm:text-black md:text-3xl my-5"
           >
-            Patungan Beli Akun Dicoding selama 1 tahun bebas kelas apa saja yang
-            ada, yuk murah meriah
+            {{ campaign.title }}
           </h2>
         </div>
 
@@ -22,7 +21,7 @@
             class="flex items-center text-black text-md xs:text-sm font-normal"
           >
             <p class="font-bold text-2xl">
-              {{ price | formatRupiah }}
+              {{ campaign.slot_price | formatRupiah }}
               <span class="font-normal">/orang</span>
             </p>
           </div>
@@ -41,13 +40,15 @@
               />
             </svg>
             <p class="text-md sm:text-sm ml-1">
-              <span class="text-gray-900 font-medium">1</span> Tahun
+              <span class="text-gray-900 font-medium">{{
+                campaign.durasi
+              }}</span>
             </p>
           </div>
           <p class="text-sm">
             Berakhir
             <span class="font-bold text-red-700">{{
-              new Date() | formatDate
+              campaign.expired_date | formatDate
             }}</span>
           </p>
           <p
@@ -58,7 +59,7 @@
               class="text-md xs:text-sm px-1 font-medium text-indigo-500"
               href="#"
             >
-              Bagus Purnama Putra
+              {{ campaign.host_name }}
             </a>
           </p>
 
@@ -96,18 +97,10 @@
             class="my-3 text-justify"
             v-bind:class="[detail ? 'line-clampin' : '']"
           >
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            {{ campaign.description }}
           </p>
           <button
-            v-if="detail === true"
+            v-if="detail"
             class="border-none bg-none cursor-pointer hover:underline text-indigo-500 focus:outline-none"
             @click="showDetail()"
           >
@@ -140,58 +133,105 @@
             <!-- Bakal di looping dari props data dari backend, siapa yg tergabung saat ini, ada pengecekan sudah beneran aktif atau tidak -->
             <div
               class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2"
+              v-for="member in campaign.campaign_members"
+              :key="member.id"
             >
-              <span class="bg-green-400 h-2 w-2 m-2 rounded-full"></span>
-              <div class="font-medium px-2 truncate">Bagus Alexander</div>
+              <span
+                v-if="member.is_pay === 1"
+                class="bg-green-400 h-2 w-2 m-2 rounded-full"
+              ></span>
+              <span
+                v-else
+                class="bg-yellow-400 h-2 w-2 m-2 rounded-full"
+              ></span>
+
+              <div class="font-medium px-2 truncate">
+                {{ member.users.name }}
+              </div>
             </div>
-            <div
-              class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2"
-            >
-              <span class="bg-green-400 h-2 w-2 m-2 rounded-full"></span>
-              <div class="font-medium px-2 truncate">Jesse Purnama</div>
-            </div>
+
             <!-- ingat ada gray nih, bisa styling class based on data active or pending -->
-            <div
-              class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2"
-            >
-              <span class="bg-gray-400 h-2 w-2 m-2 rounded-full"></span>
-              <div class="font-medium px-2 truncate">Anastasya Eka</div>
-            </div>
+
             <div
               class="flex justify-start cursor-pointer text-gray-700 bg-green-200 rounded-md px-2 py-2 xs:mb-2"
+              v-for="index in campaign.slot_capacity - campaign.total_members"
+              :key="index"
             >
               <!-- kalau ada slot kosong nanti maka penambahan kelas hidden di span berikut, dan kelas di atasnya ada penambahan kelas background nya hijau, hovernya di hapus -->
               <!-- bisa diimplementasiin styling class seleksi kondisi -->
               <!-- <span class="bg-green-400 h-2 w-2 m-2 rounded-full"></span> -->
               <div class="px-2 font-bold">Slot Kosong</div>
             </div>
-            <div
-              class="flex justify-start cursor-pointer text-gray-700 bg-green-200 rounded-md px-2 py-2 xs:mb-2"
-            >
-              <!-- <span class="bg-green-400 h-2 w-2 m-2 rounded-full"></span> -->
-              <div class="px-2 font-bold">Slot Kosong</div>
-            </div>
           </div>
         </div>
         <div class="text-center my-5 md:my-10 xs:hidden">
-          <a
+          <button
             class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
-            href="/campaign/1/checkout/1"
+            v-bind:class="[!isLogin ? 'opacity-50 ' : '']"
+            @click.prevent="rsvpCheckout(campaign.id)"
           >
-            Daftar
-          </a>
+            <span class="inline-flex items-center p-0 m-0">
+              <svg
+                v-if="loading"
+                class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+
+              Daftar</span
+            >
+          </button>
         </div>
       </div>
     </div>
     <div
       class="container px-4 mx-auto flex flex-wrap items-center justify-between bg-white w-full text-center pt-5 sm:hidden sticky bottom-0 min-w-screen"
     >
-      <a
+      <button
         class="w-1/3 xs:w-full mb-4 mt-7 py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
-        href="/campaign/1/checkout/1"
+        v-bind:class="[!isLogin ? 'opacity-50 ' : '']"
       >
-        Daftar
-      </a>
+        <span class="inline-flex items-center p-0 m-0">
+          <svg
+            v-if="loading"
+            class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+
+          Daftar</span
+        >
+      </button>
     </div>
   </div>
 </template>
@@ -201,15 +241,42 @@ import IconSocial from '../Profil/IconSocial'
 export default {
   components: { IconSocial },
   name: 'DetailCampaign',
+  props: ['campaign'],
   data() {
     return {
-      detail: true,
-      price: '53000',
+      detail: false,
+      loading: false,
     }
   },
   methods: {
     showDetail() {
       this.detail = !this.detail
+    },
+    rsvpCheckout(idCampaign) {
+      if (this.isLogin) {
+        this.loading = true
+
+        this.$axios
+          .$get(
+            process.env.API_DEV_URL +
+              `campaign/rsvp/${idCampaign}/${this.$store.state.user.id}/`
+          )
+          .then((resp) => {
+            this.$router.push(
+              `/campaign/${idCampaign}/checkout/${this.$store.state.user.id}`
+            )
+          })
+          .catch((errors) => {
+            console.dir(errors)
+          })
+      } else {
+        this.$router.push('/login')
+      }
+    },
+  },
+  computed: {
+    isLogin() {
+      return this.$store.state.auth.token
     },
   },
 }
