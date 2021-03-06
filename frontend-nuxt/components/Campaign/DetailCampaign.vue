@@ -92,27 +92,33 @@
           >
             Deskripsi
           </h1>
-
-          <p
-            class="my-3 text-justify"
-            v-bind:class="[detail ? 'line-clampin' : '']"
-          >
-            {{ campaign.description }}
-          </p>
-          <button
-            v-if="detail"
-            class="border-none bg-none cursor-pointer hover:underline text-indigo-500 focus:outline-none"
-            @click="showDetail()"
-          >
-            Lihat selengkapnya
-          </button>
-          <button
-            v-else
-            class="border-none bg-none cursor-pointer hover:underline text-indigo-500 focus:outline-none"
-            @click="showDetail()"
-          >
-            Lihat lebih ringkas
-          </button>
+          <div v-if="`${campaign.description}`.length > 100">
+            <p
+              class="my-3 text-justify"
+              v-bind:class="[hiddenDetail ? 'line-clampin' : '']"
+            >
+              {{ campaign.description }}
+            </p>
+            <button
+              v-if="hiddenDetail"
+              class="border-none bg-none cursor-pointer hover:underline text-indigo-500 focus:outline-none"
+              @click="showDetail()"
+            >
+              Lihat selengkapnya
+            </button>
+            <button
+              v-else
+              class="border-none bg-none cursor-pointer hover:underline text-indigo-500 focus:outline-none"
+              @click="showDetail()"
+            >
+              Lihat lebih ringkas
+            </button>
+          </div>
+          <div v-else>
+            <p class="my-3 text-justify">
+              {{ campaign.description }}
+            </p>
+          </div>
         </div>
       </div>
       <div
@@ -130,7 +136,6 @@
           <div
             class="sm:grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 sm:gap-3 my-3"
           >
-            <!-- Bakal di looping dari props data dari backend, siapa yg tergabung saat ini, ada pengecekan sudah beneran aktif atau tidak -->
             <div
               class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2"
               v-for="member in campaign.campaign_members"
@@ -157,9 +162,6 @@
               v-for="index in campaign.slot_capacity - campaign.total_members"
               :key="index"
             >
-              <!-- kalau ada slot kosong nanti maka penambahan kelas hidden di span berikut, dan kelas di atasnya ada penambahan kelas background nya hijau, hovernya di hapus -->
-              <!-- bisa diimplementasiin styling class seleksi kondisi -->
-              <!-- <span class="bg-green-400 h-2 w-2 m-2 rounded-full"></span> -->
               <div class="px-2 font-bold">Slot Kosong</div>
             </div>
           </div>
@@ -244,13 +246,13 @@ export default {
   props: ['campaign'],
   data() {
     return {
-      detail: false,
+      hiddenDetail: true,
       loading: false,
     }
   },
   methods: {
     showDetail() {
-      this.detail = !this.detail
+      this.hiddenDetail = !this.hiddenDetail
     },
     rsvpCheckout(idCampaign) {
       if (this.isLogin) {
@@ -287,7 +289,7 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
 </style>
