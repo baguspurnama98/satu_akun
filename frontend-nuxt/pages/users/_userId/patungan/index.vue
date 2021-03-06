@@ -96,26 +96,26 @@
                   >
                 </span>
               </td>
-              <td class="border-t-2 border-gray-200 px-4 py-3 text-xs">
+              <td class="border-t-2 border-gray-200 px-4 text-sm">
                 <span
-                  class="relative h-full px-3 py-1 font-semibold text-green-900 leading-tight text-center inline-block"
+                  class="relative h-full px-3 font-semibold text-green-900 leading-tight text-center inline-block"
                 >
                   <span
                     aria-hidden
-                    class="absolute inset-0 text-red-700 font-semibold"
+                    class="text-red-700 font-semibold"
                     v-if="patungan.payment === 0"
                   >
                     Belum Bayar</span
                   >
                   <span
                     aria-hidden
-                    class="absolute inset-0 text-gray-700 font-semibold"
+                    class="text-gray-700 font-semibold"
                     v-if="patungan.payment === 1"
                     >Pending</span
                   >
                   <span
                     aria-hidden
-                    class="absolute inset-0 text-green-500 font-semibold"
+                    class="text-green-500 font-semibold"
                     v-if="patungan.payment === 2"
                     >Terbayar</span
                   >
