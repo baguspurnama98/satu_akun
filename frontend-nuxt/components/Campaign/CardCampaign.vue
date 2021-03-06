@@ -1,21 +1,20 @@
 <template>
   <div
-    class="flex flex-col justify-between rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out mb-2"
+    class="flex flex-col justify-between rounded-lg shadow-md bg-white hover:shadow-xl transition duration-150 ease-in-out my-1 xl:mx-1"
   >
     <NuxtLink exact to="/campaign/1">
       <div class="col-span-4 relative">
         <img
           src="https://picsum.photos/640/400/?random"
           alt="Placeholder"
-          class="rounded-t-lg object-cover h-48 xs:h-24 w-full"
+          class="rounded-t-lg object-cover h-48 xs:h-32 w-full"
         />
 
         <div
           class="bg-indigo-500 absolute bottom-0 right-0 p-3 rounded-tl-md xs:py-1"
         >
           <p class="font-bold text-white text-md sm:text-sm xs:text-xs">
-            {{ formatRupiah(price, 'Rp. ')
-            }}<span class="font-normal">/orang</span>
+            {{ price | formatRupiah }}<span class="font-normal">/orang</span>
           </p>
         </div>
       </div>
@@ -106,25 +105,7 @@ export default {
       price: '53000',
     }
   },
-  methods: {
-    formatRupiah(angka, prefix) {
-      var number_string = String(angka)
-          .replace(/[^,\d]/g, '')
-          .toString(),
-        split = number_string.split(','),
-        sisa = split[0].length % 3,
-        rupiah = split[0].substr(0, sisa),
-        ribuan = split[0].substr(sisa).match(/\d{3}/gi)
-
-      if (ribuan) {
-        let separator = sisa ? '.' : ''
-        rupiah += separator + ribuan.join('.')
-      }
-
-      rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah
-      return prefix === undefined ? rupiah : rupiah ? 'Rp. ' + rupiah : ''
-    },
-  },
+  methods: {},
 }
 </script>
 <style>

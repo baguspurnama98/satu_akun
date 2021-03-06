@@ -9,7 +9,7 @@
         <input
           type="search"
           name="serch"
-          placeholder="Cari apa?"
+          placeholder="Cari apa? contoh: Netflix, Udemy"
           class="bg-gray-100 w-full h-10 px-5 py-6 pr-10 rounded-full text-md focus:outline-none shadow-md"
         />
         <button type="submit" class="absolute right-0 top-0 mt-4 mr-4">
@@ -62,7 +62,9 @@
             <p
               class="block mt-6 text-base text-gray-600 xl:text-lg sm:text-center lg:text-left"
             >
-              Bergabung untuk berlangganan platform premium secara patungan.
+              Platform yang memfasilitasi pencarian teman dalam berlanggaan
+              bersama di penyedia layanan hiburan hingga edukasi/pembelajaran
+              dengan proses yang mudah, aman, legal* dan murah.
             </p>
             <div class="relative flex mt-10 mx-auto lg:ml-0">
               <a

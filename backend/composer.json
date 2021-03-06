@@ -6,8 +6,13 @@
     "type": "project",
     "require": {
         "php": "^7.3|^8.0",
+        "flipbox/lumen-generator": "^8.2",
+        "fruitcake/laravel-cors": "^2.0",
         "illuminate/mail": "^8.27",
-        "laravel/lumen-framework": "^8.0"
+        "irazasyed/larasupport": "^1.7",
+        "jenssegers/optimus": "^1.1",
+        "laravel/lumen-framework": "^8.0",
+        "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9.1",
@@ -19,7 +24,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Helpers/helpers.php"
+        ]
     },
     "autoload-dev": {
         "classmap": [

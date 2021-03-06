@@ -7,7 +7,7 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'Berpatungan',
+    title: 'Patungin.com',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -16,11 +16,25 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
+  // untuk generate file robots.txt, disable dulu
+
+  //   robots: {
+  //     UserAgent: '*',
+  //     Disallow: '/signin',
+  //   },
+
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: ['~/assets/css/main.css'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: ['~/plugins/close-event.client.js'],
+  // Vuex persisted hanya berlaku di ssr: false (client-side)
+  plugins: [
+    '~/plugins/close-event.client.js',
+    '~/plugins/filters.js',
+    '~/plugins/datatable.js',
+
+    { src: '~/plugins/vuex-persist', ssr: false },
+  ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -29,6 +43,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/moment',
+    '@nuxtjs/pwa',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -39,10 +55,14 @@ export default {
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+    // untuk generate file env
+    '@nuxtjs/dotenv',
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    baseURL: process.env.API_DEV_URL,
+  },
 
   // Content module configuration (https://go.nuxtjs.dev/config-content)
   content: {},
@@ -50,9 +70,31 @@ export default {
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
 
+  pwa: {
+    manifest: {
+      name: 'Kita Patungan Indonesia',
+      short_name: 'Kita Patungan',
+      lang: 'id',
+      display: 'standalone',
+    },
+    meta: {
+      nativeUI: true,
+    },
+    workbox: {
+      autoRegister: true,
+      clientsClaim: true,
+      skipWaiting: true,
+      //    dev: true // or use a global variable to track the current NODE_ENV, etc to determine dev mode
+    },
+  },
+
+  router: {
+    middleware: 'auth',
+  },
+
   loadingIndicator: {
     name: 'chasing-dots',
     color: '#667EEA',
-    background: 'white'
-  }
+    background: 'white',
+  },
 }

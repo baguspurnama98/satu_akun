@@ -4,10 +4,10 @@
     <div class="bg-indigo-100">
       <div class="container px-5 py-8 flex flex-wrap mx-auto items-center">
         <div
-          class="w-1/2 lg:w-1/4 xs:w-full flex-shrink-0 md:mx-0 mx-auto text-center md:text-left"
+          class="w-1/2 lg:w-1/4 md:w-full flex-shrink-0 lg:mx-0 mx-auto text-center lg:text-left"
         >
           <a
-            class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
+            class="flex title-font font-medium items-center lg:justify-start justify-center text-gray-900"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -23,16 +23,17 @@
                 d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
               ></path>
             </svg>
-            <span class="ml-3 text-xl">satu_akun</span>
+            <span class="ml-3 text-xl tracking-wide logo">Patungin.com</span>
           </a>
           <p class="mt-2 text-sm text-gray-600">
             Kami, sekelompok anak muda berlatar belakang IT, membuat platform
             beserta fasiltas-fasilitasnya untuk patungan membeli akun berbayar.
+            (Wording)
           </p>
         </div>
 
         <div
-          class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center"
+          class="flex-grow flex flex-wrap lg:pl-20 -mb-10 lg:mt-0 mt-10 md:text-left text-center"
         >
           <div class="w-1/2 px-4">
             <h2
@@ -42,12 +43,14 @@
             </h2>
             <nav class="list-none mb-10">
               <li>
-                <a class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
+                <a
+                  class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
                   >cs@satuakun.id</a
                 >
               </li>
               <li>
-                <a class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
+                <a
+                  class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
                   >085155144278</a
                 >
               </li>
@@ -61,17 +64,22 @@
             </h2>
             <nav class="list-none mb-10">
               <li>
-                <a class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
+                <a
+                  class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
                   >Kebijakan Privasi</a
                 >
               </li>
               <li>
-                <a class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
+                <a
+                  class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
                   >FAQ</a
                 >
               </li>
               <li>
-                <NuxtLink exact to="/pricing" class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
+                <NuxtLink
+                  exact
+                  to="/pricing"
+                  class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
                   >Skema Harga
                 </NuxtLink>
               </li>
