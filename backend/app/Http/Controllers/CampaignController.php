@@ -9,7 +9,6 @@ use App\Models\CampaignCategories;
 use App\Models\CampaignMember;
 use App\Models\Transaction;
 use App\Models\User;
-use Carbon\Carbon;
 use DateTime;
 
 class CampaignController extends Controller
@@ -152,75 +151,42 @@ class CampaignController extends Controller
      */
     private function generateNewTransaction($campaign, $user, $bank = 'OVO')
     {
-        $transaction = new Transaction();
-        $price_after_fee = $this->getCalculatedPrice($campaign->slot_price);
+        $price_after_fee = getCalculatedPrice($campaign->slot_price);
         $random_code = mt_rand(10,999); // gunakan round aja kalau sistem ga support
         $final_price = $price_after_fee + $random_code;
 
         $date = new DateTime();
-
-        // bank ini di kita nya
-        $transaction->fill([
-            'campaign_id' => $campaign->id, 
-            'user_id' => $user->id,
-            'bank' => $bank,
-            'no_transaction' => $date->getTimestamp(),
-            'type' => 1,
-            'nominal' => $price_after_fee,
-            'unique_code' => $random_code,
-            'total_nominal' => $final_price,
-        ])->save();
         
         try {
+            $transaction = new Transaction();
+            // bank ini di kita nya
+            $transaction->fill([
+                'campaign_id' => $campaign->id, 
+                'user_id' => $user->id,
+                'bank' => $bank,
+                'no_transaction' => $date->getTimestamp(),
+                'type' => 1,
+                'nominal' => $price_after_fee,
+                'unique_code' => $random_code,
+                'total_nominal' => $final_price,
+            ])->save();
             $url = "wa.me/628976634788?text=" . $user->id . '/' . $transaction->id . '/no_transaksi=' . $transaction->no_transaction;
             $data = [
                 'name' => $user->name,
                 'desc' => $campaign->title,
                 'no_transaction' => $transaction->no_transaction,
-                'total' => $this->formatRupiah($final_price),
-                'created_at' => $this->convertDateTime($transaction->created_at),
+                'total' => formatRupiah($final_price),
+                'created_at' => convertDateTime($transaction->created_at),
                 'url' => $url,
             ];
             $type = 'transaction';
             $emailJob = (new MailJob($user, $data, $type));
             // masuk ke queue biar gak bloking
             dispatch($emailJob);
-        } catch (\Exception $th) {
-            
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e], 409);
         }
         
-    }
-
-
-    private function getCalculatedPrice($price): float {
-        $percentageFee = 0.2; // 20%
-        $topFee = 4800;
-        $bottomFee = 2000;
-        
-        switch ($price) {
-            case $price >= 80000 && $price < 500000:
-                $percentageFee = 0.06;
-                $topFee = 6500;
-                $bottomFee = 4800;
-                break;
-            case $price >= 500000:
-                $percentageFee = 0.013;
-                $topFee = 9000;
-                $bottomFee = 6500;
-                break;
-            default:
-                # code...
-                break;
-        }
-
-        if ($percentageFee * $price < $bottomFee) {
-            return $price + $bottomFee;
-        }
-        
-        if ($percentageFee * $price > $bottomFee) {
-            return $price + $topFee;
-        }
-        return $price + ($percentageFee * $price);
     }
 
     // ---------------------------------- Categories

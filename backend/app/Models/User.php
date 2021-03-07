@@ -26,6 +26,8 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
         'name', 'email', 'whatsapp', 'otp', 'status', 'role', 'updated_by', 'created_by',
     ];
 
+    // status 0 (belum validasi), 1 (aktif), 2 (banned), 3 (delete)
+
     /**
      * The attributes excluded from the model's JSON form.
      *

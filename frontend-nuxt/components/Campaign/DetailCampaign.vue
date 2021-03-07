@@ -236,6 +236,7 @@
       <button
         class="w-1/3 xs:w-full mb-4 mt-7 py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
         v-bind:class="[!isLogin ? 'opacity-50 ' : '']"
+        @click.prevent="rsvpCheckout(campaign.id)"
       >
         <span class="inline-flex items-center p-0 m-0">
           <svg
