@@ -19,8 +19,8 @@ export default {
       },
     }
   },
-  mounted() {
-    // console.log(this.$store.state.auth.token)
+  beforeMount() {
+    console.log(this.$store.state.auth.token)
     this.$axios
       .$get(
         process.env.API_DEV_URL + `campaign/${this.$route.params.idCampaign}`

@@ -1,22 +1,51 @@
 <template>
   <div>
     <div
+      class="min-w-screen min-h-screen flex -mt-20 justify-between items-center"
+      v-if="campaign.title === undefined"
+    >
+      <svg
+        class="animate-spin mx-auto place-items-center h-20 w-20 text-indigo-400 self-center"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          class="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+        ></circle>
+        <path
+          class="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        ></path>
+      </svg>
+    </div>
+
+    <div
       class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+      v-else
     >
       <div
         class="z-0 relative grid grid-cols-1 col-span-2 w-full sm:grid-cols-2 sm:px-5 sm:py-5 sm:gap-x-8 md:py-5"
       >
         <div
-          class="z-10 col-start-2 row-start-1 px-4 sm:pt-5 pt-40 bg-gradient-to-t from-black sm:bg-none"
+          class="z-10 col-start-2 xs:col-start-1 row-start-1 px-4 sm:pt-5 pt-40 bg-gradient-to-t from-black sm:bg-none"
         >
           <h2
-            class="text-xl font-semibold text-white sm:text-2xl leading-tight sm:text-black md:text-3xl my-5"
+            class="text-xl font-semibold text-white sm:text-2xl leading-tight sm:text-black md:text-3xl my-5 xs:max-w-xs"
           >
             {{ campaign.title }}
           </h2>
         </div>
 
-        <div class="col-start-2 row-start-3 space-y-3 px-4 xs:py-4">
+        <div
+          class="col-start-2 xs:col-start-1 row-start-3 space-y-3 px-4 xs:py-4"
+        >
           <div
             class="flex items-center text-black text-md xs:text-sm font-normal"
           >
@@ -137,17 +166,17 @@
             class="sm:grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 sm:gap-3 my-3"
           >
             <div
-              class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2"
+              class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2 items-center"
               v-for="member in campaign.campaign_members"
               :key="member.id"
             >
               <span
-                v-if="member.is_pay === 1"
-                class="bg-green-400 h-2 w-2 m-2 rounded-full"
+                v-if="member.is_pay === 0"
+                class="bg-gray-500 h-3 w-3 m-2 rounded-full"
               ></span>
               <span
                 v-else
-                class="bg-yellow-400 h-2 w-2 m-2 rounded-full"
+                class="bg-yellow-400 h-3 w-3 m-2 rounded-full"
               ></span>
 
               <div class="font-medium px-2 truncate">
@@ -272,7 +301,7 @@ export default {
             console.dir(errors)
           })
       } else {
-        this.$router.push('/login')
+        this.$router.push('/account/login')
       }
     },
   },
