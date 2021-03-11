@@ -334,7 +334,7 @@
       />
       <span class="ml-3 xs:ml-2 text-gray-700 xs:text-sm"
         >Kamu menyetujui
-        <a href="" class="text-red-500">Syarat dan Ketentuan</a> yang berlaku
+        <NuxtLink to="/about" class="text-red-500">Syarat dan Ketentuan</NuxtLink> yang berlaku
         pada layanan ini</span
       >
     </label>

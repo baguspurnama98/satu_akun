@@ -64,9 +64,10 @@
             </h2>
             <nav class="list-none mb-10">
               <li>
-                <a
+                <NuxtLink
                   class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
-                  >Kebijakan Privasi</a
+                  to="/about"
+                  >Kebijakan Privasi</NuxtLink
                 >
               </li>
               <li>
