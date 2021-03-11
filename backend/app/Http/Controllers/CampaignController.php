@@ -135,6 +135,7 @@ class CampaignController extends Controller
             $member_of_campaign->fill([
                 'user_id' => $id_user,
                 'campaign_id' => $id_campaign,
+                'is_host'=> $is_host
             ]);
             $member_of_campaign->save();
             
