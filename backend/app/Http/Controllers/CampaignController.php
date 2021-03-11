@@ -49,7 +49,7 @@ class CampaignController extends Controller
      * 'expired_date',
      * 'duration_date',
      * 'durasi',
-     * 'status',
+     * 'status' (nullable) -> default 0,
      * 'slot_capacity',
      * 'slot_price',
      * 'media_url', (nullable)
@@ -61,6 +61,16 @@ class CampaignController extends Controller
 
     public function createCampaign(Request $request, $id_user = null) {
         $this->middleware('auth');
+        // validate incoming request 
+        $this->validate($request, [
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'slot_capacity' => 'required',
+            'slot_price' => 'required',
+            'expired_date' => 'required',
+            'duration_date' => 'required',
+        ]);
+
         try {
             $campaign = new Campaign();
             $campaign->fill($request->all());
