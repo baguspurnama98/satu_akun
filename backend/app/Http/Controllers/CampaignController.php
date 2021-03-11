@@ -38,7 +38,9 @@ class CampaignController extends Controller
         return response()->json(['campaigns' => $campaign], 200);
     }
 
-
+    public function campaignByUser($id_user) {
+        
+    }
 
     /**
      * data ini akan berada di fill input
@@ -49,7 +51,7 @@ class CampaignController extends Controller
      * 'expired_date',
      * 'duration_date',
      * 'durasi',
-     * 'status',
+     * 'status' (nullable) -> default 0,
      * 'slot_capacity',
      * 'slot_price',
      * 'media_url', (nullable)
@@ -61,6 +63,16 @@ class CampaignController extends Controller
 
     public function createCampaign(Request $request, $id_user = null) {
         $this->middleware('auth');
+        // validate incoming request 
+        $this->validate($request, [
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'slot_capacity' => 'required',
+            'slot_price' => 'required',
+            'expired_date' => 'required',
+            'duration_date' => 'required',
+        ]);
+
         try {
             $campaign = new Campaign();
             $campaign->fill($request->all());
@@ -135,6 +147,7 @@ class CampaignController extends Controller
             $member_of_campaign->fill([
                 'user_id' => $id_user,
                 'campaign_id' => $id_campaign,
+                'is_host'=> $is_host
             ]);
             $member_of_campaign->save();
             
@@ -203,6 +216,23 @@ class CampaignController extends Controller
         }
         
     }
+
+    // ---------------------------------- Campaign Member
+
+    public function getMemberOnCampaign($id_campaign, $id_user = null) {
+        $this->middleware('auth');
+        $condition = ['campaign_id' => $id_campaign];
+        if ($id_user !== null) {
+            $condition = array_merge($condition, ['user_id' => $id_user]);
+        } 
+        try {
+            $campaign_members = CampaignMember::where($condition)->get();
+            return response()->json(['campaign_members' => $campaign_members, 'message' => 'SUCCESS'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e], 409);
+        }
+    }
+
 
     // ---------------------------------- Categories
 

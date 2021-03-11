@@ -34,7 +34,9 @@
 
         <div class="col-span-3 row-span-1 truncate">
           <a class="text-sm" href="#">
-            <span class="font-medium text-indigo-500">Bagus Purnama Putra</span>
+            <span class="font-medium text-indigo-500">{{
+              campaign.host_name
+            }}</span>
           </a>
         </div>
 

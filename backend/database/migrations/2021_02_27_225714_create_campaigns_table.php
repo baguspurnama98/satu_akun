@@ -18,7 +18,7 @@ class CreateCampaignsTable extends Migration
             $table->string('title');
             $table->text('description');
             
-            $table->unsignedBigInteger('email_id')->index();
+            $table->unsignedBigInteger('email_id')->index()->nullable();
             $table->foreign('email_id')->references('id')->on('emails');
             $table->unsignedBigInteger('categories_id')->index();
             $table->foreign('categories_id')->references('id')->on('campaign_categories');

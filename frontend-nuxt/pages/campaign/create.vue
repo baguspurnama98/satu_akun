@@ -129,7 +129,8 @@
             >Wajib</span
           >
           <p class="text-xs md:pr-20">
-            Masukan total slot yang Anda buka untuk campaign
+            Masukan total slot yang Anda buka untuk campaign (Tidak termasuk
+            Anda)
           </p>
         </div>
 
@@ -395,7 +396,6 @@ export default {
         value: '',
       },
       campaign: {
-        email_id: '',
         categories_id: '',
         title: '',
         description: '',
@@ -421,7 +421,6 @@ export default {
     handleSave() {
       this.loading = true
       this.campaign.status = 1
-      this.campaign.email_id = 1
       this.campaign.expired_date = moment(this.campaign.expired_date).format(
         'YYYY-MM-DD HH:mm:ss'
       )
@@ -430,7 +429,11 @@ export default {
       )
       console.log(this.campaign)
       this.$axios
-        .$post(process.env.API_DEV_URL + `campaign/store`, this.campaign)
+        .$post(
+          process.env.API_DEV_URL +
+            `campaign/store/${this.$store.state.user.id}`,
+          this.campaign
+        )
         .then((resp) => {
           if (resp.message === 'CREATED') {
             this.$router.push(
@@ -477,9 +480,7 @@ export default {
       var date = new Date()
       this.campaign.expired_date = new Date(
         date.setDate(date.getDate() + parseInt(this.expired.value))
-      )
-        .toISOString()
-        .split('T')[0]
+      ).toISOString()
     },
 
     addDate(val, unit) {
@@ -490,9 +491,9 @@ export default {
         case 'months':
           return new Date(date.setMonth(date.getMonth() + val)).toISOString()
         case 'years':
-          return new Date(date.setFullYear(date.getFullYear() + val))
-            .toISOString()
-            .split('T')[0]
+          return new Date(
+            date.setFullYear(date.getFullYear() + val)
+          ).toISOString()
       }
     },
   },
