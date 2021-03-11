@@ -13,6 +13,8 @@ export default {
   data() {
     return {
       campaign: {
+        id_host: '',
+        list_idMembers: [],
         total_members: 0,
         slot_capacity: 0,
         campaign_members: [],
@@ -26,14 +28,18 @@ export default {
         process.env.API_DEV_URL + `campaign/${this.$route.params.idCampaign}`
       )
       .then((resp) => {
+        let list_idMembers = []
         console.log(resp)
         for (let i = 0; i < resp.campaigns.campaign_members.length; i++) {
           if (resp.campaigns.campaign_members[i].is_host === 1) {
             resp.campaigns.host_name =
               resp.campaigns.campaign_members[i].users.name
             resp.campaigns.campaign_members.splice(i, 1)
+            resp.campaigns.id_host = resp.campaigns.campaign_members[i].id
           }
+          list_idMembers.push(resp.campaigns.campaign_members[i].users.id)
         }
+        resp.campaigns.list_idMembers = list_idMembers
         this.campaign = resp.campaigns
         // console.log(resp)
       })

@@ -68,7 +68,7 @@
               <div class="col-end-7 col-span-2">
                 <span class="text-sm text-gray-700">
                   {{
-                    campaign.total_members + '/' + campaign.slot_capacity
+                    campaign.total_members - 1 + '/' + campaign.slot_capacity
                   }}</span
                 >
               </div>
@@ -81,7 +81,12 @@
             >
               <span
                 class="bg-indigo-500 h-2 absolute rounded-full"
-                style="width: 66%"
+                :style="
+                  'width:' +
+                  ((campaign.total_members - 1) / campaign.slot_capacity) *
+                    100 +
+                  '%'
+                "
               ></span>
             </div>
           </div>
