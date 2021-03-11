@@ -188,7 +188,8 @@
 
             <div
               class="flex justify-start cursor-pointer text-gray-700 bg-green-200 rounded-md px-2 py-2 xs:mb-2"
-              v-for="index in campaign.slot_capacity - campaign.total_members"
+              v-for="index in campaign.slot_capacity -
+              (campaign.total_members - 1)"
               :key="index"
             >
               <div class="px-2 font-bold">Slot Kosong</div>
@@ -198,8 +199,9 @@
         <div class="text-center my-5 md:my-10 xs:hidden">
           <button
             class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
-            v-bind:class="[!isLogin ? 'opacity-50 ' : '']"
+            v-bind:class="[!isLogin || isDisable ? 'opacity-50 ' : '']"
             @click.prevent="rsvpCheckout(campaign.id)"
+            :disabled="isDisable"
           >
             <span class="inline-flex items-center p-0 m-0">
               <svg
@@ -235,7 +237,8 @@
     >
       <button
         class="w-1/3 xs:w-full mb-4 mt-7 py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
-        v-bind:class="[!isLogin ? 'opacity-50 ' : '']"
+        v-bind:class="[!isLogin || isDisable ? 'opacity-50 ' : '']"
+        :disabled="isDisable"
       >
         <span class="inline-flex items-center p-0 m-0">
           <svg
@@ -308,6 +311,16 @@ export default {
   computed: {
     isLogin() {
       return this.$store.state.auth.token
+    },
+    isDisable() {
+      console.log(
+        this.campaign.list_idMembers.includes(this.$store.state.user.id)
+      )
+      return (
+        this.campaign.id_host === this.$store.state.user.id ||
+        this.$store.state.user.role === 'a' ||
+        this.campaign.list_idMembers.includes(this.$store.state.user.id)
+      )
     },
   },
 }

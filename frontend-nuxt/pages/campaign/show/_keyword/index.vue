@@ -65,11 +65,13 @@
         </div>
       </div>
     </header>
-    <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-6 gap-4 mt-10">
+    <div
+      class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-6 gap-4 mt-10"
+    >
       <CardCampaign
-        v-for="item in items"
-        :key="item.title"
-        :title="item.title"
+        v-for="(campaign, id) in campaigns"
+        :key="id"
+        :campaign="campaign"
       />
     </div>
   </div>
@@ -82,19 +84,24 @@ export default {
   components: { CardCampaign },
   data() {
     return {
-      items: [
-        { title: 'Sharing Account Netflix 1 Bulan' },
-        { title: 'Belajar Coding Javascript' },
-        { title: 'Disney Hotstar' },
-        {
-          title:
-            'Patungan Beli Akun Dicoding selama 1 tahun bebas kelas apa saja yang ada, yuk murah meriah',
-        },
-        { title: 'Sharing Account Netflix 1 Bulan' },
-        { title: 'Belajar Coding Javascript' },
-        { title: 'Disney Hotstar' },
-      ],
+      campaigns: [],
     }
+  },
+  computed: {
+    account_login() {
+      return this.$store.state.auth.token
+    },
+  },
+  beforeMount() {
+    this.$axios
+      .$get(process.env.API_DEV_URL + `campaign/`)
+      .then((resp) => {
+        this.campaigns = resp.campaigns
+        console.log(this.campaigns)
+      })
+      .catch((errors) => {
+        console.dir(errors)
+      })
   },
 }
 </script>
