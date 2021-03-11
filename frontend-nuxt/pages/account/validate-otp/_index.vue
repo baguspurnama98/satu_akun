@@ -76,7 +76,7 @@
 export default {
   data() {
     return {
-      toast: true,
+      toast: false,
       pinlength: 6,
       errorMessage: '',
     }
