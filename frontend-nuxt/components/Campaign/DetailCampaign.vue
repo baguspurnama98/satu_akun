@@ -276,7 +276,7 @@ import IconSocial from '../Profil/IconSocial'
 export default {
   components: { IconSocial },
   name: 'DetailCampaign',
-  props: ['campaign'],
+  props: ['campaign', 'statusDisable'],
   data() {
     return {
       hiddenDetail: true,
@@ -313,12 +313,13 @@ export default {
     isLogin() {
       return this.$store.state.auth.token
     },
+
     isDisable() {
       if (this.$store.state.auth.token) {
         return (
           this.campaign.id_host === this.$store.state.user.id ||
           this.$store.state.user.role === 'a' ||
-          this.campaign.list_idMembers.includes(this.$store.state.user.id)
+          this.statusDisable
         )
       }
     },
