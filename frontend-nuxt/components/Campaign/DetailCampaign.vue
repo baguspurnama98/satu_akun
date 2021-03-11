@@ -314,14 +314,7 @@ export default {
       return this.$store.state.auth.token
     },
     isDisable() {
-      console.log(
-        this.campaign.list_idMembers.includes(this.$store.state.user.id)
-      )
-      return (
-        this.campaign.id_host === this.$store.state.user.id ||
-        this.$store.state.user.role === 'a' ||
-        this.campaign.list_idMembers.includes(this.$store.state.user.id)
-      )
+      
     },
   },
 }

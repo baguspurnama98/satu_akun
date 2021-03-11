@@ -24,6 +24,15 @@ class CampaignController extends Controller
         return response()->json(['campaigns' => Campaign::with(['categories'])->withCount('campaign_members as total_members')->get()], 200);
     }
 
+    /**
+     * disini nanti bakal ada pengaturan pengaturan
+     * apakah perlu di filter yg bukan kedaluwarsa (dashboard / non dashboard)
+     *      - ketika dashboard = false, maka filter nya yang aktif dan tidak kedaluwarsa
+     * apakah di filter berdasarkan kategori
+     *      - filter berdasarkan kategori
+     * apakah perlu di filter berdasarkan status
+     *      - filter berdasarkan status, 0 = aktif, 1 = berlangsung, 2 = expired, 3 = refund, 4 = selesai refund, 5 = selesai
+     */
     public function campaign($id_campaign, $slug = null) {
         $campaign = Campaign::with(['campaign_members.users', 'categories'])->withCount('campaign_members as total_members')->findOrFail($id_campaign);
         return response()->json(['campaigns' => $campaign], 200);
@@ -50,13 +59,17 @@ class CampaignController extends Controller
      */
         
 
-    public function createCampaign(Request $request) {
+    public function createCampaign(Request $request, $id_user = null) {
         $this->middleware('auth');
         try {
             $campaign = new Campaign();
             $campaign->fill($request->all());
             $campaign->save();
             // return successful response
+            if ($id_user !== null) {
+                $this->assignMemberToCampaign($campaign->id, $id_user, true);
+            }
+
             return response()->json(['campaign' => $campaign, 'message' => 'CREATED'], 201);
         } catch (\Exception $e) {
             // return error message
@@ -102,7 +115,7 @@ class CampaignController extends Controller
      * 'created_by', (nullable)
      */
 
-    public function assignMemberToCampaign($id_campaign, $id_user)
+    public function assignMemberToCampaign($id_campaign, $id_user, $is_host = false)
     {
         $this->middleware('auth');
         // aktifkan ini jika masa production
@@ -124,6 +137,8 @@ class CampaignController extends Controller
                 'campaign_id' => $id_campaign,
             ]);
             $member_of_campaign->save();
+            
+            if ($is_host === true) return;
             $this->generateNewTransaction($campaign, $user);
 
             return response()->json(['campaign' => $member_of_campaign, 'message' => 'CREATED'], 201);
