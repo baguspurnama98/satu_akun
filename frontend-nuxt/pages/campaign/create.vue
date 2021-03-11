@@ -44,6 +44,7 @@
               type="text"
               class="appearance-none border rounded w-full py-3 px-3 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500 xs:text-sm"
               placeholder="Contoh: Akun Sharing Netflix 1 Bulan"
+              v-model="campaign.title"
             />
           </div>
         </div>
@@ -52,7 +53,7 @@
       <div class="grid grid-cols-3 xs:grid-cols-1 gap-4 xs:gap-2 mt-4">
         <div class="col-span-1">
           <h6 class="font-semibold py-3 text-lg inline xs:text-sm">
-            Durasi Campaign
+            Kategori Campaign
           </h6>
           <span
             class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
@@ -67,11 +68,12 @@
               <select
                 class="w-full border capitalize focus:outline-none focus:ring focus:border-indigo-400 py-2 rounded xs:text-sm"
                 name="categories"
+                v-model="campaign.categories_id"
               >
                 <option
                   v-for="val in categories"
                   :key="val.id"
-                  :value="val.categories"
+                  :value="val.id"
                   class="capitalize"
                 >
                   {{ val.categories }}
@@ -102,6 +104,7 @@
               class="w-full h-96 appearance-none border rounded py-3 px-3 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500 xs:text-sm"
               placeholder=""
               rows="5"
+              v-model="campaign.description"
             />
           </div>
         </div>
@@ -138,6 +141,7 @@
               max="20"
               class="w-full border focus:outline-none focus:ring focus:border-indigo-400 p-2 rounded xs:text-sm"
               placeholder="Contoh: 2"
+              v-model="campaign.slot_capacity"
             />
           </div>
         </div>
@@ -172,6 +176,7 @@
               id="price"
               class="border focus:outline-none focus:ring focus:border-indigo-400 p-2 xs:text-sm block w-full pl-10 rounded"
               placeholder="0"
+              v-model="campaign.slot_price"
             />
           </div>
         </div>
@@ -203,13 +208,13 @@
         <div class="sm:col-span-2 xs:pl-4">
           <div class="grid grid-cols-3 gap-2">
             <label class="inline-flex items-center py-2 xs:py-0">
-              <!-- Harus ada pengecekan, jika bulan yg dipilih, maka max nya 12, jika hari maka maks nya 31 -->
               <input
                 type="number"
                 min="1"
-                max="12"
                 class="w-full border focus:outline-none focus:ring focus:border-indigo-400 p-2 rounded xs:text-sm"
                 placeholder="Contoh: 2"
+                v-model="duration.value"
+                v-on:blur="setDurationDate"
               />
             </label>
             <label class="inline-flex items-center py-2 xs:py-0">
@@ -217,6 +222,8 @@
                 class="w-full border focus:outline-none focus:ring focus:border-indigo-400 py-2 rounded xs:text-sm"
                 name="range_period"
                 id="range_period"
+                v-model="duration.unit"
+                v-on:change="setDurationDate"
               >
                 <option value="days">Hari</option>
                 <option value="months">Bulan</option>
@@ -248,6 +255,9 @@
                 type="radio"
                 name="expired"
                 class="form-radio h-4 w-4 xs:h-3 xs:w-3 text-gray-600"
+                v-model="expired.value"
+                value="1"
+                v-on:change="addDateExpired"
               /><span class="ml-2 text-gray-700 xs:text-sm">1 Hari</span>
             </label>
             <label class="inline-flex items-center py-2 xs:py-0">
@@ -255,6 +265,9 @@
                 name="expired"
                 type="radio"
                 class="form-radio h-4 w-4 text-gray-600 xs:h-3 xs:w-3"
+                v-model="expired.value"
+                v-on:change="addDateExpired"
+                value="3"
               /><span class="ml-2 text-gray-700 xs:text-sm">3 Hari</span>
             </label>
             <label class="inline-flex items-center py-2 xs:py-0">
@@ -262,6 +275,9 @@
                 name="expired"
                 type="radio"
                 class="form-radio h-4 w-4 text-gray-600 xs:h-3 xs:w-3"
+                v-model="expired.value"
+                v-on:change="addDateExpired"
+                value="7"
               /><span class="ml-2 text-gray-700 xs:text-sm">7 Hari</span>
             </label>
           </div>
@@ -328,45 +344,166 @@
         type="submit"
         v-bind:class="[isDisabled ? 'opacity-50' : '']"
         :disabled="isDisabled"
+        @click="handleSave"
       >
-        Daftar
+        <span class="inline-flex items-center p-0 m-0">
+          <svg
+            v-if="loading"
+            class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+
+          Daftar</span
+        >
       </button>
     </div>
   </div>
 </template>
 <script>
+import moment from 'moment'
+
 export default {
   name: 'Create_Campaign',
   // semua form akan disimpan dalam campaign atribute
   // categories disini gunanya untuk dropdown
   data() {
     return {
+      loading: false,
       terms: false,
       categories: '',
+      duration: {
+        value: '',
+        unit: 'days',
+      },
+      expired: {
+        value: '',
+      },
       campaign: {
+        email_id: '',
+        categories_id: '',
         title: '',
-        categories: '',
         description: '',
-        slot: '',
-        price: '',
-        duration: '',
-        expired: '',
-        img: '',
+        expired_date: '',
+        duration_date: '',
+        durasi: '',
+        status: '',
+        slot_capacity: '',
+        slot_price: '',
+        media_url: '',
+        password_email: '',
       },
     }
   },
+
   computed: {
     isDisabled: function () {
       return !this.terms
     },
   },
+
+  methods: {
+    handleSave() {
+      this.loading = true
+      this.campaign.status = 1
+      this.campaign.email_id = 1
+      this.campaign.expired_date = moment(this.campaign.expired_date).format(
+        'YYYY-MM-DD HH:mm:ss'
+      )
+      this.campaign.duration_date = moment(this.campaign.duration_date).format(
+        'YYYY-MM-DD HH:mm:ss'
+      )
+      console.log(this.campaign)
+      this.$axios
+        .$post(process.env.API_DEV_URL + `campaign/store`, this.campaign)
+        .then((resp) => {
+          if (resp.message === 'CREATED') {
+            this.$router.push(
+              `/campaign/${resp.campaign.id}/${resp.campaign.slug}`
+            )
+          }
+        })
+        .catch((errors) => {
+          console.dir(errors)
+        })
+    },
+
+    setDurationDate() {
+      if (this.duration.unit == 'days') {
+        if (this.duration.value > 31) {
+          this.duration.value = 31
+        }
+        this.campaign.duration_date = this.addDate(
+          parseInt(this.duration.value),
+          'days'
+        )
+        this.campaign.durasi = this.duration.value + ' Hari'
+      }
+      if (this.duration.unit == 'months') {
+        if (this.duration.value > 12) {
+          this.duration.value = 12
+        }
+        this.campaign.duration_date = this.addDate(
+          parseInt(this.duration.value),
+          'months'
+        )
+        this.campaign.durasi = this.duration.value + ' Bulan'
+      }
+      if (this.duration.unit == 'years') {
+        this.campaign.duration_date = this.addDate(
+          parseInt(this.duration.value),
+          'years'
+        )
+        this.campaign.durasi = this.duration.value + ' Tahun'
+      }
+    },
+
+    addDateExpired() {
+      var date = new Date()
+      this.campaign.expired_date = new Date(
+        date.setDate(date.getDate() + parseInt(this.expired.value))
+      )
+        .toISOString()
+        .split('T')[0]
+    },
+
+    addDate(val, unit) {
+      let date = new Date()
+      switch (unit) {
+        case 'days':
+          return new Date(date.setDate(date.getDate() + val)).toISOString()
+        case 'months':
+          return new Date(date.setMonth(date.getMonth() + val)).toISOString()
+        case 'years':
+          return new Date(date.setFullYear(date.getFullYear() + val))
+            .toISOString()
+            .split('T')[0]
+      }
+    },
+  },
+
   async mounted() {
     await this.$axios
       .$get(process.env.API_DEV_URL + 'campaign/categories')
       .then((resp) => {
         const { categories } = resp
         this.categories = categories
-        console.log(this.categories)
+        // console.log(this.categories)
       })
       .catch((errors) => {
         console.log(errors)

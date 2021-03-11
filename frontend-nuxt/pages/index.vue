@@ -1,13 +1,14 @@
 <template>
   <div>
-
     <!-- Kalau udah login, mending ini aja dijadikan dashboardnya untuk ngelihat dia langganan apa aja yg aktif tanpa harus klik detail di dashboard tabel -->
     <!-- Tapi agak aneh nih, kalau si panah ditekan sangat cepat, dia bisa auto scroll ke bawah, kenapa yaa? Udah aku coba click.prevent -->
-    <template v-if="account_login">
-        <carousel class="flex flex-col mx-4 w-auto xs:w-4/5 lg:mx-20 lg:items-center"></carousel>
-    </template>
+    <!-- <template v-if="account_login">
+      <carousel
+        class="flex flex-col mx-4 w-auto xs:w-4/5 lg:mx-20 lg:items-center"
+      ></carousel>
+    </template> -->
 
-    <template v-else>
+    <template>
       <!-- Content disini -->
       <Landing class="my-12" />
       <!-- component campaign -->
@@ -20,19 +21,28 @@
         >
           <div class="text-center mb-10">
             <h1 class="font-sans text-3xl font-bold text-black mb-4">
-              Patungin lebih murah
+              Patungin aja lebih murah
             </h1>
-            <p class="text-gray-700 tracking-widest font-sans leading-relaxed text-base">
+            <p
+              class="text-gray-700 tracking-widest font-sans leading-relaxed text-base"
+            >
               Yuk mulai patungan!
             </p>
           </div>
-          <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-6 gap-4">
-            <CardCampaign v-for="(item, id) in items" :key="id" :title="item.title" />
+          <div
+            class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-6 gap-4"
+          >
+            <CardCampaign
+              v-for="(campaign, id) in campaigns"
+              :key="id"
+              :campaign="campaign"
+            />
           </div>
         </div>
       </section>
+
       <!-- component hero keunggulan -->
-      <section class="text-gray-700 body-font my-12">
+      <section class="text-gray-700 body-font mb-12">
         <div class="container px-5 mx-auto flex flex-wrap">
           <div class="text-center mb-10">
             <h1
@@ -41,9 +51,9 @@
               <b>Patungin</b> aja
             </h1>
             <p class="text-base leading-relaxed">
-              Merdeka dalam akses apa saja melalui patungan. Kamu bisa patungan akun tanpa
-              ada batasan slot, patungan akun platform apa saja, hingga jaminan tanpa
-              penipuan
+              Merdeka dalam akses apa saja melalui patungan. Kamu bisa patungan
+              akun tanpa ada batasan slot, patungan akun platform apa saja,
+              hingga jaminan tanpa penipuan
             </p>
           </div>
           <div class="flex flex-wrap -m-4">
@@ -70,8 +80,8 @@
                     Mudah dan legal untuk patungan
                   </h2>
                   <p class="leading-relaxed text-sm">
-                    Kami carikan kamu teman patungan untuk membeli akun premium. "Kasih
-                    wording yang tepat"
+                    Kami carikan kamu teman patungan untuk membeli akun premium.
+                    "Kasih wording yang tepat"
                   </p>
                 </div>
               </div>
@@ -99,8 +109,9 @@
                     Pembayaran apa saja gak pakai ribet
                   </h2>
                   <p class="leading-relaxed text-sm">
-                    Tidak perlu pakai kartu kredit, cukup bayar pakai media pembayaran apa
-                    saja. Tidak perlu upload bukti pembayaran (Wording)
+                    Tidak perlu pakai kartu kredit, cukup bayar pakai media
+                    pembayaran apa saja. Tidak perlu upload bukti pembayaran
+                    (Wording)
                   </p>
                 </div>
               </div>
@@ -128,11 +139,13 @@
                     Data kamu aman
                   </h2>
                   <p class="leading-relaxed text-sm">
-                    Kami berusaha semaksimal mungkin jaga keamanan dan menghindari
-                    penipuan. Pastikan kamu baca mekanisme keamanan dan kebijakan privasi
-                    layanan Satu Akun
+                    Kami berusaha semaksimal mungkin jaga keamanan dan
+                    menghindari penipuan. Pastikan kamu baca mekanisme keamanan
+                    dan kebijakan privasi layanan Satu Akun
                   </p>
-                  <a class="mt-3 text-indigo-500 inline-flex items-center" href=""
+                  <a
+                    class="mt-3 text-indigo-500 inline-flex items-center"
+                    href=""
                     >Selengkapnya
                     <svg
                       fill="none"
@@ -172,11 +185,13 @@
                     Harga bersaing
                   </h2>
                   <p class="leading-relaxed text-sm">
-                    Kami coba berikan harga yang kompetitif dengan kualitas layanan
-                    mumpuni, <i>harga mahasiswa</i>. Coba lihat detail penawaran yang kami
-                    berikan di skema harga.
+                    Kami coba berikan harga yang kompetitif dengan kualitas
+                    layanan mumpuni, <i>harga mahasiswa</i>. Coba lihat detail
+                    penawaran yang kami berikan di skema harga.
                   </p>
-                  <a class="mt-3 text-indigo-500 inline-flex items-center" href="/pricing"
+                  <a
+                    class="mt-3 text-indigo-500 inline-flex items-center"
+                    href="/pricing"
                     >Selengkapnya
                     <svg
                       fill="none"
@@ -200,41 +215,33 @@
   </div>
 </template>
 <script>
-import Landing from "@/components/Hero/Landing";
-import CardCampaign from "@/components/Campaign/CardCampaign";
-import Carousel from "@/components/Carousel/Carousel"
+import Landing from '@/components/Hero/Landing'
+import CardCampaign from '@/components/Campaign/CardCampaign'
+import Carousel from '@/components/Carousel/Carousel'
 
 export default {
-  layout: "default",
+  layout: 'default',
   components: { Landing, CardCampaign, Carousel },
   data() {
     return {
-      items: [
-        { title: "Sharing Account Netflix 1 Bulan" },
-        { title: "Belajar Coding Javascript" },
-        { title: "Disney Hotstar" },
-        {
-          title:
-            "Patungan Beli Akun Dicoding selama 1 tahun bebas kelas apa saja yang ada, yuk murah meriah",
-        },
-        { title: "Sharing Account Netflix 1 Bulan" },
-        { title: "Belajar Coding Javascript" },
-        { title: "Disney Hotstar" },
-      ],
-    };
+      campaigns: [],
+    }
   },
   computed: {
     account_login() {
-      return this.$store.state.auth.token;
+      return this.$store.state.auth.token
     },
   },
-};
-</script>
-
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
+  mounted() {
+    this.$axios
+      .$get(process.env.API_DEV_URL + `campaign/`)
+      .then((resp) => {
+        this.campaigns = resp.campaigns
+        console.log(this.campaigns)
+      })
+      .catch((errors) => {
+        console.dir(errors)
+      })
+  },
 }
-*/
-</style>
+</script>

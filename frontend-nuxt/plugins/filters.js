@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import moment from 'moment'
+import 'moment/locale/id'
+moment.locale('id')
 
 Vue.filter('formatRupiah', (nominal) => {
   var number_string = String(nominal)
@@ -39,8 +41,8 @@ Vue.filter('formatDate', (date) => {
   return `${splitted[0]} ${monthNames[splitted[1] - 1]} ${splitted[2]}`
 })
 
-// filters: { // untuk dapetin "3 hours ago"
-//   moments(val) {
-//     return moment(val, 'DD/MM/YYYY').fromNow()
-//   },
-// },
+Vue.filter('remainingTime', (date) => {
+  const sisaTime = moment(date, 'YYYY-MM-DD HH:mm:ss').fromNow()
+  var newsisaTime = sisaTime.split(' ').slice(1).join(' ')
+  return newsisaTime
+})

@@ -39,6 +39,11 @@ class Campaign extends Model
         return Str::slug($this->attributes['title']);
     }
 
+    // public function getTotalMembersAttribute($value)
+    // {
+    //     return $value - 1;
+    // }
+
     /**
      * relasi yang digunakan misal:
      * campaign berelasi (punya id_campaign) pada tabel campaign member

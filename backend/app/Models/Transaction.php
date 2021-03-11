@@ -21,6 +21,7 @@ class Transaction extends Model
         'total_nominal',
         'no_rek_origin',
         'no_rek_destination',
+        'status',
         'updated_by',
         'created_by',
     ];
