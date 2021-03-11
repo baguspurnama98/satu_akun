@@ -17,7 +17,7 @@
         class="container px-4 my-12 mx-auto flex flex-wrap items-center justify-between"
       >
         <div
-          class="flex flex-col items-center justify-center bg-white min-h-screen min-w-screen"
+          class="flex flex-col items-center justify-center bg-white min-h-screen w-full"
         >
           <div class="text-center mb-10">
             <h1 class="font-sans text-3xl font-bold text-black mb-4">

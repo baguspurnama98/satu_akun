@@ -167,7 +167,7 @@
           >
             <div
               class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2 items-center"
-              v-for="member in campaign.campaign_members"
+              v-for="member in campaign.list_members"
               :key="member.id"
             >
               <span
@@ -314,7 +314,13 @@ export default {
       return this.$store.state.auth.token
     },
     isDisable() {
-      
+      if (this.$store.state.auth.token) {
+        return (
+          this.campaign.id_host === this.$store.state.user.id ||
+          this.$store.state.user.role === 'a' ||
+          this.campaign.list_idMembers.includes(this.$store.state.user.id)
+        )
+      }
     },
   },
 }
