@@ -52,6 +52,11 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
             $router->post('store', 'CampaignController@storeCategories');
         });
 
+        // Members
+        $router->group(['prefix' => 'members'], function () use ($router) {
+            $router->get('/{id_campaign}[/{id_user}]', 'CampaignController@getMemberOnCampaign');
+        });
+
         /**
          * kelompok kelompok campaign harus di defenisikan sebelum rootnya
          * Static route "/api/v1/campaign/categories" is shadowed by previously defined variable

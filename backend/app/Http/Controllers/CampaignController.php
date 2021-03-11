@@ -38,7 +38,9 @@ class CampaignController extends Controller
         return response()->json(['campaigns' => $campaign], 200);
     }
 
-
+    public function campaignByUser($id_user) {
+        
+    }
 
     /**
      * data ini akan berada di fill input
@@ -214,6 +216,23 @@ class CampaignController extends Controller
         }
         
     }
+
+    // ---------------------------------- Campaign Member
+
+    public function getMemberOnCampaign($id_campaign, $id_user = null) {
+        $this->middleware('auth');
+        $condition = ['campaign_id' => $id_campaign];
+        if ($id_user !== null) {
+            $condition = array_merge($condition, ['user_id' => $id_user]);
+        } 
+        try {
+            $campaign_members = CampaignMember::where($condition)->get();
+            return response()->json(['campaign_members' => $campaign_members, 'message' => 'SUCCESS'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e], 409);
+        }
+    }
+
 
     // ---------------------------------- Categories
 
