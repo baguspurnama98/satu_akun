@@ -43,7 +43,7 @@
 
       <!-- component hero keunggulan -->
       <section class="text-gray-700 body-font mb-12">
-        <div class="container px-5 mx-auto flex flex-wrap">
+        <div class="container px-5 mx-auto flex flex-wrap items-center justify-center">
           <div class="text-center mb-10">
             <h1
               class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4"
@@ -143,9 +143,9 @@
                     menghindari penipuan. Pastikan kamu baca mekanisme keamanan
                     dan kebijakan privasi layanan Satu Akun
                   </p>
-                  <a
+                  <NuxtLink
                     class="mt-3 text-indigo-500 inline-flex items-center"
-                    href=""
+                    to="/about"
                     >Selengkapnya
                     <svg
                       fill="none"
@@ -158,7 +158,7 @@
                     >
                       <path d="M5 12h14M12 5l7 7-7 7"></path>
                     </svg>
-                  </a>
+                  </NuxtLink>
                 </div>
               </div>
             </div>
@@ -189,9 +189,9 @@
                     layanan mumpuni, <i>harga mahasiswa</i>. Coba lihat detail
                     penawaran yang kami berikan di skema harga.
                   </p>
-                  <a
+                  <NuxtLink
                     class="mt-3 text-indigo-500 inline-flex items-center"
-                    href="/pricing"
+                    to="/pricing"
                     >Selengkapnya
                     <svg
                       fill="none"
@@ -204,7 +204,7 @@
                     >
                       <path d="M5 12h14M12 5l7 7-7 7"></path>
                     </svg>
-                  </a>
+                  </NuxtLink>
                 </div>
               </div>
             </div>

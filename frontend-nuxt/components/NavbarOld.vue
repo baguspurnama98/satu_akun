@@ -97,12 +97,12 @@
             </div>
           </li>
           <li class="nav-item relative text-right">
-            <button
+            <NuxtLink
               class="px-3 py-2 mx-2 my-1 rounded inline-flex items-center leading-snug text-white text-md hover:bg-indigo-700 hover:text-gray-100"
-              href="#pablo"
+              to="/about"
             >
               <span>Tentang Kami</span>
-            </button>
+            </NuxtLink>
           </li>
 
           <!-- Profile dropdown -->

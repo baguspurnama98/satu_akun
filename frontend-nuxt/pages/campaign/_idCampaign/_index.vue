@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Content disini -->
-    <DetailCampaign :campaign="campaign" />
+    <DetailCampaign :campaign="campaign" :statusDisable="statusDisable" />
   </div>
 </template>
 
@@ -12,9 +12,10 @@ export default {
   components: { DetailCampaign },
   data() {
     return {
+      statusDisable: true,
       campaign: {
         id_host: '',
-        list_idMembers: [],
+
         total_members: 0,
         slot_capacity: 0,
         campaign_members: [],
@@ -35,18 +36,18 @@ export default {
             if (resp.campaigns.campaign_members[i].is_host === 1) {
               resp.campaigns.host_name =
                 resp.campaigns.campaign_members[i].users.name
-              resp.campaigns.id_host = resp.campaigns.campaign_members[i].id
+              resp.campaigns.id_host =
+                resp.campaigns.campaign_members[i].user_id
               resp.campaigns.list_members = resp.campaigns.campaign_members.splice(
                 i,
                 1
               )
             }
-            list_idMembers.push(resp.campaigns.campaign_members[i].users.id)
           }
         } else {
           resp.campaigns.host_name =
             resp.campaigns.campaign_members[0].users.name
-          resp.campaigns.id_host = resp.campaigns.campaign_members[0].id
+          resp.campaigns.id_host = resp.campaigns.campaign_members[0].user_id
           resp.campaigns.list_members = []
         }
 
@@ -55,23 +56,26 @@ export default {
         console.log(this.campaign)
       })
       .catch((errors) => {
-        console.log(errors)
-        // if (errors.response.status === 404) {
-        //   console.log('oke')
-        //   return this.$nuxt.error({
-        //     statusCode: 404,
-        //     message: 'Post not found',
-        //   })
-        // }
+        // console.log(errors)
+        if (errors.response.status === 404) {
+          console.log('oke')
+          return this.$nuxt.error({
+            statusCode: 404,
+            message: 'Post not found',
+          })
+        }
+      })
+
+    this.$axios
+      .$get(
+        process.env.API_DEV_URL +
+          `campaign/members/${this.$route.params.idCampaign}/${this.$store.state.user.id}`
+      )
+      .then((resp) => {
+        if (resp.campaign_members.length == 0) {
+          this.statusDisable = false
+        }
       })
   },
 }
 </script>
-
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-</style>

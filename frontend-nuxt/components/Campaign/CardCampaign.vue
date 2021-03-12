@@ -79,7 +79,7 @@
 
           <div class="pb-2 pt-1 w-full">
             <div
-              class="bg-gray-300 h-4 p-1 w-full rounded-full items-center justify-center relative"
+              class="bg-green-200 h-4 p-1 w-full rounded-full items-center justify-center relative"
             >
               <span
                 class="bg-indigo-500 h-2 absolute rounded-full"
