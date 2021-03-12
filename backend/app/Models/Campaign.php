@@ -32,11 +32,18 @@ class Campaign extends Model
         // 'password_email',
     ];
 
-    protected $appends = ['slug'];
+    protected $appends = ['slug', 'host_name'];
 
     public function getSlugAttribute()
     {
         return Str::slug($this->attributes['title']);
+    }
+
+    // dynamically get hostname by default
+    public function getHostNameAttribute() 
+    {
+        $campaign_members = CampaignMember::with('users')->where(['campaign_id' => $this->id, 'is_host' => 1])->first();
+        return $campaign_members->users ?? null;
     }
 
     // public function getTotalMembersAttribute($value)

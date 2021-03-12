@@ -99,8 +99,9 @@
         >
           <div class="w-full grid">
             <div class="relative col-span-1 row-span-1 md:col-span-2">
+                <!-- src="https://picsum.photos/640/400/?random" -->
               <img
-                src="https://picsum.photos/640/400/?random"
+                :src="campaign.media_url"
                 alt="..."
                 class="absolute inset-0 w-full h-full object-cover bg-gray-100 rounded-lg z-0"
               />
