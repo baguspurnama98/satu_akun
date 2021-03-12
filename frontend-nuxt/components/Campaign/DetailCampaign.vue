@@ -99,7 +99,7 @@
         >
           <div class="w-full grid">
             <div class="relative col-span-1 row-span-1 md:col-span-2">
-                <!-- src="https://picsum.photos/640/400/?random" -->
+              <!-- src="https://picsum.photos/640/400/?random" -->
               <img
                 :src="campaign.media_url"
                 alt="..."
@@ -168,7 +168,7 @@
           >
             <div
               class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2 items-center"
-              v-for="member in campaign.list_members"
+              v-for="member in campaign.campaign_members"
               :key="member.id"
             >
               <span
