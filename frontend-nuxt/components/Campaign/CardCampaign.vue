@@ -4,8 +4,9 @@
   >
     <NuxtLink exact :to="`/campaign/${campaign.id}/${campaign.slug}`">
       <div class="col-span-4 relative">
+          <!-- src="https://picsum.photos/640/400/?random" -->
         <img
-          src="https://picsum.photos/640/400/?random"
+            :src="campaign.media_url"
           alt="Placeholder"
           class="rounded-t-lg object-cover h-48 xs:h-32 w-full"
         />
@@ -35,7 +36,7 @@
         <div class="col-span-3 row-span-1 truncate">
           <a class="text-sm" href="#">
             <span class="font-medium text-indigo-500">{{
-              campaign.host_name
+              host_name
             }}</span>
           </a>
         </div>
@@ -118,7 +119,15 @@ export default {
       price: '53000',
     }
   },
+  computed: {
+      host_name: function() {
+          return this.campaign.host_name !== null ? this.campaign.host_name.name : ''
+      }
+  },
   methods: {},
+  mounted() {
+      console.log(this.campaign.host_name)
+  },
 }
 </script>
 <style>

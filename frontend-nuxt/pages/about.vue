@@ -25,7 +25,7 @@
                 <li>Campaign Host adalah pihak yang menerbitkan dan membuat campaign patungan di situs Patungin.</li>
                 <li>Campaign User adalah pihak yang mengikuti dan menikmati campaign yang telah di tawarkan pada situs Patungin.</li>
                 <li>Akun adalah representasi individual pengguna dari situs Patungin dan melalui akun tersebut pengguna dapat mendaftar campaign dan/atau mengikuti campaign.</li>
-                <li><a class="underline text-indigo-700" href="#payment_refund">Complaint</a> adalah fasilitas layanan dari situs Patungin yang mana pengguna dapat melaporkan permasalahan yang sedang dialami dalam menikmati kemudahan situs Patungin.</li>
+                <li><a class="underline text-indigo-700" href="#payment_refund">Complain</a> adalah fasilitas layanan dari situs Patungin yang mana pengguna dapat melaporkan permasalahan yang sedang dialami dalam menikmati kemudahan situs Patungin.</li>
                 <li><a class="underline text-indigo-700" href="#payment_refund">Refund</a> adalah fasilitas layanan dari situs Patungin yang mana dana pengguna akan dikembalikan tergantung dengan ketentuan transaksi dari Patungin.</li>
                 <li>Rekening Resmi Patungin adalah rekening yang telah disepakati founders untuk digunakan untuk memfasilitasi transaksi dan hanya rekening yang tercantum disaat pembayaran terjadi.</li>
                 <li>Campaign adalah suatu usaha untuk mencari teman patungan yang bermaksud untuk menikmati layanan tertentu namun tidak terbatas pada kategori jumlah slot, jenis layanan dan rentan waktu yang ditentukan.</li>

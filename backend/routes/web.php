@@ -61,12 +61,20 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
          * kelompok kelompok campaign harus di defenisikan sebelum rootnya
          * Static route "/api/v1/campaign/categories" is shadowed by previously defined variable
          */
+
+        // $url = route('image_campaign', ['image_name' => 1]);
+        $router->get('images/{image_name}', [
+            'as' => 'image_campaign',
+            'uses' => 'CampaignController@imageCampaign'
+        ]);
+
         $router->get('/', 'CampaignController@allCampaigns');
         $router->get('/{id_campaign}[/{slug}]', 'CampaignController@campaign');
         $router->post('store[/{id_user}]', 'CampaignController@createCampaign');
         $router->post('update/{id_campaign}', 'CampaignController@updateCampaign');
 
         $router->get('rsvp/{id_campaign}/{id_user}', 'CampaignController@assignMemberToCampaign');
+
     });
 
 

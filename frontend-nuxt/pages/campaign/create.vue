@@ -304,9 +304,10 @@
       <div class="pb-5 flex flex-wrap items-center justify-between">
         <div
           id="empty-cover-art"
-          class="rounded w-full px-4 py-16 xs:py-8 text-center md:border-solid md:border md:border-gray-400"
+          class="rounded w-full md:px-4 py-16 xs:py-8 text-center md:border-solid md:border md:border-gray-400"
         >
-          <svg
+        <canvas v-if="campaign.media_blob !== null" class="object-contain h-56 w-full mb-4" id="canvas"></canvas>
+          <svg v-else
             class="mx-auto h-12 w-12 text-gray-500 m-3"
             stroke="currentColor"
             fill="none"
@@ -320,7 +321,7 @@
               stroke-linejoin="round"
             />
           </svg>
-          <input type="file" class="text-sm border rounded w-full p-3" />
+          <input type="file" accept="image/*" class="text-sm border rounded w-full p-3" @change="setImageFile" />
           <!-- <div class="py-4">Tambah Foto</div> -->
         </div>
       </div>
@@ -378,6 +379,7 @@
 </template>
 <script>
 import moment from 'moment'
+import loadImage from 'blueimp-load-image'
 
 export default {
   name: 'Create_Campaign',
@@ -388,6 +390,7 @@ export default {
       loading: false,
       terms: false,
       categories: '',
+      img_base64: null,
       duration: {
         value: '',
         unit: 'days',
@@ -405,6 +408,7 @@ export default {
         status: '',
         slot_capacity: '',
         slot_price: '',
+        media_blob: null,
         media_url: '',
         password_email: '',
       },
@@ -427,12 +431,18 @@ export default {
       this.campaign.duration_date = moment(this.campaign.duration_date).format(
         'YYYY-MM-DD HH:mm:ss'
       )
-      console.log(this.campaign)
+      
+      //   Smart ways, daripada capek pak formData satu satu, astagfiruloh
+      let formData = new FormData();
+      Object.keys(this.campaign).map(key => {
+        formData.append(key, this.campaign[key])
+      })
+
       this.$axios
         .$post(
           process.env.API_DEV_URL +
             `campaign/store/${this.$store.state.user.id}`,
-          this.campaign
+            formData
         )
         .then((resp) => {
           if (resp.message === 'CREATED') {
@@ -444,6 +454,62 @@ export default {
         .catch((errors) => {
           console.dir(errors)
         })
+    },
+
+    /**
+     * @param e = event dari input file onchange
+     */
+    async setImageFile(e) {
+        if (e !== null || e.target.files) {
+            this.campaign.media_blob = e.target.files[0]
+            var self = this;
+
+            await loadImage(
+                e.target.files[0],
+                { orientation: true, meta: true, canvas: true }
+            ).then(function (data) {
+                if (!data.exif || !data.imageHead) return; // jika tidak terdapat exif maka return
+                /**
+                 * return blob, blob disimpan kembali ke file
+                 * as jpeg
+                 */
+                return new Promise(function (resolve) {
+                    data.image.toBlob(function (blob) {
+                        data.blob = blob
+                        resolve(data)
+                    }, 'image/jpeg')
+                })
+            }).then(function (data) {
+                if (!data) return;
+                self.campaign.media_blob = data.blob
+            }).catch((err) => console.error(err))
+
+            // draw blob ke gambar as canvas
+            if (typeof FileReader === 'function') {
+                const reader = new FileReader()
+                reader.readAsDataURL(this.campaign.media_blob)
+                reader.onload = (event) => {
+                    self.img_base64 = event.target.result
+                    this.drawToCanvas(event.target.result)
+                }
+            }
+        }
+    },
+
+    /**
+     * hanya menerima base64
+     * @param base64 = string contain base64 file
+     */
+    drawToCanvas(base64) {
+        const img = new Image()
+        img.src = base64 // assign converted image to image object
+        img.onload = function() {
+            const canvas = document.getElementById('canvas') // create canvas object
+            const ctx = canvas.getContext('2d')
+            canvas.width = img.width
+            canvas.height = img.height
+            ctx.drawImage(img, 0, 0) // draw image
+        }
     },
 
     setDurationDate() {

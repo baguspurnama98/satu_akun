@@ -10,10 +10,11 @@ use App\Models\CampaignMember;
 use App\Models\Transaction;
 use App\Models\User;
 use DateTime;
+use Illuminate\Support\Str;
 
 class CampaignController extends Controller
 {
-
+    private $path_campaign = '/assets/campaigns/';
     
     /**
      * Get all categories.
@@ -54,6 +55,7 @@ class CampaignController extends Controller
      * 'status' (nullable) -> default 0,
      * 'slot_capacity',
      * 'slot_price',
+     * 'media_blob', (tdk ada di database, nullable)
      * 'media_url', (nullable)
      * 'password_email', (nullable)
      * 'updated_by', (nullable)
@@ -71,11 +73,23 @@ class CampaignController extends Controller
             'slot_price' => 'required',
             'expired_date' => 'required',
             'duration_date' => 'required',
+            'media_blob' => 'image',
         ]);
 
         try {
             $campaign = new Campaign();
             $campaign->fill($request->all());
+            if ($request->hasFile('media_blob')) {
+                $image_name = Str::random(8) . date("Ymd");
+                $request->file('media_blob')->move(storage_path('uploads/image_campaign'), $image_name);
+                // $image_path = storage_path('campaign') . '/' . $campaign->media_url;
+                // if (file_exists($image_path)) {
+                //     unlink($image_path);
+                // }
+                $generated_src = route('image_campaign', ['image_name' => $image_name]);
+
+                $campaign->media_url = $generated_src;
+            }
             $campaign->save();
             // return successful response
             if ($id_user !== null) {
@@ -92,9 +106,35 @@ class CampaignController extends Controller
     public function updateCampaign(Request $request, $id_campaign) {
         $this->middleware('auth');
 
+        $this->validate($request, [
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'slot_capacity' => 'required',
+            'slot_price' => 'required',
+            'expired_date' => 'required',
+            'duration_date' => 'required',
+            'media_blob' => 'image',
+        ]);
+
         try {
             $campaign = Campaign::findOrFail($id_campaign);
             $campaign->fill($request->all());
+            if ($request->hasFile('media_blob')) {
+                $image_name = Str::random(8) . date("Ymd");
+                
+                // cek apakah ada image yg perlu di hapus
+                $pos = strrpos($campaign->media_url, '/');
+                $curr_image = ($pos === false) ? $campaign->media_url : substr($campaign->media_url, $pos + 1);
+                $image_path = storage_path('uploads/image_campaign') . '/' . $curr_image;
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
+                
+                // simpan image
+                $request->file('media_blob')->move(storage_path('uploads/image_campaign'), $image_name);
+                $generated_src = route('image_campaign', ['image_name' => $image_name]);
+                $campaign->media_url = $generated_src;
+            }
             $campaign->touch();
             $campaign->save();
             // return successful response
@@ -110,7 +150,25 @@ class CampaignController extends Controller
         // bakal ada pengerjaan untuk softdelete member_campaign
         // seharusnya gabisa langsung delete gitu aja
         $campaign = Campaign::findOrFail($id_campaign);
+        // cek apakah ada image yg perlu di hapus
+        $pos = strrpos($campaign->media_url, '/');
+        $curr_image = ($pos === false) ? $campaign->media_url : substr($campaign->media_url, $pos + 1);
+        $image_path = storage_path('uploads/image_campaign') . '/' . $curr_image;
+        if (file_exists($image_path)) {
+            unlink($image_path);
+        }
         $campaign->delete();
+    }
+
+
+    public function imageCampaign($image_name) {
+        $image_path = storage_path('uploads/image_campaign') . '/' . $image_name;
+        if (file_exists($image_path)) {
+            $file = file_get_contents($image_path);
+            return response($file, 200)->header('Content-Type', 'image/jpeg');
+        }
+        
+        return response()->json(['message' => 'Image Not Found'], 404);
     }
 
 
