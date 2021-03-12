@@ -241,6 +241,19 @@ export default {
       window.getSelection().removeAllRanges()
     },
   },
+
+  // mounted() {
+  // this.$axios
+  //       .$get(
+  //         process.env.API_DEV_URL +
+  //           `campaign/members/${this.$route.params.idCampaign}/${this.$store.state.user.id}`
+  //       )
+  //       .then((resp) => {
+  //         if (resp.campaign_members.length == 0) {
+  //           this.statusDisable = false;
+  //         }
+  //       });
+  // }
 }
 </script>
 

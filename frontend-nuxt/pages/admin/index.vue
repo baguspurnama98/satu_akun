@@ -5,7 +5,9 @@
     <h3 class="font-bold pb-3 text-4xl text-indigo-500 xs:text-2xl">
       Hai Admin, apa kabar?
     </h3>
-    <div class="grid grid-cols-4 xs:grid-cols-2 gap-6 w-full">
+    <div
+      class="grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 w-full"
+    >
       <span
         @click.prevent="trailBackslash(item.route)"
         class="flex flex-col items-center justify-center bg-white p-4 m-4 shadow-md rounded-lg transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer text-gray-900 hover:text-black"
@@ -44,6 +46,7 @@ export default {
         { img: 'campaign.svg', name: 'Campaign', route: 'campaign/' },
         { img: 'payment.svg', name: 'Payment', route: 'payment/' },
         { img: 'email.svg', name: 'Kelola Email', route: 'email/' },
+        { img: 'category.svg', name: 'Kelola Kategori', route: 'category/' },
       ],
     }
   },
