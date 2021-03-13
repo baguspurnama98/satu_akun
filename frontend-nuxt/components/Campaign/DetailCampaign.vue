@@ -197,7 +197,7 @@
             </div>
           </div>
         </div>
-        <div class="text-center my-5 md:my-10 xs:hidden">
+        <div class="text-center my-5 md:my-10 xs:hidden" v-if="!registered">
           <button
             class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
             v-bind:class="[!isLogin || isDisable ? 'opacity-50 ' : '']"
@@ -231,10 +231,45 @@
             >
           </button>
         </div>
+        <div class="text-center my-5 md:my-10 xs:hidden" v-else>
+          <button
+            class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-orange-400 hover:bg-orange-600 focus:bg-orange-700"
+            v-bind:class="[!isLogin || isDisable ? 'opacity-50 ' : '']"
+            @click.prevent="rsvpCheckout(campaign.id)"
+            :disabled="isDisable"
+          >
+            <span class="inline-flex items-center p-0 m-0">
+              <svg
+                v-if="loading"
+                class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+
+              Menunggu Pembayaran</span
+            >
+          </button>
+        </div>
       </div>
     </div>
     <div
       class="container px-4 mx-auto flex flex-wrap items-center justify-between bg-white w-full text-center pt-5 sm:hidden sticky bottom-0 min-w-screen"
+      v-if="!registered"
     >
       <button
         class="w-1/3 xs:w-full mb-4 mt-7 py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
@@ -269,6 +304,43 @@
         >
       </button>
     </div>
+    <div
+      class="container px-4 mx-auto flex flex-wrap items-center justify-between bg-white w-full text-center pt-5 sm:hidden sticky bottom-0 min-w-screen"
+      v-else
+    >
+      <button
+        class="w-1/3 xs:w-full mb-4 mt-7 py-2 rounded text-white inline-block shadow-md bg-orange-500 hover:bg-orange-600 focus:bg-orange-700"
+        @click.prevent="rsvpCheckout(campaign.id)"
+        v-bind:class="[!isLogin || isDisable ? 'opacity-50 ' : '']"
+        :disabled="isDisable"
+      >
+        <span class="inline-flex items-center p-0 m-0">
+          <svg
+            v-if="loading"
+            class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+
+          Menunggu Pembayaran</span
+        >
+      </button>
+    </div>
   </div>
 </template>
 <script>
@@ -277,7 +349,7 @@ import IconSocial from '../Profil/IconSocial'
 export default {
   components: { IconSocial },
   name: 'DetailCampaign',
-  props: ['campaign', 'statusDisable'],
+  props: ['campaign', 'registered'],
   data() {
     return {
       hiddenDetail: true,
@@ -290,21 +362,27 @@ export default {
     },
     rsvpCheckout(idCampaign) {
       if (this.isLogin) {
-        this.loading = true
-
-        this.$axios
-          .$get(
-            process.env.API_DEV_URL +
-              `campaign/rsvp/${idCampaign}/${this.$store.state.user.id}/`
+        if (this.registered) {
+          this.$router.push(
+            `/campaign/${idCampaign}/checkout/${this.$store.state.user.id}`
           )
-          .then((resp) => {
-            this.$router.push(
-              `/campaign/${idCampaign}/checkout/${this.$store.state.user.id}`
+        } else {
+          this.loading = true
+
+          this.$axios
+            .$get(
+              process.env.API_DEV_URL +
+                `campaign/rsvp/${idCampaign}/${this.$store.state.user.id}/`
             )
-          })
-          .catch((errors) => {
-            console.dir(errors)
-          })
+            .then((resp) => {
+              this.$router.push(
+                `/campaign/${idCampaign}/checkout/${this.$store.state.user.id}`
+              )
+            })
+            .catch((errors) => {
+              console.dir(errors)
+            })
+        }
       } else {
         this.$router.push('/account/login')
       }
@@ -319,8 +397,8 @@ export default {
       if (this.$store.state.auth.token) {
         return (
           this.campaign.id_host === this.$store.state.user.id ||
-          this.$store.state.user.role === 'a' ||
-          this.statusDisable
+          this.$store.state.user.role === 'a'
+          // this.statusDisable
         )
       }
     },

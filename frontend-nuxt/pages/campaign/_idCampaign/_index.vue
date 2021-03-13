@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Content disini -->
-    <DetailCampaign :campaign="campaign" :statusDisable="statusDisable" />
+    <DetailCampaign :campaign="campaign" :registered="registered" />
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
   components: { DetailCampaign },
   data() {
     return {
-      statusDisable: true,
+      registered: true,
       campaign: {
         id_host: '',
 
@@ -60,7 +60,7 @@ export default {
         )
         .then((resp) => {
           if (resp.campaign_members.length == 0) {
-            this.statusDisable = false
+            this.registered = false
           }
         })
     }
