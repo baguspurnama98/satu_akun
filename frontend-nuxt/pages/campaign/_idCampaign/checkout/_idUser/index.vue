@@ -217,6 +217,7 @@ export default {
     return {
       price: '53000',
       total: '53234',
+      campaign: '',
       showAlertCopied: true,
     }
   },
@@ -242,18 +243,25 @@ export default {
     },
   },
 
-  // mounted() {
-  // this.$axios
+  //   beforeMount() {
+  //  this.$axios
   //       .$get(
-  //         process.env.API_DEV_URL +
-  //           `campaign/members/${this.$route.params.idCampaign}/${this.$store.state.user.id}`
+  //         process.env.API_DEV_URL + `campaign/${this.$route.params.idCampaign}`
   //       )
   //       .then((resp) => {
-  //         if (resp.campaign_members.length == 0) {
-  //           this.statusDisable = false;
+  //         this.campaign = resp.campaigns
+  //         console.log(this.campaign)
+  //       })
+  //       .catch((errors) => {
+  //         if (errors.response.status === 404) {
+  //           console.log('oke')
+  //           return this.$nuxt.error({
+  //             statusCode: 404,
+  //             message: 'Post not found',
+  //           })
   //         }
-  //       });
-  // }
+  //       })
+  //   }
 }
 </script>
 

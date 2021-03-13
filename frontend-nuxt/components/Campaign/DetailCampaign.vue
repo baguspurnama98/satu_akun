@@ -122,9 +122,9 @@
           >
             Deskripsi
           </h1>
-          <div v-if="`${campaign.description}`.length > 100">
+          <div v-if="`${campaign.description}`.length > 50">
             <p
-              class="my-3 text-justify"
+              class="my-3 text-justify whitespace-pre-line"
               v-bind:class="[hiddenDetail ? 'line-clampin' : '']"
             >
               {{ campaign.description }}
@@ -145,7 +145,7 @@
             </button>
           </div>
           <div v-else>
-            <p class="my-3 text-justify">
+            <p class="my-3 text-justify whitespace-pre-line">
               {{ campaign.description }}
             </p>
           </div>
@@ -335,5 +335,6 @@ export default {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  white-space: normal;
 }
 </style>

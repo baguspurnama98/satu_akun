@@ -311,7 +311,7 @@
           class="rounded w-full md:px-4 py-16 xs:py-8 text-center md:border-solid md:border md:border-gray-400"
         >
           <canvas
-            v-if="campaign.media_blob !== null"
+            v-if="campaign.media_blob !== ''"
             class="object-contain h-56 w-full mb-4"
             id="canvas"
           ></canvas>
@@ -387,7 +387,7 @@
             ></path>
           </svg>
 
-          Daftar</span
+          Buat Campaign</span
         >
       </button>
     </div>
@@ -424,7 +424,7 @@ export default {
         status: '',
         slot_capacity: '',
         slot_price: '',
-        media_blob: null,
+        media_blob: '',
         media_url: '',
         password_email: '',
       },
