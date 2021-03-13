@@ -35,7 +35,11 @@ export default {
             resp.campaigns.host_name =
               resp.campaigns.campaign_members[i].users.name
             resp.campaigns.id_host = resp.campaigns.campaign_members[i].user_id
-            resp.campaigns.campaign_members.splice(i, 1)
+            if (resp.campaigns.campaign_members.length === 1) {
+              resp.campaigns.campaign_members = []
+            } else {
+              resp.campaigns.campaign_members.splice(i, 1)
+            }
           }
         }
 
