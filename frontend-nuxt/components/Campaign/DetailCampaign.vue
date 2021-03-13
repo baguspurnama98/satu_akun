@@ -122,7 +122,7 @@
           >
             Deskripsi
           </h1>
-          <div v-if="`${campaign.description}`.length > 50">
+          <div v-if="`${campaign.description}`.length > 100">
             <p
               class="my-3 text-justify whitespace-pre-line"
               v-bind:class="[hiddenDetail ? 'line-clampin' : '']"
@@ -197,7 +197,10 @@
             </div>
           </div>
         </div>
-        <div class="text-center my-5 md:my-10 xs:hidden" v-if="!registered">
+        <div
+          class="text-center my-5 md:my-10 xs:hidden"
+          v-if="!registered || isDisable"
+        >
           <button
             class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
             v-bind:class="[!isLogin || isDisable ? 'opacity-50 ' : '']"
@@ -269,7 +272,7 @@
     </div>
     <div
       class="container px-4 mx-auto flex flex-wrap items-center justify-between bg-white w-full text-center pt-5 sm:hidden sticky bottom-0 min-w-screen"
-      v-if="!registered"
+      v-if="!registered || isDisable"
     >
       <button
         class="w-1/3 xs:w-full mb-4 mt-7 py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
@@ -400,6 +403,8 @@ export default {
           this.$store.state.user.role === 'a'
           // this.statusDisable
         )
+      } else {
+        return true
       }
     },
   },
