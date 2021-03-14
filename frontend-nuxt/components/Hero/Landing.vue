@@ -42,7 +42,7 @@
           <div class="w-full lg:pr-10 rounded-lg md:w-2/3 lg:w-1/2 group">
             <div class="relative xs:px-10">
               <img
-                src="~/assets/img/home_cinema.svg"
+                src="/home_cinema.svg"
                 class="z-10 object-cover w-full h-full"
               />
             </div>

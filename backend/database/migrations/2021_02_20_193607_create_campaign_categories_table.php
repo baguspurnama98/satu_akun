@@ -16,6 +16,7 @@ class CreateCampaignCategoriesTable extends Migration
         Schema::create('campaign_categories', function (Blueprint $table) {
             $table->id();
             $table->string('categories')->unique()->notNullable();
+            $table->boolean('delete')->default(0); // delete status
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();

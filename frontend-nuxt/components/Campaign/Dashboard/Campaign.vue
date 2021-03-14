@@ -17,7 +17,7 @@
           <div class="flex mb-4">
             <span class="flex items-center text-gray-600"> Bagus Purnama </span>
             <span class="flex ml-3 pl-3 border-l-2 border-gray-200 space-x-2s">
-              <icon-social></icon-social>
+              <icon-social class="lg:mt-6"></icon-social>
             </span>
           </div>
           <div class="py-3 mb-3">

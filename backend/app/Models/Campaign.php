@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -30,6 +32,7 @@ class Campaign extends Model
     // yang gak akan ditampilkan atribut nya diluar dari lingkungan lumen/laravel
     protected $hidden = [
         // 'password_email',
+        'delete'
     ];
 
     protected $appends = ['slug', 'host_name'];
@@ -50,6 +53,18 @@ class Campaign extends Model
     // {
     //     return $value - 1;
     // }
+
+
+    public function scopeActive($query) 
+    {
+        return $query->whereDate('expired_date', '>=', Carbon::now())->where('status', '1');
+    }
+
+    // - filter berdasarkan status, 0 = aktif, 1 = berlangsung, 2 = expired, 3 = refund, 4 = selesai refund, 5 = selesai
+    public function scopeStatusCampaign($query, $status) 
+    {
+        return $query->where('status', $status);
+    }
 
     /**
      * relasi yang digunakan misal:

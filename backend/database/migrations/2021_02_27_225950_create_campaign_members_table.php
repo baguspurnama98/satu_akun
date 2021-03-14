@@ -15,9 +15,9 @@ class CreateCampaignMembersTable extends Migration
     {
         Schema::create('campaign_members', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->index();
+            $table->unsignedBigInteger('user_id')->index()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('campaign_id')->index();
+            $table->unsignedBigInteger('campaign_id')->index()->nullable();
             $table->foreign('campaign_id')->references('id')->on('campaigns');  
             
             // tambahkan atribut kolom lain disini

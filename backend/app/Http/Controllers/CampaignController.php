@@ -14,26 +14,39 @@ use Illuminate\Support\Str;
 
 class CampaignController extends Controller
 {
-    private $path_campaign = '/assets/campaigns/';
-    
-    /**
-     * Get all categories.
-     *
-     * @return Response
-     */
-    public function allCampaigns() {
-        return response()->json(['campaigns' => Campaign::with(['categories'])->withCount('campaign_members as total_members')->get()], 200);
-    }
-
     /**
      * disini nanti bakal ada pengaturan pengaturan
-     * apakah perlu di filter yg bukan kedaluwarsa (dashboard / non dashboard)
-     *      - ketika dashboard = false, maka filter nya yang aktif dan tidak kedaluwarsa
+     * apakah perlu di filter yg bukan kedaluwarsa 
+     *      - ketika all = false, maka filter nya yang aktif dan tidak kedaluwarsa
      * apakah di filter berdasarkan kategori
      *      - filter berdasarkan kategori
      * apakah perlu di filter berdasarkan status
      *      - filter berdasarkan status, 0 = aktif, 1 = berlangsung, 2 = expired, 3 = refund, 4 = selesai refund, 5 = selesai
      */
+    /**
+     * Get all categories.
+     *
+     * @return Response
+     */
+    public function allCampaigns(Request $request) {
+        $status = $request->query('status') ?? null; 
+        $category = $request->query('category') ?? null;
+        $is_all = $request->query('all') ?? false;
+        // active true?
+        $search = null;
+
+        $campaigns = Campaign::with(['categories'])->withCount('campaign_members as total_members');
+        if ($status !== null) {
+            return response()->json(['campaigns' => $campaigns->statusCampaign($status)->get()], 200);
+        }
+        if ($is_all) {
+            return response()->json(['campaigns' => $campaigns->get()], 200);
+        }
+        // search by category
+        // by default ambil yg aktif
+        return response()->json(['campaigns' => $campaigns->active()->get()], 200);
+    }
+
     public function campaign($id_campaign, $slug = null) {
         $campaign = Campaign::with(['campaign_members.users', 'categories'])->withCount('campaign_members as total_members')->findOrFail($id_campaign);
         return response()->json(['campaigns' => $campaign], 200);
@@ -73,7 +86,7 @@ class CampaignController extends Controller
             'slot_price' => 'required',
             'expired_date' => 'required',
             'duration_date' => 'required',
-            'media_blob' => 'image',
+            'media_blob' => 'image|required',
         ]);
 
         try {
@@ -150,14 +163,19 @@ class CampaignController extends Controller
         // bakal ada pengerjaan untuk softdelete member_campaign
         // seharusnya gabisa langsung delete gitu aja
         $campaign = Campaign::findOrFail($id_campaign);
-        // cek apakah ada image yg perlu di hapus
-        $pos = strrpos($campaign->media_url, '/');
-        $curr_image = ($pos === false) ? $campaign->media_url : substr($campaign->media_url, $pos + 1);
-        $image_path = storage_path('uploads/image_campaign') . '/' . $curr_image;
-        if (file_exists($image_path)) {
-            unlink($image_path);
+        try {
+            // cek apakah ada image yg perlu di hapus
+            $pos = strrpos($campaign->media_url, '/');
+            $curr_image = ($pos === false) ? $campaign->media_url : substr($campaign->media_url, $pos + 1);
+            $image_path = storage_path('uploads/image_campaign') . '/' . $curr_image;
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+            $campaign->delete();
+            return response()->json(['campaign' => $campaign, 'message' => 'UPDATED'], 201);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e], 409);
         }
-        $campaign->delete();
     }
 
 
@@ -196,7 +214,7 @@ class CampaignController extends Controller
             return response()->json(['message' => 'User Not Authorized'], 401);
         }
 
-        if ($campaign->total_members === $campaign->slot_capacity - 1) {
+        if ($campaign->total_members === $campaign->slot_capacity + 1) {
             return response()->json(['message' => 'Full Capacity'], 409);
         }
         
@@ -269,6 +287,9 @@ class CampaignController extends Controller
             $emailJob = (new MailJob($user, $data, $type));
             // masuk ke queue biar gak bloking
             dispatch($emailJob);
+            
+            // lakukan scheduling apakah sudah 2 jam utk di remove
+            $url_verify = route('verify_transaction', ['id_transaction' => $transaction->id]);
         } catch (\Exception $e) {
             return response()->json(['message' => $e], 409);
         }

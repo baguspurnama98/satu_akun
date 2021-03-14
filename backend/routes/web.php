@@ -36,6 +36,8 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         $router->post('register', 'AuthController@register');
         $router->post('login', 'AuthController@login');
         $router->get('logout', 'AuthController@logout');
+        $router->delete('delete/{id_user}', 'AuthController@delete');
+        
         // OTP
         $router->get('validate/{id_user}/{otp}', 'AuthController@validateOTP');
         $router->get('resend-otp/{id_user}', 'AuthController@resendOTP');
@@ -72,6 +74,8 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         $router->get('/{id_campaign}[/{slug}]', 'CampaignController@campaign');
         $router->post('store[/{id_user}]', 'CampaignController@createCampaign');
         $router->post('update/{id_campaign}', 'CampaignController@updateCampaign');
+        $router->delete('delete/{id_campaign}', 'CampaignController@deleteCampaign');
+        
 
         $router->get('rsvp/{id_campaign}/{id_user}', 'CampaignController@assignMemberToCampaign');
 
@@ -84,6 +88,11 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         $router->get('user/{id_user}', 'TransactionController@userTransaction');
         $router->get('campaign/{id_campaign}', 'TransactionController@campaignTransaction');
         $router->get('user/{id_user}/campaign/{id_campaign}', 'TransactionController@userTransactionByCampaign');
+
+        $router->get('verify/{id_transaction}', [
+            'as' => 'verify_transaction',
+            'uses' => 'TransactionController@verifyTransactionCampaign'
+        ]);
     });
     
 

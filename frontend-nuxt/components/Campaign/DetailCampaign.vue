@@ -74,9 +74,9 @@
               }}</span>
             </p>
           </div>
-          <p class="text-sm">
+          <p class="text-md xs:text-sm">
             Berakhir
-            <span class="font-bold text-red-700">{{
+            <span class="text-md xs:text-sm font-bold text-red-700">{{
               campaign.expired_date | formatDate
             }}</span>
           </p>
@@ -92,14 +92,14 @@
             </a>
           </p>
 
-          <icon-social></icon-social>
+          <icon-social class="lg:mt-6"></icon-social>
         </div>
         <div
           class="col-start-1 col-span-2 row-start-1 flex sm:col-span-1 sm:col-start-1 sm:row-span-3"
         >
           <div class="w-full grid">
             <div class="relative col-span-1 row-span-1 md:col-span-2">
-                <!-- src="https://picsum.photos/640/400/?random" -->
+              <!-- src="https://picsum.photos/640/400/?random" -->
               <img
                 :src="campaign.media_url"
                 alt="..."
@@ -124,7 +124,7 @@
           </h1>
           <div v-if="`${campaign.description}`.length > 100">
             <p
-              class="my-3 text-justify"
+              class="my-3 text-justify whitespace-pre-line"
               v-bind:class="[hiddenDetail ? 'line-clampin' : '']"
             >
               {{ campaign.description }}
@@ -145,7 +145,7 @@
             </button>
           </div>
           <div v-else>
-            <p class="my-3 text-justify">
+            <p class="my-3 text-justify whitespace-pre-line">
               {{ campaign.description }}
             </p>
           </div>
@@ -168,7 +168,7 @@
           >
             <div
               class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2 items-center"
-              v-for="member in campaign.list_members"
+              v-for="member in campaign.campaign_members"
               :key="member.id"
             >
               <span
@@ -197,7 +197,10 @@
             </div>
           </div>
         </div>
-        <div class="text-center my-5 md:my-10 xs:hidden">
+        <div
+          class="text-center my-5 md:my-10 xs:hidden"
+          v-if="!registered || isDisable || !this.$store.state.auth.token"
+        >
           <button
             class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
             v-bind:class="[!isLogin || isDisable ? 'opacity-50 ' : '']"
@@ -231,10 +234,45 @@
             >
           </button>
         </div>
+        <div class="text-center my-5 md:my-10 xs:hidden" v-else>
+          <button
+            class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-orange-400 hover:bg-orange-600 focus:bg-orange-700"
+            v-bind:class="[!isLogin || isDisable ? 'opacity-50 ' : '']"
+            @click.prevent="rsvpCheckout(campaign.id)"
+            :disabled="isDisable"
+          >
+            <span class="inline-flex items-center p-0 m-0">
+              <svg
+                v-if="loading"
+                class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+
+              Menunggu Pembayaran</span
+            >
+          </button>
+        </div>
       </div>
     </div>
     <div
       class="container px-4 mx-auto flex flex-wrap items-center justify-between bg-white w-full text-center pt-5 sm:hidden sticky bottom-0 min-w-screen"
+      v-if="!registered || isDisable || !this.$store.state.auth.token"
     >
       <button
         class="w-1/3 xs:w-full mb-4 mt-7 py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
@@ -269,6 +307,43 @@
         >
       </button>
     </div>
+    <div
+      class="container px-4 mx-auto flex flex-wrap items-center justify-between bg-white w-full text-center pt-5 sm:hidden sticky bottom-0 min-w-screen"
+      v-else
+    >
+      <button
+        class="w-1/3 xs:w-full mb-4 mt-7 py-2 rounded text-white inline-block shadow-md bg-orange-500 hover:bg-orange-600 focus:bg-orange-700"
+        @click.prevent="rsvpCheckout(campaign.id)"
+        v-bind:class="[!isLogin || isDisable ? 'opacity-50 ' : '']"
+        :disabled="isDisable"
+      >
+        <span class="inline-flex items-center p-0 m-0">
+          <svg
+            v-if="loading"
+            class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+
+          Menunggu Pembayaran</span
+        >
+      </button>
+    </div>
   </div>
 </template>
 <script>
@@ -277,7 +352,7 @@ import IconSocial from '../Profil/IconSocial'
 export default {
   components: { IconSocial },
   name: 'DetailCampaign',
-  props: ['campaign', 'statusDisable'],
+  props: ['campaign', 'registered'],
   data() {
     return {
       hiddenDetail: true,
@@ -290,21 +365,27 @@ export default {
     },
     rsvpCheckout(idCampaign) {
       if (this.isLogin) {
-        this.loading = true
-
-        this.$axios
-          .$get(
-            process.env.API_DEV_URL +
-              `campaign/rsvp/${idCampaign}/${this.$store.state.user.id}/`
+        if (this.registered) {
+          this.$router.push(
+            `/campaign/${idCampaign}/checkout/${this.$store.state.user.id}`
           )
-          .then((resp) => {
-            this.$router.push(
-              `/campaign/${idCampaign}/checkout/${this.$store.state.user.id}`
+        } else {
+          this.loading = true
+
+          this.$axios
+            .$get(
+              process.env.API_DEV_URL +
+                `campaign/rsvp/${idCampaign}/${this.$store.state.user.id}/`
             )
-          })
-          .catch((errors) => {
-            console.dir(errors)
-          })
+            .then((resp) => {
+              this.$router.push(
+                `/campaign/${idCampaign}/checkout/${this.$store.state.user.id}`
+              )
+            })
+            .catch((errors) => {
+              console.dir(errors)
+            })
+        }
       } else {
         this.$router.push('/account/login')
       }
@@ -319,9 +400,11 @@ export default {
       if (this.$store.state.auth.token) {
         return (
           this.campaign.id_host === this.$store.state.user.id ||
-          this.$store.state.user.role === 'a' ||
-          this.statusDisable
+          this.$store.state.user.role === 'a'
+          // this.statusDisable
         )
+      } else {
+        return false
       }
     },
   },
@@ -335,5 +418,6 @@ export default {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  white-space: normal;
 }
 </style>

@@ -114,7 +114,7 @@
       display: inline-block;
       color: #FFF;
       text-decoration: none;
-      border-radius: 3px;
+      border-radius: 4px;
       box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
       -webkit-text-size-adjust: none;
       box-sizing: border-box;
@@ -255,7 +255,7 @@
     }
     
     .purchase_heading {
-      padding-bottom: 8px;
+      padding-bottom: 10px;
       border-bottom: 1px solid #EAEAEC;
     }
     
@@ -326,7 +326,7 @@
     .email-masthead_name {
       font-size: 24px;
       font-weight: bold;
-      color: #A8AAAF;
+      color: #667eea;
       text-decoration: none;
       text-shadow: 0 1px 0 white;
     }
@@ -468,14 +468,14 @@
                                 <tr>
                                   <td class="attributes_item">
                                     <span class="f-fallback">
-                                        <strong>Total Pembayaran:</strong> {{ $total }}
+                                        <strong>Total Pembayaran </strong> {{ $total }}
                                      </span>
                                   </td>
                                 </tr>
                                 <tr>
                                   <td class="attributes_item">
                                     <span class="f-fallback">
-                                        <strong>Selesaikan dalam:</strong> 2 jam
+                                        <strong>Selesaikan dalam </strong> 2 jam
                                     </span>
                                   </td>
                                 </tr>

@@ -20,7 +20,7 @@ class CreateCampaignsTable extends Migration
             
             $table->unsignedBigInteger('email_id')->index()->nullable();
             $table->foreign('email_id')->references('id')->on('emails');
-            $table->unsignedBigInteger('categories_id')->index();
+            $table->unsignedBigInteger('categories_id')->index()->nullable();
             $table->foreign('categories_id')->references('id')->on('campaign_categories');
 
             $table->dateTime('expired_date', $precision = 0);
@@ -31,6 +31,8 @@ class CreateCampaignsTable extends Migration
             $table->double('slot_price');
             $table->string('media_url')->nullable();
             $table->string('password_email');
+
+            $table->boolean('delete')->default(0); // delete status
 
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();

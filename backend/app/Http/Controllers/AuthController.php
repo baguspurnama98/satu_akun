@@ -109,7 +109,20 @@ class AuthController extends Controller
             Auth::logout();
         } catch (\Exception $e) {
         }
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => 'Successfully logged out'], 200);
+    }
+
+
+    public function delete($id_user) {
+        $this->middleware('auth');
+        $this->logout();
+        try {
+            $user = User::findOrFail($id_user);
+            $user->delete();
+        } catch(\Exception $e) {
+            return response()->json(['message' => $e], 409);
+        }
+        return response()->json(['message' => 'Successfully deleted'], 201);
     }
 
     // https://jwt-auth.readthedocs.io/en/develop/quick-start/
@@ -125,7 +138,15 @@ class AuthController extends Controller
         $user->otp = $this->generateNumericOTP(6);
         $user->save();
 
-        $url = $this->URL_dev_otp . $user->id;
+        $credentials = [
+            'email' => $user->email,
+            'password' => $user->password
+        ];
+        $token = Auth::attempt($credentials);
+
+        // $url = $this->URL_dev_otp . $user->id;
+        $url = $this->URL_dev_otp . $user->id . '?t=' . $this->getToken($token);
+        
         $data = [
             'name' => $user->name,
             'otp' => $user->otp,

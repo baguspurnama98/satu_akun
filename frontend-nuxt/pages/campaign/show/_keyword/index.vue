@@ -18,18 +18,10 @@
           <div class="flex flex-col sm:flex-row">
             <a
               class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
-              href="#"
-              >Edukasi</a
-            >
-            <a
-              class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
-              href="#"
-              >Hiburan</a
-            >
-            <a
-              class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
-              href="#"
-              >Hobi</a
+              :href="`${category.categories.toLowerCase()}`"
+              v-for="category in categories"
+              :key="category.id"
+              >{{ category.categories }}</a
             >
           </div>
         </nav>
@@ -85,6 +77,7 @@ export default {
   data() {
     return {
       campaigns: [],
+      categories: [],
     }
   },
   computed: {
@@ -101,6 +94,16 @@ export default {
       })
       .catch((errors) => {
         console.dir(errors)
+      })
+
+    this.$axios
+      .$get(process.env.API_DEV_URL + 'campaign/categories')
+      .then((resp) => {
+        this.categories = resp.categories
+        console.log(this.categories)
+      })
+      .catch((errors) => {
+        console.log(errors)
       })
   },
 }
