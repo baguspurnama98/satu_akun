@@ -32,7 +32,7 @@ class CampaignMember extends Model
      */
     public function campaigns()
     {
-        return $this->belongsTo(Campaign::class, 'campaign_id');
+        return $this->belongsTo(Campaign::class, 'campaign_id', 'id');
     }
 
     public function users()
