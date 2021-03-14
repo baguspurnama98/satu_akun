@@ -199,7 +199,7 @@
         </div>
         <div
           class="text-center my-5 md:my-10 xs:hidden"
-          v-if="!registered || isDisable"
+          v-if="!registered || isDisable || !this.$store.state.auth.token"
         >
           <button
             class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
@@ -272,7 +272,7 @@
     </div>
     <div
       class="container px-4 mx-auto flex flex-wrap items-center justify-between bg-white w-full text-center pt-5 sm:hidden sticky bottom-0 min-w-screen"
-      v-if="!registered || isDisable"
+      v-if="!registered || isDisable || !this.$store.state.auth.token"
     >
       <button
         class="w-1/3 xs:w-full mb-4 mt-7 py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
@@ -404,7 +404,7 @@ export default {
           // this.statusDisable
         )
       } else {
-        return true
+        return false
       }
     },
   },
