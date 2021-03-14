@@ -30,7 +30,7 @@
             </p>
           </div>
           <div
-            class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-6 gap-4"
+            class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-6 gap-4 w-full"
           >
             <CardCampaign
               v-for="(campaign, id) in campaigns"
@@ -43,7 +43,9 @@
 
       <!-- component hero keunggulan -->
       <section class="text-gray-700 body-font mb-12">
-        <div class="container px-5 mx-auto flex flex-wrap items-center justify-center">
+        <div
+          class="container px-5 mx-auto flex flex-wrap items-center justify-center"
+        >
           <div class="text-center mb-10">
             <h1
               class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4"

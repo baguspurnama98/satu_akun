@@ -160,10 +160,16 @@
             <span class="font-semibold"
               ><a
                 href="https://wa.me/8976634788?text=Saya%20ingin%20konfirmasi%20pembayaran"
-                >WhatsApp Berpatungan.com</a
+                >WhatsApp Patungin.com</a
               ></span
             >
-            atau klik tombol dibawah ini
+            atau klik tombol dibawah ini.
+          </p>
+          <p class="text-sm text-center xs:text-justify italic">
+            <b>*</b>Kami hanya melayani proses konfirmasi pembayaran pada pukul
+            <b>08.00 - 18.00 WIB</b>. Jika Anda melakukan konfirmasi pembayaran
+            diatas jam tersebut, maka proses Anda akan kami proses pada hari
+            selanjutnya.
           </p>
         </div>
       </div>
@@ -217,6 +223,7 @@ export default {
     return {
       price: '53000',
       total: '53234',
+      campaign: '',
       showAlertCopied: true,
     }
   },
@@ -241,6 +248,26 @@ export default {
       window.getSelection().removeAllRanges()
     },
   },
+
+  //   beforeMount() {
+  //  this.$axios
+  //       .$get(
+  //         process.env.API_DEV_URL + `campaign/${this.$route.params.idCampaign}`
+  //       )
+  //       .then((resp) => {
+  //         this.campaign = resp.campaigns
+  //         console.log(this.campaign)
+  //       })
+  //       .catch((errors) => {
+  //         if (errors.response.status === 404) {
+  //           console.log('oke')
+  //           return this.$nuxt.error({
+  //             statusCode: 404,
+  //             message: 'Post not found',
+  //           })
+  //         }
+  //       })
+  //   }
 }
 </script>
 
