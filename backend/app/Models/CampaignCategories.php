@@ -18,6 +18,8 @@ class CampaignCategories extends Model
         'created_by',
     ];
 
+    protected $hidden = ['delete'];
+
     /**
      * relation
      */

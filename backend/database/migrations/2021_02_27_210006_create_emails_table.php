@@ -19,7 +19,7 @@ class CreateEmailsTable extends Migration
             $table->string('email');
             $table->string('info');
             $table->boolean('status')->default(0); // digunakan atau tidak
-
+            $table->boolean('delete')->default(0); // delete status
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();

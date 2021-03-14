@@ -2,7 +2,7 @@
   <!-- Social Medianya si host biar terpercaya jika dia daftarin di kita (hanya inputin username akunnya aja) -->
   <div class="grid grid-cols-2 xs:grid-flow-col xs:auto-cols-max mt-2">
     <div class="col-auto xs:col">
-      <span class="inline-flex lg:ml-auto lg:mt-0 sm:mt-6 w-full md:w-auto">
+      <span class="inline-flex lg:ml-auto lg:mt-0 w-full md:w-auto">
         <!-- Nanti ambil data dari database, kalau dia punya ig, maka class hidden di nonaktifin -->
         <a class="text-gray-500 hover:text-gray-800 cursor-pointer">
           <svg

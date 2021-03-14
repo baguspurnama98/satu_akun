@@ -20,6 +20,7 @@ class Email extends Model
     // yang gak akan ditampilkan atribut nya diluar dari lingkungan lumen/laravel
     protected $hidden = [
         // 'password',
+        'delete'
     ];
 
     public function campaigns()

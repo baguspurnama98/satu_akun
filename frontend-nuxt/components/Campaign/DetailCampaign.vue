@@ -74,9 +74,9 @@
               }}</span>
             </p>
           </div>
-          <p class="text-sm">
+          <p class="text-md xs:text-sm">
             Berakhir
-            <span class="font-bold text-red-700">{{
+            <span class="text-md xs:text-sm font-bold text-red-700">{{
               campaign.expired_date | formatDate
             }}</span>
           </p>
@@ -92,7 +92,7 @@
             </a>
           </p>
 
-          <icon-social></icon-social>
+          <icon-social class="lg:mt-6"></icon-social>
         </div>
         <div
           class="col-start-1 col-span-2 row-start-1 flex sm:col-span-1 sm:col-start-1 sm:row-span-3"

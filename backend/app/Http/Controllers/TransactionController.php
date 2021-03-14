@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\CampaignMember;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 
@@ -10,7 +12,7 @@ class TransactionController extends Controller
     function __construct()
     {
         // semua fungsi di kelas ini di jaga auth
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     public function allTransactions() {
@@ -45,7 +47,7 @@ class TransactionController extends Controller
         }
     }
 
-    // TODO verify transaction &/ update transaction
+    // TODO verify transaction &/ update transaction & call member campaign
     public function updateStatusTransaction($id_transaction, $status = 1) {
         $transaction = Transaction::findOrFail($id_transaction);
         try {
@@ -57,6 +59,30 @@ class TransactionController extends Controller
             return response()->json(['message' => $e], 409);
         }
     }
+
+    // gunanya untuk set jadi true
+    public function verifyTransactionCampaign($id_transaction)
+    {
+        $transaction = Transaction::where('id', $id_transaction)->first();
+        try {
+            $campaign_member = CampaignMember::where(['campaign_id' => $transaction->id_campaign, 'user_id' => $transaction->id_user])->first();
+            if ($transaction->status !== 1) {
+                $campaign_member->delete();
+                // return
+                return response()->json(['message' => 'Success delete member on campaign'], 201);
+            } else {
+                $transaction->status = 1;
+                $campaign_member->is_pay = 1;
+                $campaign_member->touch();
+                $campaign_member->save();
+                return response()->json(['transaction' => $transaction, 'message' => 'UPDATED'], 201);
+            }
+            
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e], 409);
+        }
+    }
+    
 
     public function updateDataTransaction(Request $request, $id_transaction)
     {
@@ -73,5 +99,22 @@ class TransactionController extends Controller
             // return error message
             return response()->json(['message' => $e], 409);
         }
+    }
+
+
+    public function deleteTransaction($id_transaction)
+    {
+        $this->middleware('auth');
+
+        $transaction = Transaction::findOrFail($id_transaction);
+        try {
+            $transaction->delete = 1;
+            $transaction->touch();
+            $transaction->save();
+            return response()->json(['transaction' => $transaction, 'message' => 'UPDATED'], 201);
+        } catch (\Exception $e) {
+            // return error message
+            return response()->json(['message' => $e], 409);
+        } 
     }
 }

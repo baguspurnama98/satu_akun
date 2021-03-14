@@ -9,12 +9,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
+use App\Observers\UserObserver;
+
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Model implements JWTSubject, AuthenticatableContract, AuthorizableContract
 {
-    use Authenticatable, Authorizable, HasFactory;
+    use Authenticatable, Authorizable, HasFactory, UserObserver;
 
     protected $table = 'users';
     /**
@@ -26,7 +28,7 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
         'name', 'email', 'whatsapp', 'otp', 'status', 'role', 'updated_by', 'created_by',
     ];
 
-    // status 0 (belum validasi), 1 (aktif), 2 (banned), 3 (delete)
+    // status 0 (belum validasi), 1 (aktif), 2 (banned),
 
     /**
      * The attributes excluded from the model's JSON form.
