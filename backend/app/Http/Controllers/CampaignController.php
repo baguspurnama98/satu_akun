@@ -10,6 +10,7 @@ use App\Models\CampaignMember;
 use App\Models\Transaction;
 use App\Models\User;
 use DateTime;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class CampaignController extends Controller
@@ -31,20 +32,17 @@ class CampaignController extends Controller
     public function allCampaigns(Request $request) {
         $status = $request->query('status') ?? null; 
         $category = $request->query('category') ?? null;
-        $is_all = $request->query('all') ?? false;
-        // active true?
+        $is_all = $request->query('all') ?? false; // active true if false
         $search = null;
 
         $campaigns = Campaign::with(['categories'])->withCount('campaign_members as total_members');
-        if ($status !== null) {
-            return response()->json(['campaigns' => $campaigns->statusCampaign($status)->get()], 200);
-        }
-        if ($is_all) {
-            return response()->json(['campaigns' => $campaigns->get()], 200);
-        }
+        
+        $campaigns = ($status !== null) ? $campaigns->statusCampaign($status) : $campaigns;
+        $campaigns = ($is_all !== false) ? $campaigns : $campaigns->active();
+
         // search by category
         // by default ambil yg aktif
-        return response()->json(['campaigns' => $campaigns->active()->get()], 200);
+        return response()->json(['campaigns' => $campaigns->get()], 200);
     }
 
     public function campaign($id_campaign, $slug = null) {
@@ -59,25 +57,32 @@ class CampaignController extends Controller
      * jika tidak, maka akan ambil semua data campaign
      * 
      * jika query active didefenisikan bernilai true
-     * maka akan ambil campaignnya user yang sedang aktif saja
+     * maka akan ambil campaignnya user yang sedang aktif saja, scr default ambil semua
      */
     public function campaignByUser(Request $request, $id_user) {
-        $this->middleware('auth');
         $is_host = $request->query('host') ?? null; // boolean true / false
         $is_active = $request->query('active') ?? false; // boolean true / false
+        $status = $request->query('status') ?? null; 
         
-        $campaign = Campaign::withCount('campaign_members as total_members')
-                             ->whereHas('campaign_members', function ($query) use($id_user, $is_host) { 
+        $campaign = Campaign::withCount(['campaign_members as total_members', 'transactions as total_transactions' => function ($query) {
+                                    // ambil yang sudah di verif saja 
+                                    // perlu juga dilakukan kalkulasi yg in atau out
+                                    return $query->where('status', 1)->select(DB::raw('SUM(nominal)'));
+                             }])
+                             ->with('campaign_members', function ($query) use($id_user, $is_host) { 
                                     if ($is_host !== null) {
                                         $is_host = filter_var($is_host, FILTER_VALIDATE_BOOLEAN);
                                         return $query->where(['user_id' => $id_user, 'is_host' => $is_host]);
                                     }
+                                    // ini ambil semua
                                     return $query->where(['user_id' => $id_user]);
                                 });
 
-        $campaign = $is_active ? $campaign->active()->get() : $campaign->get();
+                                
+        $campaign = ($is_active && $status === null) ? $campaign->active() : $campaign;
+        $campaign = ($status !== null) ? $campaign->statusCampaign($status) : $campaign;
         
-        return response()->json(['campaigns' => $campaign], 200);
+        return response()->json(['campaigns' => $campaign->get()], 200);
 
     }
 
@@ -102,7 +107,6 @@ class CampaignController extends Controller
         
 
     public function createCampaign(Request $request, $id_user = null) {
-        $this->middleware('auth');
         // validate incoming request 
         $this->validate($request, [
             'title' => 'required|string',
@@ -142,7 +146,6 @@ class CampaignController extends Controller
     }
 
     public function updateCampaign(Request $request, $id_campaign) {
-        $this->middleware('auth');
 
         $this->validate($request, [
             'title' => 'required|string',
@@ -184,7 +187,6 @@ class CampaignController extends Controller
     }
 
     public function deleteCampaign($id_campaign) {
-        $this->middleware('auth');
         // bakal ada pengerjaan untuk softdelete member_campaign
         // seharusnya gabisa langsung delete gitu aja
         $campaign = Campaign::findOrFail($id_campaign);
@@ -230,7 +232,6 @@ class CampaignController extends Controller
 
     public function assignMemberToCampaign($id_campaign, $id_user, $is_host = false)
     {
-        $this->middleware('auth');
         // aktifkan ini jika masa production
         $campaign = Campaign::withCount('campaign_members as total_members')->findOrFail($id_campaign);
         $user = User::findOrFail($id_user);
@@ -324,7 +325,6 @@ class CampaignController extends Controller
     // ---------------------------------- Campaign Member
 
     public function getMemberOnCampaign($id_campaign, $id_user = null) {
-        $this->middleware('auth');
         $condition = ['campaign_id' => $id_campaign];
         if ($id_user !== null) {
             $condition = array_merge($condition, ['user_id' => $id_user]);

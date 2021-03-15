@@ -36,10 +36,16 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         $router->post('register', 'AuthController@register');
         $router->post('login', 'AuthController@login');
         $router->get('logout', 'AuthController@logout');
-        $router->delete('delete/{id_user}', 'AuthController@delete');
+        $router->delete('delete/{id_user}', [
+            'middleware' => 'auth',
+            'uses' => 'AuthController@delete'
+        ]);
         
         // OTP
-        $router->get('validate/{id_user}/{otp}', 'AuthController@validateOTP');
+        $router->get('validate/{id_user}/{otp}', [
+            'middleware' => 'auth',
+            'uses' => 'AuthController@validateOTP'
+        ]);
         $router->get('resend-otp/{id_user}', 'AuthController@resendOTP');
 
         $router->post('refresh', 'AuthController@refreshToken');
@@ -51,12 +57,17 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         // Categories
         $router->group(['prefix' => 'categories'], function () use ($router) {
             $router->get('/', 'CampaignController@allCategories');
-            $router->post('store', 'CampaignController@storeCategories');
+            $router->post('store', [
+                'middleware' => 'auth',
+                'uses' => 'CampaignController@storeCategories'
+            ]);
         });
 
         // Members
         $router->group(['prefix' => 'members'], function () use ($router) {
-            $router->get('/{id_campaign}[/{id_user}]', 'CampaignController@getMemberOnCampaign');
+            $router->get('/{id_campaign}[/{id_user}]', [
+                'middleware' => 'auth',
+                'uses' => 'CampaignController@getMemberOnCampaign']);
         });
 
         /**
@@ -69,21 +80,24 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
             'as' => 'image_campaign',
             'uses' => 'CampaignController@imageCampaign'
         ]);
+
         
-        $router->get('user/{id_user}', 'CampaignController@campaignByUser');
+        // Campaign, group with middleware
+        $router->group(['middleware' => 'auth'], function () use ($router) {
+            $router->get('user/{id_user}', 'CampaignController@campaignByUser');
+            $router->post('store[/{id_user}]', 'CampaignController@createCampaign');
+            $router->post('update/{id_campaign}', 'CampaignController@updateCampaign');
+            $router->delete('delete/{id_campaign}', 'CampaignController@deleteCampaign');
+            $router->get('rsvp/{id_campaign}/{id_user}', 'CampaignController@assignMemberToCampaign');
+        });
         $router->get('/', 'CampaignController@allCampaigns');
         $router->get('/{id_campaign}[/{slug}]', 'CampaignController@campaign');
-        $router->post('store[/{id_user}]', 'CampaignController@createCampaign');
-        $router->post('update/{id_campaign}', 'CampaignController@updateCampaign');
-        $router->delete('delete/{id_campaign}', 'CampaignController@deleteCampaign');
         
-        $router->get('rsvp/{id_campaign}/{id_user}', 'CampaignController@assignMemberToCampaign');
-
     });
 
 
     // Transaction
-    $router->group(['prefix' => 'transaction'], function () use ($router) {
+    $router->group(['prefix' => 'transaction', 'middleware' => 'auth'], function () use ($router) {
         $router->get('/', 'TransactionController@allTransactions');
         $router->get('user/{id_user}', 'TransactionController@userTransaction');
         $router->get('campaign/{id_campaign}', 'TransactionController@campaignTransaction');

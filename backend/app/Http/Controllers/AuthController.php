@@ -114,7 +114,6 @@ class AuthController extends Controller
 
 
     public function delete($id_user) {
-        $this->middleware('auth');
         $this->logout();
         try {
             $user = User::findOrFail($id_user);
@@ -162,7 +161,6 @@ class AuthController extends Controller
      * update status user status from 0 to 1
      */
     public function validateOTP($id_user, $otp) {
-        $this->middleware('auth');
         // setiap id_user harus di decode dan di decode dulu karena dia dapatnya dari hasid, bukan id_user
         try {
             $user = User::where(['id' => $id_user, 'otp' => $otp])->first();
