@@ -11,8 +11,7 @@ class TransactionController extends Controller
 
     function __construct()
     {
-        // semua fungsi di kelas ini di jaga auth
-        // $this->middleware('auth');
+        
     }
 
     public function allTransactions() {
@@ -86,8 +85,6 @@ class TransactionController extends Controller
 
     public function updateDataTransaction(Request $request, $id_transaction)
     {
-        $this->middleware('auth');
-
         try {
             $transaction = Transaction::findOrFail($id_transaction);
             $transaction->fill($request->all());
@@ -104,8 +101,6 @@ class TransactionController extends Controller
 
     public function deleteTransaction($id_transaction)
     {
-        $this->middleware('auth');
-
         $transaction = Transaction::findOrFail($id_transaction);
         try {
             $transaction->delete = 1;

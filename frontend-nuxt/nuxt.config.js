@@ -32,6 +32,8 @@ export default {
     '~/plugins/close-event.client.js',
     '~/plugins/filters.js',
     '~/plugins/datatable.js',
+    '~/plugins/inject-token.js',
+    
 
     { src: '~/plugins/vuex-persist', ssr: false },
   ],

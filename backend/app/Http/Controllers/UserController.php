@@ -17,7 +17,7 @@ class UserController extends Controller
     public function __construct()
     {   
         // uncomment this to enable auth for entire class
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -27,7 +27,6 @@ class UserController extends Controller
      */
     public function profile()
     {
-        $this->middleware('auth');
         return response()->json(['user' => Auth::user()], 200);
     }
 
@@ -38,7 +37,6 @@ class UserController extends Controller
      */
     public function allUsers()
     {
-        $this->middleware('auth');
         return response()->json(['users' => User::all()], 200);
     }
 
@@ -47,7 +45,6 @@ class UserController extends Controller
     }
 
     public function deleteUser($id_user) {
-        $this->middleware('auth');
         $user = User::findOrFail($id_user);
         try {
             $user->delete = 1;
