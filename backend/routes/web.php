@@ -69,14 +69,14 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
             'as' => 'image_campaign',
             'uses' => 'CampaignController@imageCampaign'
         ]);
-
+        
+        $router->get('user/{id_user}', 'CampaignController@campaignByUser');
         $router->get('/', 'CampaignController@allCampaigns');
         $router->get('/{id_campaign}[/{slug}]', 'CampaignController@campaign');
         $router->post('store[/{id_user}]', 'CampaignController@createCampaign');
         $router->post('update/{id_campaign}', 'CampaignController@updateCampaign');
         $router->delete('delete/{id_campaign}', 'CampaignController@deleteCampaign');
         
-
         $router->get('rsvp/{id_campaign}/{id_user}', 'CampaignController@assignMemberToCampaign');
 
     });

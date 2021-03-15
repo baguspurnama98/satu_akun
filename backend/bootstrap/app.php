@@ -78,7 +78,8 @@ $app->configure('cors');
 // ]);
 $app->middleware([
     // https://github.com/fruitcake/laravel-cors
-    Fruitcake\Cors\HandleCors::class
+    Fruitcake\Cors\HandleCors::class,
+    'auth' => App\Http\Middleware\Authenticate::class,
 ]);
 
 $app->routeMiddleware([

@@ -52,8 +52,33 @@ class CampaignController extends Controller
         return response()->json(['campaigns' => $campaign], 200);
     }
 
-    public function campaignByUser($id_user) {
+
+    /**
+     * jika host params punya nilai
+     * maka query where is_host akan dilakukan (utk menentukan apakah ini campaign by host atau patungan by slot)
+     * jika tidak, maka akan ambil semua data campaign
+     * 
+     * jika query active didefenisikan bernilai true
+     * maka akan ambil campaignnya user yang sedang aktif saja
+     */
+    public function campaignByUser(Request $request, $id_user) {
+        $this->middleware('auth');
+        $is_host = $request->query('host') ?? null; // boolean true / false
+        $is_active = $request->query('active') ?? false; // boolean true / false
         
+        $campaign = Campaign::withCount('campaign_members as total_members')
+                             ->whereHas('campaign_members', function ($query) use($id_user, $is_host) { 
+                                    if ($is_host !== null) {
+                                        $is_host = filter_var($is_host, FILTER_VALIDATE_BOOLEAN);
+                                        return $query->where(['user_id' => $id_user, 'is_host' => $is_host]);
+                                    }
+                                    return $query->where(['user_id' => $id_user]);
+                                });
+
+        $campaign = $is_active ? $campaign->active()->get() : $campaign->get();
+        
+        return response()->json(['campaigns' => $campaign], 200);
+
     }
 
     /**
