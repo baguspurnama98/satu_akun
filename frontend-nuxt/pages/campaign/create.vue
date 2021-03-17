@@ -421,7 +421,6 @@ export default {
         expired_date: '',
         duration_date: '',
         durasi: '',
-        status: '',
         slot_capacity: '',
         slot_price: '',
         media_blob: '',
@@ -440,7 +439,6 @@ export default {
   methods: {
     handleSave() {
       this.loading = true
-      this.campaign.status = 1
       this.campaign.expired_date = moment(this.campaign.expired_date).format(
         'YYYY-MM-DD HH:mm:ss'
       )

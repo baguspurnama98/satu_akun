@@ -133,24 +133,24 @@
                 <template v-if="user_role === 'u'">
                   <div class="py-1">
                     <NuxtLink
-                      to="/users/1221/campaign/"
+                      :to="`/users/${this.$store.state.user.id}/campaign/`"
                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                       role="menuitem"
                       >Campaign Saya
                     </NuxtLink>
                     <NuxtLink
-                      to="/users/2/patungan"
+                      :to="`/users/${this.$store.state.user.id}/patungan/`"
                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                       role="menuitem"
                       >Patungan Saya
                     </NuxtLink>
                   </div>
                   <div class="py-1">
-                    <a
-                      href="/users/2/transaksi"
+                    <NuxtLink
+                      :to="`/users/${this.$store.state.user.id}/transaksi/`"
                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                       role="menuitem"
-                      >Riwayat Transaksi</a
+                      >Riwayat Transaksi</NuxtLink
                     >
                   </div>
                 </template>
@@ -252,7 +252,7 @@ export default {
         .then((resp) => {
           this.$store.dispatch('auth/logout')
           this.$store.dispatch('delUserProfile')
-          window.location.reload()
+          window.location.replace('/')
         })
         .catch((errors) => {
           console.dir(errors)

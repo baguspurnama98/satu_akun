@@ -10,30 +10,21 @@
           </h3>
         </div>
       </div>
-      <nav class="flex justify-center items-center mt-4">
-        <div class="flex flex-row mt-3 flex-wrap text-center">
-          <a
-            class="text-gray-600 hover:underline mx-auto px-2 sm:mt-0 cursor-pointer"
-            @click="handleChooseCategory('progress')"
-            :class="[
-              menuActive == 'progress' ? 'text-indigo-400 font-bold' : '',
-            ]"
-            >Sedang Proses</a
-          >
-          <a
-            class="text-gray-600 hover:underline mx-auto px-2 sm:mt-0 cursor-pointer"
-            @click="handleChooseCategory('complete')"
-            :class="[
-              menuActive == 'complete' ? 'text-indigo-400 font-bold' : '',
-            ]"
-            >Selesai</a
-          >
-        </div>
-      </nav>
+
       <div style="border-bottom: 2px solid #eaeaea">
         <ul class="flex cursor-pointer">
-          <li class="py-2 px-6 bg-white rounded-t-lg">Sedang Proses</li>
-          <li class="py-2 px-6 rounded-t-lg text-gray-500 bg-gray-200">
+          <li
+            class="py-2 px-6 rounded-t-lg"
+            @click="handleChooseCategory('progress')"
+            :class="[menuActive == 'progress' ? 'turnOnTab' : 'turnOffTab']"
+          >
+            Sedang Proses
+          </li>
+          <li
+            class="py-2 px-6 rounded-t-lg"
+            @click="handleChooseCategory('complete')"
+            :class="[menuActive == 'complete' ? 'turnOnTab' : 'turnOffTab']"
+          >
             Selesai
           </li>
         </ul>
@@ -94,5 +85,12 @@ export default {
 <style lang="postcss">
 .datatables-campaign {
   @apply px-3 overflow-auto h-screen;
+}
+.turnOnTab {
+  @apply text-indigo-400 font-bold shadow-md bg-gray-100;
+}
+
+.turnOffTab {
+  @apply bg-gray-200 text-gray-500;
 }
 </style>
