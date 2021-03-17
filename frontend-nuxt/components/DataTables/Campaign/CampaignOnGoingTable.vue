@@ -35,19 +35,17 @@
             class="border-t-2 hover:bg-gray-200"
           >
             <td class="px-3 truncate" style="max-width: 150px">
-              {{ row.name }}
+              {{ row.title }}
             </td>
             <td class="px-3 truncate" style="max-width: 150px">
-              {{ row.host }}
+              {{ row.host_name.name }}
             </td>
             <!-- aku tambah informasi email, biar admin tau email suatu campaign dengan mudah -->
-            <td class="px-3 truncate" style="max-width: 150px">
-              baguspurnama@gmail.com
-            </td>
-            <td class="px-3">{{ row.created | formatDate }}</td>
+            <td class="px-3 truncate" style="max-width: 150px">email belum</td>
+            <td class="px-3">{{ row.created_at | formatDate }}</td>
 
             <td class="px-3">
-              {{ row.expired | formatDate }}
+              {{ row.expired_date | formatDate }}
             </td>
             <td class="justify-between py-2 inline-block relative">
               <div class="inline-flex">
@@ -393,35 +391,7 @@ export default {
       filters: {
         name: { value: '', keys: ['name', 'email'] },
       },
-      campaigns: [
-        {
-          id: 1,
-          name: 'akun netflix 1 bulan dijamin aman',
-          host: 'Elisabeth Olsen',
-          member: 5,
-          gathered: 1,
-          created: new Date(),
-          expired: new Date(),
-        },
-        {
-          id: 2,
-          name: 'akun netflix 1 bulan dijamin aman',
-          host: 'Elisabeth Olsen',
-          member: 5,
-          gathered: 5,
-          created: new Date(),
-          expired: new Date(),
-        },
-        {
-          id: 3,
-          name: 'akun netflix 1 bulan dijamin aman',
-          host: 'Elisabeth Olsen',
-          member: 5,
-          gathered: 3,
-          created: new Date(),
-          expired: new Date(),
-        },
-      ],
+      campaigns: [],
     }
   },
   methods: {
@@ -470,6 +440,17 @@ export default {
     saveInfoAccount() {
       alert('post request save info account')
     },
+  },
+  mounted() {
+    this.$axios
+      .$get(process.env.API_DEV_URL + 'campaign?status=1')
+      .then((resp) => {
+        this.campaigns = resp.campaigns
+        console.log(resp)
+      })
+      .catch((errors) => {
+        console.log(errors)
+      })
   },
 }
 </script>
