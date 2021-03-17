@@ -22,17 +22,18 @@
                 <span class="text-red-500 font-medium py-2 text-xs" v-if="errorStatus">{{ errorMessage }}</span>
                 <span v-if="errorCode == 404 && errorStatus == true" class="text-indigo-500 font-medium py-2 underline text-sm cursor-pointer" @click.prevent="resendOtp">Kirim ulang OTP?</span>
                 <div class="mt-4 mb-3 flex items-center justify-between">
-                    <button class=" px-6 py-2 w-1/3 rounded text-white shadow-lg bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700" type="submit">
-                    <span class="inline-flex items-center p-0 m-0">
-                    <svg v-if="loading" 
-                        class="animate-spin -ml-1 mr-3 h-4 w-4 text-white" 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        fill="none" 
-                        viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                        Masuk</span>
+                    <button class="px-6 py-2 min-w-1/3 rounded text-white shadow-lg bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700" type="submit">
+                        <span class="inline-flex items-center p-0 m-0">
+                        <svg v-if="loading" 
+                            class="animate-spin -ml-1 mr-3 h-4 w-4 text-white" 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            fill="none" 
+                            viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                            Masuk
+                        </span>
                     </button>
                     <!-- Kenapa kita ga provide lupa password? Karena kita gabisa otomatis kirim link ke email mereka, harus manual -- knp ngga bisa? bukannya tinggal pake request api by email user pake findOrFail, kalo nemu send email smtp ke email tsb(?)koreksi kalo salah... -->
                     <a class="inline-block align-baseline font-normal text-sm text-indigo-500 hover:text-indigo-800" href="#">

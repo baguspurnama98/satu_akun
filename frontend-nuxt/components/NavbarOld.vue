@@ -202,9 +202,7 @@
 </template>
 
 <script>
-import Template from '../../frontend/src/components/Template.vue'
 export default {
-  components: { Template },
   name: 'Navbar',
   data() {
     return {
