@@ -37,9 +37,9 @@ class CampaignController extends Controller
 
         $campaigns = Campaign::with(['categories'])->withCount('campaign_members as total_members');
         
-        $campaigns = ($status !== null) ? $campaigns->statusCampaign($status) : $campaigns;
-        $campaigns = ($is_all !== false) ? $campaigns : $campaigns->active();
-
+        // $campaigns = ($status !== null) ? $campaigns->statusCampaign($status) : $campaigns;
+        // $campaigns = ($is_all !== false) ? $campaigns : $campaigns->active();
+        $campaigns = ($status !== null && $is_all === false) ? $campaigns->statusCampaign($status) : $campaigns->active();
         if ($search !== null) {
             $campaigns->search($search);
         }
@@ -73,15 +73,14 @@ class CampaignController extends Controller
                                     // perlu juga dilakukan kalkulasi yg in atau out
                                     return $query->where('status', 1)->select(DB::raw('SUM(nominal)'));
                              }])
-                             ->with('campaign_members', function ($query) use($id_user, $is_host) { 
-                                    if ($is_host !== null) {
-                                        $is_host = filter_var($is_host, FILTER_VALIDATE_BOOLEAN);
-                                        return $query->where(['user_id' => $id_user, 'is_host' => $is_host]);
-                                    }
-                                    // ini ambil semua
-                                    return $query->where(['user_id' => $id_user]);
-                                });
-
+                             ->with(['emails', 'campaign_members' => function ($query) use($id_user, $is_host) { 
+                                if ($is_host !== null) {
+                                    $is_host = filter_var($is_host, FILTER_VALIDATE_BOOLEAN);
+                                    return $query->where(['user_id' => $id_user, 'is_host' => $is_host]);
+                                }
+                                // ini ambil semua
+                                return $query->where(['user_id' => $id_user]);
+                            }]);
                                 
         $campaign = ($is_active && $status === null) ? $campaign->active() : $campaign;
         $campaign = ($status !== null) ? $campaign->statusCampaign($status) : $campaign;
@@ -119,7 +118,6 @@ class CampaignController extends Controller
             'slot_price' => 'required',
             'expired_date' => 'required',
             'duration_date' => 'required',
-            'media_blob' => 'image|required',
         ]);
 
         try {
