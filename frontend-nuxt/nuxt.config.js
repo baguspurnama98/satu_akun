@@ -1,3 +1,6 @@
+let isDev = process.env.NODE_ENV !== 'production'
+
+
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
@@ -63,7 +66,7 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: process.env.API_DEV_URL,
+    baseURL: isDev ? process.env.API_DEV_URL : process.env.API_DEV_PROD,
   },
 
   // Content module configuration (https://go.nuxtjs.dev/config-content)

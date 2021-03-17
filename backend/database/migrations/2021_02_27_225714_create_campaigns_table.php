@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateCampaignsTable extends Migration
@@ -37,9 +38,11 @@ class CreateCampaignsTable extends Migration
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             
-            $table->index(['title']);
             $table->timestamps();
         });
+
+        // untuk digunakan dalam fulltext search
+        DB::statement("ALTER TABLE campaigns ADD FULLTEXT fulltext_index (title, description)");
     }
 
     /**

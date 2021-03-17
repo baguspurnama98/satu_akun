@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 
 class Campaign extends Model 
 {
+    use FullTextSearch;
+    
     // defenisi tabel yg digunakan di database
     protected $table = 'campaigns';
 
@@ -33,6 +35,15 @@ class Campaign extends Model
     protected $hidden = [
         // 'password_email',
         'delete'
+    ];
+
+    /**
+     * The columns of the full text index
+     * https://arianacosta.com/php/laravel/tutorial-full-text-search-laravel-5/
+     */
+    protected $searchable = [
+        'title',
+        'description',
     ];
 
     protected $appends = ['slug', 'host_name'];

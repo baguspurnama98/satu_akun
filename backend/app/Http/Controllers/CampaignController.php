@@ -33,12 +33,16 @@ class CampaignController extends Controller
         $status = $request->query('status') ?? null; 
         $category = $request->query('category') ?? null;
         $is_all = $request->query('all') ?? false; // active true if false
-        $search = null;
+        $search = $request->query('search') ?? null;
 
         $campaigns = Campaign::with(['categories'])->withCount('campaign_members as total_members');
         
         $campaigns = ($status !== null) ? $campaigns->statusCampaign($status) : $campaigns;
         $campaigns = ($is_all !== false) ? $campaigns : $campaigns->active();
+
+        if ($search !== null) {
+            $campaigns->search($search);
+        }
 
         // search by category
         // by default ambil yg aktif
@@ -98,7 +102,7 @@ class CampaignController extends Controller
      * 'status' (nullable) -> default 0,
      * 'slot_capacity',
      * 'slot_price',
-     * 'media_blob', (tdk ada di database, nullable)
+     * 'media_blob', (tdk ada di database, required)
      * 'media_url', (nullable)
      * 'password_email', (nullable)
      * 'updated_by', (nullable)
@@ -199,7 +203,7 @@ class CampaignController extends Controller
                 unlink($image_path);
             }
             $campaign->delete();
-            return response()->json(['campaign' => $campaign, 'message' => 'UPDATED'], 201);
+            return response()->json(['message' => 'DELETED'], 201);
         } catch (\Exception $e) {
             return response()->json(['message' => $e], 409);
         }
@@ -239,8 +243,10 @@ class CampaignController extends Controller
         if ($user->status !== 1 || CampaignMember::where(['user_id' => $user->id, 'campaign_id' => $id_campaign])->count() > 0) {
             return response()->json(['message' => 'User Not Authorized'], 401);
         }
-
+        
+        DB::beginTransaction();
         if ($campaign->total_members === $campaign->slot_capacity + 1) {
+            DB::rollBack();
             return response()->json(['message' => 'Full Capacity'], 409);
         }
         
@@ -250,15 +256,16 @@ class CampaignController extends Controller
                 'user_id' => $id_user,
                 'campaign_id' => $id_campaign,
                 'is_host'=> $is_host
-            ]);
-            $member_of_campaign->save();
-            
+            ])->save();
+
             if ($is_host === true) return;
             $this->generateNewTransaction($campaign, $user);
-
+            
+            DB::commit();
             return response()->json(['campaign' => $member_of_campaign, 'message' => 'CREATED'], 201);
         } catch (\Exception $e) {
             // return error message
+            DB::rollBack();
             return response()->json(['message' => $e], 409);
         }
     }
@@ -288,9 +295,7 @@ class CampaignController extends Controller
         $date = new DateTime();
         
         try {
-            $transaction = new Transaction();
-            // bank ini di kita nya
-            $transaction->fill([
+            $transaction = Transaction::create([
                 'campaign_id' => $campaign->id, 
                 'user_id' => $user->id,
                 'bank' => $bank,
@@ -299,7 +304,8 @@ class CampaignController extends Controller
                 'nominal' => $price_after_fee,
                 'unique_code' => $random_code,
                 'total_nominal' => $final_price,
-            ])->save();
+            ]);
+            // bank ini di kita nya
             $url = "wa.me/628976634788?text=" . $user->id . '/' . $transaction->id . '/no_transaksi=' . $transaction->no_transaction;
             $data = [
                 'name' => $user->name,
@@ -369,5 +375,14 @@ class CampaignController extends Controller
         }
     }
 
+    public function deleteCategories($id_categories) {
+        try {
+            $categories = CampaignCategories::findOrFail($id_categories);
+            $categories->delete();
+            return response()->json(['message' => 'DELETED'], 201);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e], 409);
+        }
+    }
 
 }
