@@ -4,10 +4,14 @@
   >
     <NuxtLink exact :to="`/campaign/${campaign.id}/${campaign.slug}`">
       <div class="col-span-4 relative">
-          <!-- src="https://picsum.photos/640/400/?random" -->
+        <!-- src="https://picsum.photos/640/400/?random" -->
         <img
-            :src="campaign.media_url"
-          alt="Placeholder"
+          :src="
+            campaign.media_url !== ``
+              ? campaign.media_url
+              : require(`~/assets/img/default-img.jpeg`)
+          "
+          alt="no-image"
           class="rounded-t-lg object-cover h-48 xs:h-32 w-full"
         />
 
@@ -35,9 +39,7 @@
 
         <div class="col-span-3 row-span-1 truncate">
           <a class="text-sm" href="#">
-            <span class="font-medium text-indigo-500">{{
-              host_name
-            }}</span>
+            <span class="font-medium text-indigo-500">{{ host_name }}</span>
           </a>
         </div>
 
@@ -71,7 +73,7 @@
               <div class="col-end-7 col-span-2">
                 <span class="text-sm text-gray-700">
                   {{
-                    campaign.total_members - 1 + '/' + campaign.slot_capacity
+                    campaign.total_members + '/' + campaign.slot_capacity
                   }}</span
                 >
               </div>
@@ -120,13 +122,15 @@ export default {
     }
   },
   computed: {
-      host_name: function() {
-          return this.campaign.host_name !== null ? this.campaign.host_name.name : ''
-      }
+    host_name: function () {
+      return this.campaign.host_name !== null
+        ? this.campaign.host_name.name
+        : ''
+    },
   },
   methods: {},
   mounted() {
-      console.log(this.campaign.host_name)
+    console.log(this.campaign.host_name)
   },
 }
 </script>

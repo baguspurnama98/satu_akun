@@ -43,8 +43,12 @@
           </h2>
         </div>
 
-        <div class="col-start-2 xs:col-start-1 row-start-3 space-y-3 px-4 xs:py-4">
-          <div class="flex items-center text-black text-md xs:text-sm font-normal">
+        <div
+          class="col-start-2 xs:col-start-1 row-start-3 space-y-3 px-4 xs:py-4"
+        >
+          <div
+            class="flex items-center text-black text-md xs:text-sm font-normal"
+          >
             <p class="font-bold text-2xl">
               {{ campaign.slot_price | formatRupiah }}
               <span class="font-normal">/orang</span>
@@ -65,7 +69,9 @@
               />
             </svg>
             <p class="text-md sm:text-sm ml-1">
-              <span class="text-gray-900 font-medium">{{ campaign.durasi }}</span>
+              <span class="text-gray-900 font-medium">{{
+                campaign.durasi
+              }}</span>
             </p>
           </div>
           <p class="text-md xs:text-sm">
@@ -74,9 +80,14 @@
               campaign.expired_date | formatDate
             }}</span>
           </p>
-          <p class="flex items-center text-black text-md xs:text-sm font-normal">
+          <p
+            class="flex items-center text-black text-md xs:text-sm font-normal"
+          >
             Oleh:
-            <a class="text-md xs:text-sm px-1 font-medium text-indigo-500" href="#">
+            <a
+              class="text-md xs:text-sm px-1 font-medium text-indigo-500"
+              href="#"
+            >
               {{ campaign.host_name }}
             </a>
           </p>
@@ -90,7 +101,11 @@
             <div class="relative col-span-1 row-span-1 md:col-span-2">
               <!-- src="https://picsum.photos/640/400/?random" -->
               <img
-                :src="campaign.media_url"
+                :src="
+                  campaign.media_url !== ``
+                    ? campaign.media_url
+                    : require(`~/assets/img/default-img.jpeg`)
+                "
                 alt="..."
                 class="absolute inset-0 w-full h-full object-cover bg-gray-100 rounded-lg z-0"
               />
@@ -99,8 +114,12 @@
         </div>
       </div>
 
-      <div class="w-full border border-gray-300 border-opacity-50 mt-5 sm:mx-5"></div>
-      <div class="relative grid grid-cols-1 w-full sm:px-5 sm:py-5 sm:gap-x-8 md:py-5">
+      <div
+        class="w-full border border-gray-300 border-opacity-50 mt-5 sm:mx-5"
+      ></div>
+      <div
+        class="relative grid grid-cols-1 w-full sm:px-5 sm:py-5 sm:gap-x-8 md:py-5"
+      >
         <div class="px-3 my-5">
           <h1
             class="font-semibold text-2xl text-gray-700 subpixel-antialiased text-center pb-4"
@@ -136,15 +155,21 @@
           </div>
         </div>
       </div>
-      <div class="w-full border border-gray-300 border-opacity-50 sm:mx-5"></div>
-      <div class="relative grid grid-cols-1 w-full sm:px-5 sm:py-5 sm:gap-x-8 md:py-5">
+      <div
+        class="w-full border border-gray-300 border-opacity-50 sm:mx-5"
+      ></div>
+      <div
+        class="relative grid grid-cols-1 w-full sm:px-5 sm:py-5 sm:gap-x-8 md:py-5"
+      >
         <div class="col-start-1 px-3 mt-5 mb-2">
           <h1
             class="font-semibold text-2xl text-gray-700 subpixel-antialiased text-center pb-4"
           >
             Daftar Peserta
           </h1>
-          <div class="sm:grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 sm:gap-3 my-3">
+          <div
+            class="sm:grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 sm:gap-3 my-3"
+          >
             <div
               class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2 items-center"
               v-for="member in campaign.campaign_members"
@@ -154,7 +179,10 @@
                 v-if="member.is_pay === 0"
                 class="bg-gray-500 h-3 w-3 m-2 rounded-full"
               ></span>
-              <span v-else class="bg-yellow-400 h-3 w-3 m-2 rounded-full"></span>
+              <span
+                v-else
+                class="bg-yellow-400 h-3 w-3 m-2 rounded-full"
+              ></span>
 
               <div class="font-medium px-2 truncate">
                 {{ member.users.name }}
@@ -165,7 +193,8 @@
 
             <div
               class="flex justify-start cursor-pointer text-gray-700 bg-green-200 rounded-md px-2 py-2 xs:mb-2"
-              v-for="index in campaign.slot_capacity - (campaign.total_members - 1)"
+              v-for="index in campaign.slot_capacity -
+              (campaign.total_members - 1)"
               :key="index"
             >
               <div class="px-2 font-bold">Slot Kosong</div>
@@ -312,30 +341,30 @@
   </div>
 </template>
 <script>
-import IconSocial from "../Profil/IconSocial";
+import IconSocial from '../Profil/IconSocial'
 
 export default {
   components: { IconSocial },
-  name: "DetailCampaign",
-  props: ["campaign", "registered"],
+  name: 'DetailCampaign',
+  props: ['campaign', 'registered'],
   data() {
     return {
       hiddenDetail: true,
       loading: false,
-    };
+    }
   },
   methods: {
     showDetail() {
-      this.hiddenDetail = !this.hiddenDetail;
+      this.hiddenDetail = !this.hiddenDetail
     },
     rsvpCheckout(idCampaign) {
       if (this.isLogin) {
         if (this.registered) {
           this.$router.push(
             `/campaign/${idCampaign}/checkout/${this.$store.state.user.id}`
-          );
+          )
         } else {
-          this.loading = true;
+          this.loading = true
 
           this.$axios
             .$get(
@@ -345,35 +374,35 @@ export default {
             .then((resp) => {
               this.$router.push(
                 `/campaign/${idCampaign}/checkout/${this.$store.state.user.id}`
-              );
+              )
             })
             .catch((errors) => {
-              console.dir(errors);
-            });
+              console.dir(errors)
+            })
         }
       } else {
-        this.$router.push("/account/login");
+        this.$router.push('/account/login')
       }
     },
   },
   computed: {
     isLogin() {
-      return this.$store.state.auth.token;
+      return this.$store.state.auth.token
     },
 
     isDisable() {
       if (this.$store.state.auth.token) {
         return (
           this.campaign.id_host === this.$store.state.user.id ||
-          this.$store.state.user.role === "a"
+          this.$store.state.user.role === 'a'
           // this.statusDisable
-        );
+        )
       } else {
         return false
       }
     },
   },
-};
+}
 </script>
 
 <style scoped>

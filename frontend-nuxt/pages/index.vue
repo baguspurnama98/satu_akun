@@ -10,7 +10,7 @@
 
     <template>
       <!-- Content disini -->
-      <Landing class="my-12" />
+      <Landing class="my-8" />
       <!-- component campaign -->
       <section
         id="section2"
@@ -236,8 +236,9 @@ export default {
   },
   mounted() {
     this.$axios
-      .$get(process.env.API_DEV_URL + `campaign/`)
+      .$get(process.env.API_DEV_URL + `campaign`)
       .then((resp) => {
+        console.log(resp)
         this.campaigns = resp.campaigns
         console.log(this.campaigns)
       })

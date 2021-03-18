@@ -24,7 +24,9 @@ class Transaction extends Model
         'status',
         'updated_by',
         'created_by',
+        // butuh atas nama
     ];
+
 
     // yang gak akan ditampilkan atribut nya diluar dari lingkungan lumen/laravel
     protected $hidden = [
@@ -58,12 +60,12 @@ class Transaction extends Model
      */
     public function campaigns()
     {
-        return $this->belongsTo(Campaign::class);
+        return $this->belongsTo(Campaign::class, 'campaign_id');
     }
 
     public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

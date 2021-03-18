@@ -1,57 +1,61 @@
 <template>
   <section class="text-gray-600 body-font overflow-hidden">
     <div class="container mx-auto">
-      <div class="lg:w-4/5 mx-auto flex flex-wrap">
+      <div class="lg:w-4/5 mx-auto flex flex-wrap px-5">
         <img
-          alt="ecommerce"
           class="lg:w-1/2 w-full lg:h-full h-64 object-cover object-center rounded"
-          src="https://picsum.photos/400/400/?random"
+          :src="
+            campaign.media_url !== ``
+              ? campaign.media_url
+              : require(`~/assets/img/default-img.jpeg`)
+          "
+          alt="ecommerce"
         />
-        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 px-5 mt-6 lg:mt-0">
+        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
           <h2 class="text-sm title-font text-gray-500 tracking-widest">
             Campaign Akun
           </h2>
           <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
-            The Catcher in the Rye
+            {{ campaign.title }}
           </h1>
           <div class="flex mb-4">
-            <span class="flex items-center text-gray-600"> Bagus Purnama </span>
+            <span class="flex items-center text-gray-600">
+              {{ campaign.host_name.name }}
+            </span>
             <span class="flex ml-3 pl-3 border-l-2 border-gray-200 space-x-2s">
               <icon-social class="lg:mt-6"></icon-social>
             </span>
           </div>
           <div class="py-3 mb-3">
-            <!-- Deskripsi -->
-            <p
-              class="leading-relaxed text-justify"
-              :class="[detail ? 'line-clampin' : '']"
-            >
-              Fam locavore kickstarter distillery. Mixtape chillwave tumeric
-              sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo
-              juiceramps cornhole raw denim forage brooklyn. Everyday carry +1
-              seitan poutine tumeric. Gastropub blue bottle austin listicle
-              pour-over, neutra jean shorts keytar banjo tattooed umami
-              cardigan.Fam locavore kickstarter distillery. Mixtape chillwave
-              tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam
-              indxgo juiceramps cornhole raw denim forage brooklyn. Everyday
-              carry +1 seitan poutine tumeric. Gastropub blue bottle austin
-              listicle pour-over, neutra jean shorts keytar banjo tattooed umami
-              cardigan.
-            </p>
-            <button
-              v-if="detail === true"
-              class="border-none bg-none cursor-pointer hover:underline text-indigo-500 focus:outline-none"
-              @click="showDetail()"
-            >
-              Lihat selengkapnya
-            </button>
-            <button
-              v-else
-              class="border-none bg-none cursor-pointer hover:underline text-indigo-500 focus:outline-none"
-              @click="showDetail()"
-            >
-              Lihat lebih ringkas
-            </button>
+            <div>
+              <div v-if="`${campaign.description}`.length > 100">
+                <p
+                  class="mb-3 text-justify"
+                  v-bind:class="[hiddenDetail ? 'line-clampin' : '']"
+                >
+                  {{ campaign.description }}
+                </p>
+                <button
+                  v-if="hiddenDetail"
+                  class="border-none bg-none cursor-pointer hover:underline text-indigo-500 focus:outline-none"
+                  @click="showDetail()"
+                >
+                  Lihat selengkapnya
+                </button>
+                <button
+                  v-else
+                  class="border-none bg-none cursor-pointer hover:underline text-indigo-500 focus:outline-none"
+                  @click="showDetail()"
+                >
+                  Lihat lebih ringkas
+                </button>
+              </div>
+              <div v-else>
+                <p class="mb-3 text-justify">
+                  {{ campaign.description }}
+                </p>
+              </div>
+            </div>
             <!-- Template ini hanya akan muncul ketika yang login adalah pemilik host atau slot dan status sudah berlangsung atau selesai -->
             <template v-if="true">
               <!-- disini isinya element informasi akun -->
@@ -70,7 +74,7 @@
                       Alamat Email
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0">
-                      baguspurnama98@gmail.com
+                      {{ campaign.email_id }}
                     </dd>
                   </div>
                 </dl>
@@ -78,7 +82,7 @@
                   <div class="bg-gray-50 py-2 sm:grid sm:grid-cols-3 sm:gap-4">
                     <dt class="text-sm font-medium text-gray-600">Password</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0">
-                      yukNonton#01
+                      {{ campaign.password_email }}
                     </dd>
                   </div>
                 </dl>
@@ -96,29 +100,44 @@
             </template>
           </div>
           <div
-            class="flex mt-6 items-center pt-5 border-t-2 border-gray-100"
-            v-if="user_role == 'u'"
+            class="flex mt-6 items-center pt-5 border-t-2 border-gray-100 justify-between"
           >
             <!-- Batalkan dan Edit hanya aktif ketika dia adalah host dan status masih aktif -->
             <button
-              class="flex ml-auto text-white bg-red-500 border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded"
+              class="flex mx-auto text-white bg-red-500 border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded"
+              v-if="
+                campaign.status === 0 &&
+                campaign.host_name.id === this.$store.state.user.id
+              "
             >
               Batalkan
             </button>
             <button
-              class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded"
+              class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded"
+              v-if="
+                campaign.status === 0 &&
+                campaign.host_name.id === this.$store.state.user.id
+              "
             >
               Edit
             </button>
             <!-- Ajukan perpanjangan hanya aktif ketika dia adalah slot dan status expired -->
             <button
-              class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded"
+              class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded"
+              v-if="
+                campaign.status === 2 &&
+                campaign.host_name.id !== this.$store.state.user.id
+              "
             >
               Perpanjang
             </button>
             <!-- Laporkan hanya aktif ketika dia adalah slot dan status berlangsung -->
             <button
-              class="flex ml-auto text-white bg-red-500 border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded"
+              class="flex mx-auto text-white bg-red-500 border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded"
+              v-if="
+                campaign.status === 1 &&
+                campaign.host_name.id !== this.$store.state.user.id
+              "
             >
               Laporkan
             </button>
@@ -133,21 +152,14 @@
 import IconSocial from '../../Profil/IconSocial'
 export default {
   name: 'DashboardCampaign',
-
   components: { IconSocial },
   // status: aktif, ekspired, berlangsung, refund
   // ini bakal dapatin data si pemilik host juga
-  props: ['postTitle', 'user_role'],
+  props: ['postTitle', 'user_role', 'campaign'],
   // kita pakai props, data disini hanya sebagai contoh
   data() {
     return {
       detail: true,
-      campaign: {
-        status: 'aktif',
-        judul: 'Apa Mau Loe Haah? Gak suka?',
-        host: 'Anastasya Eka',
-        dana_terkumpul: 'Rp 20.000',
-      },
     }
   },
 

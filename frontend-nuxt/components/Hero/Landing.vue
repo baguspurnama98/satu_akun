@@ -1,9 +1,10 @@
 <template>
-  <div class="lg:px-10">
+  <div class="">
     <section
       class="container px-4 mx-auto flex flex-wrap items-center justify-between"
     >
-      <div
+        <!-- Mending diganti dengan sesuatu yg menunjukkan utk buat campaign baru -->
+      <!-- <div
         class="relative items-center text-gray-900 mb-10 xs:mb-5 w-1/2 xs:w-full mx-auto"
       >
         <input
@@ -32,12 +33,12 @@
             />
           </svg>
         </button>
-      </div>
+      </div> -->
       <!-- min-h-screen min-w-screen -->
-      <div class="flex flex-col items-center bg-white pt-8">
+      <div class="flex flex-col items-center bg-white">
         <!-- flex-col -->
         <div
-          class="flex flex-col-reverse items-center justify-center p-10 mx-auto lg:flex-row lg:max-w-6xl lg:p-0 xs:p-0 xs:top-0"
+          class="flex flex-col-reverse items-center justify-center mx-auto lg:flex-row lg:max-w-6xl lg:p-0 xs:p-0 xs:top-0"
         >
           <div class="w-full lg:pr-10 rounded-lg md:w-2/3 lg:w-1/2 group">
             <div class="relative xs:px-10">
