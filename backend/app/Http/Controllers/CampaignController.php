@@ -39,9 +39,14 @@ class CampaignController extends Controller
         
         // $campaigns = ($status !== null) ? $campaigns->statusCampaign($status) : $campaigns;
         // $campaigns = ($is_all !== false) ? $campaigns : $campaigns->active();
-        $campaigns = ($status !== null && $is_all === false) ? $campaigns->statusCampaign($status) : $campaigns->active();
+        $campaigns = ($status !== null && $is_all === false) ? $campaigns->statusCampaign($status) : ($is_all === false ? $campaigns->active() : $campaigns);
         if ($search !== null) {
             $campaigns->search($search);
+        }
+        if ($category !== null && $category !== 'all') {
+            $campaigns->whereHas('categories', function($q) use ($category) {
+                $q->where('categories', $category);
+            });
         }
 
         // search by category

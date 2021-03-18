@@ -170,7 +170,7 @@
                 <div class="py-1">
                   <span
                     @click="logout"
-                    class="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                    class="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-red-200 hover:text-gray-900"
                     role="menuitem"
                     >Keluar</span
                   >
@@ -187,7 +187,7 @@
                   </NuxtLink>
                   <NuxtLink
                     to="/account/register"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-200 hover:text-gray-900"
                     role="menuitem"
                     >Daftar
                   </NuxtLink>

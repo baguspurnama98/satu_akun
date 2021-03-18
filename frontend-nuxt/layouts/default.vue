@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavbarOld />
-    <Nuxt class="py-12"/>
+    <Nuxt class="py-12" keep-alive />
     <Footer />
   </div>
 </template>

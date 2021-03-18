@@ -10,7 +10,7 @@
 
     <template>
       <!-- Content disini -->
-      <Landing class="my-12" />
+      <Landing class="my-8" />
       <!-- component campaign -->
       <section
         id="section2"
