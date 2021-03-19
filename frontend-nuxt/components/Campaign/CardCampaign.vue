@@ -73,7 +73,7 @@
               <div class="col-end-7 col-span-2">
                 <span class="text-sm text-gray-700">
                   {{
-                    campaign.total_members + '/' + campaign.slot_capacity
+                    campaign.total_members - 1 + '/' + campaign.slot_capacity
                   }}</span
                 >
               </div>

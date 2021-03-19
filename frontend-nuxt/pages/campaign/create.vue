@@ -417,6 +417,7 @@ export default {
       campaign: {
         categories_id: '',
         title: '',
+        status: '0',
         description: '',
         expired_date: '',
         duration_date: '',
@@ -459,6 +460,7 @@ export default {
           formData
         )
         .then((resp) => {
+          console.log(resp)
           if (resp.message === 'CREATED') {
             this.$router.push(
               `/campaign/${resp.campaign.id}/${resp.campaign.slug}`
