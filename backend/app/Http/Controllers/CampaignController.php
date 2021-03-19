@@ -79,14 +79,13 @@ class CampaignController extends Controller
                                     return $query->where('status', 1)->select(DB::raw('SUM(nominal)'));
                              }])
                              ->with(['emails', 'campaign_members' ])
-                             ->whereHas(['campaign_members' => function ($query) use($id_user, $is_host) { 
+                             ->whereHas('campaign_members', function ($query) use($id_user, $is_host) { 
                                 if ($is_host !== null) {
                                     $is_host = filter_var($is_host, FILTER_VALIDATE_BOOLEAN);
                                     return $query->where(['user_id' => $id_user, 'is_host' => $is_host]);
                                 }
-                                // ini ambil semua
                                 return $query->where(['user_id' => $id_user]);
-                            }]);
+                            });
                                 
         $campaign = ($is_active && $status === null) ? $campaign->active() : $campaign;
         $campaign = ($status !== null) ? $campaign->statusCampaign($status) : $campaign;
