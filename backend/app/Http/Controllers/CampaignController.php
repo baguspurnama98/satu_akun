@@ -78,7 +78,8 @@ class CampaignController extends Controller
                                     // perlu juga dilakukan kalkulasi yg in atau out
                                     return $query->where('status', 1)->select(DB::raw('SUM(nominal)'));
                              }])
-                             ->with(['emails', 'campaign_members' => function ($query) use($id_user, $is_host) { 
+                             ->with(['emails', 'campaign_members' ])
+                             ->whereHas(['campaign_members' => function ($query) use($id_user, $is_host) { 
                                 if ($is_host !== null) {
                                     $is_host = filter_var($is_host, FILTER_VALIDATE_BOOLEAN);
                                     return $query->where(['user_id' => $id_user, 'is_host' => $is_host]);
@@ -247,28 +248,32 @@ class CampaignController extends Controller
             return response()->json(['message' => 'User Not Authorized'], 401);
         }
         
-        DB::beginTransaction();
+        // DB::beginTransaction();
         if ($campaign->total_members === $campaign->slot_capacity + 1) {
             DB::rollBack();
             return response()->json(['message' => 'Full Capacity'], 409);
         }
         
         try {
-            $member_of_campaign = new CampaignMember();
-            $member_of_campaign->fill([
+            $member_of_campaign = CampaignMember::create([
                 'user_id' => $id_user,
                 'campaign_id' => $id_campaign,
-                'is_host'=> $is_host
-            ])->save();
+                'is_host' => $is_host]);
+            // new CampaignMember();
+            // $member_of_campaign->fill([
+            //     'user_id' => $id_user,
+            //     'campaign_id' => $id_campaign,
+            //     'is_host'=> $is_host
+            // ])->save();
 
             if ($is_host === true) return;
             $this->generateNewTransaction($campaign, $user);
             
-            DB::commit();
+            // DB::commit();
             return response()->json(['campaign' => $member_of_campaign, 'message' => 'CREATED'], 201);
         } catch (\Exception $e) {
             // return error message
-            DB::rollBack();
+            // DB::rollBack();
             return response()->json(['message' => $e], 409);
         }
     }
