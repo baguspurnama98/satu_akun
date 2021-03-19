@@ -70,7 +70,7 @@ export default {
     login() {
       this.loading = true
       this.$axios
-        .$post(process.env.API_DEV_URL + 'auth/login', {
+        .$post('auth/login', {
           email: this.form.email,
           password: this.form.password,
         })
@@ -111,7 +111,7 @@ export default {
         headers: { Authorization: `Bearer ${token}` },
       }
       this.$axios
-      .$get(process.env.API_DEV_URL + 'profile', null, config)
+      .$get('profile', null, config)
       .then((res)=>{
       this.$store.dispatch('getUserProfile', res.user)
       
@@ -133,7 +133,7 @@ export default {
     resendOtp() {
       let id_user = this.idUser
       this.$axios
-        .$get(process.env.API_DEV_URL + `auth/resend-otp/${id_user}`)
+        .$get(`auth/resend-otp/${id_user}`)
         .then((resp) => {
             window.location.replace(`/account/validate-otp/${id_user}`)
         })

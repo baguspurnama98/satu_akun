@@ -179,7 +179,7 @@ export default {
       this.loading = true
       if (this.validatePhoneNumber(this.form.whatsapp)) {
         this.$axios
-          .$post(process.env.API_DEV_URL + 'auth/register', {
+          .$post('auth/register', {
             name: this.form.name,
             email: this.form.email,
             password: this.form.password,

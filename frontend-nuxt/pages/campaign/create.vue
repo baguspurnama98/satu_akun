@@ -454,9 +454,7 @@ export default {
       })
 
       this.$axios
-        .$post(
-          process.env.API_DEV_URL +
-            `campaign/store/${this.$store.state.user.id}`,
+        .$post(`campaign/store/${this.$store.state.user.id}`,
           formData
         )
         .then((resp) => {
@@ -586,7 +584,7 @@ export default {
 
   async mounted() {
     await this.$axios
-      .$get(process.env.API_DEV_URL + 'campaign/categories')
+      .$get('campaign/categories')
       .then((resp) => {
         const { categories } = resp
         this.categories = categories

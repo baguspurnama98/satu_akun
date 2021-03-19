@@ -119,7 +119,7 @@ export default {
     },
     fetchData() {
       this.$axios
-        .$get(process.env.API_DEV_URL + `campaign?status=${this.idMenu}`)
+        .$get(`campaign?status=${this.idMenu}`)
         .then((resp) => {
           this.campaigns = resp.campaigns
           console.log(resp)

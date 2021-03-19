@@ -260,7 +260,7 @@ export default {
   async created() {
     const { idUser, idCampaign } = this.$route.params;
     await this.$axios
-      .$get(process.env.API_DEV_URL + `transaction/user/${idUser}/campaign/${idCampaign}`)
+      .$get(`transaction/user/${idUser}/campaign/${idCampaign}`)
       .then((resp) => {
         this.transaction = resp.transactions[0];
         this.campaign = this.transaction.campaigns

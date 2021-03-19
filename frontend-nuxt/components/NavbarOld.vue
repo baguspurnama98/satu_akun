@@ -248,7 +248,7 @@ export default {
 
     logout() {
       this.$axios
-        .$get(process.env.API_DEV_URL + 'auth/logout')
+        .$get('auth/logout')
         .then((resp) => {
           this.$store.dispatch('auth/logout')
           this.$store.dispatch('delUserProfile')

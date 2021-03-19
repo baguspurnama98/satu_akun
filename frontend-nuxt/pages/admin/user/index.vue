@@ -51,7 +51,7 @@ export default {
     })
 
     this.$axios
-      .$get(process.env.API_DEV_URL + 'users')
+      .$get('users')
       .then((resp) => {
         this.users = resp.users
         console.log(resp)

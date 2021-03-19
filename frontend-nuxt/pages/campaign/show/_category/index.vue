@@ -89,11 +89,11 @@ export default {
     },
     getCampaign: function (keyword = null) {
       let category = this.$route.params.category
-      let url = `campaign/`;
-      if (keyword !== null) url = `campaign/?search=${keyword}`;
-      if (category != 'all') url = (keyword === null) ? `campaign/?category=${category}` :  `${url}&category=${category}`
+      let url = `campaign`;
+      if (keyword !== null) url = `campaign?search=${keyword}`;
+      if (category != 'all') url = (keyword === null) ? `campaign?category=${category}` :  `${url}&category=${category}`
       this.$axios
-        .$get(process.env.API_DEV_URL + url)
+        .$get(url)
         .then((resp) => {
           this.campaigns = resp.campaigns;
         })
@@ -130,7 +130,7 @@ export default {
   },
   created() {
     this.$axios
-      .$get(process.env.API_DEV_URL + "campaign/categories")
+      .$get("campaign/categories")
       .then((resp) => {
         this.categories = [ { categories: 'all' },...resp.categories ];
       })

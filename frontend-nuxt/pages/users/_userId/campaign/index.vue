@@ -265,10 +265,7 @@ export default {
   mounted() {
     console.log(this.$store.state.user.id)
     this.$axios
-      .$get(
-        process.env.API_DEV_URL +
-          `campaign/user/${this.$store.state.user.id}?host=true`
-      )
+      .$get(`campaign/user/${this.$store.state.user.id}?host=true`)
       .then((resp) => {
         console.log(resp)
         this.campaigns = resp.campaigns
