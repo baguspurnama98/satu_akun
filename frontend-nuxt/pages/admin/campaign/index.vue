@@ -3,35 +3,6 @@
     class="container px-4 mx-auto flex-wrap items-center justify-between min-h-screen"
   >
     <breadcrumb :breadcrumbs="breadcrumbs" class="pb-4"></breadcrumb>
-
-    <!-- <div class="grid grid-cols-5 xs:grid-cols-2 gap-8 w-full justify-center">
-      <span
-        @click.prevent="trailBackslash(item.route)"
-        class="flex flex-col items-center justify-center bg-white p-3 shadow-md rounded-lg transform hover:scale-105 cursor-pointer text-gray-900 hover:text-black"
-        v-for="item in menu"
-        :key="item.name"
-      >
-        <div
-          class="flex items-center shadow-lg border border-gray-200 overflow-hidden h-20 w-full text-center justify-center"
-        >
-          <div
-            width="128"
-            heigth="128"
-            alt=""
-            class="h-full w-full bg-gray-300 border-none relative items-center"
-          >
-            <img
-              :src="require('@/assets/img/' + item.img)"
-              class="h-full w-full rounded-md opacity-25 bg-white"
-              alt="..."
-            />
-          </div>
-          <h2 class="font-bold text-lg absolute text-black">
-            {{ item.name }}
-          </h2>
-        </div>
-      </span>
-    </div> -->
     <div class="container mx-auto px-6 pt-3 pb-10">
       <div class="flex items-center justify-between">
         <div class="w-full text-center">
@@ -44,9 +15,9 @@
         <div class="flex flex-row mt-3 flex-wrap text-center">
           <a
             class="text-gray-600 hover:underline mx-auto px-2 sm:mt-0 cursor-pointer"
-            @click="handleChooseCategory(item.route)"
+            @click="handleChooseCategory(item.id, item.route)"
             v-for="item in menu"
-            :key="item.name"
+            :key="item.id"
             :class="[
               menuActive == item.route ? 'text-indigo-400 font-bold' : '',
             ]"
@@ -56,19 +27,22 @@
       </nav>
     </div>
     <div v-if="menuActive == 'active'" class="datatables-campaign">
-      <CampaignActiveTable />
+      <CampaignActiveTable :campaigns="campaigns" />
     </div>
     <div v-if="menuActive == 'going-on'" class="datatables-campaign">
-      <CampaignOnGoingTable />
+      <CampaignOnGoingTable :campaigns="campaigns" />
     </div>
     <div v-if="menuActive == 'finish'" class="datatables-campaign">
-      <CampaignFinishTable />
+      <CampaignFinishTable :campaigns="campaigns" />
     </div>
     <div v-if="menuActive == 'refund'" class="datatables-campaign">
-      <CampaingRefundTable />
+      <CampaingRefundTable :campaigns="campaigns" />
+    </div>
+    <div v-if="menuActive == 'refunded'" class="datatables-campaign">
+      <CampaingRefundTable :campaigns="campaigns" />
     </div>
     <div v-if="menuActive == 'expired'" class="datatables-campaign">
-      <CampaignExpiredTable />
+      <CampaignExpiredTable :campaigns="campaigns" />
     </div>
   </div>
 </template>
@@ -91,14 +65,17 @@ export default {
   data() {
     return {
       menuActive: 'active',
+      idMenu: '0',
       menu: [
-        { img: 'active-icon.svg', name: 'Aktif', route: 'active' },
-        { img: 'going-icon.svg', name: 'Berlangsung', route: 'going-on' },
-        { img: 'finish-icon.svg', name: 'Selesai', route: 'finish' },
-        { img: 'refund-icon.svg', name: 'Refund', route: 'refund' },
-        { img: 'expired-icon.svg', name: 'Expired', route: 'expired' },
+        { name: 'Aktif', route: 'active', id: '0' },
+        { name: 'Berlangsung', route: 'going-on', id: '1' },
+        { name: 'Selesai', route: 'finish', id: '5' },
+        { name: 'Refund', route: 'refund', id: '3' },
+        { name: 'Selesai Refund', route: 'refunded', id: '4' },
+        { name: 'Expired', route: 'expired', id: '2' },
       ],
       breadcrumbs: [],
+      campaigns: [],
     }
   },
   methods: {
@@ -114,8 +91,42 @@ export default {
         : `admin/${routeName}`
       this.$router.push(path)
     },
-    handleChooseCategory(menu) {
+    handleChooseCategory(id, menu) {
+      console.log(id)
+      this.campaigns = []
       this.menuActive = menu
+      this.idMenu = id
+      switch (this.idMenu) {
+        case '0':
+          this.fetchData('0')
+          break
+        case '1':
+          this.fetchData('1')
+          break
+        case '2':
+          this.fetchData('2')
+          break
+        case '3':
+          this.fetchData('3')
+          break
+        case '4':
+          this.fetchData('4')
+          break
+        case '5':
+          this.fetchData('5')
+          break
+      }
+    },
+    fetchData() {
+      this.$axios
+        .$get(process.env.API_DEV_URL + `campaign?status=${this.idMenu}`)
+        .then((resp) => {
+          this.campaigns = resp.campaigns
+          console.log(resp)
+        })
+        .catch((errors) => {
+          console.log(errors)
+        })
     },
   },
   mounted() {
@@ -138,6 +149,9 @@ export default {
       }
     })
     this.breadcrumbs = crumbs
+  },
+  fetch() {
+    this.fetchData()
   },
 }
 </script>

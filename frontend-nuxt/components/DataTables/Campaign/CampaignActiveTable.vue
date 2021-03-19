@@ -100,7 +100,7 @@
                   <li class="px-2 py-2 hover:bg-gray-200 w-full border-none">
                     <a
                       class="inline-flex items-center"
-                      href="/users/1/campaign/1"
+                      :href="`/users/${$store.state.user.id}/campaign/${row.id}`"
                     >
                       <svg
                         class="w-4 h-4 mr-2"
@@ -274,6 +274,7 @@
 <script>
 export default {
   name: 'CampaignActiveTable',
+  props: ['campaigns'],
   data() {
     return {
       modal: {
@@ -287,32 +288,6 @@ export default {
       filters: {
         name: { value: '', keys: ['name', 'email'] },
       },
-      campaigns: [
-        // {
-        //   name: 'akun netflix 1 bulan dijamin aman',
-        //   host: 'Elisabeth Olsen',
-        //   member: 5,
-        //   gathered: 1,
-        //   created: new Date(),
-        //   expired: new Date(),
-        // },
-        // {
-        //   name: 'akun netflix 1 bulan dijamin aman',
-        //   host: 'Elisabeth Olsen',
-        //   member: 5,
-        //   gathered: 5,
-        //   created: new Date(),
-        //   expired: new Date(),
-        // },
-        // {
-        //   name: 'akun netflix 1 bulan dijamin aman',
-        //   host: 'Elisabeth Olsen',
-        //   member: 5,
-        //   gathered: 3,
-        //   created: new Date(),
-        //   expired: new Date(),
-        // },
-      ],
     }
   },
   methods: {
@@ -349,18 +324,6 @@ export default {
         alert('proses post request berlangsung')
       }
     },
-  },
-
-  mounted() {
-    this.$axios
-      .$get(process.env.API_DEV_URL + 'campaign')
-      .then((resp) => {
-        this.campaigns = resp.campaigns
-        console.log(resp)
-      })
-      .catch((errors) => {
-        console.log(errors)
-      })
   },
 }
 </script>
