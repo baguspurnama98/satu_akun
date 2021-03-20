@@ -44,7 +44,7 @@ export default {
       menu: [
         { img: 'user.svg', name: 'User', route: 'user/' },
         { img: 'campaign.svg', name: 'Campaign', route: 'campaign/' },
-        { img: 'payment.svg', name: 'Payment', route: 'payment/' },
+        { img: 'payment.svg', name: 'Payment', route: 'transaction/' },
         { img: 'email.svg', name: 'Kelola Email', route: 'email/' },
         { img: 'category.svg', name: 'Kelola Kategori', route: 'category/' },
       ],

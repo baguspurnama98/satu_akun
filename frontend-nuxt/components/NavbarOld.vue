@@ -26,7 +26,7 @@
           class="flex items-center px-3 py-2 border rounded bg-white border-gray-100 hover:text-indigio-600 hover:border-white"
         >
           <svg
-            class="fill-current h-4 w-4"
+            class="fill-current h-4 w-4 text-black"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -59,7 +59,7 @@
               <span>Layanan</span>
               <!-- Heroicon name: chevron-down -->
               <svg
-                class="ml-1 pt-1 h-5"
+                class="ml-1 pt-1 h-5 text-white"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"

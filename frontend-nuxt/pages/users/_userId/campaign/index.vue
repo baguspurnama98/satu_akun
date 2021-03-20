@@ -6,7 +6,7 @@
       </h3>
 
       <div class="relative overflow-auto pb-20">
-        <div v-if="campaigns === null" class="min-h-screen">
+        <div v-if="campaigns === null" class="min-h-screen min-w-screen justify-between items-center">
           <svg
             class="animate-spin mx-auto place-items-center h-20 w-20 text-indigo-400 self-center"
             xmlns="http://www.w3.org/2000/svg"
