@@ -68,7 +68,7 @@ class Campaign extends Model
 
     public function scopeActive($query) 
     {
-        return $query->whereDate('expired_date', '>=', Carbon::now())->where('status', '0');
+        return $query->where('expired_date', '>=', Carbon::now())->where('status', '0');
     }
 
     // - filter berdasarkan status, 0 = aktif, 1 = berlangsung, 2 = expired, 3 = refund, 4 = selesai refund, 5 = selesai

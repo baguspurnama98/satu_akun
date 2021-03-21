@@ -108,6 +108,15 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
             'uses' => 'TransactionController@verifyTransactionCampaign'
         ]);
     });
+
+
+    // php.ini files contains some limits that might affect this. Try changing these to high enough values:
+    // upload_max_filesize = 50M
+    // post_max_size = 50M
+    // memory_limit = 64M
+    $router->group(['prefix' => 'report'], function () use ($router) {
+        $router->post('upload', 'ReportController@upload');
+    });
     
 
     $router->get('profile', 'UserController@profile');
