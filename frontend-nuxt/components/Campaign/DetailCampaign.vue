@@ -367,9 +367,7 @@ export default {
           this.loading = true
 
           this.$axios
-            .$get(
-              process.env.API_DEV_URL +
-                `campaign/rsvp/${idCampaign}/${this.$store.state.user.id}/`
+            .$get(`campaign/rsvp/${idCampaign}/${this.$store.state.user.id}`
             )
             .then((resp) => {
               this.$router.push(

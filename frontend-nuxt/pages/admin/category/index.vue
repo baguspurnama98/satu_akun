@@ -126,7 +126,7 @@ export default {
     })
 
     this.$axios
-      .$get(process.env.API_DEV_URL + 'campaign/categories')
+      .$get('campaign/categories')
       .then((resp) => {
         this.categories = resp.categories
         console.log(this.categories)

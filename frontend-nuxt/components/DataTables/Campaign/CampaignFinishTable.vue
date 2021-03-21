@@ -35,18 +35,18 @@
             class="border-t-2 hover:bg-gray-200"
           >
             <td class="px-3 truncate" style="max-width: 150px">
-              {{ row.name }}
+              {{ row.title }}
             </td>
             <td class="px-3 truncate" style="max-width: 150px">
-              {{ row.host }}
+              {{ row.host_name.name }}
             </td>
             <td class="px-3 truncate" style="max-width: 150px">
-              baguspurnama@gmail.com
+              email ini belum
             </td>
-            <td class="px-3">{{ row.created | formatDate }}</td>
+            <td class="px-3">{{ row.created_at | formatDate }}</td>
 
             <td class="px-3">
-              {{ row.expired | formatDate }}
+              {{ row.expired_date | formatDate }}
             </td>
             <td class="justify-between py-2 inline-block relative">
               <div class="inline-flex">
@@ -86,7 +86,7 @@
                   <li class="px-2 py-2 hover:bg-gray-200 w-full border-none">
                     <a
                       class="inline-flex items-center"
-                      @click="showDetailCampaign()"
+                      :href="`/users/${$store.state.user.id}/campaign/${row.id}`"
                     >
                       <svg
                         class="w-4 h-4 mr-2"
@@ -114,7 +114,7 @@
                   <li class="px-2 py-2 hover:bg-gray-200 w-full border-none">
                     <a
                       class="inline-flex items-center"
-                      :href="'https://wa.me/62' + row.telp"
+                      :href="'https://wa.me/62' + row.host_name.whatsapp"
                       target="_blank"
                     >
                       <svg
@@ -223,6 +223,7 @@
 <script>
 export default {
   name: 'CampaignActiveTable',
+  props: ['campaigns'],
   data() {
     return {
       modal: {
@@ -236,32 +237,6 @@ export default {
       filters: {
         name: { value: '', keys: ['name', 'email'] },
       },
-      campaigns: [
-        {
-          name: 'akun netflix 1 bulan dijamin aman',
-          host: 'Elisabeth Olsen',
-          member: 5,
-          gathered: 1,
-          created: new Date(),
-          expired: new Date(),
-        },
-        {
-          name: 'akun netflix 1 bulan dijamin aman',
-          host: 'Elisabeth Olsen',
-          member: 5,
-          gathered: 5,
-          created: new Date(),
-          expired: new Date(),
-        },
-        {
-          name: 'akun netflix 1 bulan dijamin aman',
-          host: 'Elisabeth Olsen',
-          member: 5,
-          gathered: 3,
-          created: new Date(),
-          expired: new Date(),
-        },
-      ],
     }
   },
   methods: {
@@ -272,7 +247,6 @@ export default {
     dateSort(a, b) {
       let date1 = new Date(a.registered).getTime()
       let date2 = new Date(b.registered).getTime()
-
       return date1 - date2
     },
 
@@ -290,11 +264,6 @@ export default {
       this.activeDetail = null
       this.modal.status = !this.modal.status
       this.modal.text = text
-    },
-
-    showDetailCampaign() {
-      // untuk redirect ke detail campaign
-      alert('open new tab detail campaign by id campaign')
     },
   },
 }

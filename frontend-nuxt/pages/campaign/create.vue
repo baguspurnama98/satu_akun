@@ -417,6 +417,7 @@ export default {
       campaign: {
         categories_id: '',
         title: '',
+        status: '0',
         description: '',
         expired_date: '',
         duration_date: '',
@@ -453,12 +454,11 @@ export default {
       })
 
       this.$axios
-        .$post(
-          process.env.API_DEV_URL +
-            `campaign/store/${this.$store.state.user.id}`,
+        .$post(`campaign/store/${this.$store.state.user.id}`,
           formData
         )
         .then((resp) => {
+          console.log(resp)
           if (resp.message === 'CREATED') {
             this.$router.push(
               `/campaign/${resp.campaign.id}/${resp.campaign.slug}`
@@ -584,7 +584,7 @@ export default {
 
   async mounted() {
     await this.$axios
-      .$get(process.env.API_DEV_URL + 'campaign/categories')
+      .$get('campaign/categories')
       .then((resp) => {
         const { categories } = resp
         this.categories = categories

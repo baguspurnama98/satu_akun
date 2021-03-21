@@ -6,7 +6,7 @@
       </h3>
 
       <div class="relative overflow-auto pb-20">
-        <div v-if="campaigns === null" class="min-h-screen">
+        <div v-if="campaigns === null" class="min-h-screen min-w-screen justify-between items-center">
           <svg
             class="animate-spin mx-auto place-items-center h-20 w-20 text-indigo-400 self-center"
             xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@
               </td>
               <td class="border-t-2 border-gray-200 px-4 py-3">
                 <div class="text-sm leading-5">
-                  {{ campaign.total_members }}/{{ campaign.slot_capacity }}
+                  {{ campaign.total_members - 1 }}/{{ campaign.slot_capacity }}
                 </div>
               </td>
 
@@ -246,44 +246,6 @@ export default {
       activeDetail: null,
       detail: false,
       campaigns: null,
-      dataPatungan: [
-        {
-          title: 'Sharing Account Netflix 1 Tahun',
-          member: 3,
-          totalMember: 4,
-          status: 'aktif',
-          dana: 300000,
-        },
-        {
-          title: 'Sharing Account Netflix 3 Bulan',
-          member: 4,
-          totalMember: 4,
-          status: 'selesai',
-          dana: 120000,
-        },
-        {
-          title: 'Sharing Account Netflix 1 Bulan',
-          member: 4,
-          totalMember: 4,
-          status: 'refund',
-          dana: 340000,
-        },
-        {
-          title: 'Belajar Coding Javascript',
-          member: 1,
-          totalMember: 4,
-          status: 'pending',
-          dana: 150000,
-        },
-        {
-          title:
-            'Patungan Beli Akun Dicoding selama 1 tahun bebas kelas apa saja yang ada, yuk murah meriah',
-          member: 4,
-          totalMember: 4,
-          status: 'berlangsung',
-          dana: 123000,
-        },
-      ],
     }
   },
   methods: {
@@ -301,11 +263,9 @@ export default {
     },
   },
   mounted() {
+    console.log(this.$store.state.user.id)
     this.$axios
-      .$get(
-        process.env.API_DEV_URL +
-          `campaign/user/${this.$store.state.user.id}?host=true`
-      )
+      .$get(`campaign/user/${this.$store.state.user.id}?host=true`)
       .then((resp) => {
         console.log(resp)
         this.campaigns = resp.campaigns

@@ -88,8 +88,7 @@ export default {
     handleSave() {
       this.loading = true
       this.$axios
-        .$post(
-          process.env.API_DEV_URL + `campaign/categories/store`,
+        .$post(`campaign/categories/store`,
           this.categories
         )
         .then((resp) => {

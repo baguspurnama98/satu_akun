@@ -236,7 +236,7 @@ export default {
   },
   mounted() {
     this.$axios
-      .$get(process.env.API_DEV_URL + `campaign`)
+      .$get(`campaign`)
       .then((resp) => {
         console.log(resp)
         this.campaigns = resp.campaigns

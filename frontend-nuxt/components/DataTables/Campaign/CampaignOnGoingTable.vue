@@ -85,8 +85,7 @@
                   <li class="px-2 py-2 hover:bg-gray-200 w-full border-none">
                     <a
                       class="inline-flex items-center"
-                      href="#"
-                      @click="showDetailCampaign()"
+                      :href="`/users/${$store.state.user.id}/campaign/${row.id}`"
                     >
                       <svg
                         class="w-4 h-4 mr-2"
@@ -371,6 +370,7 @@
 <script>
 export default {
   name: 'CampaignActiveTable',
+  props: ['campaigns'],
   data() {
     return {
       modal: {
@@ -391,7 +391,6 @@ export default {
       filters: {
         name: { value: '', keys: ['name', 'email'] },
       },
-      campaigns: [],
     }
   },
   methods: {
@@ -416,9 +415,6 @@ export default {
       this.modal.status = !this.modal.status
       this.modal.text = text
     },
-    showDetailCampaign() {
-      alert('open new tab detail campaign by id campaign')
-    },
     handleProccess() {
       if (this.modal.text == 'refund') {
         alert('proses post request refund')
@@ -440,17 +436,6 @@ export default {
     saveInfoAccount() {
       alert('post request save info account')
     },
-  },
-  mounted() {
-    this.$axios
-      .$get(process.env.API_DEV_URL + 'campaign?status=1')
-      .then((resp) => {
-        this.campaigns = resp.campaigns
-        console.log(resp)
-      })
-      .catch((errors) => {
-        console.log(errors)
-      })
   },
 }
 </script>

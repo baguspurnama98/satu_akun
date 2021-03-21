@@ -1,6 +1,8 @@
 {
-  "name": "frontend-nuxt",
-  "version": "1.0.0",
+  "name": "patungin",
+  "homepage": "https://patungin.baguspurnama.com",
+  "description": "Platform Berpatungan Indonesia",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "dev": "nuxt",

@@ -25,9 +25,7 @@ export default {
   beforeMount() {
     console.log(this.$store.state.auth.token)
     this.$axios
-      .$get(
-        process.env.API_DEV_URL + `campaign/${this.$route.params.idCampaign}`
-      )
+      .$get(`campaign/${this.$route.params.idCampaign}`)
       .then((resp) => {
         console.log(resp.campaigns)
         for (let i = 0; i < resp.campaigns.campaign_members.length; i++) {
@@ -58,10 +56,7 @@ export default {
 
     if (this.$store.state.auth.token) {
       this.$axios
-        .$get(
-          process.env.API_DEV_URL +
-            `campaign/members/${this.$route.params.idCampaign}/${this.$store.state.user.id}`
-        )
+        .$get(`campaign/members/${this.$route.params.idCampaign}/${this.$store.state.user.id}`)
         .then((resp) => {
           if (resp.campaign_members.length == 0) {
             this.registered = false
