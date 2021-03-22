@@ -67,10 +67,10 @@
               bersama di penyedia layanan hiburan hingga edukasi/pembelajaran
               dengan proses yang mudah, aman, dan murah.
             </p>
-            <div class="relative flex mt-10 mx-auto lg:ml-0">
+            <div class="relative flex flex-row mt-10 mx-auto lg:ml-0">
               <a
                 href="#section2"
-                class="flex items-center px-5 py-3 rounded-md text-base text-white transition bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
+                class="flex items-center px-5 py-3 mx-3 rounded-md text-base text-white transition bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
                 >Mulai Patungan
                 <svg
                   class="ml-2 animate-bounce w-4 h-4 text-amber-900"
@@ -84,6 +84,11 @@
                   <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
                 </svg>
               </a>
+              <NuxtLink
+                to="campaign/create"
+                class="flex items-center px-5 py-3 mx-3 rounded-md text-base text-gray-700 transition bg-white border-yellow-400 border-2 hover:bg-yellow-400"
+                >Buat Campaign
+              </NuxtLink>
             </div>
           </div>
         </div>
