@@ -61,6 +61,10 @@ $app->singleton(
 
 $app->configure('app');
 $app->configure('cors');
+$app->configure('mail');
+$app->alias('mailer', Illuminate\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -73,9 +77,6 @@ $app->configure('cors');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
 $app->middleware([
     // https://github.com/fruitcake/laravel-cors
     Fruitcake\Cors\HandleCors::class,
@@ -83,6 +84,7 @@ $app->middleware([
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    'throttle' => GrahamCampbell\Throttle\Http\Middleware\ThrottleMiddleware::class,
 ]);
 
 /*
@@ -100,7 +102,6 @@ $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
-
 // For JWT add this
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 
@@ -115,12 +116,9 @@ $app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
 // https://github.com/flipboxstudio/lumen-generator
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 
-
 $app->register(Illuminate\Mail\MailServiceProvider::class);
-$app->configure('mail');
-$app->alias('mailer', Illuminate\Mail\Mailer::class);
-$app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
-$app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
+
+$app->register(GrahamCampbell\Throttle\ThrottleServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

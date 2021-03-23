@@ -28,11 +28,12 @@ $router->group(['prefix' => 'auth'], function () use ($router) {
 
 
 // kelompok prefix API
-// Nyoba pakai throttle tapi tidak berhasil hehe
+// limit/time(minute) 'middleware' => 'throttle:30,30', berhasil: cara test nya coba ketik ketik di search campaign banyak banyak
+// nanti return nya pasti 429 Too Many Request
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
     
-    // Auth API
-    $router->group(['prefix' => 'auth'], function () use ($router) {
+    // Auth API, limit 10 kali transaksi dlm 30 menit di api auth
+    $router->group(['prefix' => 'auth', 'middleware' => 'throttle:10,30'], function () use ($router) {
         $router->post('register', 'AuthController@register');
         $router->post('login', 'AuthController@login');
         $router->get('logout', 'AuthController@logout');
