@@ -146,13 +146,13 @@
         class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row"
       >
         <p class="text-white text-sm text-center sm:text-left">
-          © 2020 satu_akun —
+          © 2020 Patungin —
           <a
             href="https://twitter.com/apri0498"
             class="text-gray-300 ml-1"
             target="_blank"
             rel="noopener noreferrer"
-            >@satu_akun</a
+            >@patungin</a
           >
         </p>
         <span

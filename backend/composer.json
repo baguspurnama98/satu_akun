@@ -8,6 +8,7 @@
         "php": "^7.3|^8.0",
         "flipbox/lumen-generator": "^8.2",
         "fruitcake/laravel-cors": "^2.0",
+        "graham-campbell/throttle": "8.1",
         "guzzlehttp/guzzle": "^7.2",
         "illuminate/mail": "^8.27",
         "irazasyed/larasupport": "^1.7",

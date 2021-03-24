@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavbarOld />
+    <Navbar />
     <Nuxt class="py-12" keep-alive />
     <Footer />
   </div>
