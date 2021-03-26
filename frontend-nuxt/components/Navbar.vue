@@ -99,7 +99,7 @@
           <li class="nav-item relative text-right">
             <NuxtLink
               class="px-3 py-2 mx-2 my-1 rounded inline-flex items-center leading-snug text-white text-md hover:bg-indigo-700 hover:text-gray-100"
-              to="/about"
+              to="#"
             >
               <span>Tentang Kami</span>
             </NuxtLink>

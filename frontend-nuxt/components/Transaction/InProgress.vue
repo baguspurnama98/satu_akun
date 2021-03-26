@@ -44,7 +44,7 @@
             <td class="px-4 py-3 text-xs">
               <div class="inline-flex">
                 <a
-                  class="px-2 py-1 text-white bg-indigo-400 hover:bg-indigo-600 focus:outline-none rounded-lg mr-2 shadow-md text-md"
+                  class="px-2 py-1 text-white bg-green-400 hover:bg-green-600 focus:outline-none rounded-lg mr-2 shadow-md text-md"
                   :href="`/campaign/${row.id}/checkout/${$store.state.user.id}`"
                 >
                   <span class="inline-flex font-medium"> Konfirmasi </span>

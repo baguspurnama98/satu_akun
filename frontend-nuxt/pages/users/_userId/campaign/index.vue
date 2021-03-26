@@ -157,7 +157,7 @@
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      class="h-4 w-4 ml-3 z-10"
+                      class="h-4 w-4 ml-3 z-0"
                       :class="{
                         'transform rotate-180 transition duration-500 ease-in-out':
                           activeDetail == index,
