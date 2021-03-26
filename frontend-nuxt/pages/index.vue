@@ -241,6 +241,7 @@ export default {
         console.log(resp)
         this.campaigns = resp.campaigns
         console.log(this.campaigns)
+        console.log(this.$store.state.auth.token)
       })
       .catch((errors) => {
         console.dir(errors)

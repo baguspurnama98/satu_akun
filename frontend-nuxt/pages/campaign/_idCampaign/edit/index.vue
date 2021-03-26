@@ -418,6 +418,7 @@ export default {
         value: '',
       },
       campaign: {
+        id: '',
         categories_id: '',
         title: '',
         status: '0',
@@ -457,10 +458,10 @@ export default {
       })
 
       this.$axios
-        .$post(`campaign/update/${this.$store.state.user.id}`, formData)
+        .$post(`campaign/update/${this.campaign.id}`, formData)
         .then((resp) => {
           console.log(resp)
-          if (resp.message === 'CREATED') {
+          if (resp.message === 'UPDATED') {
             this.$router.push(
               `/campaign/${resp.campaign.id}/${resp.campaign.slug}`
             )
@@ -600,6 +601,7 @@ export default {
       .then((resp) => {
         console.log(resp)
         this.campaign = resp.campaigns
+
         let duration = resp.campaigns.durasi.toLowerCase().split(' ')
         this.duration.value = duration[0]
         this.duration.unit =
@@ -612,6 +614,7 @@ export default {
           moment(resp.campaigns.created_at),
           'days'
         )
+        delete this.campaign.email_id
         console.log(this.expired.value)
       })
   },
