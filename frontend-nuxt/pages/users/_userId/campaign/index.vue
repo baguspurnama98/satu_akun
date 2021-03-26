@@ -1,14 +1,17 @@
 <template>
-  <div class="relative container px-4 mx-auto">
+  <div class="relative container px-4 mx-auto min-h-screen">
     <div class="relative w-full">
       <h3 class="font-bold pb-3 text-4xl xs:text-2xl text-indigo-500">
         Daftar Campaign
       </h3>
 
-      <div class="relative overflow-auto pb-20">
-        <div v-if="campaigns === null" class="min-h-screen min-w-screen justify-between items-center">
+      <div class="relative w-full overflow-auto">
+        <div
+          v-if="campaigns === null"
+          class="min-h-screen w-full justify-between flex items-stretch relative"
+        >
           <svg
-            class="animate-spin mx-auto place-items-center h-20 w-20 text-indigo-400 self-center"
+            class="animate-spin mx-auto h-20 w-20 text-indigo-400"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"

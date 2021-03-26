@@ -23,79 +23,34 @@
         </thead>
         <tbody slot="body" slot-scope="{ displayData }">
           <tr
-            v-for="(row, index) in displayData"
+            v-for="row in displayData"
             :key="row.id"
             class="border-t-2 hover:bg-gray-200"
           >
             <td class="px-3">
-              {{ row.email }}
+              {{ row.name }}
             </td>
             <td class="px-3">
-              <span
-                class="relative h-full px-3 py-1 font-semibold leading-tight text-center inline-block"
-              >
-                <span
-                  aria-hidden
-                  class="bg-yellow-600 rounded-full px-2 py-1 text-sm text-white"
-                  v-if="row.status === 1"
-                  >Aktif</span
-                >
-                <span
-                  aria-hidden
-                  class="bg-red-700 rounded-full px-2 py-1 text-sm text-white"
-                  v-if="row.status === 0"
-                  >Non-Aktif</span
-                >
-              </span>
+              {{ row.date | formatDate }}
             </td>
+            <td class="font-bold text-xl">
+              <span class="text-2xl">
+                <span v-if="row.status === 1">+</span>
+                <span v-else>-</span>
+              </span>
 
+              <span>{{ row.price | formatRupiah }}</span>
+            </td>
             <td class="px-4 py-3 text-xs">
               <div class="inline-flex">
-                <button
-                  class="px-2 py-1 text-white bg-green-400 hover:bg-green-600 focus:outline-none rounded-lg mr-2 shadow-md text-md"
-                  @click="onClickEdit(row, 'edit')"
+                <a
+                  class="px-2 py-1 text-white bg-indigo-400 hover:bg-indigo-600 focus:outline-none rounded-lg mr-2 shadow-md text-md"
+                  :href="`/campaign/${row.id}/checkout/${$store.state.user.id}`"
                 >
-                  <span class="inline-flex">
-                    <svg
-                      class="h-4 w-4 mr-1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                      />
-                    </svg>
-
-                    Ubah</span
+                  <span class="inline-flex font-medium">
+                    Konfirmasi Pembayaran</span
                   >
-                </button>
-                <button
-                  class="px-2 py-1 text-white bg-red-500 hover:bg-red-700 focus:outline-none rounded-lg shadow-md text-md"
-                  @click="handleDelete(index)"
-                >
-                  <span class="inline-flex">
-                    <svg
-                      class="h-4 w-4 mr-1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                      />
-                    </svg>
-                    Hapus
-                  </span>
-                </button>
+                </a>
               </div>
             </td>
           </tr>
@@ -112,7 +67,15 @@
 export default {
   data() {
     return {
-      emails: [{ name: 'Netflix 1 bulan', date: new Date(), price: 5000 }],
+      emails: [
+        {
+          id: 1,
+          name: 'Netflix 1 bulan',
+          date: new Date(),
+          price: 5000,
+          status: 0,
+        },
+      ],
       currentPage: 1,
       totalPages: 3,
       filters: {
@@ -133,12 +96,6 @@ export default {
       let date1 = new Date(a.registered).getTime()
       let date2 = new Date(b.registered).getTime()
       return date1 - date2
-    },
-    handleDelete(id) {
-      alert('delete email id: ' + id)
-    },
-    onClickEdit(data, todo) {
-      this.$emit('clicked', data, todo)
     },
   },
 }
