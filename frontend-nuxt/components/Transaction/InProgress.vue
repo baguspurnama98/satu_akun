@@ -5,7 +5,7 @@
       <input class="form-control" v-model="filters.name.value" /> -->
 
       <v-table
-        :data="emails"
+        :data="transactions"
         :filters="filters"
         class="w-full text-left wrapper xs:block"
         :hideSortIcons="false"
@@ -47,9 +47,7 @@
                   class="px-2 py-1 text-white bg-indigo-400 hover:bg-indigo-600 focus:outline-none rounded-lg mr-2 shadow-md text-md"
                   :href="`/campaign/${row.id}/checkout/${$store.state.user.id}`"
                 >
-                  <span class="inline-flex font-medium">
-                    Konfirmasi Pembayaran</span
-                  >
+                  <span class="inline-flex font-medium"> Konfirmasi </span>
                 </a>
               </div>
             </td>
@@ -65,17 +63,9 @@
 </template>
 <script>
 export default {
+  props: ['transactions'],
   data() {
     return {
-      emails: [
-        {
-          id: 1,
-          name: 'Netflix 1 bulan',
-          date: new Date(),
-          price: 5000,
-          status: 0,
-        },
-      ],
       currentPage: 1,
       totalPages: 3,
       filters: {

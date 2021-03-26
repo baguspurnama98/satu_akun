@@ -5,7 +5,7 @@
       <input class="form-control" v-model="filters.name.value" /> -->
 
       <v-table
-        :data="emails"
+        :data="transactions"
         :filters="filters"
         class="w-full text-left wrapper xs:block"
         :hideSortIcons="false"
@@ -44,7 +44,7 @@
             <td class="px-4 py-3 text-xs">
               <div class="inline-flex">
                 <button
-                  class="px-2 py-1 text-white bg-indigo-400 hover:bg-indigo-600 focus:outline-none rounded-lg mr-2 shadow-md text-md"
+                  class="px-2 py-1 text-white bg-blue-500 hover:bg-blue-600 focus:outline-none rounded-lg mr-2 shadow-md text-md"
                   disabled
                 >
                   <span class="inline-flex font-medium"> Selesai</span>
@@ -63,11 +63,9 @@
 </template>
 <script>
 export default {
+  props: ['transactions'],
   data() {
     return {
-      emails: [
-        { name: 'Netflix 1 bulan', date: new Date(), price: 5000, status: 0 },
-      ],
       currentPage: 1,
       totalPages: 3,
       filters: {

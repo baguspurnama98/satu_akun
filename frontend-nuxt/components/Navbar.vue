@@ -132,25 +132,25 @@
                 <!-- Menu untuk User -->
                 <template v-if="user_role === 'u'">
                   <div class="py-1">
-                    <NuxtLink
-                      :to="`/users/${this.$store.state.user.id}/campaign/`"
+                    <a
+                      :href="`/users/${this.$store.state.user.id}/campaign/`"
                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                       role="menuitem"
                       >Campaign Saya
-                    </NuxtLink>
-                    <NuxtLink
-                      :to="`/users/${this.$store.state.user.id}/patungan/`"
+                    </a>
+                    <a
+                      :href="`/users/${this.$store.state.user.id}/patungan/`"
                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                       role="menuitem"
                       >Patungan Saya
-                    </NuxtLink>
+                    </a>
                   </div>
                   <div class="py-1">
-                    <NuxtLink
-                      :to="`/users/${this.$store.state.user.id}/transaction/`"
+                    <a
+                      :href="`/users/${this.$store.state.user.id}/transaction/`"
                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                       role="menuitem"
-                      >Riwayat Transaksi</NuxtLink
+                      >Riwayat Transaksi</a
                     >
                   </div>
                 </template>

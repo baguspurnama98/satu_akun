@@ -12,7 +12,7 @@
       </div>
 
       <div style="border-bottom: 2px solid #eaeaea">
-        <ul class="flex cursor-pointer">
+        <ul class="flex cursor-pointer xs:text-sm">
           <li
             class="py-2 px-6 rounded-t-lg"
             @click="handleChooseCategory('progress')"
@@ -31,10 +31,10 @@
       </div>
     </div>
     <div v-if="menuActive == 'progress'" class="datatables-campaign">
-      <InProgress />
+      <InProgress :transactions="transactions" />
     </div>
     <div v-if="menuActive == 'complete'" class="datatables-campaign">
-      <Complete />
+      <Complete :transactions="transactions" />
     </div>
   </div>
 </template>
@@ -52,6 +52,9 @@ export default {
     return {
       menuActive: 'progress',
       breadcrumbs: [],
+      transactions: [
+        { name: 'Netflix 1 bulan', date: new Date(), price: 5000, status: 0 },
+      ],
     }
   },
   methods: {
