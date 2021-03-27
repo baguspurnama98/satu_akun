@@ -32,8 +32,8 @@ $router->group(['prefix' => 'auth'], function () use ($router) {
 // nanti return nya pasti 429 Too Many Request
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
     
-    // Auth API, limit 10 kali transaksi dlm 30 menit di api auth
-    $router->group(['prefix' => 'auth', 'middleware' => 'throttle:100,30'], function () use ($router) {
+    // Auth API, limit 30 kali transaksi dlm 30 menit di api auth
+    $router->group(['prefix' => 'auth', 'middleware' => 'throttle:30,30'], function () use ($router) {
         $router->post('register', 'AuthController@register');
         $router->post('login', 'AuthController@login');
         $router->get('logout', 'AuthController@logout');

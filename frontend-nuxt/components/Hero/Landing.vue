@@ -106,6 +106,7 @@ export default {
   },
   mounted() {
     //   https://lottiefiles.com/38964-group-of-people-communicating
+    // https://assets4.lottiefiles.com/packages/lf20_5e7wgehs.json
       lottie.loadAnimation({
         container: this.$refs["animation"], // the dom element that will contain the animation
         renderer: 'svg',

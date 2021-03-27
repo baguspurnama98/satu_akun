@@ -4,31 +4,25 @@
       <h3 class="font-bold pb-3 text-4xl text-indigo-500">Checkout</h3>
       <div class="">
         <div class="p-3 rounded-lg">
-          <p class="xs:text-sm text-justify sm:text-center">
-            Segera lakukan pembayaran agar proses pendaftaran Anda valid. Pastikan Anda
-            melakukan transfer hingga 3 digit terakhir untuk memudahkan kami melakukan
+          <p class="xs:text-sm text-justify xs:text-center">
+            Segera lakukan pembayaran dalam 2 jam. Pastikan Anda
+            melakukan transfer hingga 3 digit terakhir agar memudahkan kami melakukan
             validasi pembayaran Anda.
           </p>
         </div>
 
         <div class="rounded-lg mt-2 mx-2 lg:mx-56 p-2 xs:text-sm h-1/3">
-          <div class="flex flex-initial">
-            <img
-              class="h-auto self-center"
-              width="75"
-              src="https://img2.pngio.com/bank-negara-indonesia-logo-bank-bni-transparan-clipart-full-bank-negara-indonesia-png-3126_906.png"
-            />
-
-            <div class="ml-3 md:p-2 text-left xs:text-sm sm:text-md">
-              <p>{{ transaction.bank }}</p>
-              <p>Tasya Tobing</p>
+          <div class="flex">
+            <div class="ml-3 text-left xs:text-sm sm:text-md">
+              <p>Tujuan rekening :</p>
             </div>
           </div>
         </div>
         <div
           class="border pl-5 xs:pl-2 rounded-lg mx-2 lg:mx-56 p-2 xs:text-sm h-1/3 bg-indigo-100"
         >
-          <div class="inline-flex">
+          <div class="flex" style="align-items: center; flex-direction: column;">
+              <div class="inline-flex">
             <span
               @click.stop.prevent="copyToClipboard"
               class="cursor-pointer text-3xl font-semibold xs:text-xl"
@@ -49,49 +43,54 @@
                 d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
               />
             </svg>
+            </div>
+            <span
+              class="ml-4 text-lg xs:text-md"
+              >{{ transaction.bank }} | Tasya Purnama</span
+            >
           </div>
           <input type="hidden" id="copy-input" :value="12354453234675" />
         </div>
         <div
           class="border rounded-lg grid grid-cols-2 gap-1 m-2 lg:mx-56 py-3 xs:text-sm"
         >
-          <div class="pl-5 xs:pl-2">
+          <div class="pl-5 xs:pl-2 flex justify-between">
             <span class="font-medium">No. Transaksi</span>
+            <span class="mr-5 xs:mr-1">:</span>
           </div>
           <div>
-            <span class="mr-5">:</span>
             <span>{{ transaction.no_transaction }}</span>
           </div>
           <!--  -->
-          <div class="pl-5 xs:pl-2">
+          <div class="pl-5 xs:pl-2 flex justify-between">
             <span class="font-medium">Judul Campaign</span>
+            <span class="mr-5 xs:mr-1">:</span>
           </div>
           <div>
-            <span class="mr-5">:</span>
             <span>{{ campaign.title }}</span>
           </div>
           <!--  -->
-          <div class="pl-5 xs:pl-2">
+          <div class="pl-5 xs:pl-2 flex justify-between">
             <span class="font-medium">Durasi</span>
+            <span class="mr-5 xs:mr-1">:</span>
           </div>
           <div>
-            <span class="mr-5">:</span>
             <span>{{ campaign.durasi }}</span>
           </div>
           <!--  -->
-          <div class="pl-5 xs:pl-2">
+          <div class="pl-5 xs:pl-2 flex justify-between">
             <span class="font-medium">Nominal</span>
+            <span class="mr-5 xs:mr-1">:</span>
           </div>
           <div>
-            <span class="mr-5">:</span>
             <span>{{ transaction.nominal | formatRupiah }}</span>
           </div>
           <!--  -->
-          <div class="pl-5 xs:pl-2">
+          <div class="pl-5 xs:pl-2 flex justify-between">
             <span class="font-medium">Kode Unik</span>
+            <span class="mr-5 xs:mr-1">:</span>
           </div>
           <div>
-            <span class="mr-5">:</span>
             <span>{{ transaction.unique_code }}</span>
           </div>
 
@@ -157,11 +156,11 @@
             Setelah melakukan pembayaran, kirimkan bukti pembayaran ke
             <span class="font-semibold"
               ><a
-                href="https://wa.me/8976634788?text=Saya%20ingin%20konfirmasi%20pembayaran"
+                href="https://wa.me/9285155144278?text=Saya%20ingin%20konfirmasi%20pembayaran"
                 >WhatsApp Patungin.com</a
               ></span
             >
-            atau klik tombol dibawah ini.
+            dengan klik tombol dibawah ini.
           </p>
           <p class="text-sm text-center xs:text-justify italic">
             <b>*</b>Kami hanya melayani proses konfirmasi pembayaran pada pukul
@@ -176,7 +175,7 @@
       <a
         class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
         type="submit"
-        href="https://wa.me/8976634788?text=Saya%20ingin%20konfirmasi%20pembayaran"
+        href="https://wa.me/9285155144278?text=Saya%20ingin%20konfirmasi%20pembayaran"
       >
         Saya sudah transfer
       </a>

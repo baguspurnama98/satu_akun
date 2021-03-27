@@ -20,11 +20,11 @@
           class="flex flex-col items-center justify-center bg-white min-h-screen w-full"
         >
           <div class="text-center mb-10">
-            <h1 class="font-sans text-3xl font-bold text-black mb-4">
-              Patungin aja lebih murah
+            <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
+              <b class="logo">Patungin</b> mudah dan murah banget
             </h1>
             <p
-              class="text-gray-700 tracking-widest font-sans leading-relaxed text-base"
+              class="text-base leading-relaxed"
             >
               Yuk mulai patungan!
             </p>
@@ -50,7 +50,7 @@
             <h1
               class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4"
             >
-              <b>Patungin</b> aja
+              Kenapa pakai <b class="logo">Patungin</b>?
             </h1>
             <p class="text-base leading-relaxed">
               Merdeka dalam akses apa saja melalui patungan. Kamu bisa patungan

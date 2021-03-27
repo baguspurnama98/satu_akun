@@ -23,11 +23,10 @@ export default {
     }
   },
   beforeMount() {
-    console.log(this.$store.state.auth.token)
+    this.$destroy();
     this.$axios
       .$get(`campaign/${this.$route.params.idCampaign}`)
       .then((resp) => {
-        console.log(resp.campaigns)
         for (let i = 0; i < resp.campaigns.campaign_members.length; i++) {
           if (resp.campaigns.campaign_members[i].is_host === 1) {
             resp.campaigns.host_name =
@@ -42,7 +41,6 @@ export default {
         }
 
         this.campaign = resp.campaigns
-        console.log(this.campaign)
       })
       .catch((errors) => {
         if (errors.response.status === 404) {

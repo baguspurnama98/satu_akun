@@ -172,8 +172,8 @@
           >
             <div
               class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2 items-center"
-              v-for="member in campaign.campaign_members"
-              :key="member.id"
+              v-for="(member, index) in campaign.campaign_members"
+              :key="index"
             >
               <span
                 v-if="member.is_pay === 0"
@@ -343,6 +343,7 @@
 <script>
 import IconSocial from '../Profil/IconSocial'
 
+
 export default {
   components: { IconSocial },
   name: 'DetailCampaign',
@@ -398,7 +399,7 @@ export default {
       } else {
         return false
       }
-    },
+    }
   },
 }
 </script>
