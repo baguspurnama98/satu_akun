@@ -33,13 +33,17 @@ $router->group(['prefix' => 'auth'], function () use ($router) {
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
     
     // Auth API, limit 10 kali transaksi dlm 30 menit di api auth
-    $router->group(['prefix' => 'auth', 'middleware' => 'throttle:10,30'], function () use ($router) {
+    $router->group(['prefix' => 'auth', 'middleware' => 'throttle:100,30'], function () use ($router) {
         $router->post('register', 'AuthController@register');
         $router->post('login', 'AuthController@login');
         $router->get('logout', 'AuthController@logout');
         $router->delete('delete/{id_user}', [
             'middleware' => 'auth',
             'uses' => 'AuthController@delete'
+        ]);
+        $router->post('update/{id_user}', [
+            'middleware' => 'auth',
+            'uses' => 'AuthController@update'
         ]);
         
         // OTP
@@ -48,6 +52,8 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
             'uses' => 'AuthController@validateOTP'
         ]);
         $router->get('resend-otp/{id_user}', 'AuthController@resendOTP');
+
+        $router->post('forget-password', 'AuthController@requestChangePassword');
 
         $router->post('refresh', 'AuthController@refreshToken');
     });

@@ -2,7 +2,7 @@
 <template>
     <!-- Content disini -->
     <!-- component login -->
-    <div class="flex items-center justify-center mt-12">
+    <div class="flex items-center justify-center mt-8">
         <div class="w-full max-w-md py-5">
             <form @submit.prevent="login" class="bg-gray-100 shadow-lg rounded-md px-8 xs:px-4 pt-6 pb-8 mb-4 mx-4 ">
                 <!-- @csrf -->
@@ -36,9 +36,9 @@
                         </span>
                     </button>
                     <!-- Kenapa kita ga provide lupa password? Karena kita gabisa otomatis kirim link ke email mereka, harus manual -- knp ngga bisa? bukannya tinggal pake request api by email user pake findOrFail, kalo nemu send email smtp ke email tsb(?)koreksi kalo salah... -->
-                    <a class="inline-block align-baseline font-normal text-sm text-indigo-500 hover:text-indigo-800" href="#">
-                        Butuh bantuan?
-                    </a>
+                    <NuxtLink to="change-password/request" class="inline-block align-baseline font-normal text-sm text-indigo-500 hover:text-indigo-800">
+                        Lupa password?
+                    </NuxtLink>
                 </div>
                 <div class="flex">
                     <NuxtLink to="/account/register" class="inline-block align-baseline font-normal text-sm text-indigo-500 hover:text-indigo-800 cursor-pointer" href="#">
@@ -75,21 +75,10 @@ export default {
           password: this.form.password,
         })
         .then(({ token, expires_in }) => {
+            this.loading = false
           this.$store.dispatch('auth/setToken', { token, expires_in })
           // this.$router.push({name: 'secret'});
-          console.log({ token, expires_in })
           this.getProfile({ token, expires_in })
-          // jangan kembali ke otp
-            // 
-        
-          // if (this.$router.history._startLocation.split('/').indexOf('validate-otp') != -1) {
-          //       //   aku jadi error wkwkw
-          //       // skenarionya aku langsung buka link dari gmail dan semua tab hp ku ttg situs ini udah dihapus, jadi pas -2 dah rusak
-          //     this.$router.back() // aku ubah 2 link sebelumnya, u/ mengatasi ketika dia daftar, biar tidak langsung ke halaman checkout
-          // } else {
-          //     window.location.replace('/')
-          
-          // }  proses direct routingnya aku pindah ke getProfile, soalnya error trs buat dptin datausernya
          
         })
         .catch((errors) => {

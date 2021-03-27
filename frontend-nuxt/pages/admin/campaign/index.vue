@@ -92,7 +92,6 @@ export default {
       this.$router.push(path)
     },
     handleChooseCategory(id, menu) {
-      console.log(id)
       this.campaigns = []
       this.menuActive = menu
       this.idMenu = id
@@ -122,7 +121,6 @@ export default {
         .$get(`campaign?status=${this.idMenu}`)
         .then((resp) => {
           this.campaigns = resp.campaigns
-          console.log(resp)
         })
         .catch((errors) => {
           console.log(errors)
