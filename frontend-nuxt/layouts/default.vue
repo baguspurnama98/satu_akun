@@ -1,7 +1,9 @@
 <template>
   <div>
     <Navbar />
-    <Nuxt class="py-12" keep-alive />
+    <div class="py-12">
+        <Nuxt keep-alive />
+    </div>
     <Footer />
   </div>
 </template>
