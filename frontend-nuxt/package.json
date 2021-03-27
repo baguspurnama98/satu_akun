@@ -21,6 +21,7 @@
     "js-cookie": "^2.2.1",
     "lottie-web": "^5.7.7",
     "nuxt": "^2.14.6",
+    "v-shared-element": "^3.0.3",
     "vuejs-smart-table": "0.0.7",
     "vuex-persist": "^3.1.3"
   },

@@ -16,7 +16,10 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'stylesheet', href :'https://fonts.googleapis.com/css2?family=Righteous&display=swap'}
+    ],
   },
 
   // untuk generate file robots.txt, disable dulu
@@ -36,7 +39,7 @@ export default {
     '~/plugins/filters.js',
     '~/plugins/datatable.js',
     '~/plugins/inject-token.js',
-    
+    '~/plugins/v-shared-element.client.js',
 
     { src: '~/plugins/vuex-persist', ssr: false },
   ],

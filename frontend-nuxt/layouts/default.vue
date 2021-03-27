@@ -9,6 +9,7 @@
 
 <script>
 export default {
+    scrollToTop: false,
     mounted() {
         // console.log(this.$store.state.token)
     },

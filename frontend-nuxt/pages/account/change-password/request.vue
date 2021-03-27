@@ -2,7 +2,7 @@
 <template>
     <!-- Content disini -->
     <!-- component login -->
-    <div class="flex items-center justify-center min-h-screen">
+    <div class="flex items-center justify-center mt-8">
         <div class="w-full max-w-md py-5">
             <form @submit.prevent="requestPassword" class="bg-gray-100 shadow-lg rounded-md px-8 xs:px-4 pt-6 pb-8 mb-4 mx-4 ">
                 <!-- @csrf -->

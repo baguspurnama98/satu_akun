@@ -113,6 +113,7 @@
   </div>
 </template>
 <script>
+
 export default {
   name: 'CardCampaign',
   props: ['title', 'campaign'],
@@ -126,7 +127,7 @@ export default {
       return this.campaign.host_name !== null
         ? this.campaign.host_name.name
         : ''
-    },
+    }
   },
   methods: {},
   mounted() {
