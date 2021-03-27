@@ -19,6 +19,7 @@
     "blueimp-load-image": "^5.14.0",
     "core-js": "^3.6.5",
     "js-cookie": "^2.2.1",
+    "lottie-web": "^5.7.7",
     "nuxt": "^2.14.6",
     "vuejs-smart-table": "0.0.7",
     "vuex-persist": "^3.1.3"

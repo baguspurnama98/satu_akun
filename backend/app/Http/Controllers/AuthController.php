@@ -13,8 +13,17 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    private $URL_dev_otp = 'http://localhost:3000/account/validate-otp/';
+    
+    private $URL_dev_otp = '/account/validate-otp/';
+    private $URL_dev_password = '/account/change-password/';
 
+    // auto define base URL
+    function __construct()
+    {
+        $baseURL = app()->environment('local') ? env('BASE_URL') : env('BASE_URL_PROD');
+        $this->URL_dev_otp = $baseURL . $this->URL_dev_otp;
+        $this->URL_dev_password = $baseURL . $this->URL_dev_password;
+    }
 
     /**
      * Store a new user.
@@ -52,6 +61,7 @@ class AuthController extends Controller
                 'name' => $user->name,
                 'otp' => $user->otp,
                 'url' => $url,
+                'messages' => 'Selamat Datang'
             ];
             // $this->sendEmailOTP($data, $user);
             $type = 'otp';
@@ -113,6 +123,68 @@ class AuthController extends Controller
     }
 
 
+    public function requestChangePassword(Request $request) {
+        $this->validate($request, [
+            'email' => 'required|email',
+        ]);
+        
+        $user = User::where('email', $request->input('email'))->first();
+        if (!$user) return response()->json(['message' => 'Not Found'], 404);
+
+        $user->otp = $this->generateNumericOTP(6);
+        $user->save();
+        
+        $token = Auth::login($user);
+        $url = $this->URL_dev_password . $user->id . '?t=' . $this->getToken($token);
+        $data = [
+            'name' => $user->name,
+            'otp' => $user->otp,
+            'url' => $url,
+            'messages' => 'Ganti Password'
+        ];
+        $type = 'otp';
+        $emailJob = (new MailJob($user, $data, $type));
+        // masuk ke queue biar gak bloking
+        dispatch($emailJob);
+        return response()->json(['message' => 'SUCCESS', 'id_user' => $user->id, 'token' => $this->getToken($token)], 200);
+    }
+
+    /**
+     * ini digunakan oleh user bukan admin
+     */
+    public function update(Request $request, $id_user) {
+        //validate incoming request 
+        $this->validate($request, [
+            'name' => 'string',
+            'email' => 'required|email|unique:users,id,'. $id_user,
+            'whatsapp' => 'unique:users,id,' . $id_user,
+            'otp' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+
+        
+        
+        try {
+            // mesti cocokin OTP
+            $user = User::where(['id' => $id_user, 'otp' => $request->input('otp')])->first();
+            if ($user) {
+                $plainPassword = $request->input('password');
+                $user->fill($request->all());
+                $user->password = app('hash')->make($plainPassword);
+                $user->save();
+                $user->touch();
+                
+                return response()->json(['user' => $user, 'message' => 'UPDATED'], 201);
+            } else {
+                return response()->json(['message' => 'Not Found'], 404);
+            }
+            
+        } catch (\Exception $err) {
+            return response()->json(['message' => $err], 409);
+        }
+    }
+
+
     public function delete($id_user) {
         $this->logout();
         try {
@@ -137,11 +209,7 @@ class AuthController extends Controller
         $user->otp = $this->generateNumericOTP(6);
         $user->save();
 
-        $credentials = [
-            'email' => $user->email,
-            'password' => $user->password
-        ];
-        $token = Auth::attempt($credentials);
+        $token = Auth::login($user);
 
         // $url = $this->URL_dev_otp . $user->id;
         $url = $this->URL_dev_otp . $user->id . '?t=' . $this->getToken($token);
@@ -150,6 +218,7 @@ class AuthController extends Controller
             'name' => $user->name,
             'otp' => $user->otp,
             'url' => $url,
+            'messages' => 'Verifikasi Akun'
         ];
         $type = 'otp';
         $emailJob = (new MailJob($user, $data, $type));

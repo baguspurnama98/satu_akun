@@ -103,24 +103,27 @@
             class="flex mt-6 items-center pt-5 border-t-2 border-gray-100 justify-between"
           >
             <!-- Batalkan dan Edit hanya aktif ketika dia adalah host dan status masih aktif -->
-            <button
+            <a
               class="flex mx-auto text-white bg-red-500 border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded"
               v-if="
                 campaign.status === 0 &&
                 campaign.host_name.id === this.$store.state.user.id
               "
+              :href="`https://wa.me/628976634788?text=Saya%20ingin%20membatalkan%20campaign%20saya%20yang%20ber-ID:%20${campaign.id}`"
+              target="_blank"
             >
               Batalkan
-            </button>
-            <button
+            </a>
+            <a
               class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded"
               v-if="
                 campaign.status === 0 &&
                 campaign.host_name.id === this.$store.state.user.id
               "
+              :href="`/campaign/${campaign.id}/edit`"
             >
               Edit
-            </button>
+            </a>
             <!-- Ajukan perpanjangan hanya aktif ketika dia adalah slot dan status expired -->
             <button
               class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded"

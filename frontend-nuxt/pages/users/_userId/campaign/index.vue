@@ -1,14 +1,20 @@
 <template>
-  <div class="relative container px-4 mx-auto">
-    <div class="relative w-full">
+  <div class="relative container px-4 mx-auto min-h-screen">
+    <div class="relative w-full h-screen">
       <h3 class="font-bold pb-3 text-4xl xs:text-2xl text-indigo-500">
         Daftar Campaign
       </h3>
 
-      <div class="relative overflow-auto pb-20">
-        <div v-if="campaigns === null" class="min-h-screen min-w-screen justify-between items-center">
+      <div
+        class="relative w-full overflow-visible xs:overflow-x-auto xs:overflow-y-visible h-full"
+      >
+        <div
+          v-if="campaigns === null"
+          s
+          class="min-h-screen w-full justify-between flex items-stretch relative"
+        >
           <svg
-            class="animate-spin mx-auto place-items-center h-20 w-20 text-indigo-400 self-center"
+            class="animate-spin mx-auto h-20 w-20 text-indigo-400"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -30,7 +36,7 @@
         </div>
         <table
           v-else
-          class="relative table-auto w-full text-left whitespace-no-wrap"
+          class="relative table-auto w-full text-left whitespace-no-wrap h-auto"
         >
           <thead>
             <tr>
@@ -61,7 +67,7 @@
               ></th>
             </tr>
           </thead>
-          <!-- Bingung gimana caranya click-outsidenya berjalan maksimal -->
+
           <tbody class="bg-white relative text-sm">
             <tr
               v-for="(campaign, index) in campaigns"
@@ -151,7 +157,7 @@
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      class="h-4 w-4 ml-3 z-10"
+                      class="h-4 w-4 ml-3 z-0"
                       :class="{
                         'transform rotate-180 transition duration-500 ease-in-out':
                           activeDetail == index,
@@ -168,7 +174,7 @@
                     </svg>
                   </button>
                   <ul
-                    class="shadow-md bg-white text-gray-800 cursor-pointer rounded transform absolute divide-y transition duration-300 ease-in-out mt-1 origin-left z-50 right-0 min-w-auto"
+                    class="shadow-md bg-white text-gray-800 cursor-pointer rounded transform absolute divide-y transition duration-300 ease-in-out mt-1 origin-left z-10 right-0 min-w-auto"
                     :class="{
                       '': activeDetail == index,
                       hidden: activeDetail != index,
@@ -262,14 +268,13 @@ export default {
       this.showDetail()
     },
   },
-  mounted() {
-    console.log(this.$store.state.user.id)
+  beforeMount() {
     this.$axios
       .$get(`campaign/user/${this.$store.state.user.id}?host=true`)
       .then((resp) => {
         console.log(resp)
         this.campaigns = resp.campaigns
-        // console.log(this.campaigns)
+        console.log(this.campaigns)
       })
       .catch((errors) => {
         console.log(errors)

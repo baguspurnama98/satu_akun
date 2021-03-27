@@ -92,7 +92,6 @@ export default {
           this.categories
         )
         .then((resp) => {
-          console.log(resp)
           if (resp.message === 'CREATED') {
             window.location.reload('/admin/category/')
           }

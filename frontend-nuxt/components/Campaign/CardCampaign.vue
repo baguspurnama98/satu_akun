@@ -130,7 +130,6 @@ export default {
   },
   methods: {},
   mounted() {
-    console.log(this.campaign.host_name)
   },
 }
 </script>

@@ -10,11 +10,11 @@
 
     <template>
       <!-- Content disini -->
-      <Landing class="my-8" />
+      <Landing class="my-4" />
       <!-- component campaign -->
       <section
         id="section2"
-        class="container px-4 my-12 mx-auto flex flex-wrap items-center justify-between"
+        class="container px-4 my-4 mx-auto flex flex-wrap items-center justify-between"
       >
         <div
           class="flex flex-col items-center justify-center bg-white min-h-screen w-full"
@@ -238,9 +238,7 @@ export default {
     this.$axios
       .$get(`campaign`)
       .then((resp) => {
-        console.log(resp)
         this.campaigns = resp.campaigns
-        console.log(this.campaigns)
       })
       .catch((errors) => {
         console.dir(errors)

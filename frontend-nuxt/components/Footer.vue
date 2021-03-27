@@ -12,9 +12,9 @@
             <span class="text-xl tracking-wide logo">Patungin.com</span>
           </a>
           <p class="mt-2 text-sm text-gray-600">
-            Kami, sekelompok anak muda berlatar belakang IT dan bisnis, membuat platform
-            beserta fasiltas-fasilitasnya untuk patungan membeli akun berbayar.
-            (Wording)
+            Kami, sekelompok anak muda berlatar belakang IT dan bisnis, membuat
+            platform beserta fasiltas-fasilitasnya untuk patungan membeli akun
+            berbayar. (Wording)
           </p>
         </div>
 
@@ -52,14 +52,15 @@
               <li>
                 <NuxtLink
                   class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
-                  to="/about"
+                  to="/tnc"
                   >Kebijakan Privasi</NuxtLink
                 >
               </li>
               <li>
-                <a
+                <NuxtLink
                   class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
-                  >FAQ</a
+                  to="/faq"
+                  >FAQ</NuxtLink
                 >
               </li>
               <li>

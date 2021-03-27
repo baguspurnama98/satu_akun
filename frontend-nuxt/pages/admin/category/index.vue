@@ -129,7 +129,6 @@ export default {
       .$get('campaign/categories')
       .then((resp) => {
         this.categories = resp.categories
-        console.log(this.categories)
       })
       .catch((errors) => {
         console.log(errors)
@@ -140,7 +139,6 @@ export default {
     showModal(data, status) {
       if (data != undefined) {
         this.selected = data
-        console.log(this.selected)
       } else {
         this.selected = ''
       }

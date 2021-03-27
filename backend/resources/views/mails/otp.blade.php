@@ -99,7 +99,7 @@
                                 <table width="100%" cellpadding="0" cellspacing="0" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                     <tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                         <td class="content-block" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top">
-                                            <h3 class="aligncenter" style="font-family: Helvetica,Arial,'Lucida Grande',sans-serif; box-sizing: border-box; font-size: 30px; color: #000; line-height: 1.2em; font-weight: 400; text-align: center; margin: 40px 0 0; text-transform: uppercase" align="center"><b>Selamat Datang</b></h3>
+                                            <h3 class="aligncenter" style="font-family: Helvetica,Arial,'Lucida Grande',sans-serif; box-sizing: border-box; font-size: 30px; color: #000; line-height: 1.2em; font-weight: 400; text-align: center; margin: 40px 0 0; text-transform: uppercase" align="center"><b>{{ $messages }}</b></h3>
                                         </td>
                                     </tr>
                                     <tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
