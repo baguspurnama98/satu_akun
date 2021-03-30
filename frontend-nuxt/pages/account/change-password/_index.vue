@@ -3,7 +3,7 @@
     <!-- Content disini -->
     <!-- component login -->
     <div class="flex items-center justify-center mt-8">
-        <div class="w-full max-w-md py-5">
+        <div class="w-full max-w-md py-5 px-3">
             <form @submit.prevent="updatePassword" class="bg-gray-100 shadow-lg rounded-md px-8 xs:px-4 pt-6 pb-8 mb-4 mx-4 ">
                 <!-- @csrf -->
                 <div class="text-indigo-500 text-3xl font-semibold flex justify-center py-2 mb-6">

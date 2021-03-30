@@ -46,7 +46,7 @@ class Campaign extends Model
         'description',
     ];
 
-    protected $appends = ['slug', 'host_name'];
+    protected $appends = ['slug', 'host_name', 'calculated_price'];
 
     public function getSlugAttribute()
     {
@@ -58,6 +58,10 @@ class Campaign extends Model
     {
         $campaign_members = CampaignMember::with('users')->where(['campaign_id' => $this->id, 'is_host' => 1])->first();
         return $campaign_members->users ?? null;
+    }
+
+    public function getCalculatedPriceAttribute() {
+        return getCalculatedPrice($this->attributes['slot_price']);
     }
 
     // public function getTotalMembersAttribute($value)

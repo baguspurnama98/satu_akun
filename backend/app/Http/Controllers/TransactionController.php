@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CampaignMember;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
@@ -53,14 +54,18 @@ class TransactionController extends Controller
             $transaction->status = $status;
             $transaction->touch();
             $transaction->save();
+            $this->verifyTransactionCampaign($transaction->id, false);
             return response()->json(['transaction' => $transaction, 'message' => 'UPDATED'], 201);
         } catch (\Exception $e) {
             return response()->json(['message' => $e], 409);
         }
     }
 
-    // gunanya untuk set jadi true
-    public function verifyTransactionCampaign($id_transaction)
+    // gunanya untuk cek si transaksi si member
+    /**
+     * return response atau boolean true / false bergantung apakah si user udah bayar atau blm
+     */
+    public function verifyTransactionCampaign($id_transaction, $withResponse = true)
     {
         $transaction = Transaction::where('id', $id_transaction)->first();
         try {
@@ -68,13 +73,13 @@ class TransactionController extends Controller
             if ($transaction->status !== 1) {
                 $campaign_member->delete();
                 // return
-                return response()->json(['message' => 'Success delete member on campaign'], 201);
+                return $withResponse ? response()->json(['message' => 'Success delete member on campaign'], 201) : false;
             } else {
                 $transaction->status = 1;
                 $campaign_member->is_pay = 1;
                 $campaign_member->touch();
                 $campaign_member->save();
-                return response()->json(['transaction' => $transaction, 'message' => 'UPDATED'], 201);
+                return $withResponse ? response()->json(['campaign_members' => $campaign_member, 'message' => 'UPDATED'], 201) : true;
             }
             
         } catch (\Exception $e) {
@@ -111,5 +116,22 @@ class TransactionController extends Controller
             // return error message
             return response()->json(['message' => $e], 409);
         } 
+    }
+
+
+    public function cronCheckTransaction() {
+        try {
+            $transaction = Transaction::where('timeout', '<=', Carbon::now())->where('status', 0)->whereHas('users.campaign_members');
+            if ($transaction->doesntExist() || $transaction->count() === 0) return response()->json(['message' => 'No Transaction'], 200); 
+            
+            // Sisanya tinggal dimasukin ke job, jadi langsung return, kalau ada yg gagal, ntar tinggal di masukin ke log
+            $transaction->update(['status' => 2]);
+            Transaction::where('status', 2)->with('users.campaign_members', function($q) { $q->where('is_host', 0)->delete(); })->get();
+
+            return response()->json(['message' => 'UPDATED'], 201);
+        } catch (\Exception $err) {
+            return response()->json(['message' => $err], 409);
+        }
+        
     }
 }

@@ -50,7 +50,7 @@
             class="flex items-center text-black text-md xs:text-sm font-normal"
           >
             <p class="font-bold text-2xl">
-              {{ campaign.slot_price | formatRupiah }}
+              {{ campaign.calculated_price | formatRupiah }}
               <span class="font-normal">/orang</span>
             </p>
           </div>
@@ -107,7 +107,7 @@
                     : require(`~/assets/img/default-img.jpeg`)
                 "
                 alt="..."
-                class="absolute inset-0 w-full h-full object-cover bg-gray-100 rounded-lg z-0"
+                class="absolute inset-0 w-full h-full object-cover bg-gray-100 rounded-lg z-0 shadow-xl"
               />
             </div>
           </div>

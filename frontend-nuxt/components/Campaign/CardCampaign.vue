@@ -19,7 +19,7 @@
           class="bg-indigo-500 absolute bottom-0 right-0 p-3 rounded-tl-md xs:py-1"
         >
           <p class="font-bold text-white text-md sm:text-sm xs:text-xs">
-            {{ campaign.slot_price | formatRupiah
+            {{ campaign.calculated_price | formatRupiah
             }}<span class="font-normal">/orang</span>
           </p>
         </div>

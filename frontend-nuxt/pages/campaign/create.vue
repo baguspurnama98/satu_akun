@@ -8,8 +8,8 @@
         <p>
           Pastikan campaign Anda sesuai dengan
           <b
-            ><a href="/about" class="hover:text-indigo-500"
-              >syarat dan ketentuan Patungin.com</a
+            ><NuxtLink to="/about" class="hover:text-indigo-500 text-red-500"
+              >syarat dan ketentuan Patungin.com</NuxtLink
             ></b
           >.
         </p>
@@ -70,7 +70,7 @@
           <div class="grid grid-cols-3 gap-2">
             <label class="inline-flex items-center py-2 xs:py-0">
               <select
-                class="w-full border capitalize focus:outline-none focus:ring focus:border-indigo-400 py-2 rounded xs:text-sm"
+                class="w-full border capitalize focus:outline-none focus:ring focus:border-indigo-400 py-2 px-2 rounded xs:text-sm"
                 name="categories"
                 v-model="campaign.categories_id"
               >
@@ -163,8 +163,7 @@
           >
           <p class="text-xs md:pr-20">
             Anda bebas menentukan harga setiap slot yang harus dikeluarkan
-            anggota campaign. Pastikan harga yang Anda tawarkan cukup masuk
-            akal.
+            anggota campaign. Minimal harga adalah 10 ribu rupiah.
           </p>
         </div>
 
@@ -178,9 +177,10 @@
             <input
               type="number"
               name="price"
+              min="10000"
               id="price"
               class="border focus:outline-none focus:ring focus:border-indigo-400 p-2 xs:text-sm block w-full pl-10 rounded"
-              placeholder="0"
+              placeholder="10000"
               v-model="campaign.slot_price"
             />
           </div>
@@ -224,7 +224,7 @@
             </label>
             <label class="inline-flex items-center py-2 xs:py-0">
               <select
-                class="w-full border focus:outline-none focus:ring focus:border-indigo-400 py-2 rounded xs:text-sm"
+                class="w-full border focus:outline-none focus:ring focus:border-indigo-400 py-2 px-1 rounded xs:text-sm"
                 name="range_period"
                 id="range_period"
                 v-model="duration.unit"

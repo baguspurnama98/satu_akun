@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 use Jenssegers\Optimus\Optimus;
 
 class Transaction extends Model 
@@ -21,6 +22,7 @@ class Transaction extends Model
         'total_nominal',
         'no_rek_origin',
         'no_rek_destination',
+        'timeout',
         'status',
         'updated_by',
         'created_by',
@@ -51,6 +53,11 @@ class Transaction extends Model
     public function setNoTransactionAttribute($value)
     {
         $this->attributes['no_transaction'] = $this->encode($value);
+    }
+
+    public function setNoTimeoutAttribute()
+    {
+        $this->attributes['timeout'] = Carbon::now()->addHours(2);
     }
 
     /**

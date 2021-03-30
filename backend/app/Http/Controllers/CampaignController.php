@@ -258,12 +258,7 @@ class CampaignController extends Controller
                 'user_id' => $id_user,
                 'campaign_id' => $id_campaign,
                 'is_host' => $is_host]);
-            // new CampaignMember();
-            // $member_of_campaign->fill([
-            //     'user_id' => $id_user,
-            //     'campaign_id' => $id_campaign,
-            //     'is_host'=> $is_host
-            // ])->save();
+                
 
             if ($is_host === true) return;
             $this->generateNewTransaction($campaign, $user);
@@ -327,8 +322,7 @@ class CampaignController extends Controller
             // masuk ke queue biar gak bloking
             dispatch($emailJob);
             
-            // lakukan scheduling apakah sudah 2 jam utk di remove
-            $url_verify = route('verify_transaction', ['id_transaction' => $transaction->id]);
+            // lakukan scheduling apakah sudah 2 jam utk di remove habis ini
         } catch (\Exception $e) {
             return response()->json(['message' => $e], 409);
         }
