@@ -104,16 +104,21 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
 
     // Transaction
-    $router->group(['prefix' => 'transaction', 'middleware' => 'auth'], function () use ($router) {
-        $router->get('/', 'TransactionController@allTransactions');
-        $router->get('user/{id_user}', 'TransactionController@userTransaction');
-        $router->get('campaign/{id_campaign}', 'TransactionController@campaignTransaction');
-        $router->get('user/{id_user}/campaign/{id_campaign}', 'TransactionController@userTransactionByCampaign');
+    $router->group(['prefix' => 'transaction'], function () use ($router) {
+        $router->group(['middleware' => 'auth'], function () use ($router) {
+            $router->get('/', 'TransactionController@allTransactions');
+            $router->get('user/{id_user}', 'TransactionController@userTransaction');
+            $router->get('campaign/{id_campaign}', 'TransactionController@campaignTransaction');
+            $router->get('user/{id_user}/campaign/{id_campaign}', 'TransactionController@userTransactionByCampaign');
 
-        $router->get('verify/{id_transaction}', [
-            'as' => 'verify_transaction',
-            'uses' => 'TransactionController@verifyTransactionCampaign'
-        ]);
+            $router->get('verify/{id_transaction}', [
+                'as' => 'verify_transaction',
+                'uses' => 'TransactionController@verifyTransactionCampaign'
+            ]);
+        });
+
+        /** masih without middleware */
+        $router->get('cron', 'TransactionController@cronCheckTransaction');
     });
 
 

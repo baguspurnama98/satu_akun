@@ -43,8 +43,10 @@ class MailJob extends Job
         //
         if ($this->type === 'otp') {
             $this->sendEmailOTP($this->data, $this->user);
-        } else {
+        } elseif ($this->type === 'transaction') {
             $this->sendTransactionUser($this->data, $this->user);
+        } else {
+            $this->sendTransactionFail($this->data, $this->user);
         }
         
     }
@@ -84,6 +86,28 @@ class MailJob extends Job
         Mail::send('mails.transaction', $data, function($message) use($user, $from_email, $surname) {
             // to
             $message->to($user->email, $user->name)->subject('Invoice Patungin');
+            // from
+            $message->from($from_email, $surname);
+        });
+    }
+
+    /**
+     * remove members
+     * data == campaign
+     */
+    private function sendTransactionFail($data, $user)
+    {
+        $from_email = 'noreply@baguspurnama.com';
+        $surname = 'noreply';
+
+        $data = [
+            'name' => $user->name,
+            'campaign' => $data->title,
+        ];
+
+        Mail::send('mails.member_fail', $data, function($message) use($user, $from_email, $surname) {
+            // to
+            $message->to($user->email, $user->name)->subject('Kamu Dikeluarkan dari Campaign');
             // from
             $message->from($from_email, $surname);
         });

@@ -42,7 +42,7 @@
         >
           <div class="w-full lg:pr-10 rounded-lg md:w-2/3 lg:w-1/2 group">
             <div class="relative xs:px-4">
-                <div ref="animation"></div>
+                <div v-once ref="animation"></div>
             </div>
           </div>
           <div

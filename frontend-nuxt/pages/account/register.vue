@@ -6,8 +6,8 @@
       style="max-width: 1000px"
     >
       <div class="grid grid-flow-col grid-cols-2 xs:grid-cols-1 w-full">
-        <div class="bg-indigo-500 py-10 px-10 flex items-stretch xs:hidden">
-          <img src="~/assets/img/press_play.svg" class="self-center" />
+        <div class="bg-indigo-500 py-10 px-10 flex items-stretch justify-center xs:hidden">
+          <div ref="animation" class="self-center"></div>
         </div>
         <div class="w-full py-10 px-5 md:px-10">
           <div class="text-center mb-5">
@@ -152,6 +152,8 @@
 </template>
 
 <script>
+import lottie from 'lottie-web'
+
 export default {
   name: "Register",
   layout: "default",
@@ -170,6 +172,15 @@ export default {
         password_confirmation: "",
       },
     };
+  },
+  mounted() {
+      lottie.loadAnimation({
+        container: this.$refs["animation"], // the dom element that will contain the animation
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'https://assets8.lottiefiles.com/packages/lf20_wd1udlcz.json' // the path to the animation json
+      });
   },
   computed: {
     isDisabled() {

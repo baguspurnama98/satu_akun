@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -26,6 +27,7 @@ class TransactionSeeder extends Seeder
             'unique_code' => 290,
             'total_nominal' => 20298,
             'no_rek_origin' => '1291241239',
+            'timeout' => Carbon::now()->addHours(2),
             'no_rek_destination' => '21834131',
             'updated_by' => 'Ananta',
             'created_by' => 'Rispo',

@@ -32,6 +32,8 @@ class CreateTransactionsTable extends Migration
             $table->boolean('status')->default(0);
             $table->boolean('delete')->default(0); // delete status
 
+            $table->dateTime('timeout', $precision = 0);
+
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();

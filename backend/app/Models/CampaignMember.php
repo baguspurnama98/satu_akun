@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Models;
+
+use App\Observers\CampaignMemberObserver;
 use Illuminate\Database\Eloquent\Model;
 
 class CampaignMember extends Model 
 {
+    use CampaignMemberObserver;
     // defenisi tabel yg digunakan di database
     protected $table = 'campaign_members';
 
