@@ -1,12 +1,42 @@
 <template>
-  <div class="relative container px-4 mx-auto">
+  <div class="relative container px-4 mx-auto min-h-screen">
     <div class="relative w-full">
       <h3 class="font-bold pb-3 text-4xl xs:text-2xl text-indigo-500">
         Patungan Saya
       </h3>
 
-      <div class="relative overflow-auto pb-20">
-        <table class="relative table-auto w-full text-left whitespace-no-wrap">
+      <div
+        class="relative w-full overflow-visible xs:overflow-x-auto xs:overflow-y-visible h-full"
+      >
+        <div
+          v-if="campaigns === null"
+          class="min-h-screen w-full justify-between flex items-stretch relative"
+        >
+          <svg
+            class="animate-spin mx-auto h-20 w-20 text-indigo-400"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+        </div>
+        <table
+          v-else
+          class="relative table-auto w-full text-left whitespace-no-wrap"
+        >
           <thead>
             <tr>
               <th
@@ -43,8 +73,8 @@
           <!-- Bingung gimana caranya click-outsidenya berjalan maksimal -->
           <tbody class="bg-white relative text-sm">
             <tr
-              v-for="(patungan, index) in dataPatungan"
-              :key="patungan.title"
+              v-for="(campaign, index) in campaigns"
+              :key="campaign.id"
               class="hover:bg-gray-100 relative"
             >
               <td
@@ -52,12 +82,12 @@
                 style="max-width: 200px"
               >
                 <p class="text-sm leading-5 text-gray-800 font-medium truncate">
-                  {{ patungan.title }}
+                  {{ campaign.title }}
                 </p>
               </td>
               <td class="border-t-2 border-gray-200 px-4 py-3">
                 <div class="text-sm leading-5">
-                  {{ patungan.member }}/{{ patungan.totalMember }}
+                  {{ campaign.total_members - 1 }}/{{ campaign.slot_capacity }}
                 </div>
               </td>
 
@@ -67,32 +97,39 @@
                 >
                   <span
                     aria-hidden
-                    class="absolute inset-0 bg-red-600 rounded-full"
-                    v-if="patungan.status === 'pending'"
-                  ></span>
+                    class="bg-yellow-500 rounded-full text-xs font-bold capitalize text-white m-0 px-2 py-1"
+                    v-if="campaign.status === 0"
+                    >Aktif</span
+                  >
                   <span
                     aria-hidden
-                    class="absolute inset-0 bg-gray-700 rounded-full"
-                    v-if="patungan.status === 'refund'"
-                  ></span>
+                    class="bg-indigo-500 rounded-full text-xs font-bold capitalize text-white m-0 px-2 py-1"
+                    v-if="campaign.status === 1"
+                    >Berlangsung</span
+                  >
                   <span
                     aria-hidden
-                    class="absolute inset-0 bg-yellow-500 rounded-full"
-                    v-if="patungan.status === 'aktif'"
-                  ></span
-                  ><span
-                    aria-hidden
-                    class="absolute inset-0 bg-indigo-500 rounded-full"
-                    v-if="patungan.status === 'berlangsung'"
-                  ></span
-                  ><span
-                    aria-hidden
-                    class="absolute inset-0 bg-green-400 rounded-full"
-                    v-if="patungan.status === 'selesai'"
-                  ></span>
+                    class="bg-gray-600 rounded-full text-xs font-bold capitalize text-white m-0 px-2 py-1"
+                    v-if="campaign.status === 2"
+                    >Expired</span
+                  >
                   <span
-                    class="relative text-xs font-bold capitalize text-white m-0"
-                    >{{ patungan.status }}</span
+                    aria-hidden
+                    class="bg-red-600 rounded-full text-xs font-bold capitalize text-white m-0 px-2 py-1"
+                    v-if="campaign.status === 3"
+                    >Refund</span
+                  >
+                  <span
+                    aria-hidden
+                    class="bg-red-300 rounded-full text-xs font-bold capitalize text-white m-0 px-2 py-1"
+                    v-if="campaign.status === 4"
+                    >Selesai Refund</span
+                  >
+                  <span
+                    aria-hidden
+                    class="bg-green-400 rounded-full text-xs font-bold capitalize text-white m-0 px-2 py-1"
+                    v-if="campaign.status === 5"
+                    >Selesai</span
                   >
                 </span>
               </td>
@@ -103,26 +140,26 @@
                   <span
                     aria-hidden
                     class="text-red-700 font-semibold"
-                    v-if="patungan.payment === 0"
+                    v-if="campaign.data_user.is_pay === 0"
                   >
                     Belum Bayar</span
                   >
                   <span
                     aria-hidden
                     class="text-gray-700 font-semibold"
-                    v-if="patungan.payment === 1"
+                    v-if="campaign.data_user.is_pay === 1"
                     >Pending</span
                   >
                   <span
                     aria-hidden
                     class="text-green-500 font-semibold"
-                    v-if="patungan.payment === 2"
+                    v-if="campaign.data_user.is_pay === 2"
                     >Terbayar</span
                   >
                 </span>
               </td>
               <td class="border-t-2 border-gray-200 px-4 py-3">
-                {{ patungan.dateEnd | formatDate }}
+                {{ campaign.expired_date | formatDate }}
               </td>
               <td class="border-t-2 border-gray-200 px-4 py-3">
                 <div
@@ -134,16 +171,16 @@
                     class="items-center px-2 py-1 border bg-white text-indigo-500 rounded transition duration-300 focus:outline-none flex font-semibold"
                     @click="showDetail(index)"
                     :disabled="
-                      patungan.status == 'pending' ||
-                      patungan.status == 'refund'
+                      campaign.status == 'pending' ||
+                      campaign.status == 'refund'
                     "
                     :class="{
                       'disabled:opacity-50 bg-gray-300 border-gray-500':
-                        patungan.status == 'pending' ||
-                        patungan.status == 'refund',
+                        campaign.status == 'pending' ||
+                        campaign.status == 'refund',
                       'border-indigo-400 hover:border-indigo-700':
-                        patungan.status != 'pending' ||
-                        patungan.status == 'refund',
+                        campaign.status != 'pending' ||
+                        campaign.status == 'refund',
                     }"
                   >
                     Detail
@@ -177,7 +214,10 @@
                     }"
                   >
                     <li class="px-2 py-2 hover:bg-gray-100 w-full border-none">
-                      <a class="inline-flex items-center" href="patungan/1">
+                      <a
+                        class="inline-flex items-center"
+                        :href="`/campaign/${campaign.id}/${campaign.slug}`"
+                      >
                         <svg
                           class="w-4 h-4 mr-2"
                           xmlns="http://www.w3.org/2000/svg"
@@ -243,6 +283,7 @@ export default {
     return {
       activeDetail: null,
       detail: false,
+      campaigns: null,
       dataPatungan: [
         {
           title: 'Sharing Account Netflix 1 Tahun',
@@ -297,7 +338,29 @@ export default {
       }
     },
   },
-
+  beforeMount() {
+    this.$axios
+      .$get(`campaign/user/${this.$store.state.user.id}?host=false`)
+      .then((resp) => {
+        console.log(resp)
+        for (let i = 0; i < resp.campaigns.length; i++) {
+          for (let k = 0; k < resp.campaigns[i].campaign_members.length; k++) {
+            if (
+              resp.campaigns[i].campaign_members[k].user_id ===
+              this.$store.state.user.id
+            ) {
+              resp.campaigns[i].data_user =
+                resp.campaigns[i].campaign_members[k]
+            }
+          }
+        }
+        this.campaigns = resp.campaigns
+        console.log(this.campaigns)
+      })
+      .catch((errors) => {
+        console.log(errors)
+      })
+  },
   watch: {
     $route(to, from) {
       this.showDetail()

@@ -31,10 +31,10 @@
       </div>
     </div>
     <div v-if="menuActive == 'progress'" class="datatables-campaign">
-      <InProgress :transactions="transactions" />
+      <InProgress :transactions="transactions_onGoing" />
     </div>
     <div v-if="menuActive == 'complete'" class="datatables-campaign">
-      <Complete :transactions="transactions" />
+      <Complete :transactions="transactions_done" />
     </div>
   </div>
 </template>
@@ -52,9 +52,8 @@ export default {
     return {
       menuActive: 'progress',
       breadcrumbs: [],
-      transactions: [
-        { name: 'Netflix 1 bulan', date: new Date(), price: 5000, status: 0 },
-      ],
+      transactions_onGoing: [],
+      transactions_done: [],
     }
   },
   methods: {
@@ -62,27 +61,49 @@ export default {
       this.menuActive = menu
     },
   },
-  //   mounted() {
-  //     const fullPath = this.$route.fullPath
-  //     const params = fullPath.substring(1).split('/')
 
-  //     let path = ''
-  //     let crumbs = []
+  beforeMount() {
+    this.$destroy()
+    let onGoing = []
+    let done = []
+    this.$axios
+      .$get(`transaction/user/${this.$store.state.user.id}`)
+      .then((resp) => {
+        console.log(resp)
+        for (let i = 0; i < resp.transactions.length; i++) {
+          this.$axios
+            .$get(`campaign/${resp.transactions[i].campaign_id}`)
+            .then((respon) => {
+              resp.transactions[i].detail_campaign = respon.campaigns
+            })
+            .catch((errors) => {
+              if (errors.response.status === 404) {
+                return this.$nuxt.error({
+                  statusCode: 404,
+                  message: 'Post not found',
+                })
+              }
+            })
 
-  //     params.forEach((param, index) => {
-  //       path = `${path}/${param}`
-  //       const match = this.$router.match(path)
-
-  //       //   Jika name route tidak null dan name route belum ada di crumbs
-  //       if (
-  //         match.name !== null &&
-  //         crumbs.map((val) => val.name).indexOf(match.name) === -1
-  //       ) {
-  //         crumbs.push(match)
-  //       }
-  //     })
-  //     this.breadcrumbs = crumbs
-  //   },
+          if (resp.transactions[i].status === 0) {
+            onGoing.push(resp.transactions[i])
+          } else {
+            done.push(resp.transactions[i])
+          }
+        }
+        this.transactions_onGoing = onGoing
+        this.transactions_done = done
+        console.log(this.transactions_onGoing, this.transactions_done)
+      })
+      .catch((errors) => {
+        if (errors.response.status === 404) {
+          return this.$nuxt.error({
+            statusCode: 404,
+            message: 'Post not found',
+          })
+        }
+      })
+  },
 }
 </script>
 <style lang="postcss">

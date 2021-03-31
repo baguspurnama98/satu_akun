@@ -41,6 +41,26 @@ Vue.filter('formatDate', (date) => {
   return `${splitted[0]} ${monthNames[splitted[1] - 1]} ${splitted[2]}`
 })
 
+Vue.filter('formatTime', (date) => {
+  const monthNames = [
+    'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember',
+  ]
+  let dateNew = moment(date).format('DD/MM/YYYY HH:mm')
+  var splitted = dateNew.split('/')
+  return `${splitted[0]} ${monthNames[splitted[1] - 1]} ${splitted[2]}`
+})
+
 Vue.filter('remainingTime', (date) => {
   const sisaTime = moment(date, 'YYYY-MM-DD HH:mm:ss').fromNow()
   var newsisaTime = sisaTime.split(' ').slice(1).join(' ')

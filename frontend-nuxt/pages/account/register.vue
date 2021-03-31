@@ -1,12 +1,16 @@
 <template>
-  <div class="min-w-screen min-h-screen flex items-start justify-center px-5 py-5">
+  <div
+    class="min-w-screen min-h-screen flex items-start justify-center px-5 py-5"
+  >
     <form
       @submit.prevent="register"
       class="bg-gray-100 text-gray-500 rounded-3xl shadow-lg overflow-hidden"
       style="max-width: 1000px"
     >
       <div class="grid grid-flow-col grid-cols-2 xs:grid-cols-1 w-full">
-        <div class="bg-indigo-500 py-10 px-10 flex items-stretch justify-center xs:hidden">
+        <div
+          class="bg-indigo-500 py-10 px-10 flex items-stretch justify-center xs:hidden"
+        >
           <div ref="animation" class="self-center"></div>
         </div>
         <div class="w-full py-10 px-5 md:px-10">
@@ -15,7 +19,9 @@
           </div>
           <div>
             <div class="mb-4">
-              <label for="name" class="text-sm font-semibold text-gray-600">Nama</label>
+              <label for="name" class="text-sm font-semibold text-gray-600"
+                >Nama</label
+              >
               <input
                 class="appearance-none border rounded w-full py-3 px-3 text-gray-900 focus:border-indigo-500 focus:outline-none"
                 name="name"
@@ -27,8 +33,12 @@
               />
             </div>
             <div class="mb-4">
-              <label for="email" class="text-sm font-semibold text-gray-600">Email</label>
-              <span v-if="isEmailAlready" class="ml-1 text-xs font-medium text-red-500"
+              <label for="email" class="text-sm font-semibold text-gray-600"
+                >Email</label
+              >
+              <span
+                v-if="isEmailAlready"
+                class="ml-1 text-xs font-medium text-red-500"
                 >Email sudah digunakan</span
               >
               <input
@@ -61,7 +71,9 @@
                 class="text-sm font-semibold text-gray-600"
                 >Konfirmasi Password</label
               >
-              <span v-if="isPassConfirm" class="ml-1 text-xs font-medium text-red-500"
+              <span
+                v-if="isPassConfirm"
+                class="ml-1 text-xs font-medium text-red-500"
                 >Password tidak sama</span
               >
               <input
@@ -78,10 +90,14 @@
               <label for="whatsapp" class="text-sm font-semibold text-gray-600"
                 >WhatsApp</label
               >
-              <span v-if="isEmailAlready" class="ml-1 text-xs font-medium text-red-500"
+              <span
+                v-if="isWaAlready"
+                class="ml-1 text-xs font-medium text-red-500"
                 >WhatsApp sudah digunakan</span
               >
-              <span v-if="isPhoneConfirm" class="ml-1 text-xs font-medium text-red-500"
+              <span
+                v-if="isPhoneConfirm"
+                class="ml-1 text-xs font-medium text-red-500"
                 >Masukan nomor dengan benar</span
               >
               <input
@@ -94,19 +110,24 @@
                 @keydown="isPhoneConfirm = false"
               />
 
-              <label class="flex items-center py-3 xs:pl-0" style="align-items: flex-start">
-              <input
-                type="checkbox"
-                name="expired"
-                class="form-tick h-6 w-6 xs:h-5 xs:w-5 focus:outline-none text-gray-600"
-                v-model="terms"
-              />
-              <span class="ml-3 xs:ml-2 text-gray-700 xs:text-sm"
-                >Data kamu aman, baca
-                <NuxtLink to="/about" class="text-red-500">Syarat dan Ketentuan</NuxtLink>
-                Patungin</span
+              <label
+                class="flex items-center py-3 xs:pl-0"
+                style="align-items: flex-start"
               >
-            </label>
+                <input
+                  type="checkbox"
+                  name="expired"
+                  class="form-tick h-6 w-6 xs:h-5 xs:w-5 focus:outline-none text-gray-600"
+                  v-model="terms"
+                />
+                <span class="ml-3 xs:ml-2 text-gray-700 xs:text-sm"
+                  >Data kamu aman, baca
+                  <NuxtLink to="/about" class="text-red-500"
+                    >Syarat dan Ketentuan</NuxtLink
+                  >
+                  Patungin</span
+                >
+              </label>
             </div>
 
             <div class="">
@@ -155,8 +176,8 @@
 import lottie from 'lottie-web'
 
 export default {
-  name: "Register",
-  layout: "default",
+  name: 'Register',
+  layout: 'default',
   data() {
     return {
       loading: false,
@@ -165,22 +186,22 @@ export default {
       isWaAlready: false,
       terms: false,
       form: {
-        name: "",
-        email: "",
-        password: "",
-        whatsapp: "",
-        password_confirmation: "",
+        name: '',
+        email: '',
+        password: '',
+        whatsapp: '',
+        password_confirmation: '',
       },
-    };
+    }
   },
   mounted() {
-      lottie.loadAnimation({
-        container: this.$refs["animation"], // the dom element that will contain the animation
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        path: 'https://assets8.lottiefiles.com/packages/lf20_wd1udlcz.json' // the path to the animation json
-      });
+    lottie.loadAnimation({
+      container: this.$refs['animation'], // the dom element that will contain the animation
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'https://assets8.lottiefiles.com/packages/lf20_wd1udlcz.json', // the path to the animation json
+    })
   },
   computed: {
     isDisabled() {
@@ -191,21 +212,21 @@ export default {
         this.form.whatsapp.length < 10 ||
         this.form.password !== this.form.password_confirmation ||
         !this.terms
-      );
+      )
     },
     isPassConfirm() {
       return (
         this.form.password !== this.form.password_confirmation &&
-        this.form.password_confirmation != ""
-      );
+        this.form.password_confirmation != ''
+      )
     },
   },
   methods: {
     register() {
-      this.loading = true;
+      this.loading = true
       if (this.validatePhoneNumber(this.form.whatsapp)) {
         this.$axios
-          .$post("auth/register", {
+          .$post('auth/register', {
             name: this.form.name,
             email: this.form.email,
             password: this.form.password,
@@ -214,34 +235,36 @@ export default {
           })
           .then((res) => {
             // berhasil, tampilkan sesuatu
-            this.$router.push(`/account/validate-otp/${res.user.id}?t=${res.user.token}`);
+            this.$router.push(
+              `/account/validate-otp/${res.user.id}?t=${res.user.token}`
+            )
           })
           .catch((errors) => {
             // console.log(errors.response)
-            this.loading = false;
-            const { email, whatsapp } = errors.response.data;
+            this.loading = false
+            const { email, whatsapp } = errors.response.data
             if (email) {
               // sudah ada email yg sama
-              this.isEmailAlready = true;
+              this.isEmailAlready = true
               // setTimeout(()=>{
               //     this.$router.push('/account/login')
               // }, 5000)
             }
             if (whatsapp) {
-              this.isWaAlready = true;
+              this.isWaAlready = true
             }
-          });
+          })
       } else {
-        this.isPhoneConfirm = true;
-        this.loading = false;
+        this.isPhoneConfirm = true
+        this.loading = false
       }
     },
     validatePhoneNumber(input_str) {
-      var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-      return re.test(input_str);
+      var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+      return re.test(input_str)
     },
   },
-};
+}
 </script>
 
 <style>

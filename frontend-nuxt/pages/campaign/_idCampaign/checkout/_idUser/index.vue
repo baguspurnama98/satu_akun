@@ -1,12 +1,14 @@
 <template>
-  <div class="container px-4 mx-auto flex flex-wrap items-start justify-between">
+  <div
+    class="container px-4 mx-auto flex flex-wrap items-start justify-between"
+  >
     <div class="w-full">
       <h3 class="font-bold pb-3 text-4xl text-indigo-500">Checkout</h3>
       <div class="">
         <div class="p-3 rounded-lg">
           <p class="xs:text-sm text-justify xs:text-center">
-            Segera lakukan pembayaran dalam 2 jam. Pastikan Anda
-            melakukan transfer hingga 3 digit terakhir agar memudahkan kami melakukan
+            Segera lakukan pembayaran dalam 2 jam. Pastikan Anda melakukan
+            transfer hingga 3 digit terakhir agar memudahkan kami melakukan
             validasi pembayaran Anda.
           </p>
         </div>
@@ -21,31 +23,30 @@
         <div
           class="border pl-5 xs:pl-2 rounded-lg mx-2 lg:mx-56 p-2 xs:text-sm h-1/3 bg-indigo-100"
         >
-          <div class="flex" style="align-items: center; flex-direction: column;">
-              <div class="inline-flex">
-            <span
-              @click.stop.prevent="copyToClipboard"
-              class="cursor-pointer text-3xl font-semibold xs:text-xl"
-              >12354453234675</span
-            >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              class="h-5 w-5 self-center xs:h-4 xs:w-4 ml-5 justify-self-center font-semibold cursor-pointer rounded-lg bg-yellow-200"
-              @click.stop.prevent="copyToClipboard"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
-              />
-            </svg>
+          <div class="flex" style="align-items: center; flex-direction: column">
+            <div class="inline-flex">
+              <span
+                @click.stop.prevent="copyToClipboard"
+                class="cursor-pointer text-3xl font-semibold xs:text-xl"
+                >12354453234675</span
+              >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="h-5 w-5 self-center xs:h-4 xs:w-4 ml-5 justify-self-center font-semibold cursor-pointer rounded-lg bg-yellow-200"
+                @click.stop.prevent="copyToClipboard"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
+                />
+              </svg>
             </div>
-            <span
-              class="ml-4 text-lg xs:text-md"
+            <span class="ml-4 text-lg xs:text-md"
               >{{ transaction.bank }} | Tasya Purnama</span
             >
           </div>
@@ -149,8 +150,10 @@
         <div class="p-3 mt-3 rounded-lg">
           <p class="xs:text-sm text-center xs:text-justify">
             Segera lakukan pembayaran sebelum
-            <span class="font-bold">12 Januari 2020 14.00 WIB</span> atau transaksimu akan
-            dibatalkan otomatis oleh sistem
+            <span class="font-bold"
+              >{{ add2Day(transaction.created_at) | formatTime }} WIB</span
+            >
+            atau transaksimu akan dibatalkan otomatis oleh sistem
           </p>
           <p class="xs:text-sm text-center xs:text-justify">
             Setelah melakukan pembayaran, kirimkan bukti pembayaran ke
@@ -164,8 +167,9 @@
           </p>
           <p class="text-sm text-center xs:text-justify italic">
             <b>*</b>Kami hanya melayani proses konfirmasi pembayaran pada pukul
-            <b>08.00 - 18.00 WIB</b>. Jika Anda melakukan konfirmasi pembayaran diatas jam
-            tersebut, maka proses Anda akan kami proses pada hari selanjutnya.
+            <b>08.00 - 18.00 WIB</b>. Jika Anda melakukan konfirmasi pembayaran
+            diatas jam tersebut, maka proses Anda akan kami proses pada hari
+            selanjutnya.
           </p>
         </div>
       </div>
@@ -212,67 +216,74 @@
   </div>
 </template>
 <script>
+import moment from 'moment'
 export default {
-  name: "CheckoutCampaign",
+  name: 'CheckoutCampaign',
 
   data() {
     return {
       campaign: {
-          title: null,
-          durasi: null,
+        title: null,
+        durasi: null,
       },
       user: {
-          name: null
+        name: null,
       },
       transaction: {
-          nominal: null,
-          unique_code: null,
-          total_nominal: null,
-          bank: null,
-          no_transaction: null,
-          no_rek_destination: null,
+        nominal: null,
+        unique_code: null,
+        total_nominal: null,
+        bank: null,
+        no_transaction: null,
+        no_rek_destination: null,
       },
       showAlertCopied: true,
-    };
+    }
   },
   methods: {
     handleAlertCopied() {
-      this.showAlertCopied = !this.showAlertCopied;
+      this.showAlertCopied = !this.showAlertCopied
+    },
+    add2Day(startDate) {
+      return moment(startDate, 'YYYY-MM-DD HH:mm:ss')
+        .add(2, 'hours')
+        .format('YYYY-MM-DD HH:mm')
     },
     copyToClipboard() {
-      let dataToCopy = document.querySelector("#copy-input");
-      dataToCopy.setAttribute("type", "text");
-      dataToCopy.select();
+      let dataToCopy = document.querySelector('#copy-input')
+      dataToCopy.setAttribute('type', 'text')
+      dataToCopy.select()
 
       try {
-        var successful = document.execCommand("copy");
+        var successful = document.execCommand('copy')
 
-        this.showAlertCopied = !this.showAlertCopied;
-        setTimeout(() => (this.showAlertCopied = true), 600);
+        this.showAlertCopied = !this.showAlertCopied
+        setTimeout(() => (this.showAlertCopied = true), 600)
       } catch (err) {
-        alert("Oops, unable to copy");
+        alert('Oops, unable to copy')
       }
-      dataToCopy.setAttribute("type", "hidden");
-      window.getSelection().removeAllRanges();
+      dataToCopy.setAttribute('type', 'hidden')
+      window.getSelection().removeAllRanges()
     },
   },
   async created() {
-    const { idUser, idCampaign } = this.$route.params;
+    const { idUser, idCampaign } = this.$route.params
     await this.$axios
       .$get(`transaction/user/${idUser}/campaign/${idCampaign}`)
       .then((resp) => {
-        this.transaction = resp.transactions[0];
+        this.transaction = resp.transactions[0]
         this.campaign = this.transaction.campaigns
         this.user = this.transaction.users
+        console.log(this.transaction)
       })
       .catch((errors) => {
         if (errors.response.status === 404) {
           return this.$nuxt.error({
             statusCode: 404,
-            message: "Post not found",
-          });
+            message: 'Post not found',
+          })
         }
-      });
+      })
   },
 
   //   beforeMount() {
@@ -294,7 +305,7 @@ export default {
   //         }
   //       })
   //   }
-};
+}
 </script>
 
 <style scoped>
