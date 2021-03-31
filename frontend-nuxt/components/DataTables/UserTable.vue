@@ -65,7 +65,7 @@
             </td>
             <td class="justify-between px-2 py-3">
               <a
-                class="px-2 py-1 bg-green-400 rounded-md text-sm font-medium text-white hover:bg-green-600 focus:outline-none mr-2 text-center"
+                class="px-2 py-1 text-white bg-green-400 hover:bg-green-600 focus:outline-none rounded-lg mr-2 shadow-md text-sm"
                 :href="'https://wa.me/62' + row.whatsapp"
                 target="_blank"
               >
@@ -73,15 +73,15 @@
               >
 
               <button
-                class="px-2 py-1 bg-indigo-500 rounded-md text-sm font-medium text-white hover:bg-indigo-600 focus:outline-none text-center"
+                class="px-2 py-1 bg-indigo-500 text-sm text-white hover:bg-indigo-600 focus:outline-none text-center rounded-lg mr-2 shadow-md"
                 v-if="row.status === 'terblokir'"
               >
                 Aktifkan
               </button>
               <button
-                class="px-2 py-1 bg-red-500 rounded-md text-sm font-medium text-white hover:bg-red-600 focus:outline-none text-center"
+                class="px-2 py-1 bg-red-500 text-sm text-white hover:bg-red-600 focus:outline-none text-center rounded-lg mr-2 shadow-md"
                 v-else
-                @click="showModalBlock(row.name)"
+                @click="showModalBlock(row.id)"
               >
                 Blokir
               </button>
@@ -96,7 +96,7 @@
     </div>
     <!-- Modal Block -->
     <div
-      class="container mx-auto flex justify-center justify-items-start items-start w-full absolute z-100 inset-0"
+      class="container mx-auto flex justify-center justify-items-start items-start w-full absolute z-100 inset-0 -mt-40"
       :class="[modalBlock ? 'hidden' : '']"
     >
       <div
@@ -129,14 +129,14 @@
 
         <div class="p-4 flex space-x-4">
           <button
-            @click="showModalBlock()"
+            @click="showModalBlock('outside')"
             class="w-1/2 px-4 py-3 text-center bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-black font-bold rounded-lg text-sm focus:outline-none"
           >
             Batal
           </button>
           <button
             class="w-1/2 px-4 py-3 text-center text-white bg-red-600 rounded-lg hover:bg-red-700 hover:text-white font-bold text-sm focus:outline-none"
-            @click="blockUser(row.name)"
+            @click="blockUser()"
           >
             Blokir
           </button>
@@ -177,19 +177,24 @@ export default {
 
     showModalBlock(id) {
       if (id === 'outside') {
-        console.log('oke2')
         this.modalBlock = true
         this.userSelected = ''
       } else {
-        console.log('oke')
         this.modalBlock = !this.modalBlock
         this.userSelected = id
       }
     },
 
     blockUser() {
-      alert(this.userSelected)
-      //post request
+      this.$axios
+        .$get(`auth/delete/${this.userSelected}`)
+        .then((resp) => {
+          console.log(resp)
+          // return
+        })
+        .catch((errors) => {
+          console.log(errors)
+        })
     },
   },
 }

@@ -28,7 +28,7 @@
             class="border-t-2 hover:bg-gray-200"
           >
             <td class="px-3">
-              {{ row.name }}
+              {{ row.detail_campaign.title }}
             </td>
             <td class="px-3">
               {{ row.date | formatDate }}
@@ -39,7 +39,7 @@
                 <span v-else>-</span>
               </span>
 
-              <span>{{ row.price | formatRupiah }}</span>
+              <span>{{ row.nominal | formatRupiah }}</span>
             </td>
             <td class="px-4 py-3 text-xs">
               <div class="inline-flex">
@@ -75,11 +75,11 @@ export default {
   },
   methods: {
     nameLength(row) {
-      return row.email.length
+      return row.detail_campaign.email.length
     },
 
     indexChar(row) {
-      return row.email.charCodeAt(0) - 96
+      return row.detail_campaign.email.charCodeAt(0) - 96
     },
 
     dateSort(a, b) {

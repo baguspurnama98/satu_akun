@@ -1,7 +1,7 @@
 <template>
   <!-- Modal Form informasi akun -->
   <div
-    class="container mx-auto flex justify-center justify-items-start items-start absolute z-100 inset-0"
+    class="container mx-auto flex justify-center justify-items-start items-start absolute z-100 inset-0 -mt-40"
     :class="[status ? '' : 'hidden']"
   >
     <div class="fixed w-1/3 xs:w-full self-center">

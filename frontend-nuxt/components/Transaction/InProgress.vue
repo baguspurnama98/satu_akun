@@ -75,11 +75,11 @@ export default {
   },
   methods: {
     nameLength(row) {
-      // return row.email.length
+      return row.detail_campaign.email.length
     },
 
     indexChar(row) {
-      return row.email.charCodeAt(0) - 96
+      return row.detail_campaign.email.charCodeAt(0) - 96
     },
 
     dateSort(a, b) {
