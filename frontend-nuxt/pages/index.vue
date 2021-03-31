@@ -13,7 +13,7 @@
       <Landing class="my-4" />
       <!-- component campaign -->
       <section
-        id="section2"
+        id="campaign"
         class="container px-4 my-4 mx-auto flex flex-wrap items-center justify-between"
       >
         <div

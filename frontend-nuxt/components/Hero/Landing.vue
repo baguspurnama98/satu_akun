@@ -66,7 +66,7 @@
             </p>
             <div class="relative flex flex-row mt-10 mx-auto lg:ml-0">
               <a
-                href="#section2"
+                href="#campaign"
                 class="flex items-center px-5 py-3 mx-3 rounded-md text-base text-white transition bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
                 style="text-align: center"
                 >Mulai Patungan
