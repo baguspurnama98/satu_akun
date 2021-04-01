@@ -1,6 +1,5 @@
 let isDev = process.env.NODE_ENV !== 'production'
 
-
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
@@ -17,8 +16,11 @@ export default {
       { hid: 'description', name: 'description', content: '' },
     ],
     link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'stylesheet', href :'https://fonts.googleapis.com/css2?family=Righteous&display=swap'}
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Righteous&display=swap',
+      },
     ],
   },
 
@@ -69,7 +71,7 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: !isDev ? process.env.API_PROD_URL : process.env.API_DEV_URL,
+    baseURL: isDev ? process.env.API_PROD_URL : process.env.API_DEV_URL, //---
     retry: { retries: 3 },
   },
 

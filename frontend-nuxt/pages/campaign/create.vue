@@ -8,7 +8,7 @@
         <p>
           Pastikan campaign Anda sesuai dengan
           <b
-            ><NuxtLink to="/about" class="hover:text-indigo-500 text-red-500"
+            ><NuxtLink to="/tnc" class="hover:text-indigo-500 text-red-500"
               >syarat dan ketentuan Patungin.com</NuxtLink
             ></b
           >.
@@ -149,6 +149,16 @@
               v-model="campaign.slot_capacity"
             />
           </div>
+          <span
+            class="text-red-700 text-sm font-semibold"
+            v-if="campaign.slot_capacity !== '' && campaign.slot_capacity < 2"
+            >*Jumlah minimal slot 2</span
+          >
+          <span
+            class="text-red-700 text-sm font-semibold"
+            v-if="campaign.slot_capacity !== '' && campaign.slot_capacity > 20"
+            >*Jumlah maksimal slot 20</span
+          >
         </div>
       </div>
 
@@ -163,7 +173,7 @@
           >
           <p class="text-xs md:pr-20">
             Anda bebas menentukan harga setiap slot yang harus dikeluarkan
-            anggota campaign. Minimal harga adalah 10 ribu rupiah.
+            anggota campaign. Minimal harga adalah Rp. 10.000.
           </p>
         </div>
 
@@ -184,6 +194,11 @@
               v-model="campaign.slot_price"
             />
           </div>
+          <span
+            class="text-red-700 text-sm font-semibold"
+            v-if="campaign.slot_price !== '' && campaign.slot_price < 10000"
+            >*Minimal harga sebesar Rp. 10000</span
+          >
         </div>
       </div>
     </section>
@@ -390,6 +405,11 @@
           Buat Campaign</span
         >
       </button>
+      <span
+        class="text-red-800 text-sm block text-font-semibold"
+        v-if="message_error === true"
+        >Terdapat kesalahan, cek kembali Formnya</span
+      >
     </div>
   </div>
 </template>
@@ -404,6 +424,7 @@ export default {
   data() {
     return {
       loading: false,
+      message_error: false,
       terms: false,
       categories: '',
       img_base64: null,
@@ -439,35 +460,44 @@ export default {
 
   methods: {
     handleSave() {
-      this.loading = true
-      this.campaign.expired_date = moment(this.campaign.expired_date).format(
-        'YYYY-MM-DD HH:mm:ss'
-      )
-      this.campaign.duration_date = moment(this.campaign.duration_date).format(
-        'YYYY-MM-DD HH:mm:ss'
-      )
-
-      //   Smart ways, daripada capek pak formData satu satu, astagfiruloh
-      let formData = new FormData()
-      Object.keys(this.campaign).map((key) => {
-        formData.append(key, this.campaign[key])
-      })
-
-      this.$axios
-        .$post(`campaign/store/${this.$store.state.user.id}`,
-          formData
+      if (
+        parseInt(this.campaign.slot_price) < 10000 ||
+        parseInt(this.campaign.slot_capacity) < 2 ||
+        parseInt(this.campaign.slot_capacity) > 20
+      ) {
+        this.message_error = true
+        setTimeout(() => {
+          this.message_error = false
+        }, 5000)
+      } else {
+        this.loading = true
+        this.campaign.expired_date = moment(this.campaign.expired_date).format(
+          'YYYY-MM-DD HH:mm:ss'
         )
-        .then((resp) => {
-          console.log(resp)
-          if (resp.message === 'CREATED') {
-            this.$router.push(
-              `/campaign/${resp.campaign.id}/${resp.campaign.slug}`
-            )
-          }
+        this.campaign.duration_date = moment(
+          this.campaign.duration_date
+        ).format('YYYY-MM-DD HH:mm:ss')
+
+        //   Smart ways, daripada capek pak formData satu satu, astagfiruloh
+        let formData = new FormData()
+        Object.keys(this.campaign).map((key) => {
+          formData.append(key, this.campaign[key])
         })
-        .catch((errors) => {
-          console.dir(errors)
-        })
+
+        this.$axios
+          .$post(`campaign/store/${this.$store.state.user.id}`, formData)
+          .then((resp) => {
+            console.log(resp)
+            if (resp.message === 'CREATED') {
+              this.$router.push(
+                `/campaign/${resp.campaign.id}/${resp.campaign.slug}`
+              )
+            }
+          })
+          .catch((errors) => {
+            console.dir(errors)
+          })
+      }
     },
 
     /**
@@ -583,6 +613,7 @@ export default {
   },
 
   async mounted() {
+    this.$destroy()
     await this.$axios
       .$get('campaign/categories')
       .then((resp) => {

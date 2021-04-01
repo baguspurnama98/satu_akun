@@ -20,14 +20,12 @@
           class="flex flex-col items-center justify-center bg-white min-h-screen w-full"
         >
           <div class="text-center mb-10">
-            <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
+            <h1
+              class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4"
+            >
               <b class="logo">Patungin</b> mudah dan murah banget
             </h1>
-            <p
-              class="text-base leading-relaxed"
-            >
-              Yuk mulai patungan!
-            </p>
+            <p class="text-base leading-relaxed">Yuk mulai patungan!</p>
           </div>
           <div
             class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-6 gap-4 w-full"
@@ -239,6 +237,7 @@ export default {
       .$get(`campaign`)
       .then((resp) => {
         this.campaigns = resp.campaigns
+        console.log(this.campaigns)
       })
       .catch((errors) => {
         console.dir(errors)
