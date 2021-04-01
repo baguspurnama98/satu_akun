@@ -86,7 +86,7 @@
           <div>
             <span>{{ transaction.nominal | formatRupiah }}</span>
           </div>
-          <!--  -->
+
           <div class="pl-5 xs:pl-2 flex justify-between">
             <span class="font-medium">Kode Unik</span>
             <span class="mr-5 xs:mr-1">:</span>
@@ -151,7 +151,7 @@
           <p class="xs:text-sm text-center xs:text-justify">
             Segera lakukan pembayaran sebelum
             <span class="font-bold"
-              >{{ add2Day(transaction.created_at) | formatTime }} WIB</span
+              >{{ transaction.timeout | formatTime }} WIB</span
             >
             atau transaksimu akan dibatalkan otomatis oleh sistem
           </p>
@@ -216,7 +216,6 @@
   </div>
 </template>
 <script>
-import moment from 'moment'
 export default {
   name: 'CheckoutCampaign',
 
@@ -244,11 +243,7 @@ export default {
     handleAlertCopied() {
       this.showAlertCopied = !this.showAlertCopied
     },
-    add2Day(startDate) {
-      return moment(startDate, 'YYYY-MM-DD HH:mm:ss')
-        .add(2, 'hours')
-        .format('YYYY-MM-DD HH:mm')
-    },
+
     copyToClipboard() {
       let dataToCopy = document.querySelector('#copy-input')
       dataToCopy.setAttribute('type', 'text')
@@ -285,26 +280,6 @@ export default {
         }
       })
   },
-
-  //   beforeMount() {
-  //  this.$axios
-  //       .$get(
-  //         process.env.API_DEV_URL + `campaign/${this.$route.params.idCampaign}`
-  //       )
-  //       .then((resp) => {
-  //         this.campaign = resp.campaigns
-  //         console.log(this.campaign)
-  //       })
-  //       .catch((errors) => {
-  //         if (errors.response.status === 404) {
-  //           console.log('oke')
-  //           return this.$nuxt.error({
-  //             statusCode: 404,
-  //             message: 'Post not found',
-  //           })
-  //         }
-  //       })
-  //   }
 }
 </script>
 

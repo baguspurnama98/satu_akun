@@ -28,7 +28,7 @@
             class="border-t-2 hover:bg-gray-200"
           >
             <td class="px-3">
-              {{ row.detail_campaign.title }}
+              {{ row.campaigns.title }}
             </td>
             <td class="px-3">
               {{ row.date | formatDate }}
@@ -75,11 +75,11 @@ export default {
   },
   methods: {
     nameLength(row) {
-      return row.detail_campaign.email.length
+      // return row.detail_campaign.email.length
     },
 
     indexChar(row) {
-      return row.detail_campaign.email.charCodeAt(0) - 96
+      // return row.detail_campaign.email.charCodeAt(0) - 96
     },
 
     dateSort(a, b) {

@@ -122,7 +122,7 @@
                 />
                 <span class="ml-3 xs:ml-2 text-gray-700 xs:text-sm"
                   >Data kamu aman, baca
-                  <NuxtLink to="/about" class="text-red-500"
+                  <NuxtLink to="/tnc" class="text-red-500"
                     >Syarat dan Ketentuan</NuxtLink
                   >
                   Patungin</span

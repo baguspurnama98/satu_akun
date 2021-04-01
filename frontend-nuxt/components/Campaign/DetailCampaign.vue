@@ -1,29 +1,7 @@
 <template>
   <div>
-    <div
-      class="min-w-screen min-h-screen flex -mt-20 justify-between items-center"
-      v-if="campaign.title === undefined"
-    >
-      <svg
-        class="animate-spin mx-auto place-items-center h-20 w-20 text-indigo-400 self-center"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <circle
-          class="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="currentColor"
-          stroke-width="4"
-        ></circle>
-        <path
-          class="opacity-75"
-          fill="currentColor"
-          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-        ></path>
-      </svg>
+    <div v-if="campaign.title === undefined">
+      <Spinner />
     </div>
 
     <div
@@ -342,7 +320,7 @@
 </template>
 <script>
 import IconSocial from '../Profil/IconSocial'
-
+import Spinner from '@/components/Spinner.vue'
 
 export default {
   components: { IconSocial },
@@ -368,8 +346,7 @@ export default {
           this.loading = true
 
           this.$axios
-            .$get(`campaign/rsvp/${idCampaign}/${this.$store.state.user.id}`
-            )
+            .$get(`campaign/rsvp/${idCampaign}/${this.$store.state.user.id}`)
             .then((resp) => {
               this.$router.push(
                 `/campaign/${idCampaign}/checkout/${this.$store.state.user.id}`
@@ -399,7 +376,7 @@ export default {
       } else {
         return false
       }
-    }
+    },
   },
 }
 </script>

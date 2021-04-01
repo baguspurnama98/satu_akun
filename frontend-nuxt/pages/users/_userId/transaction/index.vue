@@ -30,11 +30,16 @@
         </ul>
       </div>
     </div>
-    <div v-if="menuActive == 'progress'" class="datatables-campaign">
-      <InProgress :transactions="transactions_onGoing" />
+    <div v-if="transactions_done === null || transactions_onGoing === null">
+      <Spinner />
     </div>
-    <div v-if="menuActive == 'complete'" class="datatables-campaign">
-      <Complete :transactions="transactions_done" />
+    <div v-else>
+      <div v-if="menuActive == 'progress'" class="datatables-campaign">
+        <InProgress :transactions="transactions_onGoing" />
+      </div>
+      <div v-if="menuActive == 'complete'" class="datatables-campaign">
+        <Complete :transactions="transactions_done" />
+      </div>
     </div>
   </div>
 </template>
@@ -42,7 +47,7 @@
 <script>
 import Complete from '@/components/Transaction/Complete'
 import InProgress from '@/components/Transaction/InProgress'
-
+import Spinner from '@/components/Spinner.vue'
 export default {
   components: {
     Complete,
@@ -52,8 +57,8 @@ export default {
     return {
       menuActive: 'progress',
       breadcrumbs: [],
-      transactions_onGoing: [],
-      transactions_done: [],
+      transactions_onGoing: null,
+      transactions_done: null,
     }
   },
   methods: {
@@ -71,20 +76,6 @@ export default {
       .then((resp) => {
         console.log(resp)
         for (let i = 0; i < resp.transactions.length; i++) {
-          this.$axios
-            .$get(`campaign/${resp.transactions[i].campaign_id}`)
-            .then((respon) => {
-              resp.transactions[i].detail_campaign = respon.campaigns
-            })
-            .catch((errors) => {
-              if (errors.response.status === 404) {
-                return this.$nuxt.error({
-                  statusCode: 404,
-                  message: 'Post not found',
-                })
-              }
-            })
-
           if (resp.transactions[i].status === 0) {
             onGoing.push(resp.transactions[i])
           } else {
