@@ -9,6 +9,7 @@ use App\Models\CampaignCategories;
 use App\Models\CampaignMember;
 use App\Models\Transaction;
 use App\Models\User;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -249,7 +250,6 @@ class CampaignController extends Controller
         
         // DB::beginTransaction();
         if ($campaign->total_members === $campaign->slot_capacity + 1) {
-            DB::rollBack();
             return response()->json(['message' => 'Full Capacity'], 409);
         }
         
@@ -263,11 +263,8 @@ class CampaignController extends Controller
             if ($is_host === true) return;
             $this->generateNewTransaction($campaign, $user);
             
-            // DB::commit();
             return response()->json(['campaign' => $member_of_campaign, 'message' => 'CREATED'], 201);
         } catch (\Exception $e) {
-            // return error message
-            // DB::rollBack();
             return response()->json(['message' => $e], 409);
         }
     }
@@ -303,6 +300,7 @@ class CampaignController extends Controller
                 'bank' => $bank,
                 'no_transaction' => $date->getTimestamp(),
                 'type' => 1,
+                'timeout' => Carbon::now()->addHours(2),
                 'nominal' => $price_after_fee,
                 'unique_code' => $random_code,
                 'total_nominal' => $final_price,

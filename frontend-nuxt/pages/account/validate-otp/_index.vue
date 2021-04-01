@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-indigo-100 h-screen">
+  <div class="bg-gradient-to-b from-white via-indigo-100 to-white">
     <div class="items-center flex justify-center">
       <div
-        class="bg-white rounded-lg shadow-md my-16 p-8 xs:px-2 xs:py-4 xs:mx-4"
+        class="bg-white rounded-lg shadow-lg my-16 p-8 xs:px-2 xs:py-4 xs:mx-4"
       >
         <div class="px-2 pb-4">
           <div class="font-bold text-indigo-500 text-2xl">Kode OTP</div>

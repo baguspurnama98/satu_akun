@@ -348,6 +348,7 @@ export default {
           this.$axios
             .$get(`campaign/rsvp/${idCampaign}/${this.$store.state.user.id}`)
             .then((resp) => {
+                console.log(resp)
               this.$router.push(
                 `/campaign/${idCampaign}/checkout/${this.$store.state.user.id}`
               )

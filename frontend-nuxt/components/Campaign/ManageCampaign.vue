@@ -96,8 +96,8 @@
               Deskripsi
             </h6>
             <span
-              class="bg-gray-200 p-1 ml-1 rounded-md w-auto text-gray-600 text-xs font-semibold"
-              >Opsional</span
+              class="bg-red-200 p-1 ml-1 rounded-md w-auto text-red-600 text-xs font-semibold"
+              >Wajib</span
             >
             <p class="text-xs lg:pr-20 md:pr-10 xs:pr-0">
               Tulis deskripsi campaign Anda sedetail mungkin
@@ -107,6 +107,7 @@
           <div class="sm:col-span-2">
             <div>
               <textarea
+                required
                 class="w-full h-96 appearance-none border rounded py-3 px-3 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500 xs:text-sm"
                 placeholder=""
                 rows="5"
@@ -144,6 +145,7 @@
             <div>
               <input
                 type="number"
+                required
                 min="2"
                 max="20"
                 class="w-full border focus:outline-none focus:ring focus:border-indigo-400 p-2 rounded xs:text-sm"
@@ -195,6 +197,7 @@
                 id="price"
                 class="border focus:outline-none focus:ring focus:border-indigo-400 p-2 xs:text-sm block w-full pl-10 rounded"
                 placeholder="10000"
+                required
                 v-model="campaign.slot_price"
               />
             </div>

@@ -221,7 +221,6 @@
 </template>
 <script>
 import moment from 'moment'
-import Spinner from '@/components/Spinner.vue'
 export default {
   layout: 'default',
 
@@ -246,7 +245,13 @@ export default {
       this.showDetail()
     },
   },
-  beforeMount() {
+  activated() {
+      if (this.$fetchState.timestamp <= Date.now() - 30000) {
+        this.$fetch()
+      }
+  },
+//   https://id.nuxtjs.org/docs/2.x/features/data-fetching/#menggunakan-pengait-activated
+  fetch() {
     this.$axios
       .$get(`campaign/user/${this.$store.state.user.id}?host=true`)
       .then((resp) => {

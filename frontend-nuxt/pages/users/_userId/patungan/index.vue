@@ -255,7 +255,6 @@
   </div>
 </template>
 <script>
-import Spinner from '@/components/Spinner.vue'
 export default {
   layout: 'default',
 
@@ -275,7 +274,12 @@ export default {
       }
     },
   },
-  beforeMount() {
+  activated() {
+      if (this.$fetchState.timestamp <= Date.now() - 30000) {
+        this.$fetch()
+      }
+  },
+  fetch() {
     this.$axios
       .$get(`campaign/user/${this.$store.state.user.id}?host=false`)
       .then((resp) => {

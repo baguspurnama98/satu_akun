@@ -47,7 +47,6 @@
 <script>
 import Complete from '@/components/Transaction/Complete'
 import InProgress from '@/components/Transaction/InProgress'
-import Spinner from '@/components/Spinner.vue'
 export default {
   components: {
     Complete,
@@ -66,8 +65,12 @@ export default {
       this.menuActive = menu
     },
   },
-
-  beforeMount() {
+  activated() {
+      if (this.$fetchState.timestamp <= Date.now() - 30000) {
+        this.$fetch()
+      }
+  },
+  fetch() {
     this.$destroy()
     let onGoing = []
     let done = []
