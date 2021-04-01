@@ -70,7 +70,7 @@
             </td>
             <td class="justify-between px-2 py-3">
               <a
-                class="px-2 py-1 bg-green-400 rounded-md text-sm font-medium text-white hover:bg-green-600 focus:outline-none mr-2 text-center"
+                class="px-2 py-1 text-white bg-green-400 hover:bg-green-600 focus:outline-none rounded-lg mr-2 shadow-md text-sm"
                 href="1"
               >
                 Detail</a

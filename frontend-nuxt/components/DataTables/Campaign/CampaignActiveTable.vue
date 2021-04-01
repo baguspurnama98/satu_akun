@@ -42,7 +42,7 @@
             <td class="px-4 py-3 text-xs">
               <span
                 class="relative h-full px-3 py-1 font-semibold leading-tight text-center inline-block"
-                v-if="row.total_members == row.slot_capacity"
+                v-if="row.total_members - 1 == row.slot_capacity"
               >
                 <span
                   aria-hidden
@@ -54,7 +54,7 @@
                 >
               </span>
               <span v-else class="font-bold text-lg ml-3"
-                >{{ row.total_members }}/{{ row.slot_capacity }}</span
+                >{{ row.total_members - 1 }}/{{ row.slot_capacity }}</span
               >
             </td>
             <td class="px-3">{{ row.created_at | formatDate }}</td>
