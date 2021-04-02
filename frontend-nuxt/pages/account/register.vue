@@ -11,7 +11,7 @@
         <div
           class="bg-indigo-500 py-10 px-10 flex items-stretch justify-center xs:hidden"
         >
-          <div ref="animation" class="self-center"></div>
+          <div v-once ref="animation" class="self-center"></div>
         </div>
         <div class="w-full py-10 px-5 md:px-10">
           <div class="text-center mb-5">

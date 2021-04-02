@@ -18,7 +18,9 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
-        rel: 'stylesheet',
+        rel: 'preload',
+        as: 'font',
+        type: 'font/woff2',
         href: 'https://fonts.googleapis.com/css2?family=Righteous&display=swap',
       },
     ],
@@ -71,7 +73,7 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: isDev ? process.env.API_PROD_URL : process.env.API_DEV_URL, //---
+    baseURL: !isDev ? process.env.API_PROD_URL : process.env.API_DEV_URL, //---
     retry: { retries: 3 },
   },
 
@@ -83,13 +85,14 @@ export default {
 
   pwa: {
     manifest: {
-      name: 'Kita Patungan Indonesia',
-      short_name: 'Kita Patungan',
+      name: 'Platform Patungan Indonesia',
+      short_name: 'Patungin',
       lang: 'id',
       display: 'standalone',
     },
     meta: {
       nativeUI: true,
+      theme_color: "#fff",
     },
     workbox: {
       autoRegister: true,
