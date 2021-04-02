@@ -54,6 +54,7 @@ export default {
       .$get('users')
       .then((resp) => {
         this.users = resp.users
+        console.log(this.users)
         setTimeout(() => this.$nuxt.$loading.finish(), 5000)
       })
       .catch((errors) => {

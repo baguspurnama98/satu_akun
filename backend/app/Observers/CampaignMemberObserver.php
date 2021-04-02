@@ -29,7 +29,7 @@ trait CampaignMemberObserver {
          * @param  \App\CampaignMember  $campaign_member
          * @return void
          */
-        static::deleted(function ($campaign_member) {
+        static::deleting(function ($campaign_member) {
             $campaign = Campaign::where('id', $campaign_member->campaign_id)->first();
             $user = User::where('id', $campaign_member->user_id)->first();
             $type = "members";

@@ -44,10 +44,12 @@
             <td class="px-4 py-3 text-xs">
               <div class="inline-flex">
                 <a
-                  class="px-2 py-1 text-white bg-green-400 hover:bg-green-600 focus:outline-none rounded-lg mr-2 shadow-md text-md"
+                  class="px-3 py-1 text-white bg-green-400 hover:bg-green-600 focus:outline-none rounded-lg mr-2 shadow-md text-md"
                   :href="`/campaign/${row.campaign_id}/checkout/${$store.state.user.id}`"
                 >
-                  <span class="inline-flex font-medium"> Konfirmasi </span>
+                  <span class="text-sm inline-flex text-white">
+                    Konfirmasi
+                  </span>
                 </a>
               </div>
             </td>
