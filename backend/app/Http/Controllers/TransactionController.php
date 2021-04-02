@@ -9,9 +9,16 @@ use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
+
+    protected $typeTransaction = [
+        'type_0' => 'admin ke host',
+        'type_1' => 'user ke admin',
+        'type_2' => 'admin ke user'
+    ];
 
     function __construct()
     {
@@ -19,33 +26,55 @@ class TransactionController extends Controller
     }
 
     public function allTransactions() {
-        return response()->json(['transactions' => Transaction::all()], 200);
+        return response()->json(['transactions' => Transaction::all(), 'informasi' => $this->typeTransaction], 200);
     }
 
     public function getTransaction($id_transaction) {
-        return response()->json(['transaction' => Transaction::findOrFail($id_transaction)], 200);
+        return response()->json(['transaction' => Transaction::findOrFail($id_transaction), 'informasi' => $this->typeTransaction], 200);
     }
 
     public function userTransaction($id_user) {
         try {
-            return response()->json(['transactions' => Transaction::with(['campaigns', 'users'])->where('user_id', $id_user)->get()], 200);
+            return response()->json(['transactions' => Transaction::with(['campaigns', 'users'])->where('user_id', $id_user)->get(), 'informasi' => $this->typeTransaction], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e], 409);
         }
     }
 
-    public function campaignTransaction($id_campaign) {
+
+    public function campaignTransactions($id_campaign = null) {
         try {
-            return response()->json(['transactions' => Transaction::with('campaigns')->where('campaign_id', $id_campaign)->get()], 200);
+            $transactionByCampaigns = Campaign::with(['campaign_members' => function ($q) { 
+                // tingkatan kedua, relasi ke
+                $q->where('is_host', 0)->whereHas('transactions')->with('transactions', function($q) { 
+                    // disini bisa dapat semua jenis transaksi yg sudah diverif dari relasi campaign members
+                    $q->where('status', 1); 
+                }); 
+            
+            }])->withCount(['transactions as total_receive' => function ($query) {
+                // ambil yang sudah di verif saja 
+                return $query->where(['status' => 1, 'type' => 1])->select(DB::raw('SUM(nominal)'));
+            }])->withCount(['transactions as total_disburse' => function ($query) {
+                // ambil yang sudah di verif saja 
+                // type 0 berarti admin ke host
+                return $query->where(['status' => 1, 'type' => 0])->select(DB::raw('SUM(nominal)'));
+            }])->withCount(['transactions as total_refund' => function ($query) {
+                // ambil yang sudah di verif saja 
+                // type 0 berarti admin ke host
+                return $query->where(['status' => 1, 'type' => 2])->select(DB::raw('SUM(nominal)'));
+            }])->whereHas('campaign_members'); // ada penjagaan campaign members?
+            
+            return response()->json(['campaigns' => $id_campaign !== null ? $transactionByCampaigns->find('id', $id_campaign) : $transactionByCampaigns->get(), 'informasi' => $this->typeTransaction], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e], 409);
         }
     }
+
 
     // ini harus yang bukan invalid (status != 2)
     public function userTransactionByCampaign($id_user, $id_campaign) {
         try {
-            return response()->json(['transactions' => Transaction::with(['campaigns', 'users'])->where(['user_id' => $id_user, 'campaign_id' => $id_campaign])->where('status', '!=' ,2)->get()], 200);
+            return response()->json(['transactions' => Transaction::with(['campaigns', 'users'])->where(['user_id' => $id_user, 'campaign_id' => $id_campaign])->where('status', '!=' ,2)->get(), 'informasi' => $this->typeTransaction], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e], 409);
         }

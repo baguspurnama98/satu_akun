@@ -109,20 +109,37 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
     // Transaction
     $router->group(['prefix' => 'transaction'], function () use ($router) {
+        /** masih without middleware */
+        $router->get('cron', 'TransactionController@cronCheckTransaction');
         $router->group(['middleware' => 'auth'], function () use ($router) {
-            $router->get('/', 'TransactionController@allTransactions');
+            // ini transaksi yg dimiliki user
             $router->get('user/{id_user}', 'TransactionController@userTransaction');
-            $router->get('campaign/{id_campaign}', 'TransactionController@campaignTransaction');
+
+            // ini transaksi yg dimiliki campaign
+            $router->get('campaign[/{id_campaign}]', 'TransactionController@campaignTransactions');
+            
+            // ini utk checkout
             $router->get('user/{id_user}/campaign/{id_campaign}', 'TransactionController@userTransactionByCampaign');
 
             $router->get('verify/{id_transaction}', [
                 'as' => 'verify_transaction',
                 'uses' => 'TransactionController@verifyTransactionCampaign'
             ]);
+            $router->get('/', 'TransactionController@allTransactions');
+            $router->get('/{id_transaction}', 'TransactionController@getTransaction');
         });
+    });
 
-        /** masih without middleware */
-        $router->get('cron', 'TransactionController@cronCheckTransaction');
+
+    // Email
+    $router->group(['prefix' => 'email'], function () use ($router) {
+        $router->group(['middleware' => 'auth'], function () use ($router) {
+            $router->post('store', 'EmailController@create');
+            $router->post('update/{id_email}', 'EmailController@update');
+            $router->delete('delete/{id_email}', 'EmailController@delete');
+        });
+        $router->get('/', 'EmailController@getEmail');
+        $router->get('/{id_email}', 'EmailController@getEmail');
     });
 
 

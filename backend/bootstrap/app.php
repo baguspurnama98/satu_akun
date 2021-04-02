@@ -120,6 +120,10 @@ $app->register(Illuminate\Mail\MailServiceProvider::class);
 
 $app->register(GrahamCampbell\Throttle\ThrottleServiceProvider::class);
 
+
+// $app->register(Awobaz\Compoships\Compoships::class);
+
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Models;
+
+use App\Observers\EmailObserver;
 use Illuminate\Database\Eloquent\Model;
 
 class Email extends Model 
 {
+    use EmailObserver; // udah pasti bekerja
     // defenisi tabel yg digunakan di database
     protected $table = 'emails';
 

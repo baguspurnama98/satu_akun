@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": "^7.3|^8.0",
+        "awobaz/compoships": "^2.1",
         "flipbox/lumen-generator": "^8.2",
         "fruitcake/laravel-cors": "^2.0",
         "graham-campbell/throttle": "8.1",
