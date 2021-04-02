@@ -2,8 +2,6 @@
   <div>
     <div
       class="w-full relative"
-      v-click-outside
-      @clicked-outside="showDetail()"
     >
       <label>Search:</label>
       <input class="form-control" v-model="filters.name.value" />
@@ -48,7 +46,8 @@
               {{ row.expired_date | formatDate }}
             </td>
             <td class="justify-between py-2 inline-block relative">
-              <div class="inline-flex">
+              <div class="inline-flex" v-click-outside
+                @clicked-outside="showDetail()">
                 <button
                   class="items-center px-2 py-1 bg-indigo-400 rounded-md text-sm transition duration-300 text-white hover:bg-indigo-600 focus:outline-none flex font-semibold"
                   @click="showDetail(index)"

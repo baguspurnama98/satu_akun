@@ -25,7 +25,7 @@ class TransactionController extends Controller
 
     public function userTransaction($id_user) {
         try {
-            return response()->json(['transactions' => Transaction::with('users')->where('user_id', $id_user)->get()], 200);
+            return response()->json(['transactions' => Transaction::with(['campaigns', 'users'])->where('user_id', $id_user)->get()], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e], 409);
         }

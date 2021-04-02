@@ -1,8 +1,8 @@
 <template>
   <nav
     id="nav"
-    v-click-outside
     class="p-3 sticky w-full z-50 top-0 shadow-lg bg-indigo-500"
+    v-click-outside
   >
     <div
       class="container px-4 mx-auto flex flex-wrap items-center justify-between"
@@ -45,6 +45,7 @@
 
       <div
         id="nav-content"
+        @click.prevent="clickInNav"
         class="w-full flex-grow lg:flex lg:items-center lg:w-auto pt-6 lg:pt-0 relative"
         v-bind:class="[toggle ? 'hidden' : '']"
       >
@@ -132,25 +133,25 @@
                 <!-- Menu untuk User -->
                 <template v-if="user_role === 'u'">
                   <div class="py-1">
-                    <a
-                      :href="`/users/${this.$store.state.user.id}/campaign/`"
+                    <NuxtLink
+                      :to="`/users/${this.$store.state.user.id}/campaign/`"
                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                       role="menuitem"
                       >Campaign Saya
-                    </a>
-                    <a
-                      :href="`/users/${this.$store.state.user.id}/patungan/`"
+                    </NuxtLink>
+                    <NuxtLink
+                      :to="`/users/${this.$store.state.user.id}/patungan/`"
                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                       role="menuitem"
                       >Patungan Saya
-                    </a>
+                    </NuxtLink>
                   </div>
                   <div class="py-1">
-                    <a
-                      :href="`/users/${this.$store.state.user.id}/transaction/`"
+                    <NuxtLink
+                      :to="`/users/${this.$store.state.user.id}/transaction/`"
                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                       role="menuitem"
-                      >Riwayat Transaksi</a
+                      >Riwayat Transaksi</NuxtLink
                     >
                   </div>
                 </template>
@@ -224,6 +225,11 @@ export default {
     },
   },
   methods: {
+    clickInNav(e) {
+        if (e.target.localName !== "ul"  && e.target.localName !== "li") return
+        this.navLayanan = true
+        this.navUserOption = true
+    },
     toggleButton(value) {
       switch (value) {
         case 'toggle':

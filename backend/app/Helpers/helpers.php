@@ -58,3 +58,21 @@ function getCalculatedPrice($price): float {
     }
     return $price + ($percentageFee * $price);
 }
+
+
+function sensorName($words) {
+    $word = explode(" ", $words);
+    $temp_str = [];
+
+    foreach($word as $str) {
+        $str_array = str_split($str);
+        $string_not_sensor = mt_rand(1, count($str_array));
+        foreach($str_array as $key => $char) {
+            if ($key == 0 || $key < $string_not_sensor - 2) continue;
+            if ($char != '-' && $char != ' ' && $char != '.' && $char != ',') $str[$key] = '*';
+        }
+        array_push($temp_str, $str);
+    }
+    
+    return join(" ", $temp_str);
+  }

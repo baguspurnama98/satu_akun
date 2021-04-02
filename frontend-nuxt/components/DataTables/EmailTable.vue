@@ -35,13 +35,13 @@
               >
                 <span
                   aria-hidden
-                  class="bg-yellow-600 rounded-full px-2 py-1 text-sm text-white"
+                  class="bg-yellow-600 rounded-full text-xs font-bold capitalize text-white m-0 px-2 py-1"
                   v-if="row.status === 1"
                   >Aktif</span
                 >
                 <span
                   aria-hidden
-                  class="bg-red-700 rounded-full px-2 py-1 text-sm text-white"
+                  class="bg-red-600 rounded-full text-xs font-bold capitalize text-white m-0 px-2 py-1"
                   v-if="row.status === 0"
                   >Non-Aktif</span
                 >

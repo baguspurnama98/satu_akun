@@ -121,6 +121,7 @@ export default {
         .$get(`campaign?status=${this.idMenu}`)
         .then((resp) => {
           this.campaigns = resp.campaigns
+          console.log(this.campaigns)
         })
         .catch((errors) => {
           console.log(errors)

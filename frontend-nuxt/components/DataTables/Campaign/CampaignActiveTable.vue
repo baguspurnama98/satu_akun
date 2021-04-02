@@ -2,8 +2,6 @@
   <div>
     <div
       class="w-full relative"
-      v-click-outside
-      @clicked-outside="showDetail()"
     >
       <label>Search:</label>
       <input class="form-control" v-model="filters.name.value" />
@@ -42,7 +40,7 @@
             <td class="px-4 py-3 text-xs">
               <span
                 class="relative h-full px-3 py-1 font-semibold leading-tight text-center inline-block"
-                v-if="row.total_members == row.slot_capacity"
+                v-if="row.total_members - 1 == row.slot_capacity"
               >
                 <span
                   aria-hidden
@@ -54,7 +52,7 @@
                 >
               </span>
               <span v-else class="font-bold text-lg ml-3"
-                >{{ row.total_members }}/{{ row.slot_capacity }}</span
+                >{{ row.total_members - 1 }}/{{ row.slot_capacity }}</span
               >
             </td>
             <td class="px-3">{{ row.created_at | formatDate }}</td>
@@ -63,7 +61,8 @@
               {{ row.expired_date | formatDate }}
             </td>
             <td class="justify-between py-2 inline-block relative">
-              <div class="inline-flex">
+              <div class="inline-flex" v-click-outside
+                @clicked-outside="showDetail()">
                 <button
                   class="items-center px-2 py-1 bg-indigo-400 rounded-md text-sm transition duration-300 text-white hover:bg-indigo-600 focus:outline-none flex font-semibold"
                   @click="showDetail(index)"

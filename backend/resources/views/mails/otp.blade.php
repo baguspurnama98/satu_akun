@@ -9,7 +9,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>kitapatungan.com</title>
+    <title>Patungin.com</title>
 
 
     <style type="text/css">
@@ -110,7 +110,7 @@
                                                         <table class="invoice-items" cellpadding="0" cellspacing="0" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; margin: 0;">
                                                             <tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                                 <td style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0; text-align:center;" valign="top">
-                                                                    Hai <b>{{ $name }}</b>, Selamat datang di <b style="color:#667eea">kitapatungan.com</b>.<br />
+                                                                    Hai <b>{{ $name }}</b>, Selamat datang di <b style="color:#667eea">Patungin.com</b>.<br />
                                                                     Untuk melanjutkan proses pendaftaran Anda, masukan kode OTP berikut ini:<br />
                                                                     <div style="text-align:center;padding:30px; margin:30px;">
                                                                         <b style="background-color:#f3f5ff;color:#667eea; padding:20px; font-size:40px; border-radius: 25px; width:fit-content">{{ $otp }}</b>

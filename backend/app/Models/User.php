@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
 use App\Observers\UserObserver;
-
-
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Model implements JWTSubject, AuthenticatableContract, AuthorizableContract
@@ -59,6 +58,18 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function getNameAttribute() {
+        $id_user = $this->attributes['id'];
+        $is_host = CampaignMember::where(['id' => $id_user, 'is_host' => 1])->limit(1)->exists();
+        if ($is_host) return $this->attributes['name'];
+        if (Auth::user()) {
+            if (Auth::user()->role == 'a' || Auth::user()->id === $id_user) {
+                return $this->attributes['name'];
+            }
+        }
+        return sensorName($this->attributes['name']);
     }
 
 

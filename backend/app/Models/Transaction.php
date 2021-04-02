@@ -2,7 +2,6 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 use Jenssegers\Optimus\Optimus;
 
 class Transaction extends Model 
@@ -55,10 +54,10 @@ class Transaction extends Model
         $this->attributes['no_transaction'] = $this->encode($value);
     }
 
-    public function setNoTimeoutAttribute()
-    {
-        $this->attributes['timeout'] = Carbon::now()->addHours(2);
-    }
+    // public function setTimeoutAttribute()
+    // {
+    //     $this->attributes['timeout'] = Carbon::now()->addHours(2);
+    // }
 
     /**
      * relasi yang digunakan misal:
