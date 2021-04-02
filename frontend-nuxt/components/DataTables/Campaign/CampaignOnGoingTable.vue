@@ -346,7 +346,6 @@ export default {
     },
     showForm(id) {
       if (id !== '') {
-        // alert(id)
         this.activeDetail = null
         this.form.status = !this.form.status
       } else {
