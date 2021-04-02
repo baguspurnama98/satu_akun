@@ -68,6 +68,10 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
                 'middleware' => 'auth',
                 'uses' => 'CampaignController@storeCategories'
             ]);
+            $router->post('update/{id_categories}', [
+                'middleware' => 'auth',
+                'uses' => 'CampaignController@updateCategories'
+            ]);
         });
 
         // Members
@@ -135,6 +139,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->get('users', 'UserController@allUsers');
 
     $router->get('user/{id_user}', 'UserController@getUser');
+    $router->get('user/deactivate/{id_user}/{status}', 'UserController@changeStatusUser');
 });
 
 // php -S localhost:8000 -t public

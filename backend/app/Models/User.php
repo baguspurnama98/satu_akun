@@ -62,7 +62,7 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
 
     public function getNameAttribute() {
         $id_user = $this->attributes['id'];
-        $is_host = CampaignMember::where(['id' => $id_user, 'is_host' => 1])->limit(1)->exists();
+        $is_host = CampaignMember::where(['user_id' => $id_user, 'is_host' => 1])->limit(1)->exists();
         if ($is_host) return $this->attributes['name'];
         if (Auth::user()) {
             if (Auth::user()->role == 'a' || Auth::user()->id === $id_user) {
@@ -71,7 +71,6 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
         }
         return sensorName($this->attributes['name']);
     }
-
 
     /**
      * relation

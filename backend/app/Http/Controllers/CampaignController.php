@@ -384,4 +384,19 @@ class CampaignController extends Controller
         }
     }
 
+    public function updateCategories(Request $request, $id_categories) {
+        // 
+        try {
+            $categories = CampaignCategories::where('id', $id_categories)->first();
+            $categories->categories = $request->input('categories');
+            $categories->save();
+            $categories->touch();
+            // return successful response
+            return response()->json(['categories' => $categories, 'message' => 'CREATED'], 201);
+        } catch (\Exception $e) {
+            // return error message
+            return response()->json(['message' => $e], 409);
+        }
+    }
+
 }
