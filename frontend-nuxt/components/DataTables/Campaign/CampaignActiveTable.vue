@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div
-      class="w-full relative"
-    >
+    <div class="w-full relative">
       <label>Search:</label>
       <input class="form-control" v-model="filters.name.value" />
 
@@ -61,8 +59,11 @@
               {{ row.expired_date | formatDate }}
             </td>
             <td class="justify-between py-2 inline-block relative">
-              <div class="inline-flex" v-click-outside
-                @clicked-outside="showDetail()">
+              <div
+                class="inline-flex"
+                v-click-outside
+                @clicked-outside="showDetail()"
+              >
                 <button
                   class="items-center px-2 py-1 bg-indigo-400 rounded-md text-sm transition duration-300 text-white hover:bg-indigo-600 focus:outline-none flex font-semibold"
                   @click="showDetail(index)"
@@ -96,11 +97,11 @@
                     hidden: activeDetail != index,
                   }"
                 >
-                  <li class="px-2 py-2 hover:bg-gray-200 w-full border-none">
-                    <a
-                      class="inline-flex items-center"
-                      :href="`/users/${$store.state.user.id}/campaign/${row.id}`"
-                    >
+                  <a
+                    class="block items-center"
+                    :href="`/users/${$store.state.user.id}/campaign/${row.id}`"
+                  >
+                    <li class="px-2 py-2 hover:bg-gray-200 w-full border-none">
                       <svg
                         class="w-4 h-4 mr-2"
                         xmlns="http://www.w3.org/2000/svg"
@@ -122,14 +123,15 @@
                         />
                       </svg>
                       <span class="text-sm"> Detail Campaign </span>
-                    </a>
-                  </li>
-                  <li class="px-2 py-2 hover:bg-gray-200 w-full border-none">
-                    <a
-                      class="inline-flex items-center"
-                      :href="'https://wa.me/62' + row.host_name.whatsapp"
-                      target="_blank"
-                    >
+                    </li>
+                  </a>
+
+                  <a
+                    class="block items-center border-none"
+                    :href="'https://wa.me/62' + row.host_name.whatsapp"
+                    target="_blank"
+                  >
+                    <li class="px-2 py-2 hover:bg-gray-200 w-full">
                       <svg
                         class="w-4 h-4 mr-2"
                         xmlns="http://www.w3.org/2000/svg"
@@ -145,19 +147,19 @@
                         />
                       </svg>
                       <span class="text-sm"> WhatsApp </span>
-                    </a>
-                  </li>
+                    </li>
+                  </a>
                   <li
                     class="px-2 py-2 hover:bg-gray-200 w-full border-none"
                     :class="{
-                      '': row.member != row.gathered,
-                      hidden: row.member == row.gathered,
+                      '': row.slot_capacity != row.total_members - 1,
+                      hidden: row.slot_capacity == row.total_members - 1,
                     }"
                   >
                     <a
                       class="inline-flex items-center"
                       href="#"
-                      @click.prevent="showModal('expired')"
+                      @click.prevent="showModal('expired', row.id)"
                     >
                       <svg
                         class="w-4 h-4 mr-2"
@@ -179,14 +181,14 @@
                   <li
                     class="px-2 py-2 hover:bg-gray-200 w-full border-none"
                     :class="{
-                      '': row.member == row.gathered,
-                      hidden: row.member != row.gathered,
+                      '': row.slot_capacity == row.total_members - 1,
+                      hidden: row.slot_capacity != row.total_members - 1,
                     }"
                   >
                     <a
                       class="inline-flex items-center"
                       href="#"
-                      @click.prevent="showModal('berlangsung')"
+                      @click.prevent="showModal('berlangsung', row.id)"
                     >
                       <svg
                         class="w-4 h-4 mr-2"
@@ -276,6 +278,7 @@ export default {
   props: ['campaigns'],
   data() {
     return {
+      idSelected: null,
       modal: {
         status: false,
         text: '',
@@ -287,6 +290,7 @@ export default {
       filters: {
         name: { value: '', keys: ['name', 'email'] },
       },
+      campaign: {},
     }
   },
   methods: {
@@ -306,22 +310,34 @@ export default {
         this.activeDetail = value
       }
     },
-    showModal(text) {
+    showModal(text, id) {
+      this.idSelected = id
       this.activeDetail = null
       this.modal.status = !this.modal.status
       this.modal.text = text
     },
-    showDetailCampaign() {
-      alert('open new tab detail campaign by id campaign')
-    },
-    handleProccess() {
-      if (this.modal.text == 'expired') {
-        alert('proses post request expired')
-      }
 
-      if (this.modal.text == 'berlangsung') {
-        alert('proses post request berlangsung')
+    handleProccess() {
+      let newStatus = null
+      if (this.modal.text == 'expired') {
+        newStatus = 2
+      } else {
+        newStatus = 1
       }
+      this.campaign = this.campaigns.filter((i) => i.id == this.idSelected)[0]
+      this.campaign.status = newStatus
+      console.log(this.campaign)
+      this.$axios
+        .$post(`campaign/update/${this.idSelected}`, this.campaign)
+        .then((resp) => {
+          console.log(resp)
+          if (resp.message === 'UPDATED') {
+            location.reload()
+          }
+        })
+        .catch((errors) => {
+          console.dir(errors)
+        })
     },
   },
 }

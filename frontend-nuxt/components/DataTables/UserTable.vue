@@ -80,7 +80,7 @@
                 <span class="inline-flex items-center p-0 m-0">
                   <svg
                     v-if="loadingBlock"
-                    class="animate-spin -ml-1 mr-3 h-3 w-3 text-white"
+                    class="animate-spin ml-1 mr-2 h-3 w-3 text-white"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -240,10 +240,9 @@ export default {
         .then((resp) => {
           this.loadingBlock = true
           if (resp.message == 'SUCCESS') {
-            this.$fetch()
+            location.reload()
           }
           console.log(resp)
-          // return
         })
         .catch((errors) => {
           console.log(errors)
@@ -258,10 +257,9 @@ export default {
           this.loadingBlock = true
           if (resp.message == 'SUCCESS') {
             this.loadingActivate = false
-            this.$fetch()
+            location.reload()
           }
           console.log(resp)
-          // return
         })
         .catch((errors) => {
           console.log(errors)
