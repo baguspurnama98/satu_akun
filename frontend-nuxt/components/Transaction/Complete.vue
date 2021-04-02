@@ -35,8 +35,8 @@
             </td>
             <td class="font-bold text-xl">
               <span class="text-2xl">
-                <span v-if="row.status === 1">+</span>
-                <span v-else>-</span>
+                <span v-if="row.type === '1'">-</span>
+                <span v-else>+</span>
               </span>
 
               <span>{{ row.nominal | formatRupiah }}</span>

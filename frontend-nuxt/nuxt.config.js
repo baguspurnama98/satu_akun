@@ -73,7 +73,7 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: !isDev ? process.env.API_PROD_URL : process.env.API_DEV_URL, //---
+    baseURL: isDev ? process.env.API_PROD_URL : process.env.API_DEV_URL, //---
     retry: { retries: 3 },
   },
 
@@ -92,7 +92,7 @@ export default {
     },
     meta: {
       nativeUI: true,
-      theme_color: "#fff",
+      theme_color: '#fff',
     },
     workbox: {
       autoRegister: true,

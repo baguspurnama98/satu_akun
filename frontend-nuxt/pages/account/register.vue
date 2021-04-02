@@ -174,6 +174,7 @@
 
 <script>
 import lottie from 'lottie-web'
+import * as registerAnimation from '~/assets/lottie/register.json'
 
 export default {
   name: 'Register',
@@ -200,7 +201,7 @@ export default {
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      path: 'https://assets8.lottiefiles.com/packages/lf20_wd1udlcz.json', // the path to the animation json
+      animationData: registerAnimation.default,
     })
   },
   computed: {

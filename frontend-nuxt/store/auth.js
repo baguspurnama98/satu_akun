@@ -2,6 +2,7 @@ import cookies from 'js-cookie'
 
 export const state = () => ({
   token: null,
+  datetime: null,
 })
 
 // mutation adalah event
@@ -10,6 +11,7 @@ export const state = () => ({
 export const mutations = {
   SET_TOKEN(state, token) {
     state.token = token
+    state.datetime = Date.now()
   },
 
   REMOVE_TOKEN(state) {
@@ -20,7 +22,7 @@ export const mutations = {
 // actions hanyalah function yg mentrigger mutations
 // dipanggil dengan cara dispatch
 export const actions = {
-  async setToken({ commit }, { token, expiresIn, role = 'u' }) {
+  async setToken({ commit }, { token, expiresIn = 0, role = 'u' }) {
     this.$axios.setToken(token, 'Bearer')
     const expiryTime = new Date(new Date().getTime() + expiresIn * 1000)
     cookies.set('x-access-token', token, { expires: expiryTime })
