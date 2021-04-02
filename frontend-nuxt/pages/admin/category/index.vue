@@ -67,7 +67,13 @@
                 style="max-width: 200px"
               >
                 <button
-                  class="bg-red-600 px-2 py-1 text-sm text-white rounded-lg"
+                  class="px-2 py-1 bg-yellow-500 text-sm text-white hover:bg-yellow-600 focus:outline-none text-center rounded-lg mr-2 shadow-md"
+                  @click="showModal(category, 'edit')"
+                >
+                  Edit
+                </button>
+                <button
+                  class="px-2 py-1 bg-red-500 text-sm text-white hover:bg-red-600 focus:outline-none text-center rounded-lg mr-2 shadow-md"
                 >
                   Hapus
                 </button>
@@ -78,8 +84,10 @@
       </div>
       <ManageCategory
         :status="showModalStatus"
-        @clicked="showModal"
+        @clicked="showModal(null, 'close')"
         :todo="todo"
+        :categorySelected="categorySelected"
+        :idSelected="idSelected"
       />
     </div>
   </div>
@@ -95,6 +103,8 @@ export default {
     return {
       breadcrumbs: [],
       showModalStatus: false,
+      categorySelected: '',
+      idSelected: null,
       todo: 'edit',
       categories: [],
     }
@@ -137,10 +147,12 @@ export default {
 
   methods: {
     showModal(data, status) {
-      if (data != undefined) {
-        this.selected = data
+      // console.log(data)
+      if (data !== null) {
+        this.categorySelected = data.categories
+        this.idSelected = data.id
       } else {
-        this.selected = ''
+        this.categorySelected = ''
       }
       this.todo = status
       this.showModalStatus = !this.showModalStatus
