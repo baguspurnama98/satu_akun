@@ -6,6 +6,8 @@ use Jenssegers\Optimus\Optimus;
 
 class Transaction extends Model 
 {
+    use \Awobaz\Compoships\Compoships; // multi foreign key
+
     // defenisi tabel yg digunakan di database
     protected $table = 'transactions';
 
@@ -72,6 +74,10 @@ class Transaction extends Model
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function campaign_members() {
+        return $this->belongsTo(CampaignMember::class, ['user_id', 'campaign_id'], ['user_id', 'campaign_id']);
     }
 
 }

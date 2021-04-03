@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CampaignMember extends Model 
 {
-    use CampaignMemberObserver;
+    use CampaignMemberObserver, \Awobaz\Compoships\Compoships; // multi foreign key
+    
     // defenisi tabel yg digunakan di database
     protected $table = 'campaign_members';
 
@@ -41,6 +42,10 @@ class CampaignMember extends Model
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function transactions() {
+        return $this->hasMany(Transaction::class, ['user_id', 'campaign_id'], ['user_id', 'campaign_id']);
     }
 
 }

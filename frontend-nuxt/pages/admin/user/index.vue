@@ -8,7 +8,11 @@
     </h3>
     <div>
       <!-- <div v-if="users.length == 0"></div> -->
-      <DataTableUser :users="users" />
+      <DataTableUser
+        :users="users"
+        :block-user="blockUser"
+        :activate-user="activateUser"
+      />
     </div>
   </div>
 </template>
@@ -24,8 +28,43 @@ export default {
       breadcrumbs: [],
     }
   },
+  methods: {
+    blockUser(id) {
+      this.$axios
+        .$get(`user/deactivate/${id}/2`)
+        .then((resp) => {
+          this.loadingBlock = true
+          if (resp.message == 'SUCCESS') {
+            location.reload()
+            // this.$destroy()
+          }
+          console.log(resp)
+        })
+        .catch((errors) => {
+          console.log(errors)
+        })
+    },
 
+    activateUser(id) {
+      // this.loadingActivate = true
+      this.$axios
+        .$get(`user/deactivate/${id}/1`)
+        .then((resp) => {
+          this.loadingBlock = true
+          if (resp.message == 'SUCCESS') {
+            this.loadingActivate = false
+            location.reload()
+            // this.$destroy()
+          }
+          console.log(resp)
+        })
+        .catch((errors) => {
+          console.log(errors)
+        })
+    },
+  },
   mounted() {
+    // console.log(this.users)
     const fullPath = this.$route.fullPath
     const params = fullPath.substring(1).split('/')
 

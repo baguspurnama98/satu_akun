@@ -80,7 +80,7 @@
                 <span class="inline-flex items-center p-0 m-0">
                   <svg
                     v-if="loadingBlock"
-                    class="animate-spin -ml-1 mr-3 h-3 w-3 text-white"
+                    class="animate-spin ml-1 mr-2 h-3 w-3 text-white"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -160,7 +160,7 @@
           </button>
           <button
             class="w-1/2 px-4 py-3 text-center text-white bg-red-600 rounded-lg hover:bg-red-700 hover:text-white font-bold text-sm focus:outline-none"
-            @click.prevent="blockUser"
+            @click.prevent="blockUser(userSelected)"
           >
             <span class="inline-flex items-center p-0 m-0">
               <svg
@@ -195,7 +195,7 @@
 <script>
 export default {
   name: 'DataTableUser',
-  props: ['users'],
+  props: ['users', 'blockUser', 'activateUser'],
   data() {
     return {
       modalBlock: true,
@@ -232,40 +232,6 @@ export default {
         this.modalBlock = !this.modalBlock
         this.userSelected = id
       }
-    },
-
-    blockUser() {
-      this.$axios
-        .$get(`user/deactivate/${this.userSelected}/2`)
-        .then((resp) => {
-          this.loadingBlock = true
-          if (resp.message == 'SUCCESS') {
-            this.$fetch()
-          }
-          console.log(resp)
-          // return
-        })
-        .catch((errors) => {
-          console.log(errors)
-        })
-    },
-
-    activateUser(id) {
-      this.loadingActivate = true
-      this.$axios
-        .$get(`user/deactivate/${id}/1`)
-        .then((resp) => {
-          this.loadingBlock = true
-          if (resp.message == 'SUCCESS') {
-            this.loadingActivate = false
-            this.$fetch()
-          }
-          console.log(resp)
-          // return
-        })
-        .catch((errors) => {
-          console.log(errors)
-        })
     },
   },
 }

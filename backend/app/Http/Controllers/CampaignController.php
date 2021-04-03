@@ -257,7 +257,8 @@ class CampaignController extends Controller
             $member_of_campaign = CampaignMember::create([
                 'user_id' => $id_user,
                 'campaign_id' => $id_campaign,
-                'is_host' => $is_host]);
+                'is_host' => $is_host
+            ]);
                 
 
             if ($is_host === true) return;
