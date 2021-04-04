@@ -150,8 +150,8 @@
           >
             <div
               class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2 items-center"
-              v-for="(member, index) in campaign.campaign_members"
-              :key="index"
+              v-for="member in campaign.campaign_members"
+              :key="member.id"
             >
               <span
                 v-if="member.is_pay === 0"
@@ -348,7 +348,7 @@ export default {
           this.$axios
             .$get(`campaign/rsvp/${idCampaign}/${this.$store.state.user.id}`)
             .then((resp) => {
-                console.log(resp)
+              console.log(resp)
               this.$router.push(
                 `/campaign/${idCampaign}/checkout/${this.$store.state.user.id}`
               )
