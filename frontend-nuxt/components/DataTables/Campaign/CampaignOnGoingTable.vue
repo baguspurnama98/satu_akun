@@ -138,7 +138,7 @@
                     <a
                       class="inline-flex items-center"
                       href="#"
-                      @click.prevent="showForm(row.id)"
+                      @click.prevent="showForm(true, row.id)"
                     >
                       <svg
                         class="w-4 h-4 mr-2"
@@ -267,7 +267,11 @@
     </div>
 
     <!-- Modal Form informasi akun -->
-    <ManageAccount :status="form.status" />
+    <ManageAccount
+      :status="form.status"
+      :emails="emails"
+      :show-form="showForm"
+    />
   </div>
 </template>
 <script>
@@ -277,6 +281,7 @@ export default {
   props: ['campaigns'],
   data() {
     return {
+      emails: [],
       modal: {
         status: false,
         text: '',
@@ -344,8 +349,22 @@ export default {
           console.dir(errors)
         })
     },
-    showForm(id) {
-      if (id !== '') {
+
+    addInfoAccount(data) {
+      this.$axios
+        .$post(`campaign/update/${this.idSelected}`, this.campaign)
+        .then((resp) => {
+          console.log(resp)
+          if (resp.message === 'UPDATED') {
+            location.reload()
+          }
+        })
+        .catch((errors) => {
+          console.dir(errors)
+        })
+    },
+    showForm(status, id) {
+      if (status) {
         this.activeDetail = null
         this.form.status = !this.form.status
       } else {
@@ -355,6 +374,19 @@ export default {
     saveInfoAccount() {
       alert('post request save info account')
     },
+  },
+
+  beforeMount() {
+    this.$axios
+      .$get('email')
+      .then((resp) => {
+        this.emails = resp.email
+        console.log(this.emails)
+        // setTimeout(() => this.$nuxt.$loading.finish(), 5000)
+      })
+      .catch((errors) => {
+        console.log(errors)
+      })
   },
 }
 </script>
