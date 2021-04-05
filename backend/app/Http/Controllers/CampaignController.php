@@ -36,7 +36,9 @@ class CampaignController extends Controller
         $is_all = $request->query('all') ?? false; // active true if false
         $search = $request->query('search') ?? null;
 
-        $campaigns = Campaign::with(['categories'])->withCount('campaign_members as total_members');
+        $campaigns = Campaign::with(['categories'])->withCount('campaign_members as total_members')->withCount(['campaign_members as slot_members' => function ($query) {
+            return $query->where('is_host', 0);
+         }]);
         
         // $campaigns = ($status !== null) ? $campaigns->statusCampaign($status) : $campaigns;
         // $campaigns = ($is_all !== false) ? $campaigns : $campaigns->active();
@@ -56,7 +58,9 @@ class CampaignController extends Controller
     }
 
     public function campaign($id_campaign, $slug = null) {
-        $campaign = Campaign::with(['campaign_members.users', 'categories'])->withCount('campaign_members as total_members')->findOrFail($id_campaign);
+        $campaign = Campaign::with(['campaign_members.users', 'categories'])->withCount('campaign_members as total_members')->withCount(['campaign_members as slot_members' => function ($query) {
+            return $query->where('is_host', 0);
+         }])->findOrFail($id_campaign);
         return response()->json(['campaigns' => $campaign], 200);
     }
 
@@ -78,6 +82,9 @@ class CampaignController extends Controller
                                     // ambil yang sudah di verif saja 
                                     // perlu juga dilakukan kalkulasi yg in atau out
                                     return $query->where('status', 1)->select(DB::raw('SUM(nominal)'));
+                             }])
+                             ->withCount(['campaign_members as slot_members' => function ($query) {
+                                return $query->where('is_host', 0);
                              }])
                              ->with(['emails', 'campaign_members' ])
                              ->whereHas('campaign_members', function ($query) use($id_user, $is_host) { 
@@ -241,7 +248,9 @@ class CampaignController extends Controller
     public function assignMemberToCampaign($id_campaign, $id_user, $is_host = false)
     {
         // aktifkan ini jika masa production
-        $campaign = Campaign::withCount('campaign_members as total_members')->findOrFail($id_campaign);
+        $campaign = Campaign::withCount('campaign_members as total_members')->withCount(['campaign_members as slot_members' => function ($query) {
+            return $query->where('is_host', 0);
+         }])->findOrFail($id_campaign);
         $user = User::findOrFail($id_user);
 
         if ($user->status !== 1 || CampaignMember::where(['user_id' => $user->id, 'campaign_id' => $id_campaign])->count() > 0) {

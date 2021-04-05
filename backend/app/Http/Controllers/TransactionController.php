@@ -10,6 +10,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TransactionController extends Controller
 {
@@ -154,22 +155,26 @@ class TransactionController extends Controller
 
     public function cronCheckTransaction() {
         try {
-            $transaction = Transaction::where('timeout', '<=', Carbon::now())->where('status', 0)->whereHas('users.campaign_members');
-            if ($transaction->doesntExist() || $transaction->count() === 0) return response()->json(['message' => 'No Transaction'], 200); 
+            $transactions = Transaction::where('timeout', '<=', Carbon::now())->where('status', 0)->whereHas('users.campaign_members');
+            if ($transactions->doesntExist() || $transactions->count() === 0) return response()->json(['message' => 'No Transaction'], 200); 
             
             // Sisanya tinggal dimasukin ke job, jadi langsung return, kalau ada yg gagal, ntar tinggal di masukin ke log
-            $transaction->update(['status' => 2]);
+            $transactions->update(['status' => 2]);
             Transaction::where('status', 2)->with('users.campaign_members', function($q) { 
                 $q->where('is_host', 0)->delete(); 
             })->get();
-            $campaign = Campaign::where('id', $transaction->campaign_id)->first();
-            $user = User::where('id', $transaction->user_id)->first();
-            $type = "members";
-            $emailJob = (new MailJob($user, $campaign, $type));
-            dispatch($emailJob);
+
+            foreach ($transactions as $transaction) {
+                $campaign = Campaign::where('id', $transaction->campaign_id)->first();
+                $user = User::where('id', $transaction->user_id)->first();
+                $type = "members";
+                $emailJob = (new MailJob($user, $campaign, $type));
+                dispatch($emailJob);
+            }
 
             return response()->json(['message' => 'UPDATED'], 201);
         } catch (\Exception $err) {
+            Log::error('Cron Update Transactions: ' . $err);
             return response()->json(['message' => $err], 409);
         }
         

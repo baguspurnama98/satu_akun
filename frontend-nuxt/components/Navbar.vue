@@ -4,9 +4,7 @@
     class="p-3 sticky w-full z-50 top-0 shadow-lg bg-indigo-500"
     v-click-outside
   >
-    <div
-      class="container px-4 mx-auto flex flex-wrap items-center justify-between"
-    >
+    <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
       <div class="flex items-center text-white">
         <NuxtLink
           exact
@@ -31,10 +29,7 @@
             xmlns="http://www.w3.org/2000/svg"
           >
             <title>Menu</title>
-            <path
-              v-if="toggle"
-              d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"
-            />
+            <path v-if="toggle" d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
             <path
               v-else
               d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -114,12 +109,8 @@
               type="button"
               @click="toggleButton('navUserOption')"
             >
-              <span v-if="account_login && user_role === 'u'">{{
-                getName
-              }}</span>
-              <span v-else-if="account_login && user_role === 'a'">{{
-                getName
-              }}</span>
+              <span v-if="account_login && user_role === 'u'">{{ getName }}</span>
+              <span v-else-if="account_login && user_role === 'a'">{{ getName }}</span>
               <span v-else>Masuk</span>
             </button>
             <div
@@ -204,7 +195,7 @@
 
 <script>
 export default {
-  name: 'Navbar',
+  name: "Navbar",
   data() {
     return {
       toggle: true,
@@ -212,78 +203,78 @@ export default {
       navUserOption: true,
       name: null,
       user_role: null,
-    }
+    };
   },
   computed: {
     account_login() {
-      return this.$store.state.auth.token
+      return this.$store.state.auth.token;
     },
     getName() {
-      const name = this.$store.state.user.name || ''
-      var firstName = name.split(' ')[0]
-      return firstName
+      const name = this.$store.state.user.name || "";
+      var firstName = name.split(" ")[0];
+      return firstName;
     },
   },
   methods: {
     clickInNav(e) {
-        if (e.target.localName !== "ul"  && e.target.localName !== "li") return
-        this.navLayanan = true
-        this.navUserOption = true
+      if (e.target.localName !== "ul" && e.target.localName !== "li") return;
+      this.navLayanan = true;
+      this.navUserOption = true;
     },
     toggleButton(value) {
       switch (value) {
-        case 'toggle':
-          this.toggle = !this.toggle
-          this.navUserOption = true
-          this.navLayanan = true
-          break
-        case 'navLayanan':
-          this.navUserOption = true
-          this.navLayanan = !this.navLayanan
-          break
-        case 'navUserOption':
-          this.navLayanan = true
-          this.navUserOption = !this.navUserOption
-          break
+        case "toggle":
+          this.toggle = !this.toggle;
+          this.navUserOption = true;
+          this.navLayanan = true;
+          break;
+        case "navLayanan":
+          this.navUserOption = true;
+          this.navLayanan = !this.navLayanan;
+          break;
+        case "navUserOption":
+          this.navLayanan = true;
+          this.navUserOption = !this.navUserOption;
+          break;
         default:
-          ;(this.toggle = true), (this.navUserOption = true)
-          this.navLayanan = true
-          break
+          (this.toggle = true), (this.navUserOption = true);
+          this.navLayanan = true;
+          break;
       }
     },
 
     logout() {
       this.$axios
-        .$get('auth/logout')
+        .$get("auth/logout")
         .then((resp) => {
-          this.$store.dispatch('auth/logout')
-          this.$store.dispatch('delUserProfile')
-          window.location.replace('/')
+          this.$store.dispatch("auth/logout");
+          this.$store.dispatch("delUserProfile");
+          this.$router.replace("/");
         })
         .catch((errors) => {
-          console.dir(errors)
-        })
+          console.dir(errors);
+        });
     },
   },
   watch: {
     $route(to, from) {
-      this.toggleButton()
+      this.toggleButton();
     },
   },
   mounted() {
-    const form = document.getElementById('nav')
+    const nav = document.getElementById("nav");
     // agar event hanya bekerja pada element nav saja
-    form.addEventListener('clicked-outside', (e) => {
-      if (e.detail.tag == 'nav') {
-        this.toggleButton()
+    nav.addEventListener("clicked-outside", (e) => {
+      if (e.detail.tag == "nav") {
+        this.toggleButton();
       }
-    })
+    });
 
     if (this.account_login) {
-      this.user_role = this.$store.state.user.role
+      this.user_role = this.$store.state.user.role;
     }
   },
-}
+};
 </script>
 <style scoped>
 #nav-content {

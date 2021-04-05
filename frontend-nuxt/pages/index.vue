@@ -232,12 +232,17 @@ export default {
       return this.$store.state.auth.token
     },
   },
-  mounted() {
+  activated() {
+      if (this.$fetchState.timestamp <= Date.now() - 30000) {
+        console.log("refresh")
+        this.$fetch() // this.$destroy()
+      }
+  },
+  fetch() {
     this.$axios
       .$get(`campaign`)
       .then((resp) => {
         this.campaigns = resp.campaigns
-        console.log(this.campaigns)
       })
       .catch((errors) => {
         console.dir(errors)
