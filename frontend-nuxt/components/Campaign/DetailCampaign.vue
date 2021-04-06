@@ -171,8 +171,7 @@
 
             <div
               class="flex justify-start cursor-pointer text-gray-700 bg-green-200 rounded-md px-2 py-2 xs:mb-2"
-              v-for="index in campaign.slot_capacity -
-              (campaign.total_members - 1)"
+              v-for="index in campaign.slot_capacity - campaign.slot_members"
               :key="index"
             >
               <div class="px-2 font-bold">Slot Kosong</div>
@@ -249,7 +248,7 @@
       </div>
     </div>
     <div
-      class="container px-4 mx-auto flex flex-wrap items-center justify-between bg-white w-full text-center pt-5 sm:hidden sticky bottom-0 min-w-screen"
+      class="container px-4 mx-auto flex flex-wrap items-center justify-between bg-white w-full text-center pt-5 pb-20 sm:hidden sticky bottom-0 min-w-screen"
     >
       <button
         v-if="!registered || isDisable || !this.$store.state.auth.token"
@@ -330,7 +329,7 @@ export default {
     return {
       hiddenDetail: true,
       loading: false,
-      errorMsg: ''
+      errorMsg: '',
     }
   },
   methods: {
@@ -355,11 +354,11 @@ export default {
               )
             })
             .catch((errors) => {
-                this.loading = false
-                const { status, data } = errors.response
-                if (status === 422) {
-                    alert("Sudah penuh")
-                }
+              this.loading = false
+              const { status, data } = errors.response
+              if (status === 422) {
+                alert('Sudah penuh')
+              }
               console.dir(errors)
             })
         }
@@ -377,8 +376,8 @@ export default {
       if (this.$store.state.auth.token) {
         return (
           this.campaign.id_host === this.$store.state.user.id ||
-          this.$store.state.user.role === 'a'
-          // this.statusDisable
+          this.$store.state.user.role === 'a' ||
+          this.campaign.slot_members === this.campaign.slot_capacity
         )
       } else {
         return false

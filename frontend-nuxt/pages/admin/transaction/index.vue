@@ -3,32 +3,29 @@
     class="container px-4 mx-auto flex-wrap justify-between min-h-screen relative"
   >
     <breadcrumb :breadcrumbs="breadcrumbs" class="pb-4"></breadcrumb>
-    <h3 class="font-bold pb-4 text-4xl xs:text-2xl text-indigo-500">
-      Data Payment
-    </h3>
-    <div>
-      <!-- <div v-if="users.length == 0"></div> -->
-      <PaymentTable :payments="payments" />
+    <div v-if="campaigns === null">
+      <Spinner />
+    </div>
+    <div v-else>
+      <h3 class="font-bold pb-4 text-4xl xs:text-2xl text-indigo-500">
+        Data Payment
+      </h3>
+      <div>
+        <PaymentTable :campaigns="campaigns" />
+      </div>
     </div>
   </div>
 </template>
 <script>
 import PaymentTable from '@/components/DataTables/PaymentTable'
 import Breadcrumb from '@/components/Breadcrumb'
+import Spinner from '@/components/Spinner.vue'
 
 export default {
   components: { PaymentTable, Breadcrumb },
   data() {
     return {
-      payments: [
-        {
-          name: 'netflix 1 bulan',
-          price: 180000,
-          amount_collected: 180000,
-          withdrawal: 93000,
-          status: 50,
-        },
-      ],
+      campaigns: null,
       breadcrumbs: [],
     }
   },
@@ -59,10 +56,10 @@ export default {
     })
 
     this.$axios
-      .$get('users')
+      .$get('transaction/campaign')
       .then((resp) => {
-        this.users = resp.users
-        setTimeout(() => this.$nuxt.$loading.finish(), 5000)
+        console.log(resp)
+        this.campaigns = resp.campaigns
       })
       .catch((errors) => {
         console.log(errors)
