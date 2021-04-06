@@ -35,12 +35,19 @@
 
     <div>
       <!-- <div v-if="users.length == 0"></div> -->
-      <EmailTable :emails="emails" @clicked="showModal" :todo="todo" />
+      <EmailTable
+        :data_emails="data_emails"
+        :show-modal="showModal"
+        :delete-email="deleteEmail"
+        :loadingDelete="loadingDelete"
+      />
       <EmailModal
-        :status="showModalStatus"
+        :create-email="createEmail"
         @clicked="showModal"
         :todo="todo"
-        :selected="selected"
+        :new_email="new_email"
+        :status="showModalStatus"
+        :loadingProcess="loadingProcess"
       />
     </div>
   </div>
@@ -54,23 +61,23 @@ export default {
   components: { EmailTable, Breadcrumb, EmailModal },
   data() {
     return {
-      emails: [
-        {
-          email: 'akun1@patungin.com',
-          pass: '123',
-          id: 1,
-          status: 1,
-        },
-        { email: 'akun2patungin.com', pass: '123', id: 2, status: 0 },
-      ],
+      loadingDelete: false,
+      loadingProcess: false,
+      data_emails: [],
       breadcrumbs: [],
       showModalStatus: false,
       todo: 'edit',
-      selected: '',
+      new_email: {
+        email: '',
+        info: '',
+        status: '',
+      },
     }
   },
 
-  mounted() {
+  beforeMount() {
+    console.log(this.$store.state.auth.token)
+    this.$destroy()
     const fullPath = this.$route.fullPath
     const params = fullPath.substring(1).split('/')
 
@@ -95,28 +102,80 @@ export default {
       this.$nuxt.$loading.start()
     })
 
-    // this.$axios
-    //   .$get(process.env.API_DEV_URL + 'users')
-    //   .then((resp) => {
-    //     this.users = resp.users
-    //     console.log(resp)
-    //     setTimeout(() => this.$nuxt.$loading.finish(), 5000)
-    //   })
-    //   .catch((errors) => {
-    //     console.log(errors)
-    //   })
+    this.$axios
+      .$get('email')
+      .then((resp) => {
+        this.data_emails = resp.email
+        console.log(this.data_emails)
+        // setTimeout(() => this.$nuxt.$loading.finish(), 5000)
+      })
+      .catch((errors) => {
+        console.log(errors)
+      })
   },
 
   methods: {
     showModal(data, status) {
-      if (data != undefined) {
-        this.selected = data
-        console.log(this.selected)
-      } else {
-        this.selected = ''
+      if (status == 'edit') {
+        this.new_email = {
+          email: data.email,
+          info: data.info,
+          status: data.status,
+          id: data.id,
+        }
+        console.log(this.new_email)
       }
       this.todo = status
       this.showModalStatus = !this.showModalStatus
+    },
+
+    createEmail(status, todo) {
+      if (status) {
+        this.loadingProcess = true
+        console.log(this.new_email)
+        if (todo == 'edit') {
+          this.$axios
+            .$post(`email/update/${this.new_email.id}`, this.new_email)
+            .then((resp) => {
+              if (resp.message === 'UPDATED') {
+                location.reload()
+              }
+              console.log(this.data_emails)
+            })
+            .catch((errors) => {
+              console.log(errors)
+            })
+        } else {
+          this.$axios
+            .$post('email/create', this.new_email)
+            .then((resp) => {
+              if (resp.message === 'CREATED') {
+                location.reload()
+              }
+              console.log(this.data_emails)
+            })
+            .catch((errors) => {
+              console.log(errors)
+            })
+        }
+      } else {
+        this.showModalStatus = !this.showModalStatus
+      }
+    },
+
+    deleteEmail(id) {
+      this.loadingDelete = true
+      // console.log(id)
+      this.$axios
+        .$delete(`email/delete/${id}`)
+        .then((resp) => {
+          if (resp.message === 'DELETED') {
+            location.reload()
+          }
+        })
+        .catch((errors) => {
+          console.log(errors)
+        })
     },
   },
 }

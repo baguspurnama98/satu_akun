@@ -30,14 +30,12 @@
                 id="range_period"
               >
                 <option>Pilih...</option>
-                <option value="akun-1-@patungin.com">
-                  akun-1-@patungin.com
-                </option>
-                <option value="akun-2-@patungin.com">
-                  akun-2-@patungin.com
-                </option>
-                <option value="akun-3-@patungin.com">
-                  akun-3-@patungin.com
+                <option
+                  v-for="item in emails"
+                  :key="item.id"
+                  :value="item.email"
+                >
+                  {{ item.email }}
                 </option>
               </select>
             </div>
@@ -72,6 +70,7 @@
         <div class="p-4 flex space-x-4">
           <button
             class="w-1/2 px-4 py-3 text-center bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-black font-bold rounded-lg text-sm focus:outline-none"
+            @click.prevent="showForm(false)"
           >
             Batal
           </button>
@@ -87,6 +86,7 @@
 </template>
 <script>
 export default {
-  props: ['status'],
+  props: ['status', 'emails', 'showForm'],
+  methods: {},
 }
 </script>

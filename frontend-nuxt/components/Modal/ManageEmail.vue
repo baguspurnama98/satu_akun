@@ -23,19 +23,19 @@
             <div class="flex flex-col mb-1">
               <label class="leading-loose text-md">Email</label>
               <input
-                type="text"
+                type="email"
                 class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                 placeholder="Masukan Email"
-                :value="selected_data.email"
+                v-model="new_email.email"
               />
             </div>
             <div class="flex flex-col mb-1">
-              <label class="leading-loose text-md">Password</label>
-              <input
-                type="text"
+              <label class="leading-loose text-md">Info</label>
+              <textarea
+                rows="3"
                 class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                placeholder="Masukan Password"
-                :value="selected_data.pass"
+                placeholder="Masukan Informasi Tambahan"
+                v-model="new_email.info"
               />
             </div>
             <div class="flex flex-col mb-1">
@@ -46,7 +46,9 @@
                     type="radio"
                     class="form-radio h-4 w-4 text-gray-600"
                     name="statusEmail"
-                    :checked="selected_data.status == 1"
+                    v-model="new_email.status"
+                    :checked="new_email.status == 1"
+                    :value="1"
                   /><span class="ml-1 text-gray-700">Aktif</span>
                 </label>
                 <label class="inline-flex items-center">
@@ -54,7 +56,9 @@
                     type="radio"
                     class="form-radio h-4 w-4 text-gray-600"
                     name="statusEmail"
-                    :checked="selected_data.status == 0"
+                    v-model="new_email.status"
+                    :checked="new_email.status == 0"
+                    :value="0"
                   /><span class="ml-1 text-gray-700">Non-Aktif</span>
                 </label>
               </div>
@@ -64,16 +68,39 @@
 
         <div class="p-4 flex space-x-4">
           <button
-            @click.prevent="onClickCancel()"
+            @click.prevent="createEmail(false)"
             class="w-1/2 px-4 py-3 text-center bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-black font-bold rounded-lg text-sm focus:outline-none"
           >
             Batal
           </button>
           <button
             class="w-1/2 px-4 py-3 text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg hover:text-white font-bold text-sm focus:outline-none capitalize"
-            @click.prevent="handleSaveEmail()"
+            @click.prevent="createEmail(true, todo)"
           >
-            {{ todo }}
+            <span class="inline-flex items-center p-0 m-0">
+              <svg
+                v-if="loadingProcess"
+                class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              {{ todo }}
+            </span>
           </button>
         </div>
       </form>
@@ -83,31 +110,9 @@
 <script>
 export default {
   name: 'ManageEmail',
-  props: ['status', 'todo', 'selected'],
+  props: ['status', 'todo', 'createEmail', 'new_email', 'loadingProcess'],
   data() {
-    return {
-      selected_data: {
-        email: this.selected.email,
-        pass: this.selected.pass,
-        status: this.selected.status,
-      },
-    }
+    return {}
   },
-  methods: {
-    handleSaveEmail() {
-      alert('save/edit email')
-    },
-    onClickCancel(event) {
-      this.$emit('clicked')
-    },
-  },
-  // mounted() {
-  //   this.$nextTick(() => {
-  //     console.log(this.todo)
-  //     if (this.todo === 'add') {
-  //       alert('add')
-  //     }
-  //   })
-  // },
 }
 </script>

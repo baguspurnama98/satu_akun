@@ -5,7 +5,7 @@
       <input class="form-control" v-model="filters.name.value" />
 
       <v-table
-        :data="emails"
+        :data="data_emails"
         :filters="filters"
         class="w-full text-left wrapper xs:block"
         :hideSortIcons="false"
@@ -22,7 +22,7 @@
         </thead>
         <tbody slot="body" slot-scope="{ displayData }">
           <tr
-            v-for="(row, index) in displayData"
+            v-for="row in displayData"
             :key="row.id"
             class="border-t-2 hover:bg-gray-200"
           >
@@ -52,7 +52,7 @@
               <div class="inline-flex">
                 <button
                   class="px-2 py-1 text-white bg-green-400 hover:bg-green-600 focus:outline-none rounded-lg mr-2 shadow-md text-md"
-                  @click="onClickEdit(row, 'edit')"
+                  @click="showModal(row, 'edit')"
                 >
                   <span class="inline-flex">
                     <svg
@@ -75,7 +75,7 @@
                 </button>
                 <button
                   class="px-2 py-1 text-white bg-red-500 hover:bg-red-700 focus:outline-none rounded-lg shadow-md text-md"
-                  @click="handleDelete(index)"
+                  @click="handleDelete(true, row.id)"
                 >
                   <span class="inline-flex">
                     <svg
@@ -105,14 +105,89 @@
         :totalPages="totalPages"
       />
     </div>
+
+    <!-- Modal Delete -->
+    <div
+      class="container mx-auto flex justify-center justify-items-start items-start w-full absolute z-100 inset-0 -mt-40"
+      :class="[modalDelete ? '' : 'hidden']"
+    >
+      <div
+        class="bg-white fixed rounded-lg shadow-lg mx-auto xs:mx-5 self-center"
+      >
+        <div class="w-96 border-t-8 border-red-600 rounded-lg flex">
+          <div class="w-1/3 pt-6 flex justify-center">
+            <svg
+              class="w-16 h-16 bg-red-600 text-white p-3 rounded-full"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+              />
+            </svg>
+          </div>
+          <div class="w-full pt-9 pr-4">
+            <h3 class="font-bold text-red-500 pt-5">Blokir Akun ?</h3>
+            <p class="py-2 text-sm text-gray-600">
+              Yakin lakukan pemblokiran terhadap akun ini?
+            </p>
+          </div>
+        </div>
+
+        <div class="p-4 flex space-x-4">
+          <button
+            @click="handleDelete(false)"
+            class="w-1/2 px-4 py-3 text-center bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-black font-bold rounded-lg text-sm focus:outline-none"
+          >
+            Batal
+          </button>
+          <button
+            class="w-1/2 px-4 py-3 text-center text-white bg-red-600 rounded-lg hover:bg-red-700 hover:text-white font-bold text-sm focus:outline-none"
+            @click.prevent="deleteEmail(emailSeleted)"
+          >
+            <span class="inline-flex items-center p-0 m-0">
+              <svg
+                v-if="loadingDelete"
+                class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              Hapus
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 export default {
   name: 'EmailTable',
-  props: ['emails'],
+  props: ['data_emails', 'showModal', 'deleteEmail', 'loadingDelete'],
   data() {
     return {
+      modalDelete: false,
+      emailSeleted: null,
       currentPage: 1,
       totalPages: 3,
       filters: {
@@ -134,8 +209,13 @@ export default {
       let date2 = new Date(b.registered).getTime()
       return date1 - date2
     },
-    handleDelete(id) {
-      alert('delete email id: ' + id)
+    handleDelete(status, id) {
+      if (status) {
+        this.emailSeleted = id
+        this.modalDelete = true
+      } else {
+        this.modalDelete = false
+      }
     },
     onClickEdit(data, todo) {
       this.$emit('clicked', data, todo)
