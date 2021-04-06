@@ -330,6 +330,7 @@ export default {
     return {
       hiddenDetail: true,
       loading: false,
+      errorMsg: ''
     }
   },
   methods: {
@@ -354,6 +355,11 @@ export default {
               )
             })
             .catch((errors) => {
+                this.loading = false
+                const { status, data } = errors.response
+                if (status === 422) {
+                    alert("Sudah penuh")
+                }
               console.dir(errors)
             })
         }

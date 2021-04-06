@@ -97,7 +97,7 @@
 
     <!-- menu dropup class="bottom-0 origin-top-right absolute left-0 mt-2 -mr-1 w-48 rounded-md shadow-lg"> --> 
     <div
-      class="origin-top-left absolute right-0 bottom-0 mb-12 mr-2 min-w-32 rounded-md shadow-lg bg-white border border-gray-200 divide-y divide-gray-300 text-left"
+      class="origin-top-left absolute right-0 bottom-0 mb-12 mr-2 w-40 min-w-40 rounded-md shadow-lg bg-white border border-gray-200 divide-y divide-gray-300 text-left"
       v-bind:class="[navUserOption ? 'hidden' : '']"
       role="menu"
       aria-orientation="vertical"
