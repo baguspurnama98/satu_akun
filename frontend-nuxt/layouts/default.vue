@@ -1,7 +1,7 @@
 <template>
   <div>
     <component :is="navbar"></component>
-    <div :class="[navbar === 'Navbar' ? 'my-12' : 'mb-24']">
+    <div :class="[navbar === 'Navbar' ? 'my-12' : 'mt-12 mb-24']">
       <div v-show="android || iphone" class="container py-5 px-3 flex flex-col mx-auto items-center justify-center content install-prompt">
         <p class="mb-4">Install aplikasi Patungin di ponsel kamu</p>
         

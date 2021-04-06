@@ -259,7 +259,7 @@ class CampaignController extends Controller
         
         // DB::beginTransaction();
         if ($campaign->total_members === $campaign->slot_capacity + 1) {
-            return response()->json(['message' => 'Full Capacity'], 409);
+            return response()->json(['message' => 'Full Capacity'], 422);
         }
         
         try {
