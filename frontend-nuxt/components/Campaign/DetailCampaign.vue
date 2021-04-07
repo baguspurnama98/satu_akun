@@ -248,7 +248,7 @@
       </div>
     </div>
     <div
-      class="container px-4 mx-auto flex flex-wrap items-center justify-between bg-white w-full text-center pt-5 pb-20 sm:hidden sticky bottom-0 min-w-screen"
+      class="container px-4 mx-auto flex flex-wrap items-center justify-between bg-white w-full text-center pt-0 pb-16 sm:hidden sticky bottom-0 min-w-screen"
     >
       <button
         v-if="!registered || isDisable || !this.$store.state.auth.token"

@@ -59,7 +59,7 @@
           </button>
         </div>
       </div>
-      <Nuxt keep-alive />
+      <Nuxt keep-alive :keep-alive-props="{ exclude: ['category'] }" />
     </div>
     <Footer v-if="navbar === 'Navbar'" />
   </div>
@@ -101,7 +101,7 @@ export default {
                 this.android = true;
             }
             if (navigator.userAgent.toLowerCase().indexOf("iphone") > -1){
-                this.iphone = true;
+                // this.iphone = true;
             }
             const account = /account/i
             if (account.test(this.$route.path)) {
@@ -115,9 +115,9 @@ export default {
                 return false;
             });
         } else {
-            this.navbar = "NavbarBottom"
+            // this.navbar = "NavbarBottom"
         }
-        if (this.android === true || this.iphone === true) {
+        if (this.android === true) {
             this.navbar = "NavbarBottom"
         }
     },

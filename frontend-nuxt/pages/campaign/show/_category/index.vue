@@ -13,13 +13,7 @@
         >
           <!-- seamless search -->
           <div class="flex flex-col sm:flex-row">
-            <NuxtLink
-              class="my-1 text-gray-600 capitalize hover:underline sm:mx-3"
-              :to="`${category.categories.toLowerCase()}`"
-              v-for="category in categories"
-              :key="category.id"
-              >{{ category.categories }}</NuxtLink
-            >
+            <category :categories="categories" :go-to-category="goToCategory" :selected-category="$route.params.category"></category>   
           </div>
         </nav>
         <!--  -->
@@ -67,10 +61,11 @@
 </template>
 <script>
 import CardCampaign from "@/components/Campaign/CardCampaign";
+import Category from "@/components/Category"
 
 export default {
   layout: "default",
-  components: { CardCampaign },
+  components: { CardCampaign, Category },
   data() {
     return {
       keywords: "",
@@ -121,6 +116,10 @@ export default {
         if (immediate && !timeout) func.apply(context, args);
       };
     },
+
+    goToCategory(event) {
+        this.$router.push(event.target.value)
+    }
   },
   watch: {
     keywords: function (value) {
