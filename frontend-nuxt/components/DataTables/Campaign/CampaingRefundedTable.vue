@@ -21,7 +21,7 @@
             >Nama Campaign</v-th
           >
           <v-th :sortKey="nameLength">Host</v-th>
-          <v-th :sortKey="nameLength">Email Tertaut</v-th>
+          <!-- <v-th :sortKey="nameLength">Status Pembayaran</v-th> -->
 
           <v-th :sortKey="nameLength">Tanggal Pembuatan</v-th>
           <v-th :sortKey="dateSort" defaultSort="desc">Tanggal Kadaluarsa</v-th>
@@ -39,9 +39,12 @@
             <td class="px-3 truncate" style="max-width: 150px">
               {{ row.host_name.name }}
             </td>
-            <td class="px-3 truncate" style="max-width: 150px">
-              email ini belum
-            </td>
+
+            <!-- <td class="px-3" style="max-width: 150px">
+              <span class="px-2 py-1 rounded-full bg-green-400 text-sm"
+                >Selesai</span
+              >
+            </td> -->
             <td class="px-3">{{ row.created_at | formatDate }}</td>
 
             <td class="px-3">
@@ -141,6 +144,29 @@
                     <a
                       class="inline-flex items-center"
                       href="#"
+                      @click="showFormRefund(row.id)"
+                    >
+                      <svg
+                        class="w-4 h-4 mr-2"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        />
+                      </svg>
+                      <span class="text-sm"> Update Pembayaran </span>
+                    </a>
+                  </li>
+                  <li class="px-2 py-2 hover:bg-gray-200 w-full border-none">
+                    <a
+                      class="inline-flex items-center"
+                      href="#"
                       @click.prevent="showModal('email')"
                     >
                       <svg
@@ -197,7 +223,7 @@
           </div>
           <div class="w-full pt-9 px-4">
             <h3 class="font-bold text-indigo-500 pt-5 capitalize">
-              Non Aktifkan {{ modal.text }}
+              Jadikan {{ modal.text }}
             </h3>
             <p class="py-2 text-sm text-gray-600">
               Yakin lanjutkan proses ini?
@@ -221,19 +247,109 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal Form informasi akun -->
+    <div
+      class="container mx-auto flex justify-center justify-items-start items-start absolute z-100 inset-0"
+      :class="[form.status ? '' : 'hidden']"
+    >
+      <div class="fixed w-1/2 sm:w-2/3 xs:w-full self-center">
+        <form class="bg-white rounded-lg shadow-lg mx-auto xs:mx-8">
+          <div class="border-t-8 border-indigo-600 rounded-lg px-10 xs:px-5">
+            <div class="w-full pt-9 px-4 text-center">
+              <h3
+                class="font-bold text-indigo-500 pt-5 capitalize text-3xl xs:text-xl sm:text-2xl"
+              >
+                Form Refund
+              </h3>
+            </div>
+
+            <div
+              class="py-8 text-base leading-6 text-gray-700 sm:text-md sm:leading-7 xs:text-sm"
+            >
+              <div class="flex flex-col mb-1">
+                <label class="leading-loose text-md">Email</label>
+                <select
+                  class="w-full border focus:outline-none focus:ring focus:border-indigo-400 px-4 py-2 rounded-md sm:text-sm"
+                  name="range_period"
+                  id="range_period"
+                >
+                  <option>Pilih...</option>
+                  <option value="akun-1-@patungin.com">
+                    akun-1-@patungin.com
+                  </option>
+                  <option value="akun-2-@patungin.com">
+                    akun-2-@patungin.com
+                  </option>
+                  <option value="akun-3-@patungin.com">
+                    akun-3-@patungin.com
+                  </option>
+                </select>
+              </div>
+              <div class="flex flex-col mb-1">
+                <label class="leading-loose text-md">Password</label>
+                <input
+                  type="text"
+                  class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                  placeholder="Masukan Password"
+                />
+              </div>
+              <div class="flex flex-col mb-1">
+                <label class="leading-loose text-md">Deskripsi</label>
+                <textarea
+                  rows="6"
+                  class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                  placeholder="Masukan Deskripsi Tambahan"
+                />
+              </div>
+              <div class="flex flex-col mb-1">
+                <label class="leading-loose text-md">Link Grup WA</label>
+                <input
+                  type="textarea"
+                  row="5"
+                  class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                  placeholder="Masukan url link"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 flex space-x-4">
+            <button
+              @click="showFormRefund('')"
+              class="w-1/2 px-4 py-3 text-center bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-black font-bold rounded-lg text-sm focus:outline-none"
+            >
+              Batal
+            </button>
+            <button
+              class="w-1/2 px-4 py-3 text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg hover:text-white font-bold text-sm focus:outline-none"
+              @click="handleProccess()"
+            >
+              Proses
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import Spinner from '@/components/Spinner.vue'
-
 export default {
-  components: { Spinner },
   name: 'CampaignActiveTable',
+  components: { Spinner },
   data() {
     return {
       modal: {
         status: false,
         text: '',
+      },
+      form: {
+        status: false,
+        email: '',
+        pass: '',
+        desc: '',
+        urlGroup: '',
       },
       activeDetail: null,
       detail: false,
@@ -249,33 +365,40 @@ export default {
     nameLength(row) {
       return row.name.length
     },
-
     dateSort(a, b) {
       let date1 = new Date(a.registered).getTime()
       let date2 = new Date(b.registered).getTime()
+
       return date1 - date2
     },
-
     showDetail(value) {
-      // show detail dropdown
       if (value === this.activeDetail) {
         this.activeDetail = null
       } else {
         this.activeDetail = value
       }
     },
-
     showModal(text) {
-      // show modal confirm
       this.activeDetail = null
       this.modal.status = !this.modal.status
       this.modal.text = text
+    },
+
+    handleProccess() {
+      alert('proses post request refund')
+    },
+    showFormRefund(id) {
+      this.activeDetail = null
+      this.form.status = !this.form.status
+    },
+    saveInfoAccount() {
+      alert('post request save info account')
     },
   },
   beforeMount() {
     this.$destroy()
     this.$axios
-      .$get(`campaign?status=5`)
+      .$get(`campaign?status=4`)
       .then((resp) => {
         this.campaigns = resp.campaigns
         console.log(this.campaigns)

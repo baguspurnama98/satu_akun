@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div
-      class="w-full relative"
-    >
+    <div v-if="campaigns === null">
+      <Spinner class="-mt-40" />
+    </div>
+    <div v-else class="w-full relative">
       <label>Search:</label>
       <input class="form-control" v-model="filters.name.value" />
 
@@ -50,8 +51,11 @@
               {{ row.expired_date | formatDate }}
             </td>
             <td class="justify-between py-2 inline-block relative">
-              <div class="inline-flex" v-click-outside
-                @clicked-outside="showDetail()">
+              <div
+                class="inline-flex"
+                v-click-outside
+                @clicked-outside="showDetail()"
+              >
                 <button
                   class="items-center px-2 py-1 bg-indigo-400 rounded-md text-sm transition duration-300 text-white hover:bg-indigo-600 focus:outline-none flex font-semibold"
                   @click="showDetail(index)"
@@ -330,9 +334,10 @@
   </div>
 </template>
 <script>
+import Spinner from '@/components/Spinner.vue'
 export default {
   name: 'CampaignActiveTable',
-  props: ['campaigns'],
+  components: { Spinner },
   data() {
     return {
       modal: {
@@ -353,6 +358,7 @@ export default {
       filters: {
         name: { value: '', keys: ['name', 'email'] },
       },
+      campaigns: null,
     }
   },
   methods: {
@@ -388,6 +394,18 @@ export default {
     saveInfoAccount() {
       alert('post request save info account')
     },
+  },
+  beforeMount() {
+    this.$destroy()
+    this.$axios
+      .$get(`campaign?status=3`)
+      .then((resp) => {
+        this.campaigns = resp.campaigns
+        console.log(this.campaigns)
+      })
+      .catch((errors) => {
+        console.log(errors)
+      })
   },
 }
 </script>

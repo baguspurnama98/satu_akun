@@ -1,7 +1,7 @@
 <template>
   <div
     class="container mx-auto flex justify-center justify-items-start items-start absolute z-100 inset-0"
-    :class="[status ? '' : 'hidden']"
+    :class="[form.status ? '' : 'hidden']"
   >
     <div class="fixed w-1/2 sm:w-2/3 xs:w-full self-center">
       <form class="bg-white rounded-lg shadow-lg mx-auto xs:mx-8">
@@ -28,13 +28,10 @@
                 class="w-full border focus:outline-none focus:ring focus:border-indigo-400 px-4 py-2 rounded-md sm:text-sm"
                 name="range_period"
                 id="range_period"
+                v-model="form.email_id"
               >
                 <option>Pilih...</option>
-                <option
-                  v-for="item in emails"
-                  :key="item.id"
-                  :value="item.email"
-                >
+                <option v-for="item in emails" :key="item.id" :value="item.id">
                   {{ item.email }}
                 </option>
               </select>
@@ -45,6 +42,7 @@
                 type="text"
                 class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                 placeholder="Masukan Password"
+                v-model="form.password_email"
               />
             </div>
             <div class="flex flex-col mb-1">
@@ -76,8 +74,32 @@
           </button>
           <button
             class="w-1/2 px-4 py-3 text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg hover:text-white font-bold text-sm focus:outline-none"
+            @click.prevent="saveInfoAccount"
           >
-            Proses
+            <span class="inline-flex items-center p-0 m-0">
+              <svg
+                v-if="form.loading"
+                class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              Simpan</span
+            >
           </button>
         </div>
       </form>
@@ -86,7 +108,9 @@
 </template>
 <script>
 export default {
-  props: ['status', 'emails', 'showForm'],
-  methods: {},
+  props: ['form', 'emails', 'showForm', 'saveInfoAccount'],
+  data() {
+    return {}
+  },
 }
 </script>

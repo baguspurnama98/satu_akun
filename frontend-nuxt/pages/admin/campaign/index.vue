@@ -27,22 +27,22 @@
       </nav>
     </div>
     <div v-if="menuActive == 'active'" class="datatables-campaign">
-      <CampaignActiveTable :campaigns="campaigns" />
+      <CampaignActiveTable />
     </div>
     <div v-if="menuActive == 'going-on'" class="datatables-campaign">
-      <CampaignOnGoingTable :campaigns="campaigns" />
+      <CampaignOnGoingTable />
     </div>
     <div v-if="menuActive == 'finish'" class="datatables-campaign">
-      <CampaignFinishTable :campaigns="campaigns" />
+      <CampaignFinishTable />
     </div>
     <div v-if="menuActive == 'refund'" class="datatables-campaign">
-      <CampaingRefundTable :campaigns="campaigns" />
+      <CampaingRefundTable />
     </div>
     <div v-if="menuActive == 'refunded'" class="datatables-campaign">
-      <CampaingRefundTable :campaigns="campaigns" />
+      <CampaingRefundedTable />
     </div>
     <div v-if="menuActive == 'expired'" class="datatables-campaign">
-      <CampaignExpiredTable :campaigns="campaigns" />
+      <CampaignExpiredTable />
     </div>
   </div>
 </template>
@@ -52,6 +52,7 @@ import CampaignActiveTable from '@/components/DataTables/Campaign/CampaignActive
 import CampaignOnGoingTable from '@/components/DataTables/Campaign/CampaignOnGoingTable'
 import CampaignFinishTable from '@/components/DataTables/Campaign/CampaignFinishTable'
 import CampaingRefundTable from '@/components/DataTables/Campaign/CampaingRefundTable'
+import CampaingRefundedTable from '@/components/DataTables/Campaign/CampaingRefundedTable'
 import CampaignExpiredTable from '@/components/DataTables/Campaign/CampaignExpiredTable'
 
 export default {
@@ -84,6 +85,7 @@ export default {
      * pada href maupun nuxtlink ekspetasi routing bergantung pada backslash
      * localhost:8000/admin -> /user/ (tidak ada backslash di ujung admin)
      * localhost:8000/admin/ -> /admin/user/
+     * filter berdasarkan status, 0 = aktif, 1 = berlangsung, 2 = expired, 3 = refund, 4 = selesai refund, 5 = selesai
      */
     trailBackslash: function (routeName) {
       let path = this.$route.path.endsWith('/')
@@ -95,38 +97,38 @@ export default {
       this.campaigns = []
       this.menuActive = menu
       this.idMenu = id
-      switch (this.idMenu) {
-        case '0':
-          this.fetchData('0')
-          break
-        case '1':
-          this.fetchData('1')
-          break
-        case '2':
-          this.fetchData('2')
-          break
-        case '3':
-          this.fetchData('3')
-          break
-        case '4':
-          this.fetchData('4')
-          break
-        case '5':
-          this.fetchData('5')
-          break
-      }
+      // switch (this.idMenu) {
+      //   case '0':
+      //     this.fetchData('0')
+      //     break
+      //   case '1':
+      //     this.fetchData('1')
+      //     break
+      //   case '2':
+      //     this.fetchData('2')
+      //     break
+      //   case '3':
+      //     this.fetchData('3')
+      //     break
+      //   case '4':
+      //     this.fetchData('4')
+      //     break
+      //   case '5':
+      //     this.fetchData('5')
+      //     break
+      // }
     },
-    fetchData() {
-      this.$axios
-        .$get(`campaign?status=${this.idMenu}`)
-        .then((resp) => {
-          this.campaigns = resp.campaigns
-          console.log(this.campaigns)
-        })
-        .catch((errors) => {
-          console.log(errors)
-        })
-    },
+    // fetchData() {
+    //   this.$axios
+    //     .$get(`campaign?status=${this.idMenu}`)
+    //     .then((resp) => {
+    //       this.campaigns = resp.campaigns
+    //       console.log(this.campaigns)
+    //     })
+    //     .catch((errors) => {
+    //       console.log(errors)
+    //     })
+    // },
   },
   mounted() {
     const fullPath = this.$route.fullPath
@@ -149,9 +151,9 @@ export default {
     })
     this.breadcrumbs = crumbs
   },
-  fetch() {
-    this.fetchData()
-  },
+  // fetch() {
+  //   this.fetchData()
+  // },
 }
 </script>
 <style lang="postcss">

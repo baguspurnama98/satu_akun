@@ -95,11 +95,11 @@ export default {
           }
         })
     },
-    getProfile(token) {
+    async getProfile(token) {
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       }
-      this.$axios
+     await this.$axios
       .$get('profile', null, config)
       .then((res)=>{
       this.$store.dispatch('getUserProfile', res.user)
@@ -115,7 +115,7 @@ export default {
       //     this.$router.push('/create')
       //   }
       //    else {
-          window.location.replace('/')  
+          window.location.replace('/')  // entah kenapa jadi error, jadi sementara gini dulu ya
       //   }
       })
       .catch((err) => console.log(err))
