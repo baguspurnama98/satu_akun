@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="w-full relative">
+    <div v-if="campaigns === null">
+      <Spinner class="-mt-40" />
+    </div>
+    <div v-else class="w-full relative">
       <label>Search:</label>
       <input class="form-control" v-model="filters.name.value" />
 
@@ -273,9 +276,11 @@
   </div>
 </template>
 <script>
+import Spinner from '@/components/Spinner.vue'
+
 export default {
+  components: { Spinner },
   name: 'CampaignActiveTable',
-  props: ['campaigns'],
   data() {
     return {
       idSelected: null,
@@ -291,6 +296,7 @@ export default {
         name: { value: '', keys: ['name', 'email'] },
       },
       campaign: {},
+      campaigns: null,
     }
   },
   methods: {
@@ -339,6 +345,18 @@ export default {
           console.dir(errors)
         })
     },
+  },
+  beforeMount() {
+    this.$destroy()
+    this.$axios
+      .$get(`campaign?status=0`)
+      .then((resp) => {
+        this.campaigns = resp.campaigns
+        console.log(this.campaigns)
+      })
+      .catch((errors) => {
+        console.log(errors)
+      })
   },
 }
 </script>

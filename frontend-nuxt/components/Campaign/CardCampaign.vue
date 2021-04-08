@@ -73,7 +73,7 @@
               <div class="col-end-7 col-span-2">
                 <span class="text-sm text-gray-700">
                   {{
-                    campaign.total_members - 1 + '/' + campaign.slot_capacity
+                    campaign.slot_members + '/' + campaign.slot_capacity
                   }}</span
                 >
               </div>
@@ -113,7 +113,6 @@
   </div>
 </template>
 <script>
-
 export default {
   name: 'CardCampaign',
   props: ['title', 'campaign'],
@@ -127,11 +126,10 @@ export default {
       return this.campaign.host_name !== null
         ? this.campaign.host_name.name
         : ''
-    }
+    },
   },
   methods: {},
-  mounted() {
-  },
+  mounted() {},
 }
 </script>
 <style>

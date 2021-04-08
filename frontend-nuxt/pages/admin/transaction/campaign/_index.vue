@@ -1,33 +1,26 @@
 <template>
-  <div>
-    <CampaignDashboard :user_role="user_role" />
-
-    <div class="container mx-auto flex items-center mt-6">
-      <div class="lg:w-3/5 w-full mx-auto px-4 my-4 overflow-auto">
-        <div class="inline-flex w-full justify-between mb-5">
-          <h3 class="text-lg leading-6 font-medium text-gray-900">
-            Bagus Purnama <span>(Host)</span>
-          </h3>
-          <button
-            class="text-white px-2 py-1 text-sm rounded-lg shadow-md bg-indigo-400 hover:bg-indigo-600 focus:outline-none"
-          >
-            Tambah
-          </button>
-        </div>
-
-        <div class="flex border-t border-gray-200 py-2">
+  <div
+    class="container px-4 mx-auto flex-wrap justify-between min-h-screen relative"
+  >
+    <breadcrumb :breadcrumbs="breadcrumbs" class="pb-4"></breadcrumb>
+    <div v-if="campaigns === undefined">
+      <Spinner />
+    </div>
+    <div v-else>
+      <h3 class="font-bold pb-4 text-4xl xs:text-2xl text-indigo-500">
+        Data Payment Per Anggota
+      </h3>
+      <div v-if="campaigns === null" class="w-full text-center">
+        <h1
+          class="font-bold py-10 text-4xl xs:text-2xl text-red-500 mx-auto inline-flex"
+        >
+          Data Kosong!
+        </h1>
+      </div>
+      <div v-else>
+        <div class="flex border-t border-gray-200 py-2 w-3/4 px-5 mx-auto">
           <span class="text-gray-600 pr-6">IN</span>
           <span class="text-gray-600">20 Oktober 2020</span>
-          <span class="ml-auto text-gray-900">{{ 40000 | formatRupiah }}</span>
-        </div>
-        <div class="flex border-t border-gray-200 py-2">
-          <span class="text-gray-600 pr-6">IN</span>
-          <span class="text-gray-600">12 Desember 2020</span>
-          <span class="ml-auto text-gray-900">{{ 40000 | formatRupiah }}</span>
-        </div>
-        <div class="flex border-t border-b mb-6 border-gray-200 py-2">
-          <span class="text-gray-600 pr-6">IN</span>
-          <span class="text-gray-600">1 Januari 2021</span>
           <span class="ml-auto text-gray-900">{{ 40000 | formatRupiah }}</span>
         </div>
       </div>
@@ -36,20 +29,49 @@
 </template>
 
 <script>
-import CampaignDashboard from '@/components/Campaign/Dashboard/Campaign'
-
+import Breadcrumb from '@/components/Breadcrumb'
 export default {
-  // pasang ini jika ingin tidak bisa diakses kalau belum login
-  components: { CampaignDashboard },
+  components: { Breadcrumb },
   layout: 'default',
-  member_campaign: 6,
   data() {
     return {
-      user_role: 'u',
+      campaigns: undefined,
+      breadcrumbs: [],
     }
   },
   mounted() {
-    this.user_role = this.$store.state.user.role
+    const fullPath = this.$route.fullPath
+    const params = fullPath.substring(1).split('/')
+
+    let path = ''
+    let crumbs = []
+
+    params.forEach((param, index) => {
+      path = `${path}/${param}`
+      const match = this.$router.match(path)
+
+      if (
+        match.name !== null &&
+        crumbs.map((val) => val.name).indexOf(match.name) === -1
+      ) {
+        crumbs.push(match)
+      }
+    })
+    this.breadcrumbs = crumbs
+
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+    })
+
+    this.$axios
+      .$get(`transaction/campaign/${this.$route.params.index}`)
+      .then((resp) => {
+        console.log(resp)
+        this.campaigns = resp.campaigns
+      })
+      .catch((errors) => {
+        console.log(errors)
+      })
   },
 }
 </script>

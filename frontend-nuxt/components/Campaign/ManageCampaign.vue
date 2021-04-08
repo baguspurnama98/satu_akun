@@ -204,7 +204,7 @@
             <span
               class="text-red-700 text-sm font-semibold"
               v-if="campaign.slot_price !== '' && campaign.slot_price < 10000"
-              >*Minimal harga sebesar Rp. 10000</span
+              >*Minimal harga sebesar Rp. 10.000</span
             >
           </div>
         </div>

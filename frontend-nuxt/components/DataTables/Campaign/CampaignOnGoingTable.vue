@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div class="w-full relative">
+    <div v-if="campaigns === null">
+      <Spinner class="-mt-40" />
+    </div>
+
+    <div v-else class="w-full relative">
       <label>Search:</label>
       <input class="form-control" v-model="filters.name.value" />
 
@@ -37,7 +41,9 @@
               {{ row.host_name.name }}
             </td>
             <!-- aku tambah informasi email, biar admin tau email suatu campaign dengan mudah -->
-            <td class="px-3 truncate" style="max-width: 150px">email belum</td>
+            <td class="px-3 truncate" style="max-width: 150px">
+              {{ row.email_id }}
+            </td>
             <td class="px-3">{{ row.created_at | formatDate }}</td>
 
             <td class="px-3">
@@ -161,7 +167,7 @@
                     <a
                       class="inline-flex items-center"
                       href="#"
-                      @click="showModal('refund', row.id)"
+                      @click="showModalConfirm('refund', row.id)"
                       ref="non"
                     >
                       <svg
@@ -185,7 +191,7 @@
                     <a
                       class="inline-flex items-center"
                       href="#"
-                      @click="showModal('selesai', row.id)"
+                      @click="showModalConfirm('selesai', row.id)"
                     >
                       <svg
                         class="w-4 h-4 mr-2"
@@ -251,7 +257,7 @@
 
         <div class="p-4 flex space-x-4">
           <button
-            @click.prevent="showModal('', null)"
+            @click.prevent="showModalConfirm('', null)"
             class="w-1/2 px-4 py-3 text-center bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-black font-bold rounded-lg text-sm focus:outline-none"
           >
             Batal
@@ -268,30 +274,37 @@
 
     <!-- Modal Form informasi akun -->
     <ManageAccount
-      :status="form.status"
+      :form="form"
       :emails="emails"
       :show-form="showForm"
+      :save-info-account="saveInfoAccount"
     />
   </div>
 </template>
 <script>
 import ManageAccount from '@/components/Modal/ManageAccount'
+import Spinner from '@/components/Spinner.vue'
+
 export default {
+  components: { Spinner },
   name: 'CampaignActiveTable',
-  props: ['campaigns'],
+
   data() {
     return {
       emails: [],
+
       modal: {
         status: false,
         text: '',
       },
       form: {
+        id_campaign: '',
         status: false,
-        email: '',
-        pass: '',
+        email_id: '',
+        password_email: '',
         desc: '',
         urlGroup: '',
+        loading: false,
       },
       activeDetail: null,
       detail: false,
@@ -302,6 +315,7 @@ export default {
         name: { value: '', keys: ['name', 'email'] },
       },
       campaign: {},
+      campaigns: null,
     }
   },
   methods: {
@@ -321,7 +335,7 @@ export default {
         this.activeDetail = value
       }
     },
-    showModal(text, id) {
+    showModalConfirm(text, id) {
       this.activeDetail = null
       this.modal.status = !this.modal.status
       this.modal.text = text
@@ -350,9 +364,14 @@ export default {
         })
     },
 
-    addInfoAccount(data) {
+    saveInfoAccount() {
+      this.form.loading = true
+      this.campaign = this.campaigns.filter((i) => i.id == this.form.id)[0]
+      this.campaign.email_id = this.form.email_id
+      this.campaign.password_email = this.form.password_email
+
       this.$axios
-        .$post(`campaign/update/${this.idSelected}`, this.campaign)
+        .$post(`campaign/update/${this.form.id}`, this.campaign)
         .then((resp) => {
           console.log(resp)
           if (resp.message === 'UPDATED') {
@@ -367,22 +386,33 @@ export default {
       if (status) {
         this.activeDetail = null
         this.form.status = !this.form.status
+        this.form.id = id
       } else {
         this.form.status = !this.form.status
+        this.form.id = ''
+        this.form.email_id = ''
+        this.form.password_email = ''
+        this.form.loading = false
       }
-    },
-    saveInfoAccount() {
-      alert('post request save info account')
     },
   },
 
   beforeMount() {
+    this.$destroy()
+    this.$axios
+      .$get(`campaign?status=1`)
+      .then((resp) => {
+        this.campaigns = resp.campaigns
+        console.log(this.campaigns)
+      })
+      .catch((errors) => {
+        console.log(errors)
+      })
+
     this.$axios
       .$get('email')
       .then((resp) => {
         this.emails = resp.email
-        console.log(this.emails)
-        // setTimeout(() => this.$nuxt.$loading.finish(), 5000)
       })
       .catch((errors) => {
         console.log(errors)

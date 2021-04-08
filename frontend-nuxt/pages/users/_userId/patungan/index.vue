@@ -66,7 +66,7 @@
               </td>
               <td class="border-t-2 border-gray-200 px-4 py-3">
                 <div class="text-sm leading-5">
-                  {{ campaign.total_members - 1 }}/{{ campaign.slot_capacity }}
+                  {{ campaign.slot_members }}/{{ campaign.slot_capacity }}
                 </div>
               </td>
 
@@ -275,9 +275,9 @@ export default {
     },
   },
   activated() {
-      if (this.$fetchState.timestamp <= Date.now() - 30000) {
-        this.$fetch()
-      }
+    if (this.$fetchState.timestamp <= Date.now() - 30000) {
+      this.$fetch()
+    }
   },
   fetch() {
     this.$axios

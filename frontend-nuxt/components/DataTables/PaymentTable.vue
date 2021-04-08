@@ -1,15 +1,11 @@
 <template>
   <div>
-    <div
-      class="w-full relative z-0"
-      v-click-outside
-      @clicked-outside="showModalBlock('outside')"
-    >
+    <div class="w-full relative z-0" v-click-outside>
       <label>Search:</label>
       <input class="form-control" v-model="filters.name.value" />
 
       <v-table
-        :data="payments"
+        :data="campaigns"
         :filters="filters"
         class="w-full text-left wrapper xs:block"
         :hideSortIcons="false"
@@ -34,44 +30,52 @@
             class="border-t-2 hover:bg-gray-200"
           >
             <td class="px-3 truncate" style="max-width: 200px">
-              {{ row.name }}
+              {{ row.title }}
             </td>
             <td class="px-3">
-              {{ row.price | formatRupiah }}
+              {{ (row.calculated_price * row.slot_capacity) | formatRupiah }}
             </td>
             <td class="px-3">
-              {{ row.amount_collected | formatRupiah }}
+              {{ row.total_receive | formatRupiah }}
             </td>
-            <td class="px-3">{{ row.withdrawal | formatRupiah }}</td>
+            <td class="px-3">{{ row.total_disburse | formatRupiah }}</td>
 
             <td class="px-4 py-3 text-xs">
               <span
                 class="relative h-full px-3 py-1 font-semibold leading-tight text-center inline-block"
+                v-if="row.total_disburse !== null"
               >
                 <span
                   aria-hidden
                   class="bg-indigo-600 rounded-full px-2 py-1 text-sm text-white"
-                  v-if="row.status === 50"
+                  v-if="(row.total_receive / row.total_disburse) * 100 === 50"
                   >50%</span
                 >
                 <span
                   aria-hidden
                   class="bg-indigo-700 rounded-full px-2 py-1 text-sm text-white"
-                  v-if="row.status === 75"
+                  v-if="(row.total_receive / row.total_disburse) * 100 === 75"
                   >75%</span
                 >
                 <span
                   aria-hidden
                   class="bg-indigo-800 rounded-full px-2 py-1 text-sm text-white"
-                  v-if="row.status === 100"
+                  v-if="(row.total_receive / row.total_disburse) * 100 === 100"
                   >100%</span
+                >
+              </span>
+              <span v-else>
+                <span
+                  aria-hidden
+                  class="bg-indigo-600 rounded-full px-2 py-1 text-sm text-white"
+                  >0%</span
                 >
               </span>
             </td>
             <td class="justify-between px-2 py-3">
               <a
                 class="px-2 py-1 text-white bg-green-400 hover:bg-green-600 focus:outline-none rounded-lg mr-2 shadow-md text-sm"
-                href="1"
+                :href="`campaign/${row.id}`"
               >
                 Detail</a
               >
@@ -84,61 +88,12 @@
         :totalPages="totalPages"
       />
     </div>
-    <!-- Modal Block -->
-    <div
-      class="container mx-auto flex justify-center justify-items-start items-start w-full absolute z-100 inset-0"
-      :class="[modalBlock ? 'hidden' : '']"
-    >
-      <div
-        class="bg-white fixed rounded-lg shadow-lg mx-auto xs:mx-5 self-center"
-      >
-        <div class="w-96 border-t-8 border-red-600 rounded-lg flex">
-          <div class="w-1/3 pt-6 flex justify-center">
-            <svg
-              class="w-16 h-16 bg-red-600 text-white p-3 rounded-full"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
-              />
-            </svg>
-          </div>
-          <div class="w-full pt-9 pr-4">
-            <h3 class="font-bold text-red-500 pt-5">Blokir Akun ?</h3>
-            <p class="py-2 text-sm text-gray-600">
-              Yakin lakukan pemblokiran terhadap akun ini?
-            </p>
-          </div>
-        </div>
-
-        <div class="p-4 flex space-x-4">
-          <button
-            @click="showModalBlock()"
-            class="w-1/2 px-4 py-3 text-center bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-black font-bold rounded-lg text-sm focus:outline-none"
-          >
-            Batal
-          </button>
-          <button
-            class="w-1/2 px-4 py-3 text-center text-white bg-red-600 rounded-lg hover:bg-red-700 hover:text-white font-bold text-sm focus:outline-none"
-            @click="blockUser(row.name)"
-          >
-            Blokir
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 <script>
 export default {
   name: 'PaymentTable',
-  props: ['payments'],
+  props: ['campaigns'],
   data() {
     return {
       modalBlock: true,
@@ -156,30 +111,13 @@ export default {
     },
 
     indexChar(row) {
-      return row.name.charCodeAt(0) - 96
+      return row.title.charCodeAt(0) - 96
     },
 
     dateSort(a, b) {
       let date1 = new Date(a.registered).getTime()
       let date2 = new Date(b.registered).getTime()
       return date1 - date2
-    },
-
-    showModalBlock(id) {
-      if (id === 'outside') {
-        console.log('oke2')
-        this.modalBlock = true
-        this.userSelected = ''
-      } else {
-        console.log('oke')
-        this.modalBlock = !this.modalBlock
-        this.userSelected = id
-      }
-    },
-
-    blockUser() {
-      alert(this.userSelected)
-      //post request
     },
   },
 }

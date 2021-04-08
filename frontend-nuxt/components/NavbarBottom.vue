@@ -3,10 +3,10 @@
   <nav
     id="nav"
     v-click-outside
-    class="fixed bottom-0 flex flex-row justify-between w-full bg-indigo-500 text-white shadow-top md:px-10 text-base z-40"
+    class="fixed bottom-0 flex flex-row justify-between w-full bg-indigo-500 appearance-none outline-none text-white md:px-10 text-base z-10"
   >
-    <NuxtLink to="/">
-      <div class="px-3 cursor-pointer hover:bg-indigo-400">
+    <span @click.prevent="$router.push('/')">
+      <div class="px-3 appearance-none outline-none ripple hover:bg-indigo-400">
         <div class="flex flex-col py-2 w-20">
           <div class="flex justify-center">
             <svg
@@ -33,10 +33,10 @@
           >
         </div>
       </div>
-    </NuxtLink>
+    </span>
 
-    <NuxtLink exact to="/campaign/show/all">
-      <div class="px-3 cursor-pointer hover:bg-indigo-400">
+    <span @click.prevent="$router.push('/campaign/show/all')">
+      <div class="px-3 appearance-none outline-none ripple hover:bg-indigo-400">
         <div class="flex flex-col py-2 w-20">
           <div class="flex justify-center">
             <svg
@@ -63,10 +63,10 @@
           >
         </div>
       </div>
-    </NuxtLink>
+    </span>
 
-    <button @click="toggleButton('navUserOption')">
-      <div class="px-3 cursor-pointer hover:bg-indigo-400">
+    <span @click.prevent="toggleButton('navUserOption')">
+      <div class="px-3 appearance-none outline-none ripple hover:bg-indigo-400">
         <div class="flex flex-col py-2 w-20">
           <div class="flex justify-center">
             <svg
@@ -93,11 +93,11 @@
           >
         </div>
       </div>
-    </button>
+    </span>
 
     <!-- menu dropup class="bottom-0 origin-top-right absolute left-0 mt-2 -mr-1 w-48 rounded-md shadow-lg"> --> 
     <div
-      class="origin-top-left absolute right-0 bottom-0 mb-12 mr-2 w-40 min-w-40 rounded-md shadow-lg bg-white border border-gray-200 divide-y divide-gray-300 text-left"
+      class="origin-top-left absolute right-0 bottom-0 mb-12 mr-2 w-40 min-w-40 rounded-md shadow-lg bg-white border border-gray-200 divide-y divide-gray-300 text-left z-40"
       v-bind:class="[navUserOption ? 'hidden' : '']"
       role="menu"
       aria-orientation="vertical"
@@ -253,6 +253,18 @@ a.nuxt-link-active {
 /* exact link will show the primary color for only the exact matching link */
 a.nuxt-link-exact-active {
   background-color: #7f9cf5;
-  color: #fff;
+}
+
+.ripple {
+  background-position: center;
+  transition: background 0.6s;
+}
+.ripple:hover {
+  background: #7f9cf5 radial-gradient(circle, transparent 1%, #667eea 1%) center/15000%;
+}
+.ripple:active {
+  background-color: #7f9cf5;
+  background-size: 100%;
+  transition: background 0s;
 }
 </style>
