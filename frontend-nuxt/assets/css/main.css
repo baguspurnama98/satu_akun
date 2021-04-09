@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 .logo {
-    font-family: 'Righteous', cursive;
-    -webkit-font-smoothing: auto;
-    -moz-osx-font-smoothing: auto;
+  font-family: 'Righteous', cursive;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+}
+.text-green-own {
+  color: #ffad4d;
 }
