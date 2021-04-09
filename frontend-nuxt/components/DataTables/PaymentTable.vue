@@ -33,7 +33,7 @@
               {{ row.title }}
             </td>
             <td class="px-3">
-              {{ (row.calculated_price * row.slot_capacity) | formatRupiah }}
+              {{ (row.slot_price * row.slot_capacity) | formatRupiah }}
             </td>
             <td class="px-3">
               {{ row.total_receive | formatRupiah }}

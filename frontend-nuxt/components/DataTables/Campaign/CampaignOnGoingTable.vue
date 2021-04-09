@@ -42,7 +42,7 @@
             </td>
             <!-- aku tambah informasi email, biar admin tau email suatu campaign dengan mudah -->
             <td class="px-3 truncate" style="max-width: 150px">
-              {{ row.email_id }}
+              {{ row.emails.email }}
             </td>
             <td class="px-3">{{ row.created_at | formatDate }}</td>
 
@@ -302,8 +302,8 @@ export default {
         status: false,
         email_id: '',
         password_email: '',
-        desc: '',
-        urlGroup: '',
+        info: '',
+        link_wa: '',
         loading: false,
       },
       activeDetail: null,
@@ -369,6 +369,8 @@ export default {
       this.campaign = this.campaigns.filter((i) => i.id == this.form.id)[0]
       this.campaign.email_id = this.form.email_id
       this.campaign.password_email = this.form.password_email
+      this.campaign.info = this.form.info
+      this.campaign.link_wa = this.form.link_wa
 
       this.$axios
         .$post(`campaign/update/${this.form.id}`, this.campaign)

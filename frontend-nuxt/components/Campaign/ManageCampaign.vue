@@ -14,7 +14,7 @@
           >.
         </p>
         <p>
-          Berpatungan menghimbau untuk menjalankan campaign yang wajar atau
+          Patungin menghimbau untuk menjalankan campaign yang wajar atau
           campaign Anda dapat diturunkan oleh Patungin.com sesuai S&K yang
           berlaku.
         </p>
@@ -272,7 +272,7 @@
               >Wajib</span
             >
             <p class="text-xs lg:pr-20 md:pr-10 xs:pr-0">
-              Pilih lama campaign Anda aktif pada Berpatungan.com
+              Pilih lama campaign Anda aktif pada Patungin.com
             </p>
           </div>
 
