@@ -257,7 +257,7 @@ a.nuxt-link-exact-active {
 
 .ripple {
   background-position: center;
-  transition: background 0.6s;
+  transition: background 0.3s;
 }
 .ripple:hover {
   background: #7f9cf5 radial-gradient(circle, transparent 1%, #667eea 1%) center/15000%;

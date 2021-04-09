@@ -19,6 +19,8 @@ class Campaign extends Model
         'categories_id',
         'title',
         'description',
+        'info',
+        'link_wa',
         'expired_date',
         'duration_date',
         'durasi',
@@ -107,7 +109,7 @@ class Campaign extends Model
      */
     public function emails()
     {
-        return $this->belongsTo(Email::class);
+        return $this->belongsTo(Email::class, 'email_id');
     }
 
     public function categories()
