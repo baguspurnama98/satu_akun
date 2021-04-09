@@ -27,7 +27,7 @@
           <span class="mr-5 xs:mr-1">:</span>
         </div>
         <div>
-          <span> nama user </span>
+          <span> {{ transaction.users.name }} </span>
         </div>
         <!--  -->
         <div class="pl-5 xs:pl-2 flex justify-between">
@@ -35,7 +35,7 @@
           <span class="mr-5 xs:mr-1">:</span>
         </div>
         <div>
-          <span> Judul campaign </span>
+          <span> {{ transaction.campaigns.title }}</span>
         </div>
         <!--  -->
         <div class="pl-5 xs:pl-2 flex justify-between">
@@ -111,6 +111,14 @@
           >
         </button>
       </div>
+
+      <!-- <div class="w-full text-center my-3 md:my-5" v-else>
+        <button
+          class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
+        >
+          Sudah Dikonfirmasi
+        </button>
+      </div> -->
     </div>
   </div>
 </template>

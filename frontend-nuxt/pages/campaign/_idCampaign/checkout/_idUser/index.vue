@@ -159,7 +159,7 @@
             Setelah melakukan pembayaran, kirimkan bukti pembayaran ke
             <span class="font-semibold"
               ><a
-                href="https://wa.me/9285155144278?text=Saya%20ingin%20konfirmasi%20pembayaran"
+                href="https://wa.me/628976634788?text=Saya%20ingin%20konfirmasi%20pembayaran"
                 >WhatsApp Patungin.com</a
               ></span
             >
@@ -178,7 +178,7 @@
     <div class="w-full text-center my-3 md:my-5">
       <a
         class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
-        href="https://wa.me/9285155144278?text=Saya%20ingin%20konfirmasi%20pembayaran"
+        href="https://wa.me/628976634788?text=Saya%20ingin%20konfirmasi%20pembayaran"
       >
         Saya sudah transfer
       </a>
