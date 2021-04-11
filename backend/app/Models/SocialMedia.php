@@ -13,7 +13,7 @@ class SocialMedia extends Model
      * @var array
      */
     protected $fillable = [
-        'username', 'id_user', 'type', 'updated_by', 'created_by',
+        'username', 'user_id', 'type', 'updated_by', 'created_by',
     ];
 
     /**
@@ -21,7 +21,7 @@ class SocialMedia extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

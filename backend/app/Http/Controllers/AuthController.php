@@ -159,10 +159,9 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,id,'. $id_user,
             'whatsapp' => 'unique:users,id,' . $id_user,
             'otp' => 'required',
-            'password' => 'required|confirmed',
+            'password' => 'required',
         ]);
 
-        
         
         try {
             // mesti cocokin OTP

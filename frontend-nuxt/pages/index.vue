@@ -8,7 +8,6 @@
       ></carousel>
     </template> -->
 
-    <div v-if="account_login" class='onesignal-customlink-container container px-4 my-4 mx-auto flex flex-wrap items-center justify-between'></div>
     <template>
       <!-- Content disini -->
       <Landing class="my-4" />

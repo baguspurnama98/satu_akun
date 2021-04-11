@@ -6,6 +6,7 @@ export default function ({ store, redirect, route }) {
         'users',
         'admin',
         'create',
+        'profile',
         'checkout'
     ]
 

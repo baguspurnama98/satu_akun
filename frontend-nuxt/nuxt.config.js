@@ -124,7 +124,6 @@ export default {
           text: {
             subscribe: "Aktifkan", /* Prompt's text when not subscribed */
             unsubscribe: "Nonaktifkan", /* Prompt's text when subscribed */
-            explanation: "Terima notifikasi dari Patungin untuk meningkatkan pengalaman pengguna", /* Optional text appearing before the prompt button */
           },
           unsubscribeEnabled: true, /* Controls whether the prompt is visible after subscription */
         }
