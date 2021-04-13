@@ -31,7 +31,9 @@ class TransactionController extends Controller
     }
 
     public function getTransaction($id_transaction) {
-        return response()->json(['transaction' => Transaction::findOrFail($id_transaction), 'informasi' => $this->typeTransaction], 200);
+        return response()->json(['transaction' => Transaction::with([
+            'users', 'campaigns'
+        ])->findOrFail($id_transaction), 'informasi' => $this->typeTransaction], 200);
     }
 
     public function userTransaction($id_user) {
@@ -65,7 +67,7 @@ class TransactionController extends Controller
                 return $query->where(['status' => 1, 'type' => 2])->select(DB::raw('SUM(nominal)'));
             }])->whereHas('campaign_members'); // ada penjagaan campaign members?
             
-            return response()->json(['campaigns' => $id_campaign !== null ? $transactionByCampaigns->find('id', $id_campaign) : $transactionByCampaigns->get(), 'informasi' => $this->typeTransaction], 200);
+            return response()->json(['campaigns' => $id_campaign !== null ? $transactionByCampaigns->where('id', $id_campaign)->get() : $transactionByCampaigns->get(), 'informasi' => $this->typeTransaction], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e], 409);
         }

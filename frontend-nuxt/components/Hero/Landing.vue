@@ -23,7 +23,7 @@
                 class="relative bottom-0 left-0 inline-block w-full h-4 mb-1 -ml-1 transform -skew-x-3 bg-yellow-200"
               ></span> -->
               <span class="">Cara Aman,</span>
-              <span class="block text-yellow-400">Buat Patungan.</span>
+              <span class="block text-green-own">Buat Patungan.</span>
             </h1>
             <p
               class="block mt-6 text-base text-gray-600 xl:text-lg sm:text-center lg:text-left"
@@ -52,7 +52,7 @@
               </a>
               <NuxtLink
                 to="campaign/create"
-                class="flex items-center px-5 py-3 mx-3 rounded-md text-base text-gray-700 transition bg-white border-yellow-400 border-2 hover:bg-yellow-400"
+                class="flex items-center px-5 py-3 mx-3 rounded-md text-base text-gray-700 transition bg-white border-green-own border-2 bg-green-own"
                 style="text-align: center"
                 >Buat Campaign
               </NuxtLink>
@@ -113,5 +113,12 @@ export default {
 }
 .landing-pic {
   width: 500px;
+}
+.border-green-own {
+  border-color: #ffad4d;
+}
+.bg-green-own:hover {
+  background-color: #ffad4d;
+  color: white;
 }
 </style>

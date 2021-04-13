@@ -322,7 +322,7 @@ import IconSocial from '../Profil/IconSocial'
 import Spinner from '@/components/Spinner.vue'
 
 export default {
-  components: { IconSocial },
+  components: { IconSocial, Spinner },
   name: 'DetailCampaign',
   props: ['campaign', 'registered'],
   data() {

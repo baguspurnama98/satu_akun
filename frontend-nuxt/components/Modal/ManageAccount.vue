@@ -51,6 +51,7 @@
                 rows="6"
                 class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                 placeholder="Masukan Deskripsi Tambahan"
+                v-model="form.info"
               />
             </div>
             <div class="flex flex-col mb-1">
@@ -60,6 +61,7 @@
                 row="5"
                 class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                 placeholder="Masukan url link"
+                v-model="form.link_wa"
               />
             </div>
           </div>

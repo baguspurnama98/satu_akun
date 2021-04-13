@@ -2,18 +2,38 @@
   <div>
     <component :is="navbar"></component>
     <div :class="[navbar === 'Navbar' ? 'my-12' : 'mt-12 mb-24']">
-      <div v-show="android || iphone" class="container py-5 px-3 flex flex-col mx-auto items-center justify-center content install-prompt">
+      <div
+        v-show="android || iphone"
+        class="container py-5 px-3 flex flex-col mx-auto items-center justify-center content install-prompt"
+      >
         <p class="mb-4">Install aplikasi Patungin di ponsel kamu</p>
-        
+
         <!-- notifikasi sedang menginstall -->
-        <div v-show="beingInstalled" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative w-full max-w-md mb-5" role="alert">
-            <strong class="font-bold">Installing.</strong>
-            <span class="block sm:inline">Sedang menginstall di perangkat.</span>
-            <span @click.prevent="beingInstalled = false" class="absolute top-0 bottom-0 right-0 px-2 py-3">
-                <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-            </span>
+        <div
+          v-show="beingInstalled"
+          class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative w-full max-w-md mb-5"
+          role="alert"
+        >
+          <strong class="font-bold">Installing.</strong>
+          <span class="block sm:inline">Sedang menginstall di perangkat.</span>
+          <span
+            @click.prevent="beingInstalled = false"
+            class="absolute top-0 bottom-0 right-0 px-2 py-3"
+          >
+            <svg
+              class="fill-current h-6 w-6 text-green-500"
+              role="button"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <title>Close</title>
+              <path
+                d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
+              />
+            </svg>
+          </span>
         </div>
-        
+
         <!-- button pilihan -->
         <div class="flex mx-auto items-center flex-shrink-0 space-x-4">
           <button
@@ -59,81 +79,120 @@
           </button>
         </div>
       </div>
-      <Nuxt keep-alive :keep-alive-props="{ exclude: ['category'] }" />
+      <Nuxt keep-alive />
     </div>
     <Footer v-if="navbar === 'Navbar'" />
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
-import NavbarBottom from '@/components/NavbarBottom'
+import Navbar from "@/components/Navbar";
+import NavbarBottom from "@/components/NavbarBottom";
 
 export default {
-    data() {
-        return {
-            navbar: "Navbar",
-            iphone: false,
-            android: false,
-            deferredPrompt: null,
-            beingInstalled: false,
-        }
+  data() {
+    return {
+      navbar: "Navbar",
+      iphone: false,
+      android: false,
+      deferredPrompt: null,
+      beingInstalled: false,
+    };
+  },
+  components: {
+    Navbar,
+    NavbarBottom,
+  },
+  watch: {
+    $route(to, from) {
+      const account = /account/i;
+      if (account.test(to.path)) {
+        this.iphone = false;
+        this.android = false;
+        this.beingInstalled = false;
+      }
     },
-    components: {
-        Navbar,
-        NavbarBottom
+  },
+  computed: {
+    account_login() {
+      return this.$store.state.auth.token;
     },
-    watch: {
-        $route(to, from) {
-            const account = /account/i
-            if (account.test(to.path)) {
-                this.iphone = false
-                this.android = false
-                this.beingInstalled = false
-            }
-        }
+    getId() {
+      const userId = this.$store.state.user.id || "";
+      return userId;
     },
-    mounted() {
-        // console.log(this.$store.state.token)
-        // jika sudah install, maka di hidden
-        if (! window.matchMedia('(display-mode: standalone)').matches) {
-            if (navigator.userAgent.toLowerCase().indexOf("android") > -1){
-                this.android = true;
-            }
-            if (navigator.userAgent.toLowerCase().indexOf("iphone") > -1){
-                // this.iphone = true;
-            }
-            const account = /account/i
-            if (account.test(this.$route.path)) {
-                this.iphone = false
-                this.android = false
-                this.beingInstalled = false
-            }
-            window.addEventListener('beforeinstallprompt', (event) => {
-                event.preventDefault();
-                this.deferredPrompt = event;
-                return false;
+  },
+  mounted() {
+    // console.log(this.$store.state.token)
+    // jika sudah install, maka di hidden
+    if (!window.matchMedia("(display-mode: standalone)").matches) {
+      if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
+        this.android = true;
+      }
+      if (navigator.userAgent.toLowerCase().indexOf("iphone") > -1) {
+        // this.iphone = true;
+      }
+      const account = /account/i;
+      if (account.test(this.$route.path)) {
+        this.iphone = false;
+        this.android = false;
+        this.beingInstalled = false;
+      }
+      window.addEventListener("beforeinstallprompt", (event) => {
+        event.preventDefault();
+        this.deferredPrompt = event;
+        return false;
+      });
+    } else {
+      this.navbar = "NavbarBottom";
+    }
+    if (this.android === true) {
+      this.navbar = "NavbarBottom";
+    }
+
+    // Inside page components
+    if (this.account_login) {
+      this.$OneSignal.push(() => {
+        this.$OneSignal.isPushNotificationsEnabled((isEnabled) => {
+          if (isEnabled) {
+            var self = this;
+            window.$OneSignal.push(function () {
+              window.$OneSignal.setExternalUserId(self.getId);
             });
-        } else {
-            // this.navbar = "NavbarBottom"
-        }
-        if (this.android === true) {
-            this.navbar = "NavbarBottom"
-        }
+          } else {
+            this.$OneSignal.showNativePrompt();
+          }
+        });
+      });
+    }
+
+    // Using window and array form
+    window.$OneSignal.push([
+      "addListenerForNotificationOpened",
+      (data) => {
+        console.log("Received NotificationOpened:", data);
+      },
+    ]);
+
+    // window.$OneSignal.push(function() {
+    //     window.$OneSignal.removeExternalUserId();
+    // });
+
+    // this.$OneSignal.setSubscription(false);
+  },
+  methods: {
+    addToHomeScreen() {
+      if (this.deferredPrompt) {
+        this.beingInstalled = true;
+        this.deferredPrompt.prompt();
+        this.deferredPrompt.userChoice.then((choiceResult) => {
+          console.log(choiceResult.outcome);
+        });
+        this.deferredPrompt = null;
+      }
     },
-    methods: {
-        addToHomeScreen() {
-            if (this.deferredPrompt) {
-                this.beingInstalled = true
-                this.deferredPrompt.prompt();
-                this.deferredPrompt.userChoice.then((choiceResult) => {
-                    console.log(choiceResult.outcome);
-                });
-                this.deferredPrompt = null;
-            }
-        }
-    },
-}
+  },
+};
 </script>
 
 <style>

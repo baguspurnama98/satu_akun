@@ -156,6 +156,9 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->get('users', 'UserController@allUsers');
 
     $router->get('user/{id_user}', 'UserController@getUser');
+    $router->post('user/{id_user}/social/set', 'UserController@setUserSocial');
+    $router->get('user/{id_user}/social', 'UserController@getUserSocial');
+    
     $router->get('user/deactivate/{id_user}/{status}', 'UserController@changeStatusUser');
 });
 

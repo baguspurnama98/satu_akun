@@ -128,6 +128,14 @@
               >Riwayat Transaksi</NuxtLink
             >
           </div>
+          <div class="py-1">
+            <NuxtLink
+              to="/account/profile"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+              role="menuitem"
+              >Profil</NuxtLink
+            >
+          </div>
         </template>
 
         <!-- Menu untuk Admin -->
@@ -257,7 +265,7 @@ a.nuxt-link-exact-active {
 
 .ripple {
   background-position: center;
-  transition: background 0.6s;
+  transition: background 0.3s;
 }
 .ripple:hover {
   background: #7f9cf5 radial-gradient(circle, transparent 1%, #667eea 1%) center/15000%;

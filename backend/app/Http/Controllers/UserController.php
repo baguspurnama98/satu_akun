@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\SocialMedia;
 use App\Models\User;
 // gunakan ini untuk autentikasi
 use Illuminate\Support\Facades\Auth;
@@ -63,6 +64,37 @@ class UserController extends Controller
         }
     }
     
+    public function setUserSocial(Request $request, $id_user) {        
+        try {
+            if ($request->instagram) {
+                $user_social = SocialMedia::where(['user_id' => $id_user, 'type' => 'instagram'])->exists() ? SocialMedia::where(['user_id' => $id_user, 'type' => 'instagram'])->first() : new SocialMedia();
+                $user_social->fill(['type' => 'instagram', 'username' => $request->input('instagram'), 'user_id' => $id_user])->save();
+            }
+            if ($request->twitter) {
+                $user_social = SocialMedia::where(['user_id' => $id_user, 'type' => 'twitter'])->exists() ? SocialMedia::where(['user_id' => $id_user, 'type' => 'twitter'])->first() : new SocialMedia();
+                $user_social->fill(['type' => 'twitter', 'username' => $request->input('twitter'), 'user_id' => $id_user])->save();
+            }
+            if ($request->facebook) {
+                $user_social = SocialMedia::where(['user_id' => $id_user, 'type' => 'facebook'])->exists() ? SocialMedia::where(['user_id' => $id_user, 'type' => 'facebook'])->first() : new SocialMedia();
+                $user_social->fill(['type' => 'facebook', 'username' => $request->input('facebook'), 'user_id' => $id_user])->save();
+            }
+            return response()->json(['message' => 'SUCCESS', 'social_media' => SocialMedia::where('user_id', $id_user)->get()], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e], 409);
+        }
+    }
+
+    /**
+     * diberikan auth agar prevent si user dihubungi diluar platform
+     */
+    public function getUserSocial($id_user) {
+        try {
+            $user_social = SocialMedia::where(['user_id' => $id_user])->get();
+            return response()->json(['message' => 'SUCCESS', 'social_media' => $user_social], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e], 409);
+        }
+    }
 
     public function changeStatusUser($id_user, $status) {
         $user = User::where(['id' => $id_user])->first();
