@@ -110,7 +110,7 @@ export default {
             this.loading = false
           this.$store.dispatch('auth/setToken', { token, expires_in })
           // this.$router.push({name: 'secret'});
-          this.getProfile({ token, expires_in })
+          this.getProfile(token)
          
         })
         .catch((errors) => {
@@ -135,19 +135,31 @@ export default {
       .$get('profile', null, config)
       .then((res)=>{
       this.$store.dispatch('getUserProfile', res.user)
-      
-      const histURL = this.$router.history._startLocation.split('/')
-      const lastURL = histURL[histURL.length - 1]
-      console.log(this.$nuxt.context.from)
-      //  if (lastURL === 'checkout') { 
-           this.$router.go(-1)
+      let routeBefore = this.$nuxt.context.from.fullPath
+      const histURL = routeBefore.split('/')
+      // const lastURL = histURL[histURL.length - 1]
+
+      console.log('login',histURL)
+      if(histURL[1] === 'account'){
+        window.location.replace('/')
+      }
+      else if(histURL[3] === 'verification'){
+        this.$router.push(this.$nuxt.context.from.fullPath)
+      }
+      else {
+        this.$router.go(-1)
+      }
+    //  if (lastURL === 'checkout') { 
+          //  this.$router.go(-1)
+          //  window.history.back(); // cadangan
         // } 
         // else if(lastURL === 'create'){
         //   // window.location.replace(this.$route.fullPath)
         //   this.$router.push('/create')
         // }
         //  else {
-        //   window.location.replace('/')  // entah kenapa jadi error, jadi sementara gini dulu ya
+          // this.$router.back()
+          // window.location.replace('/')  // entah kenapa jadi error, jadi sementara gini dulu ya
         // }
       })
       .catch((err) => console.log(err))

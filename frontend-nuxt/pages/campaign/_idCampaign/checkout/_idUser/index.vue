@@ -159,7 +159,7 @@
             Setelah melakukan pembayaran, kirimkan bukti pembayaran ke
             <span class="font-semibold"
               ><a
-                href="https://wa.me/6281311749217?text=Saya%20ingin%20konfirmasi%20pembayaran"
+                :href="`https://wa.me/628976634788?text=Saya%20ingin%20konfirmasi%20pembayaran%20https://patungin.baguspurnama.com/admin/transaction/verification/${transaction.id}`"
                 >WhatsApp Patungin.com</a
               ></span
             >

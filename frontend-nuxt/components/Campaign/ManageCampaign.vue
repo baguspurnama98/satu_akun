@@ -692,9 +692,9 @@ export default {
         console.log(errors)
       })
   },
-  beforeMount() {
-    this.$destroy()
-  },
+  // beforeMount() {
+  //   this.$destroy()
+  // },
 }
 </script>
 

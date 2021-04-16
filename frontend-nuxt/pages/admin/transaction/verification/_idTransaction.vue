@@ -160,6 +160,9 @@ export default {
         })
     },
   },
+  beforeMount() {
+    this.$destroy()
+  },
   async created() {
     await this.$axios
       .$get(`transaction/${this.$route.params.idTransaction}`)
