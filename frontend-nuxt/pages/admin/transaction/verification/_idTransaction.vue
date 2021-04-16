@@ -133,16 +133,16 @@ export default {
   methods: {
     verif() {
       this.loading = true
-      console.log(this.$route.params.idTransaction)
+      // console.log(this.$route.params.idTransaction)
       this.transaction.status = 1
-      console.log(this.transaction)
+      // console.log(this.transaction)
       this.$axios
         .$post(
           `transaction/update/${this.$route.params.idTransaction}`,
           this.transaction
         )
         .then((resp) => {
-          console.log(resp)
+          // console.log(resp)
           if (resp.message === 'UPDATED') {
             // this.$router.push(
             //   `/campaign/${resp.campaign.id}/${resp.campaign.slug}`
@@ -169,7 +169,7 @@ export default {
       .then((resp) => {
         this.transaction = resp.transaction
         this.status = resp.transaction.status
-        console.log(resp)
+        // console.log(resp)
       })
       .catch((errors) => {
         if (errors.response.status === 404) {

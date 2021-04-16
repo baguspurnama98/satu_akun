@@ -42,7 +42,7 @@
             </td>
             <!-- aku tambah informasi email, biar admin tau email suatu campaign dengan mudah -->
             <td class="px-3 truncate" style="max-width: 150px">
-              {{ row.emails.email }}
+              {{ row.emails != null ? row.emails.email : ' ' }}
             </td>
             <td class="px-3">{{ row.created_at | formatDate }}</td>
 
@@ -144,7 +144,7 @@
                     <a
                       class="inline-flex items-center"
                       href="#"
-                      @click.prevent="showForm(true, row.id)"
+                      @click.prevent="showFormEmail(true, row.id)"
                     >
                       <svg
                         class="w-4 h-4 mr-2"
@@ -276,7 +276,7 @@
     <ManageAccount
       :form="form"
       :emails="emails"
-      :show-form="showForm"
+      :show-form-email="showFormEmail"
       :save-info-account="saveInfoAccount"
     />
   </div>
@@ -384,7 +384,7 @@ export default {
           console.dir(errors)
         })
     },
-    showForm(status, id) {
+    showFormEmail(status, id) {
       if (status) {
         this.activeDetail = null
         this.form.status = !this.form.status

@@ -147,7 +147,8 @@ export default {
         this.$router.push(this.$nuxt.context.from.fullPath)
       }
       else {
-        this.$router.go(-1)
+        // this.$router.go(-1)
+        window.location.replace(this.$nuxt.context.from.fullPath)
       }
     //  if (lastURL === 'checkout') { 
           //  this.$router.go(-1)

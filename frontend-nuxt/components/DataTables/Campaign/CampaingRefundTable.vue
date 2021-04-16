@@ -91,7 +91,7 @@
                 >
                   <li class="px-2 py-2 hover:bg-gray-200 w-full border-none">
                     <a
-                      class="inline-flex items-center"
+                      class="inline-flex items-center w-full"
                       :href="`/users/${$store.state.user.id}/campaign/${row.id}`"
                     >
                       <svg
@@ -119,7 +119,7 @@
                   </li>
                   <li class="px-2 py-2 hover:bg-gray-200 w-full border-none">
                     <a
-                      class="inline-flex items-center"
+                      class="inline-flex items-center w-full"
                       :href="'https://wa.me/62' + row.host_name.whatsapp"
                       target="_blank"
                     >
@@ -167,7 +167,7 @@
                     <a
                       class="inline-flex items-center"
                       href="#"
-                      @click.prevent="showModal('email')"
+                      @click.prevent="showFormEmail(true, row.id)"
                     >
                       <svg
                         class="w-4 h-4 mr-2"
@@ -233,14 +233,14 @@
 
         <div class="p-4 flex space-x-4">
           <button
-            @click="showModal('')"
+            @click.prevent="showModal('')"
             class="w-1/2 px-4 py-3 text-center bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-black font-bold rounded-lg text-sm focus:outline-none"
           >
             Batal
           </button>
           <button
             class="w-1/2 px-4 py-3 text-center text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 hover:text-white font-bold text-sm focus:outline-none"
-            @click="handleProccess()"
+            @click.prevent="handleDeactiveEmail()"
           >
             Proses
           </button>
@@ -248,8 +248,15 @@
       </div>
     </div>
 
+    <ManageAccount
+      :form="form"
+      :emails="emails"
+      :show-form-email="showFormEmail"
+      :save-info-account="saveInfoAccount"
+    />
+
     <!-- Modal Form informasi akun -->
-    <div
+    <!-- <div
       class="container mx-auto flex justify-center justify-items-start items-start absolute z-100 inset-0"
       :class="[form.status ? '' : 'hidden']"
     >
@@ -316,48 +323,55 @@
 
           <div class="p-4 flex space-x-4">
             <button
-              @click="showFormRefund('')"
+              @click.prevent="showFormRefund('')"
               class="w-1/2 px-4 py-3 text-center bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-black font-bold rounded-lg text-sm focus:outline-none"
             >
               Batal
             </button>
             <button
               class="w-1/2 px-4 py-3 text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg hover:text-white font-bold text-sm focus:outline-none"
-              @click="handleProccess()"
+              @click.prevent="handleDeactiveEmail()"
             >
               Proses
             </button>
           </div>
         </form>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
 import Spinner from '@/components/Spinner.vue'
+import ManageAccount from '@/components/Modal/ManageAccount'
+
 export default {
   name: 'CampaignActiveTable',
   components: { Spinner },
   data() {
     return {
+      emails: [],
       modal: {
         status: false,
         text: '',
       },
       form: {
+        id_campaign: '',
         status: false,
-        email: '',
-        pass: '',
-        desc: '',
-        urlGroup: '',
+        email_id: '',
+        password_email: '',
+        info: '',
+        link_wa: '',
+        loading: false,
       },
       activeDetail: null,
       detail: false,
+      idSelected: null,
       currentPage: 1,
       totalPages: 3,
       filters: {
         name: { value: '', keys: ['name', 'email'] },
       },
+      campaign: {},
       campaigns: null,
     }
   },
@@ -365,12 +379,14 @@ export default {
     nameLength(row) {
       return row.name.length
     },
+
     dateSort(a, b) {
       let date1 = new Date(a.registered).getTime()
       let date2 = new Date(b.registered).getTime()
 
       return date1 - date2
     },
+
     showDetail(value) {
       if (value === this.activeDetail) {
         this.activeDetail = null
@@ -378,23 +394,54 @@ export default {
         this.activeDetail = value
       }
     },
+
     showModal(text) {
       this.activeDetail = null
       this.modal.status = !this.modal.status
       this.modal.text = text
     },
 
-    handleProccess() {
-      alert('proses post request refund')
-    },
     showFormRefund(id) {
       this.activeDetail = null
       this.form.status = !this.form.status
     },
+
+    showFormEmail(status, id) {
+      if (status) {
+        this.activeDetail = null
+        this.form.status = !this.form.status
+        this.form.id = id
+      } else {
+        this.form.status = !this.form.status
+        this.form.id = ''
+        this.form.email_id = ''
+        this.form.password_email = ''
+        this.form.loading = false
+      }
+    },
+
     saveInfoAccount() {
-      alert('post request save info account')
+      this.form.loading = true
+      this.campaign = this.campaigns.filter((i) => i.id == this.form.id)[0]
+      this.campaign.email_id = this.form.email_id
+      this.campaign.password_email = this.form.password_email
+      this.campaign.info = this.form.info
+      this.campaign.link_wa = this.form.link_wa
+
+      this.$axios
+        .$post(`campaign/update/${this.form.id}`, this.campaign)
+        .then((resp) => {
+          console.log(resp)
+          if (resp.message === 'UPDATED') {
+            location.reload()
+          }
+        })
+        .catch((errors) => {
+          console.dir(errors)
+        })
     },
   },
+
   beforeMount() {
     this.$destroy()
     this.$axios
