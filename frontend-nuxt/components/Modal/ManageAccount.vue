@@ -19,18 +19,15 @@
           >
             <div class="flex flex-col mb-1">
               <label class="leading-loose text-md">Email</label>
-              <!-- <input
-                  type="text"
-                  class="px-4 py-2 border focus:ring-gray-500 focus:border-indigo-400 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                  placeholder="Pilih Email"
-                /> -->
               <select
                 class="w-full border focus:outline-none focus:ring focus:border-indigo-400 px-4 py-2 rounded-md sm:text-sm"
                 name="range_period"
                 id="range_period"
                 v-model="form.email_id"
               >
-                <option>Pilih...</option>
+                <option :value="null" class="font-semibold text-red-600">
+                  Non-Aktifkan
+                </option>
                 <option v-for="item in emails" :key="item.id" :value="item.id">
                   {{ item.email }}
                 </option>
@@ -70,7 +67,7 @@
         <div class="p-4 flex space-x-4">
           <button
             class="w-1/2 px-4 py-3 text-center bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-black font-bold rounded-lg text-sm focus:outline-none"
-            @click.prevent="showForm(false)"
+            @click.prevent="showFormEmail(false)"
           >
             Batal
           </button>
@@ -110,7 +107,7 @@
 </template>
 <script>
 export default {
-  props: ['form', 'emails', 'showForm', 'saveInfoAccount'],
+  props: ['form', 'emails', 'showFormEmail', 'saveInfoAccount'],
   data() {
     return {}
   },

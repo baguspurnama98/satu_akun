@@ -74,7 +74,7 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: !isDev ? process.env.API_PROD_URL : process.env.API_DEV_URL, //---
+    baseURL: isDev ? process.env.API_PROD_URL : process.env.API_DEV_URL, //---
     retry: { retries: 3 },
   },
 
@@ -109,26 +109,27 @@ export default {
       appId: 'd71c3ed3-4d72-4d75-a6d9-44de6a526672',
       allowLocalhostAsSecureOrigin: true,
       welcomeNotification: {
-        disable: true
+        disable: true,
       },
       autoResubscribe: true,
       promptOptions: {
         customlink: {
-          enabled: true, /* Required to use the Custom Link */
-          style: "button", /* Has value of 'button' or 'link' */
-          size: "medium", /* One of 'small', 'medium', or 'large' */
+          enabled: true /* Required to use the Custom Link */,
+          style: 'button' /* Has value of 'button' or 'link' */,
+          size: 'medium' /* One of 'small', 'medium', or 'large' */,
           color: {
-            button: '#eb682c', /* Color of the button background if style = "button" */
-            text: '#fff', /* Color of the prompt's text */
+            button:
+              '#eb682c' /* Color of the button background if style = "button" */,
+            text: '#fff' /* Color of the prompt's text */,
           },
           text: {
-            subscribe: "Aktifkan", /* Prompt's text when not subscribed */
-            unsubscribe: "Nonaktifkan", /* Prompt's text when subscribed */
+            subscribe: 'Aktifkan' /* Prompt's text when not subscribed */,
+            unsubscribe: 'Nonaktifkan' /* Prompt's text when subscribed */,
           },
-          unsubscribeEnabled: true, /* Controls whether the prompt is visible after subscription */
-        }
-      }
-    }
+          unsubscribeEnabled: true /* Controls whether the prompt is visible after subscription */,
+        },
+      },
+    },
   },
 
   router: {

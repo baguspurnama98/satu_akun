@@ -3,6 +3,7 @@ import cookies from 'js-cookie'
 export const state = () => ({
   token: null,
   datetime: null,
+  previousRoute: null,
 })
 
 // mutation adalah event
@@ -16,6 +17,10 @@ export const mutations = {
 
   REMOVE_TOKEN(state) {
     state.token = null
+  },
+
+  ADD_ROUTE: (state, route) => {
+    state.previousRoute = route
   },
 }
 
@@ -38,5 +43,9 @@ export const actions = {
     this.$axios.setToken(false)
     cookies.remove('x-access-token')
     commit('REMOVE_TOKEN')
+  },
+
+  savePreviousRoute({ commit }, route) {
+    commit('ADD_ROUTE', route)
   },
 }
