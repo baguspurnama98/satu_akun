@@ -118,6 +118,9 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
             // ini transaksi yg dimiliki campaign
             $router->get('campaign[/{id_campaign}]', 'TransactionController@campaignTransactions');
             
+            //untuk update transaksi
+            $router->post('update/{id_transaction}', 'TransactionController@updateDataTransaction');
+            
             // ini utk checkout
             $router->get('user/{id_user}/campaign/{id_campaign}', 'TransactionController@userTransactionByCampaign');
 
@@ -127,6 +130,8 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
             ]);
             $router->get('/', 'TransactionController@allTransactions');
             $router->get('/{id_transaction}', 'TransactionController@getTransaction');
+
+            
         });
     });
 
