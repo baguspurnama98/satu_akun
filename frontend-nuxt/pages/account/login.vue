@@ -1,4 +1,3 @@
-<
 <template>
     <!-- Content disini -->
     <!-- component login -->
@@ -78,7 +77,6 @@
                 </div>
             </form>
         </div>
-      </div>
     </div>
 </template>
 
@@ -110,7 +108,7 @@ export default {
             this.loading = false
           this.$store.dispatch('auth/setToken', { token, expires_in })
           // this.$router.push({name: 'secret'});
-          this.getProfile({ token, expires_in })
+          this.getProfile(token)
          
         })
         .catch((errors) => {

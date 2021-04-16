@@ -15,7 +15,7 @@
         "irazasyed/larasupport": "^1.7",
         "jenssegers/optimus": "^1.1",
         "laravel/lumen-framework": "^8.0",
-        "tymon/jwt-auth": "dev-develop"
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9.1",
