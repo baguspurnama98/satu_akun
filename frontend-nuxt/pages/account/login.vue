@@ -136,19 +136,19 @@ export default {
       .then((res)=>{
       this.$store.dispatch('getUserProfile', res.user)
       
-      // const histURL = this.$router.history._startLocation.split('/')
-      // const lastURL = histURL[histURL.length - 1]
-      // console.log(this.$nuxt.context.from)
+      const histURL = this.$router.history._startLocation.split('/')
+      const lastURL = histURL[histURL.length - 1]
+      console.log(this.$nuxt.context.from)
       //  if (lastURL === 'checkout') { 
-          //  this.$router.go(-1)
-      //   } 
-      //   else if(lastURL === 'create'){
-      //     // window.location.replace(this.$route.fullPath)
-      //     this.$router.push('/create')
-      //   }
-      //    else {
-          window.location.replace('/')  // entah kenapa jadi error, jadi sementara gini dulu ya
-      //   }
+           this.$router.go(-1)
+        // } 
+        // else if(lastURL === 'create'){
+        //   // window.location.replace(this.$route.fullPath)
+        //   this.$router.push('/create')
+        // }
+        //  else {
+        //   window.location.replace('/')  // entah kenapa jadi error, jadi sementara gini dulu ya
+        // }
       })
       .catch((err) => console.log(err))
     },

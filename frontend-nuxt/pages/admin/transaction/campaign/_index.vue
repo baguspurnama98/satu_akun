@@ -17,11 +17,77 @@
           Data Kosong!
         </h1>
       </div>
-      <div v-else>
-        <div class="flex border-t border-gray-200 py-2 w-3/4 px-5 mx-auto">
-          <span class="text-gray-600 pr-6">IN</span>
-          <span class="text-gray-600">20 Oktober 2020</span>
-          <span class="ml-auto text-gray-900">{{ 40000 | formatRupiah }}</span>
+      <div v-else class="w-3/4 px-5 mx-auto xs:w-full xs:px-2">
+        <div class="p-5 shadow-lg rounded-lg">
+          <div class="flex justify-between">
+            <div class="font-bold text-2xl xs:text-lg text-indigo-500">
+              {{ campaigns[0].host_name.name }}
+            </div>
+            <div class="font-bold text-2xl xs:text-lg text-indigo-500">
+              Host
+            </div>
+          </div>
+          <a
+            class="ml-2 px-2 py-1 text-white bg-green-400 hover:bg-green-600 focus:outline-none rounded-lg mr-2 shadow-md text-sm"
+            :href="'https://wa.me/62' + campaigns[0].host_name.whatsapp"
+            target="_blank"
+          >
+            WhatsApp</a
+          >
+        </div>
+
+        <div v-for="member in campaigns[0].campaign_members" :key="member.id">
+          <div class="p-5 shadow-lg rounded-lg my-5">
+            <div class="font-bold text-2xl xs:text-lg py-4 text-indigo-500">
+              {{ member.user_id }}
+            </div>
+            <div
+              v-if="member.transactions.length == 0"
+              class="italic text-gray-600 text-center"
+            >
+              Tidak ditemukan transaksi
+            </div>
+            <div
+              v-else
+              v-for="transaction in member.transactions"
+              :key="transaction.id"
+            >
+              <div
+                class="border-t border-gray-200 py-2 grid grid-flow-col grid-cols-4 gap-2"
+              >
+                <span class="font-bold" v-if="transaction.type == '1'">IN</span>
+                <span class="font-bold" v-if="transaction.type == '2'"
+                  >OUT</span
+                >
+                <span class="xs:text-sm">{{
+                  transaction.timeout | formatDate
+                }}</span>
+                <span class="text-gray-900 xs:text-sm">{{
+                  transaction.bank
+                }}</span>
+                <span class="text-gray-900 xs:text-sm">{{
+                  transaction.total_nominal | formatRupiah
+                }}</span>
+
+                <!-- <div class="ml-auto">
+                  <span
+                    v-if="transaction.status == 1"
+                    class="px-2 py-1 text-white bg-green-400 hover:bg-green-600 focus:outline-none rounded-lg mr-2 shadow-md text-sm"
+                  >
+                    Sukses
+                  </span>
+                  <a
+                    v-else
+                    class="px-2 py-1 text-white bg-red-600 hover:bg-red-700 focus:outline-none rounded-lg mr-2 shadow-md text-sm"
+                    :href="`/admin/transaction/verification/${transaction.id}`"
+                    target="_blank"
+                  >
+                    Konfirmasi
+                  </a>
+                </div> -->
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
