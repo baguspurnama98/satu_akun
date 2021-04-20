@@ -158,12 +158,11 @@
               v-if="campaign.slot_capacity !== '' && campaign.slot_capacity < 2"
               >*Jumlah minimal slot 2</span
             >
+            <!-- sementara kapasitas maksimumnya 10 dulu -->
             <span
               class="text-red-700 text-sm font-semibold"
-              v-if="
-                campaign.slot_capacity !== '' && campaign.slot_capacity > 20
-              "
-              >*Jumlah maksimal slot 20</span
+              v-if="campaign.slot_capacity !== '' && campaign.slot_capacity > 10"
+              >*Jumlah maksimal slot 10</span
             >
           </div>
         </div>
@@ -179,7 +178,7 @@
             >
             <p class="text-xs md:pr-20">
               Anda bebas menentukan harga setiap slot yang harus dikeluarkan
-              anggota campaign. Minimal harga adalah Rp. 10.000.
+              anggota campaign. Rentang harga yang diperbolehkan Rp 10.000 - Rp 499.999.
             </p>
           </div>
 
@@ -201,10 +200,11 @@
                 v-model="campaign.slot_price"
               />
             </div>
+            <!-- sementara ada batas atas 500 ribu -->
             <span
               class="text-red-700 text-sm font-semibold"
-              v-if="campaign.slot_price !== '' && campaign.slot_price < 10000"
-              >*Minimal harga sebesar Rp. 10.000</span
+              v-if="campaign.slot_price !== '' && campaign.slot_price < 10000 && campaign.slot_price >= 500000"
+              >*Rentang harga yang diperbolehkan Rp 10.000 - Rp 499.999</span
             >
           </div>
         </div>
@@ -474,8 +474,9 @@ export default {
     handleSave() {
       if (
         parseInt(this.campaign.slot_price) < 10000 ||
+        parseInt(this.campaign.slot_price) >= 500000 ||
         parseInt(this.campaign.slot_capacity) < 2 ||
-        parseInt(this.campaign.slot_capacity) > 20
+        parseInt(this.campaign.slot_capacity) > 10
       ) {
         this.message_error = true
         setTimeout(() => {
@@ -692,9 +693,9 @@ export default {
         console.log(errors)
       })
   },
-  beforeMount() {
-    this.$destroy()
-  },
+  // beforeMount() {
+  //   this.$destroy()
+  // },
 }
 </script>
 

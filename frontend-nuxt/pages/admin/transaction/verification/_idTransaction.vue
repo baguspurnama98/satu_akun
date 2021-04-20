@@ -6,7 +6,7 @@
       <h3 class="font-bold pb-3 text-4xl text-indigo-500">
         Verifikasi Pembayaran
       </h3>
-      <div v-if="transaction === null">
+      <div v-if="status === null">
         <Spinner />
       </div>
 
@@ -62,17 +62,17 @@
           <span
             aria-hidden
             class="bg-indigo-500 rounded-full text-xs font-bold capitalize text-white m-0 px-2 py-1"
-            v-if="transaction.status === 0"
+            v-if="status === 0"
             >Belum Dikonfirmasi</span
           >
           <span
-            v-if="transaction.status === 1"
+            v-if="status === 1"
             aria-hidden
             class="bg-yellow-500 rounded-full text-xs font-bold capitalize text-white m-0 px-2 py-1"
             >Terkonfirmasi
           </span>
           <span
-            v-if="transaction.status === 2"
+            v-if="status === 2"
             aria-hidden
             class="bg-red-500 rounded-full text-xs font-bold capitalize text-white m-0 px-2 py-1"
             >Gagal
@@ -82,7 +82,9 @@
       <div class="w-full text-center my-3 md:my-5">
         <button
           class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
+          v-bind:class="[isDisable ? 'opacity-50 ' : '']"
           @click.prevent="verif"
+          :disabled="isDisable"
         >
           <span class="inline-flex items-center p-0 m-0">
             <svg
@@ -111,14 +113,6 @@
           >
         </button>
       </div>
-
-      <!-- <div class="w-full text-center my-3 md:my-5" v-else>
-        <button
-          class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
-        >
-          Sudah Dikonfirmasi
-        </button>
-      </div> -->
     </div>
   </div>
 </template>
@@ -131,6 +125,7 @@ export default {
 
   data() {
     return {
+      status: null,
       transaction: null,
       loading: false,
     }
@@ -138,15 +133,22 @@ export default {
   methods: {
     verif() {
       this.loading = true
+      // console.log(this.$route.params.idTransaction)
+      this.transaction.status = 1
+      // console.log(this.transaction)
       this.$axios
-        .$get(`transaction/verify/${this.$route.params.idTransaction}`)
+        .$post(
+          `transaction/update/${this.$route.params.idTransaction}`,
+          this.transaction
+        )
         .then((resp) => {
-          console.log(resp)
-          //    if (resp.message === 'CREATED') {
-          //             this.$router.push(
-          //               `/campaign/${resp.campaign.id}/${resp.campaign.slug}`
-          //             )
-          //           }
+          // console.log(resp)
+          if (resp.message === 'UPDATED') {
+            // this.$router.push(
+            //   `/campaign/${resp.campaign.id}/${resp.campaign.slug}`
+            // )
+            window.location.reload()
+          }
         })
         .catch((errors) => {
           if (errors.response.status === 404) {
@@ -158,12 +160,16 @@ export default {
         })
     },
   },
+  beforeMount() {
+    this.$destroy()
+  },
   async created() {
     await this.$axios
       .$get(`transaction/${this.$route.params.idTransaction}`)
       .then((resp) => {
         this.transaction = resp.transaction
-        console.log(resp)
+        this.status = resp.transaction.status
+        // console.log(resp)
       })
       .catch((errors) => {
         if (errors.response.status === 404) {
@@ -173,6 +179,15 @@ export default {
           })
         }
       })
+  },
+  computed: {
+    isDisable() {
+      if (this.status !== null) {
+        return this.status === 1
+      } else {
+        return false
+      }
+    },
   },
 }
 </script>
