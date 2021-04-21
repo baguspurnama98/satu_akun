@@ -165,8 +165,9 @@ class AuthController extends Controller
         
         try {
             // mesti cocokin OTP
-            $user = User::where(['id' => $id_user, 'otp' => $request->input('otp')])->first();
-            if ($user) {
+            $user = User::where(['id' => $id_user])->first();
+            $otp = $request->input('otp');
+            if ($user && ($user->otp === $otp)) {
                 $plainPassword = $request->input('password');
                 $user->fill($request->all());
                 $user->password = app('hash')->make($plainPassword);
@@ -231,7 +232,8 @@ class AuthController extends Controller
     public function validateOTP($id_user, $otp) {
         // setiap id_user harus di decode dan di decode dulu karena dia dapatnya dari hasid, bukan id_user
         try {
-            $user = User::where(['id' => $id_user, 'otp' => $otp])->first();
+            $user = User::where(['id' => $id_user])->first();
+            if ($user->otp !== $otp) throw new \Exception('Not Authorized.');
             $user->status = 1;
             $user->save();
         } catch (\Exception $e) {

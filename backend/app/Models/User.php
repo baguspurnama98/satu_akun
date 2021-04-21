@@ -40,6 +40,10 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
         // 'id',
     ];
     
+    protected $casts = [
+        'otp' => 'encrypted',
+    ];
+    
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
@@ -71,22 +75,6 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
             }
         }
         return sensorName($this->attributes['name']);
-    }
-
-    public function setWhatsappAttribute() {
-        $this->attributes['whatsapp'] = Crypt::encrypt($this->attributes['whatsapp']);
-    }
-
-    public function getWhatsappAttribute() {
-        return Crypt::decrypt($this->attributes['whatsapp']);
-    }
-
-    public function setOtpAttribute() {
-        $this->attributes['otp'] = Crypt::encrypt($this->attributes['otp']);
-    }
-
-    public function getOtpAttribute() {
-        return Crypt::decrypt($this->attributes['otp']);
     }
 
     /**
