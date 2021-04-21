@@ -11,6 +11,7 @@ use Laravel\Lumen\Auth\Authorizable;
 
 use App\Observers\UserObserver;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Model implements JWTSubject, AuthenticatableContract, AuthorizableContract
@@ -70,6 +71,22 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
             }
         }
         return sensorName($this->attributes['name']);
+    }
+
+    public function setWhatsappAttribute() {
+        $this->attributes['whatsapp'] = Crypt::encrypt($this->attributes['whatsapp']);
+    }
+
+    public function getWhatsappAttribute() {
+        return Crypt::decrypt($this->attributes['whatsapp']);
+    }
+
+    public function setOtpAttribute() {
+        $this->attributes['otp'] = Crypt::encrypt($this->attributes['otp']);
+    }
+
+    public function getOtpAttribute() {
+        return Crypt::decrypt($this->attributes['otp']);
     }
 
     /**
