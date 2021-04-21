@@ -5,65 +5,68 @@
     v-click-outside
     class="fixed bottom-0 flex flex-row justify-between w-full bg-indigo-500 appearance-none outline-none text-white md:px-10 text-base z-10"
   >
-    <span @click.prevent="$router.push('/')">
-      <div class="px-3 appearance-none outline-none ripple hover:bg-indigo-400">
-        <div class="flex flex-col py-2 w-20">
-          <div class="flex justify-center">
-            <svg
-              class="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 25 25"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-              />
-            </svg>
-          </div>
-          <span
-            class="tracking-wide text-center capitalize anti-xsaliased md:text-base text-sm sm:subpixel-antialiased"
-            >beranda</span
+    <NuxtLink
+      exact
+      to="/"
+      class="appearance-none cursor-default px-3 outline-none ripple hover:bg-indigo-400"
+    >
+      <div class="flex flex-col py-2 w-20">
+        <div class="flex justify-center">
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 25 25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            xmlns="http://www.w3.org/2000/svg"
           >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            />
+          </svg>
         </div>
+        <span
+          class="tracking-wide text-center capitalize anti-xsaliased md:text-base text-sm sm:subpixel-antialiased"
+          >beranda</span
+        >
       </div>
-    </span>
+    </NuxtLink>
 
-    <span @click.prevent="$router.push('/campaign/show/all')">
-      <div class="px-3 appearance-none outline-none ripple hover:bg-indigo-400">
-        <div class="flex flex-col py-2 w-20">
-          <div class="flex justify-center">
-            <svg
-              class="inline-block text-center w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 25 25"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </div>
-          <span
-            class="tracking-wide text-center capitalize anti-xsaliased md:text-base text-sm sm:subpixel-antialiased"
-            >patungan</span
+    <NuxtLink
+      to="/campaign/show/all"
+      class="appearance-none cursor-default px-3 outline-none ripple hover:bg-indigo-400"
+    >
+      <div class="flex flex-col py-2 w-20">
+        <div class="flex justify-center">
+          <svg
+            class="inline-block text-center w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 25 25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            xmlns="http://www.w3.org/2000/svg"
           >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
         </div>
+        <span
+          class="tracking-wide text-center capitalize anti-xsaliased md:text-base text-sm sm:subpixel-antialiased"
+          >patungan</span
+        >
       </div>
-    </span>
+    </NuxtLink>
 
     <span @click.prevent="toggleButton('navUserOption')">
       <div class="px-3 appearance-none outline-none ripple hover:bg-indigo-400">
@@ -95,7 +98,7 @@
       </div>
     </span>
 
-    <!-- menu dropup class="bottom-0 origin-top-right absolute left-0 mt-2 -mr-1 w-48 rounded-md shadow-lg"> --> 
+    <!-- menu dropup class="bottom-0 origin-top-right absolute left-0 mt-2 -mr-1 w-48 rounded-md shadow-lg"> -->
     <div
       class="origin-top-left absolute right-0 bottom-0 mb-12 mr-2 w-40 min-w-40 rounded-md shadow-lg bg-white border border-gray-200 divide-y divide-gray-300 text-left z-40"
       v-bind:class="[navUserOption ? 'hidden' : '']"
@@ -260,19 +263,27 @@ a.nuxt-link-active {
 }
 /* exact link will show the primary color for only the exact matching link */
 a.nuxt-link-exact-active {
+  color: #fff;
   background-color: #7f9cf5;
 }
 
 .ripple {
   background-position: center;
-  transition: background 0.3s;
+  -webkit-transition: all 0.2s 0s ease;
+  -moz-transition: all 0.2s 0s ease;
+  -o-transition: all 0.2s 0s ease;
+  transition: all 0.2s 0s ease;
 }
 .ripple:hover {
+  transition-delay: 0s;
   background: #7f9cf5 radial-gradient(circle, transparent 1%, #667eea 1%) center/15000%;
 }
 .ripple:active {
   background-color: #7f9cf5;
   background-size: 100%;
-  transition: background 0s;
+  -webkit-transition: all 0s 0s ease;
+  -moz-transition: all 0s 0s ease;
+  -o-transition: all 0s 0s ease;
+  transition: all 0s 0s ease;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <select
-      class="sm:hidden border shadow-md border-gray-200 rounded-full text-gray-700 h-10 pl-5 pr-5 bg-white focus:outline-none appearance-none capitalize"
+      class="sm:hidden border shadow-md border-orange-200 rounded-full text-gray-700 h-10 pl-5 pr-5 bg-white focus:outline-none appearance-none capitalize"
       @change="goToCategory" v-bind:value="selectedCategory"
     >
       <option value="" disabled selected>Filter Category</option>
