@@ -81,7 +81,27 @@
       </div>
       <Nuxt keep-alive />
     </div>
-    <Footer v-if="navbar === 'Navbar'" />
+    <Footer v-if="showFooter" :class="[navbar === 'Navbar' ? '' : 'mb-12']"/>
+    <div v-if="showFooter && navbar === 'Navbar'" class="bg-indigo-500">
+      <div
+        class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row"
+      >
+        <p class="text-white text-sm text-center sm:text-left">
+          © 2020 Patungin —
+          <a
+            href="https://twitter.com/apri0498"
+            class="text-gray-300 ml-1"
+            target="_blank"
+            rel="noopener noreferrer"
+            >@patungin</a
+          >
+        </p>
+        <span
+          class="sm:ml-auto sm:mt-0 mt-2 sm:w-auto w-full sm:text-left text-center text-white text-sm"
+          >God bless Indonesia</span
+        >
+      </div>
+    </div>
   </div>
 </template>
 
@@ -97,6 +117,7 @@ export default {
       android: false,
       deferredPrompt: null,
       beingInstalled: false,
+      showFooter: true,
     };
   },
   components: {
@@ -125,7 +146,7 @@ export default {
   mounted() {
     // console.log(this.$store.state.token)
     // jika sudah install, maka di hidden
-    if (!window.matchMedia("(display-mode: standalone)").matches) {
+    if (!window.matchMedia("(display-mode: standalone)").matches) {  
       if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
         this.android = true;
       }
@@ -145,6 +166,7 @@ export default {
       });
     } else {
       this.navbar = "NavbarBottom";
+      this.showFooter = false;
     }
     if (this.android === true) {
       this.navbar = "NavbarBottom";

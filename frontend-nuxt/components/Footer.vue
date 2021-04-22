@@ -142,26 +142,6 @@
         </span>
       </div>
     </div>
-    <div class="bg-indigo-500">
-      <div
-        class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row"
-      >
-        <p class="text-white text-sm text-center sm:text-left">
-          © 2020 Patungin —
-          <a
-            href="https://twitter.com/apri0498"
-            class="text-gray-300 ml-1"
-            target="_blank"
-            rel="noopener noreferrer"
-            >@patungin</a
-          >
-        </p>
-        <span
-          class="sm:ml-auto sm:mt-0 mt-2 sm:w-auto w-full sm:text-left text-center text-white text-sm"
-          >God bless Indonesia</span
-        >
-      </div>
-    </div>
   </footer>
   <!-- component footer -->
 </template>

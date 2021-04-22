@@ -82,7 +82,6 @@ export default {
   },
   methods: {
     setSelected(index) {
-      console.log(index);
       this.selected = index;
     },
   },

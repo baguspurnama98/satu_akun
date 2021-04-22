@@ -174,6 +174,15 @@
                       >Dashboard
                     </NuxtLink>
                   </div>
+                  <div class="py-1">
+                    <a
+                      href="https://patungin.com:2096/3rdparty/roundcube/"
+                      target=”_blank” rel="noreferrer noopener"
+                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                      role="menuitem"
+                      >Webmail
+                    </a>
+                  </div>
                 </template>
 
                 <div class="py-1">

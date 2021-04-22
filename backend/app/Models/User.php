@@ -11,6 +11,7 @@ use Laravel\Lumen\Auth\Authorizable;
 
 use App\Observers\UserObserver;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Model implements JWTSubject, AuthenticatableContract, AuthorizableContract
@@ -37,6 +38,10 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
     protected $hidden = [
         'password',
         // 'id',
+    ];
+    
+    protected $casts = [
+        'otp' => 'encrypted',
     ];
     
 
