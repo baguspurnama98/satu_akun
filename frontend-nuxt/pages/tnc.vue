@@ -24,13 +24,13 @@
                 <li>Campaign Host adalah pihak yang menerbitkan dan membuat campaign patungan di situs Patungin.</li>
                 <li>Campaign User adalah pihak yang mengikuti dan menikmati campaign yang telah di tawarkan pada situs Patungin.</li>
                 <li>Akun adalah representasi individual pengguna dari situs Patungin dan melalui akun tersebut pengguna dapat mendaftar campaign dan/atau mengikuti campaign.</li>
-                <li><a class="underline text-indigo-700" href="#payment_refund">Complain</a> adalah fasilitas layanan dari situs Patungin yang mana pengguna dapat melaporkan permasalahan yang sedang dialami dalam menikmati kemudahan situs Patungin.</li>
-                <li><a class="underline text-indigo-700" href="#payment_refund">Refund</a> adalah fasilitas layanan dari situs Patungin yang mana dana pengguna akan dikembalikan tergantung dengan ketentuan transaksi dari Patungin.</li>
+                <li><a class="underline text-indigo-700" href="#payment">Komplain</a> adalah fasilitas layanan dari situs Patungin yang mana pengguna dapat melaporkan permasalahan yang sedang dialami dalam menikmati kemudahan situs Patungin.</li>
+                <li><a class="underline text-indigo-700" href="#payment">Refund</a> adalah fasilitas layanan dari situs Patungin yang mana dana pengguna akan dikembalikan tergantung dengan ketentuan transaksi dari Patungin.</li>
                 <li>Rekening Resmi Patungin adalah rekening yang telah disepakati founders untuk digunakan untuk memfasilitasi transaksi dan hanya rekening yang tercantum disaat pembayaran terjadi.</li>
                 <li>Campaign adalah suatu usaha untuk mencari teman patungan yang bermaksud untuk menikmati layanan tertentu namun tidak terbatas pada kategori jumlah slot, jenis layanan dan rentan waktu yang ditentukan.</li>
             </ul>
 
-            <div class="mb-20" id="account_campaign"></div>
+            <div class="mb-20" id="policy"></div>
             <h2 class="my-5 text-xl"><strong>Akun dan Campaign kamu?</strong></h2>
             <ul class="pl-5 list-disc list-outside">
                 <li>Tim Patungin tidak memungut biaya pendaftaran kepada pengunjung dan/atau pengguna.</li>
@@ -44,8 +44,8 @@
                 <li>Pengguna dengan ini menyatakan Tim Patungin tidak bertanggung jawab atas kerugian dan/atau kendala yang disebabkan oleh kelalaian Pengguna, termasuk memberikan akun kepada pihak lain dengan alasan apapun.</li>
             </ul>
             
-            <div class="mb-20" id="payment_refund"></div>
-            <h2 class="my-5 text-xl"><strong>Pelaksanaan Pembayaran, Complain dan Refund</strong></h2>
+            <div class="mb-20" id="payment"></div>
+            <h2 class="my-5 text-xl"><strong>Pelaksanaan Pembayaran, Komplain dan Refund</strong></h2>
             <ul class="pl-5 list-disc list-outside">
                 <li>Pengguna yang gagal memenuhi pembayaran dalam batas waktu yang telah ditentukan tidak lagi memiliki hak atas slot yang telah di booking. Patungin menerapkan sistem <i>‘first book, first pay, first serve’</i>.</li>
                 <li>Pembayaran yang diterima hanya dengan melalui rekening yang telah tercantum pada laman konfirmasi pembayaran.</li>
