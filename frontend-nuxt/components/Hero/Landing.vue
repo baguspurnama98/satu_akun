@@ -28,9 +28,7 @@
             <p
               class="block mt-6 text-base text-gray-600 xl:text-lg sm:text-center lg:text-left"
             >
-              Platform yang memfasilitasi pencarian teman dalam berlanggaan
-              bersama di penyedia layanan hiburan hingga edukasi/pembelajaran
-              dengan proses yang mudah, aman, dan murah.
+              Platform yang memfasilitasi pencarian teman dalam berlanggaan bersama di penyedia layanan hiburan hingga edukasi/pembelajaran dengan proses yang mudah, aman, dan murah.
             </p>
             <div class="relative flex flex-row mt-10 mx-auto lg:ml-0">
               <a

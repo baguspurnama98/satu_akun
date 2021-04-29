@@ -45,12 +45,189 @@ class CampaignSeeder extends Seeder
         Campaign::create([
             'email_id' => 1,
             'categories_id' => 1,
+            'title' => 'Ani Campaign Dummy',
+            'description' => 'Ini Campaign Dummy',
+            'expired_date' => '2021-04-30 07:16:19',
+            'duration_date' => '2021-05-01 00:00:00',
+            'durasi' => '1 Bulan',
+            'status' => 0,
+            'slot_capacity' => '5',
+            'slot_price' => 23000,
+            'media_url' => '',
+            'password_email' => 'asaksak',
+            'updated_by' => 'Anji',
+            'created_by' => 'Pragiwaksono',
+        ]);
+
+        Campaign::create([
+            'email_id' => 1,
+            'categories_id' => 1,
+            'title' => 'Bni Campaign Dummy',
+            'description' => 'Ini Campaign Dummy',
+            'expired_date' => '2021-04-30 07:16:19',
+            'duration_date' => '2021-05-01 00:00:00',
+            'durasi' => '1 Bulan',
+            'status' => 0,
+            'slot_capacity' => '5',
+            'slot_price' => 23000,
+            'media_url' => '',
+            'password_email' => 'asaksak',
+            'updated_by' => 'Anji',
+            'created_by' => 'Pragiwaksono',
+        ]);
+
+
+        Campaign::create([
+            'email_id' => 1,
+            'categories_id' => 1,
+            'title' => 'Cni Campaign Dummy',
+            'description' => 'Ini Campaign Dummy',
+            'expired_date' => '2021-04-30 07:16:19',
+            'duration_date' => '2021-05-01 00:00:00',
+            'durasi' => '1 Bulan',
+            'status' => 0,
+            'slot_capacity' => '5',
+            'slot_price' => 23000,
+            'media_url' => '',
+            'password_email' => 'asaksak',
+            'updated_by' => 'Anji',
+            'created_by' => 'Pragiwaksono',
+        ]);
+
+
+        Campaign::create([
+            'email_id' => 1,
+            'categories_id' => 1,
+            'title' => 'Dni Campaign Dummy',
+            'description' => 'Ini Campaign Dummy',
+            'expired_date' => '2021-04-30 07:16:19',
+            'duration_date' => '2021-05-01 00:00:00',
+            'durasi' => '1 Bulan',
+            'status' => 0,
+            'slot_capacity' => '5',
+            'slot_price' => 23000,
+            'media_url' => '',
+            'password_email' => 'asaksak',
+            'updated_by' => 'Anji',
+            'created_by' => 'Pragiwaksono',
+        ]);
+
+        Campaign::create([
+            'email_id' => 1,
+            'categories_id' => 1,
+            'title' => 'Ani Campaign Dummy',
+            'description' => 'Ini Campaign Dummy',
+            'expired_date' => '2021-04-30 07:16:19',
+            'duration_date' => '2021-05-01 00:00:00',
+            'durasi' => '1 Bulan',
+            'status' => 0,
+            'slot_capacity' => '5',
+            'slot_price' => 23000,
+            'media_url' => '',
+            'password_email' => 'asaksak',
+            'updated_by' => 'Anji',
+            'created_by' => 'Pragiwaksono',
+        ]);
+
+        Campaign::create([
+            'email_id' => 1,
+            'categories_id' => 1,
+            'title' => 'Vni Campaign Dummy',
+            'description' => 'Ini Campaign Dummy',
+            'expired_date' => '2021-04-30 07:16:19',
+            'duration_date' => '2021-05-01 00:00:00',
+            'durasi' => '1 Bulan',
+            'status' => 0,
+            'slot_capacity' => '5',
+            'slot_price' => 23000,
+            'media_url' => '',
+            'password_email' => 'asaksak',
+            'updated_by' => 'Anji',
+            'created_by' => 'Pragiwaksono',
+        ]);
+
+
+        Campaign::create([
+            'email_id' => 1,
+            'categories_id' => 1,
+            'title' => 'Cni Campaign Dummy',
+            'description' => 'Ini Campaign Dummy',
+            'expired_date' => '2021-04-30 07:16:19',
+            'duration_date' => '2021-05-01 00:00:00',
+            'durasi' => '1 Bulan',
+            'status' => 0,
+            'slot_capacity' => '5',
+            'slot_price' => 23000,
+            'media_url' => '',
+            'password_email' => 'asaksak',
+            'updated_by' => 'Anji',
+            'created_by' => 'Pragiwaksono',
+        ]);
+
+
+        Campaign::create([
+            'email_id' => 1,
+            'categories_id' => 1,
+            'title' => 'Eni Campaign Dummy',
+            'description' => 'Ini Campaign Dummy',
+            'expired_date' => '2021-04-30 07:16:19',
+            'duration_date' => '2021-05-01 00:00:00',
+            'durasi' => '1 Bulan',
+            'status' => 0,
+            'slot_capacity' => '5',
+            'slot_price' => 23000,
+            'media_url' => '',
+            'password_email' => 'asaksak',
+            'updated_by' => 'Anji',
+            'created_by' => 'Pragiwaksono',
+        ]);
+
+
+        Campaign::create([
+            'email_id' => 1,
+            'categories_id' => 1,
+            'title' => 'Bni Campaign Dummy',
+            'description' => 'Ini Campaign Dummy',
+            'expired_date' => '2021-04-30 07:16:19',
+            'duration_date' => '2021-05-01 00:00:00',
+            'durasi' => '1 Bulan',
+            'status' => 0,
+            'slot_capacity' => '5',
+            'slot_price' => 23000,
+            'media_url' => '',
+            'password_email' => 'asaksak',
+            'updated_by' => 'Anji',
+            'created_by' => 'Pragiwaksono',
+        ]);
+
+
+        Campaign::create([
+            'email_id' => 1,
+            'categories_id' => 1,
             'title' => 'Ini Campaign Dummy',
             'description' => 'Ini Campaign Dummy',
-            'expired_date' => '2021-03-02 07:16:19',
-            'duration_date' => '2021-03-31 00:00:00',
+            'expired_date' => '2021-04-30 07:16:19',
+            'duration_date' => '2021-05-01 00:00:00',
             'durasi' => '1 Bulan',
-            'status' => 1,
+            'status' => 0,
+            'slot_capacity' => '5',
+            'slot_price' => 23000,
+            'media_url' => '',
+            'password_email' => 'asaksak',
+            'updated_by' => 'Anji',
+            'created_by' => 'Pragiwaksono',
+        ]);
+
+
+        Campaign::create([
+            'email_id' => 1,
+            'categories_id' => 1,
+            'title' => 'Ini Campaign Dummy',
+            'description' => 'Ini Campaign Dummy',
+            'expired_date' => '2021-04-30 07:16:19',
+            'duration_date' => '2021-05-01 00:00:00',
+            'durasi' => '1 Bulan',
+            'status' => 0,
             'slot_capacity' => '5',
             'slot_price' => 23000,
             'media_url' => '',

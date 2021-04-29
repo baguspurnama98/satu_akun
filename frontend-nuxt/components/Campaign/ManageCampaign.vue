@@ -503,6 +503,17 @@ export default {
             .then((resp) => {
               console.log(resp)
               if (resp.message === 'CREATED') {
+                this.$toast.show({
+                    title: "Berhasil dibuat",
+                    message: "Campaign berhasil dibuat",
+                    classToast: 'bg-green-400',
+                    classTitle: "text-white text-xl",
+                    classMessage: "text-white",
+                    classClose: "text-green-200",
+                    classTimeout: "bg-green-600",
+                    timeout: 3,
+                });
+                this.loading = false;
                 this.$router.push(
                   `/campaign/${resp.campaign.id}/${resp.campaign.slug}`
                 )
@@ -517,6 +528,17 @@ export default {
             .then((resp) => {
               console.log(resp)
               if (resp.message === 'UPDATED') {
+                this.$toast.show({
+                    title: "Berhasil Disimpan",
+                    message: "Campaign berhasil disimpan",
+                    classToast: 'bg-green-400',
+                    classTitle: "text-white text-xl",
+                    classMessage: "text-white",
+                    classClose: "text-green-200",
+                    classTimeout: "bg-green-600",
+                    timeout: 3,
+                });
+                this.loading = false
                 this.$router.push(
                   `/campaign/${resp.campaign.id}/${resp.campaign.slug}`
                 )

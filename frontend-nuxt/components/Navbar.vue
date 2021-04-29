@@ -276,7 +276,7 @@ export default {
           this.$store.dispatch('auth/logout')
           this.$store.dispatch('delUserProfile')
           // this.$router.replace('/')
-          window.location.replace('/')
+          this.$router.replace('/account/login')
         })
         .catch((errors) => {
           console.dir(errors)

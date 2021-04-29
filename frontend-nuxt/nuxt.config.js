@@ -70,6 +70,7 @@ export default {
     '@nuxt/content',
     // untuk generate file env
     '@nuxtjs/dotenv',
+    [ 'nuxt-tailvue', { all: true, toast: { defaults: { containerClasses: [ 'mt-12', 'z-40' ] } } } ],
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)

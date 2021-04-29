@@ -13,4 +13,7 @@ module.exports = {
     }
   },
   plugins: [],
+  content: [
+    'node_modules/tv-*/dist/tv-*.umd.min.js',
+  ],
 }

@@ -35,10 +35,12 @@ class CampaignController extends Controller
         $category = $request->query('category') ?? null;
         $is_all = $request->query('all') ?? false; // active true if false
         $search = $request->query('search') ?? null;
+        $page = $request->query('page') ?? 0;
 
         $campaigns = Campaign::with(['categories', 'emails'])->withCount('campaign_members as total_members')->withCount(['campaign_members as slot_members' => function ($query) {
             return $query->where('is_host', 0);
-         }]);
+        }])->offset(8 * ($page - 1))->limit(8);
+
         
         // $campaigns = ($status !== null) ? $campaigns->statusCampaign($status) : $campaigns;
         // $campaigns = ($is_all !== false) ? $campaigns : $campaigns->active();

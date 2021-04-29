@@ -9,9 +9,8 @@
           :src="
             campaign.media_url !== ``
               ? campaign.media_url
-              : require(`~/assets/img/default-img.jpeg`)
-          "
-          alt="no-image"
+              : require(`~/assets/img/default-img.jpeg`)"
+          loading="lazy"
           class="rounded-t-lg object-cover h-48 xs:h-32 w-full"
         />
 

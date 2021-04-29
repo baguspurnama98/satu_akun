@@ -14,7 +14,7 @@
       <!-- component campaign -->
       <section
         id="campaign"
-        class="container px-4 my-4 mx-auto flex flex-wrap items-center justify-between"
+        class="container px-4 my-8 mx-auto flex flex-wrap items-center justify-between"
       >
         <div
           class="flex flex-col items-center justify-center bg-white min-h-screen w-full"
@@ -39,11 +39,10 @@
         </div>
       </section>
 
+
       <!-- component hero keunggulan -->
-      <section class="text-gray-700 body-font mb-12">
-        <div
-          class="container px-5 mx-auto flex flex-wrap items-center justify-center"
-        >
+      <section class="text-gray-700 body-font my-12">
+        <div class="container px-5 mx-auto flex flex-wrap items-center justify-center">
           <div class="text-center mb-10">
             <h1
               class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4"
@@ -51,9 +50,8 @@
               Kenapa pakai <b class="logo">Patungin</b>?
             </h1>
             <p class="text-base leading-relaxed">
-              Merdeka dalam akses apa saja melalui patungan. Kamu bisa patungan
-              akun tanpa ada batasan slot, patungan akun platform apa saja,
-              hingga jaminan tanpa penipuan
+              Merdeka mengakses apa saja melalui Patungin. Kamu bisa patungan platform
+              favorit kamu tanpa ada batasan dan jaminan tanpa penipuan.
             </p>
           </div>
           <div class="flex flex-wrap -m-4">
@@ -77,12 +75,28 @@
                 </div>
                 <div class="flex-grow">
                   <h2 class="text-gray-900 text-lg title-font font-medium mb-3">
-                    Mudah dan legal untuk patungan
+                    Mudah, fleksibel dan legal untuk patungan
                   </h2>
                   <p class="leading-relaxed text-sm">
-                    Kami carikan kamu teman patungan untuk membeli akun premium.
-                    "Kasih wording yang tepat"
+                    Kami mencarikan teman patungan sesuai kebutuhan kamu dengan mudah,
+                    fleksibel dan aman.
                   </p>
+                  <NuxtLink
+                    class="mt-3 text-indigo-500 inline-flex items-center"
+                    to="/tnc"
+                    >Selengkapnya
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      class="w-4 h-4 ml-2"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                  </NuxtLink>
                 </div>
               </div>
             </div>
@@ -109,10 +123,25 @@
                     Pembayaran apa saja gak pakai ribet
                   </h2>
                   <p class="leading-relaxed text-sm">
-                    Tidak perlu pakai kartu kredit, cukup bayar pakai media
-                    pembayaran apa saja. Tidak perlu upload bukti pembayaran
-                    (Wording)
+                    Kami menerima media pembayaran apa saja, dan berusaha untuk menawarkan
+                    harga terjangkau.
                   </p>
+                  <NuxtLink
+                    class="mt-3 text-indigo-500 inline-flex items-center"
+                    to="/tnc#payment"
+                    >Selengkapnya
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      class="w-4 h-4 ml-2"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                  </NuxtLink>
                 </div>
               </div>
             </div>
@@ -139,13 +168,12 @@
                     Data kamu aman
                   </h2>
                   <p class="leading-relaxed text-sm">
-                    Kami berusaha semaksimal mungkin jaga keamanan dan
-                    menghindari penipuan. Pastikan kamu baca mekanisme keamanan
-                    dan kebijakan privasi layanan Satu Akun
+                    Kami berkomitmen untuk jaga keamanan dan menghindari penipuan.
+                    Pastikan kamu telah membaca kebijakan layanan Patungin.
                   </p>
                   <NuxtLink
                     class="mt-3 text-indigo-500 inline-flex items-center"
-                    to="/about"
+                    to="/tnc#policy"
                     >Selengkapnya
                     <svg
                       fill="none"
@@ -185,9 +213,8 @@
                     Harga bersaing
                   </h2>
                   <p class="leading-relaxed text-sm">
-                    Kami coba berikan harga yang kompetitif dengan kualitas
-                    layanan mumpuni, <i>harga mahasiswa</i>. Coba lihat detail
-                    penawaran yang kami berikan di skema harga.
+                    Temukan harga yang sesuai dengan kantongmu, dan ekspresikan
+                    kebahagiaanmu dengan teman temanmu.
                   </p>
                   <NuxtLink
                     class="mt-3 text-indigo-500 inline-flex items-center"
@@ -215,38 +242,46 @@
   </div>
 </template>
 <script>
-import Landing from '@/components/Hero/Landing'
-import CardCampaign from '@/components/Campaign/CardCampaign'
-import Carousel from '@/components/Carousel/Carousel'
+import Landing from "@/components/Hero/Landing";
+import CardCampaign from "@/components/Campaign/CardCampaign";
+import Carousel from "@/components/Carousel/Carousel";
+
 
 export default {
-  layout: 'default',
+  layout: "default",
   components: { Landing, CardCampaign, Carousel },
   data() {
     return {
       campaigns: [],
-    }
+      page: 1,
+    };
   },
   computed: {
     account_login() {
-      return this.$store.state.auth.token
+      return this.$store.state.auth.token;
     },
   },
+  methods: {
+    
+  },
   activated() {
-      if (this.$fetchState.timestamp <= Date.now() - 30000) {
-        console.log("refresh")
-        this.$fetch() // this.$destroy()
-      }
+    if (this.$fetchState.timestamp <= Date.now() - 30000) {
+      console.log("refresh");
+      this.$fetch(); // this.$destroy()
+    }
   },
   fetch() {
     this.$axios
-      .$get(`campaign`)
-      .then((resp) => {
-        this.campaigns = resp.campaigns
+      .$get(`campaign`, {
+          params: {
+            page: this.page,
+          }
+      }).then((resp) => {
+        this.campaigns = resp.campaigns;
       })
       .catch((errors) => {
-        console.dir(errors)
-      })
+        console.dir(errors);
+      });
   },
-}
+};
 </script>
