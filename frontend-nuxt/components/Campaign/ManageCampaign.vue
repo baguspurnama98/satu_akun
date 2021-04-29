@@ -505,7 +505,7 @@ export default {
               if (resp.message === 'CREATED') {
                 this.$toast.show({
                     title: "Berhasil dibuat",
-                    message: "Campaign berhasil dibuat",
+                    message: "Yeay, Campaign kamu berhasil dibuat!",
                     classToast: 'bg-green-400',
                     classTitle: "text-white text-xl",
                     classMessage: "text-white",
@@ -530,7 +530,7 @@ export default {
               if (resp.message === 'UPDATED') {
                 this.$toast.show({
                     title: "Berhasil Disimpan",
-                    message: "Campaign berhasil disimpan",
+                    message: "Campaign kamu telah disimpan",
                     classToast: 'bg-green-400',
                     classTitle: "text-white text-xl",
                     classMessage: "text-white",

@@ -220,7 +220,8 @@ export default {
           console.dir(errors);
         });
     },
-    redirectAfterLogin(histURL) {
+    async redirectAfterLogin(histURL) {
+      await this.$destroy()
       if (histURL[1] === "account") {
         this.$router.replace("/");
       } else if (histURL[3] === "verification") {
