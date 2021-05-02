@@ -228,7 +228,7 @@ export default {
         this.$router.push(this.$nuxt.context.from.fullPath);
       } else {
         // this.$router.go(-1)
-        this.$router.replace(this.$nuxt.context.from.fullPath);
+        window.location.replace(this.$nuxt.context.from.fullPath);
       }
     },
   },

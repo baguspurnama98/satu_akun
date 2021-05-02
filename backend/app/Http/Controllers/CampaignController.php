@@ -12,6 +12,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class CampaignController extends Controller
@@ -181,11 +182,13 @@ class CampaignController extends Controller
                 $image_name = Str::random(8) . date("Ymd");
                 
                 // cek apakah ada image yg perlu di hapus
-                $pos = strrpos($campaign->media_url, '/');
-                $curr_image = ($pos === false) ? $campaign->media_url : substr($campaign->media_url, $pos + 1);
-                $image_path = storage_path('uploads/image_campaign') . '/' . $curr_image;
-                if (file_exists($image_path)) {
-                    unlink($image_path);
+                if ($campaign->media_url) {
+                    $pos = strrpos($campaign->media_url, '/');
+                    $curr_image = ($pos === false) ? $campaign->media_url : substr($campaign->media_url, $pos + 1);
+                    $image_path = storage_path('uploads/image_campaign') . '/' . $curr_image;
+                    if (file_exists($image_path)) {
+                        unlink($image_path);
+                    }
                 }
                 
                 // simpan image
@@ -410,5 +413,36 @@ class CampaignController extends Controller
             return response()->json(['message' => $e], 409);
         }
     }
+
+
+
+    public function cronCheckCampaign() {
+        try {
+            $campaigns = Campaign::with('campaign_members')->where('expired_date', '<', Carbon::now())->where('status', '0');
+            if ($campaigns->doesntExist() || $campaigns->count() === 0) return response()->json(['message' => 'No Campaigns'], 200);
+            
+            // Sisanya tinggal dimasukin ke job, jadi langsung return, kalau ada yg gagal, ntar tinggal di masukin ke log
+            
+            foreach ($campaigns->get() as $campaign) {
+                $updated_campaign = $this->updateStatus($campaign);
+                $user = User::where('id', $updated_campaign->host_name->id)->first();
+                $type = "campaigns";
+                $emailJob = (new MailJob($user, $updated_campaign, $type));
+                dispatch($emailJob);
+            }
+
+            return response()->json(['message' => 'UPDATED'], 201);
+        } catch (\Exception $e) {
+            Log::error('Cron Update Transactions: ' . $e);
+            return response()->json(['message' => $e], 409);
+        }
+    }
+
+
+    private function updateStatus($campaign)
+    {
+        return tap($campaign)->update(['status' => 2]); //second way
+    }
+
 
 }

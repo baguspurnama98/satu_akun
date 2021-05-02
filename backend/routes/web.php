@@ -60,7 +60,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
     // Campaign
     $router->group(['prefix' => 'campaign'], function () use ($router) {
-
+        $router->get('cron', 'CampaignController@cronCheckCampaign');
         // Categories
         $router->group(['prefix' => 'categories'], function () use ($router) {
             $router->get('/', 'CampaignController@allCategories');
@@ -147,6 +147,8 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         $router->get('/{id_email}', 'EmailController@getEmail');
     });
 
+
+    $router->get('fetch', 'Controller@fetchURL');
 
     // php.ini files contains some limits that might affect this. Try changing these to high enough values:
     // upload_max_filesize = 50M

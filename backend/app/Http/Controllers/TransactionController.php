@@ -161,14 +161,14 @@ class TransactionController extends Controller
             if ($transactions->doesntExist() || $transactions->count() === 0) return response()->json(['message' => 'No Transaction'], 200); 
             
             // Sisanya tinggal dimasukin ke job, jadi langsung return, kalau ada yg gagal, ntar tinggal di masukin ke log
-            $transactions->update(['status' => 2]);
             Transaction::where('status', 2)->with('users.campaign_members', function($q) { 
                 $q->where('is_host', 0)->delete(); 
             })->get();
 
-            foreach ($transactions as $transaction) {
-                $campaign = Campaign::where('id', $transaction->campaign_id)->first();
-                $user = User::where('id', $transaction->user_id)->first();
+            foreach ($transactions->get() as $transaction) {
+                $updated_transaction = $this->updateStatus($transaction);
+                $campaign = Campaign::where('id', $updated_transaction->campaign_id)->first();
+                $user = User::where('id', $updated_transaction->user_id)->first();
                 $type = "members";
                 $emailJob = (new MailJob($user, $campaign, $type));
                 dispatch($emailJob);
@@ -180,5 +180,10 @@ class TransactionController extends Controller
             return response()->json(['message' => $err], 409);
         }
         
+    }
+
+    private function updateStatus($transaction)
+    {
+        return tap($transaction)->update(['status' => 2]); //second way
     }
 }
