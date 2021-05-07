@@ -7,7 +7,7 @@
         <div class="px-2 pb-4">
           <div class="font-bold text-indigo-500 text-2xl">Kode OTP</div>
           <span class="text-sm text-gray-700"
-            >OTP telah dikirimkan pada email saat kamu mendaftar</span
+            >OTP telah dikirimkan pada email saat kamu mendaftar, tunggu beberapa saat</span
           >
           <span
             v-if="errorMessage != ''"
@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="items-center flex justify-center">
+    <div class="items-center flex justify-center p-3">
       <!-- Toast -->
 
       <div class="mx-auto place-self-start" :class="[toast ? '' : 'hidden']">

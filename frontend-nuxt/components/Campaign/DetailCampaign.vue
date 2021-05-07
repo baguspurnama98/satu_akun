@@ -21,12 +21,8 @@
           </h2>
         </div>
 
-        <div
-          class="col-start-2 xs:col-start-1 row-start-3 space-y-3 px-4 xs:py-4"
-        >
-          <div
-            class="flex items-center text-black text-md xs:text-sm font-normal"
-          >
+        <div class="col-start-2 xs:col-start-1 row-start-3 space-y-3 px-4 xs:py-4">
+          <div class="flex items-center text-black text-md xs:text-sm font-normal">
             <p class="font-bold text-2xl">
               {{ campaign.calculated_price | formatRupiah }}
               <span class="font-normal">/orang</span>
@@ -47,9 +43,7 @@
               />
             </svg>
             <p class="text-md sm:text-sm ml-1">
-              <span class="text-gray-900 font-medium">{{
-                campaign.durasi
-              }}</span>
+              <span class="text-gray-900 font-medium">{{ campaign.durasi }}</span>
             </p>
           </div>
           <p class="text-md xs:text-sm">
@@ -58,19 +52,30 @@
               campaign.expired_date | formatDate
             }}</span>
           </p>
-          <p
-            class="flex items-center text-black text-md xs:text-sm font-normal"
-          >
+          <p class="flex items-center text-black text-md xs:text-sm font-normal">
             Oleh:
-            <a
-              class="text-md xs:text-sm px-1 font-medium text-indigo-500"
-              href="#"
-            >
+            <a class="text-md xs:text-sm px-1 font-medium text-indigo-500" href="#">
               {{ campaign.host_name }}
             </a>
           </p>
 
           <icon-social class="lg:mt-6"></icon-social>
+          <button
+            class="text-white px-4 w-auto h-10 bg-indigo-500 rounded-full hover:bg-indigo-600 mouse shadow focus:outline-none"
+            @click.prevent="copyToClipboard(`patungin.com${$route.fullPath}`)"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              enable-background="new 0 0 20 20"
+              class="w-6 h-6 inline-block mr-1"
+            >
+              <path
+                fill="#FFFFFF"
+                d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"
+              />
+            </svg>
+            <span>Share link</span>
+          </button>
         </div>
         <div
           class="col-start-1 col-span-2 row-start-1 flex sm:col-span-1 sm:col-start-1 sm:row-span-3"
@@ -92,12 +97,8 @@
         </div>
       </div>
 
-      <div
-        class="w-full border border-gray-300 border-opacity-50 mt-5 sm:mx-5"
-      ></div>
-      <div
-        class="relative grid grid-cols-1 w-full sm:px-5 sm:py-5 sm:gap-x-8 md:py-5"
-      >
+      <div class="w-full border border-gray-300 border-opacity-50 mt-5 sm:mx-5"></div>
+      <div class="relative grid grid-cols-1 w-full sm:px-5 sm:py-5 sm:gap-x-8 md:py-5">
         <div class="px-3 my-5">
           <h1
             class="font-semibold text-2xl text-gray-700 subpixel-antialiased text-center pb-4"
@@ -106,7 +107,7 @@
           </h1>
           <div v-if="`${campaign.description}`.length > 100">
             <p
-              class="my-3 text-justify whitespace-pre-line"
+              class="my-3 text-justify whitespace-normal"
               v-bind:class="[hiddenDetail ? 'line-clampin' : '']"
             >
               {{ campaign.description }}
@@ -133,21 +134,15 @@
           </div>
         </div>
       </div>
-      <div
-        class="w-full border border-gray-300 border-opacity-50 sm:mx-5"
-      ></div>
-      <div
-        class="relative grid grid-cols-1 w-full sm:px-5 sm:py-5 sm:gap-x-8 md:py-5"
-      >
+      <div class="w-full border border-gray-300 border-opacity-50 sm:mx-5"></div>
+      <div class="relative grid grid-cols-1 w-full sm:px-5 sm:py-5 sm:gap-x-8 md:py-5">
         <div class="col-start-1 px-3 mt-5 mb-2">
           <h1
             class="font-semibold text-2xl text-gray-700 subpixel-antialiased text-center pb-4"
           >
             Daftar Peserta
           </h1>
-          <div
-            class="sm:grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 sm:gap-3 my-3"
-          >
+          <div class="sm:grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 sm:gap-3 my-3">
             <div
               class="flex justify-start cursor-pointer text-gray-700 lg:bg-gray-100 bg-indigo-100 hover:bg-indigo-100 rounded-md px-2 py-2 xs:mb-2 items-center"
               v-for="member in campaign.campaign_members"
@@ -157,10 +152,7 @@
                 v-if="member.is_pay === 0"
                 class="bg-gray-500 h-3 w-3 m-2 rounded-full"
               ></span>
-              <span
-                v-else
-                class="bg-yellow-400 h-3 w-3 m-2 rounded-full"
-              ></span>
+              <span v-else class="bg-green-400 h-3 w-3 m-2 rounded-full"></span>
 
               <div class="font-medium px-2 truncate">
                 {{ member.users.name }}
@@ -214,7 +206,7 @@
           </button>
           <button
             v-else-if="registered && !isDisable && this.$store.state.auth.token"
-            class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-orange-400 hover:bg-orange-600 focus:bg-orange-700"
+            class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-orange-400 hover:bg-orange-500 focus:bg-orange-600"
             v-bind:class="[!isLogin || isDisable ? 'opacity-50 ' : '']"
             @click.prevent="rsvpCheckout(campaign.id)"
             :disabled="isDisable"
@@ -318,73 +310,93 @@
   </div>
 </template>
 <script>
-import IconSocial from '../Profil/IconSocial'
-import Spinner from '@/components/Spinner.vue'
+import IconSocial from "../Profil/IconSocial";
+import Spinner from "@/components/Spinner.vue";
 
 export default {
   components: { IconSocial, Spinner },
-  name: 'DetailCampaign',
-  props: ['campaign', 'registered'],
+  name: "DetailCampaign",
+  props: ["campaign", "registered"],
   data() {
     return {
       hiddenDetail: true,
       loading: false,
-      errorMsg: '',
-    }
+      errorMsg: "",
+    };
   },
   methods: {
     showDetail() {
-      this.hiddenDetail = !this.hiddenDetail
+      this.hiddenDetail = !this.hiddenDetail;
     },
     rsvpCheckout(idCampaign) {
       if (this.isLogin) {
         if (this.registered) {
           this.$router.push(
             `/campaign/${idCampaign}/checkout/${this.$store.state.user.id}`
-          )
+          );
         } else {
-          this.loading = true
+          this.loading = true;
 
           this.$axios
             .$get(`campaign/rsvp/${idCampaign}/${this.$store.state.user.id}`)
             .then((resp) => {
-              console.log(resp)
               this.$router.push(
                 `/campaign/${idCampaign}/checkout/${this.$store.state.user.id}`
-              )
+              );
             })
             .catch((errors) => {
-              this.loading = false
-              const { status, data } = errors.response
+              this.loading = false;
+              const { status, data } = errors.response;
               if (status === 422) {
-                alert('Sudah penuh')
+                alert("Sudah penuh");
               }
-              console.dir(errors)
-            })
+              console.dir(errors);
+            });
         }
       } else {
-        this.$router.push('/account/login')
+        this.$router.push("/account/login");
       }
+    },
+    copyToClipboard(value) {
+      var self = this
+      navigator.clipboard.writeText(value).then(
+        function () {
+          /* clipboard successfully set */
+          self.$toast.show({
+            title: "Link di salin",
+            message: "Link campaign ada pada clipboard",
+            classToast: "bg-green-500",
+            classTitle: "text-white text-xl",
+            classMessage: "text-white",
+            classClose: "text-green-200",
+            classTimeout: "bg-green-600",
+            timeout: 2.5,
+          });
+        },
+        function () {
+          /* clipboard write failed */
+        }
+      );
     },
   },
   computed: {
     isLogin() {
-      return this.$store.state.auth.token
+      return this.$store.state.auth.token;
     },
 
     isDisable() {
       if (this.$store.state.auth.token) {
         return (
           this.campaign.id_host === this.$store.state.user.id ||
-          this.$store.state.user.role === 'a' ||
+          this.$store.state.user.role === "a" ||
           this.campaign.slot_members === this.campaign.slot_capacity
-        )
+        );
       } else {
-        return false
+        return false;
       }
     },
   },
-}
+};
 </script>
 
 <style scoped>

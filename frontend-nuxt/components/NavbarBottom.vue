@@ -108,7 +108,7 @@
     >
       <template v-if="account_login">
         <!-- Menu untuk User -->
-        <template v-if="user_role === 'u'">
+        <template v-if="userRole === 'u'">
           <div class="py-1">
             <NuxtLink
               :to="`/users/${this.$store.state.user.id}/campaign/`"
@@ -142,7 +142,7 @@
         </template>
 
         <!-- Menu untuk Admin -->
-        <template v-if="user_role === 'a'">
+        <template v-if="userRole === 'a'">
           <div class="py-1">
             <NuxtLink
               to="/admin/"
@@ -202,7 +202,6 @@ export default {
   data() {
     return {
       name: null,
-      user_role: null,
       toggle: true,
       navLayanan: true,
       navUserOption: true,
@@ -212,6 +211,13 @@ export default {
     account_login() {
       return this.$store.state.auth.token;
     },
+    userRole() {
+      if (this.account_login) {
+        return this.$store.state.user.role
+      } else {
+        return null
+      }
+    }
   },
   watch: {
     $route(to, from) {
@@ -219,9 +225,6 @@ export default {
     },
   },
   mounted() {
-    if (this.account_login) {
-      this.user_role = this.$store.state.user.role;
-    }
     const nav = document.getElementById("nav");
     // agar event hanya bekerja pada element nav saja
     nav.addEventListener("clicked-outside", (e) => {

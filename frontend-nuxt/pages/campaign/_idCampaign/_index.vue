@@ -27,7 +27,6 @@ export default {
     this.$axios
       .$get(`campaign/${this.$route.params.idCampaign}`)
       .then((resp) => {
-          console.log(resp)
         for (let i = 0; i < resp.campaigns.campaign_members.length; i++) {
           if (resp.campaigns.campaign_members[i].is_host === 1) {
             resp.campaigns.host_name =

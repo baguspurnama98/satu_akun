@@ -60,11 +60,11 @@
             <div
               class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400"
             >
-              <img src="~/assets/img/profiles/tasya.jpg" id="tasya" class="object-cover rounded-full">
+              <img src="~/assets/img/profiles/jesse.jpg" id="jesse" class="object-cover rounded-full">
             </div>
             <div class="flex flex-col items-center text-center justify-center">
               <h2 class="font-medium title-font text-gray-900 text-lg">
-                Anastasya Eka
+                Alexander Jesse
               </h2>
               <div class="w-12 h-1 bg-indigo-500 rounded mt-2"></div>
             </div>
@@ -73,11 +73,11 @@
             <div
               class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400"
             >
-              <img src="~/assets/img/profiles/jesse.jpg" id="jesse" class="object-cover rounded-full">
+              <img src="~/assets/img/profiles/tasya.jpg" id="tasya" class="object-cover rounded-full">
             </div>
             <div class="flex flex-col items-center text-center justify-center">
               <h2 class="font-medium title-font text-gray-900 text-lg">
-                Alexander Jesse
+                Anastasya Eka
               </h2>
               <div class="w-12 h-1 bg-indigo-500 rounded mt-2"></div>
             </div>

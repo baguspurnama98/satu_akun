@@ -17,6 +17,8 @@ class MailJob extends Job
     protected $data;
     protected $type;
 
+    protected $contact_admin = "6282266605123";
+
 
     /**
      * https://lumen.laravel.com/docs/8.x/queues
@@ -27,6 +29,8 @@ class MailJob extends Job
      */
     public function __construct(User $user, $data, $type)
     {
+        array_push($data, ['contact_admin' => $this->contact_admin]);
+        
         // https://laravel.com/docs/8.x/queues#handling-relationships
         $this->user = $user->withoutRelations();
         $this->data = $data;
@@ -129,7 +133,7 @@ class MailJob extends Job
             'msg_info' => 'Sistem kami telah mengubah status campaign tersebut menjadi expired secara otomatis. Silahkan menghubungi Admin jika ada yang ditanyakan',
         ];
 
-        Mail::send('mails.member_fail', $data, function($message) use($user, $from_email, $surname) {
+        Mail::send('mails.failed', $data, function($message) use($user, $from_email, $surname) {
             // to
             $message->to($user->email, $user->name)->subject('Kamu Dikeluarkan dari Campaign');
             // from

@@ -17,6 +17,10 @@ use Illuminate\Support\Str;
 
 class CampaignController extends Controller
 {
+
+    private $rek_destination = '082266605123';
+    private $contact_admin = '6282266605123';
+
     /**
      * disini nanti bakal ada pengaturan pengaturan
      * apakah perlu di filter yg bukan kedaluwarsa 
@@ -313,6 +317,7 @@ class CampaignController extends Controller
                 'campaign_id' => $campaign->id, 
                 'user_id' => $user->id,
                 'bank' => $bank,
+                'no_rek_destination' => $this->rek_destination,
                 'no_transaction' => $date->getTimestamp(),
                 'type' => 1,
                 'timeout' => Carbon::now()->addHours(2),
@@ -321,7 +326,7 @@ class CampaignController extends Controller
                 'total_nominal' => $final_price,
             ]);
             // bank ini di kita nya
-            $url = "wa.me/628976634788?text=" . $user->id . '/' . $transaction->id . '/no_transaksi=' . $transaction->no_transaction;
+            $url = "wa.me/" . $this->contact_admin . "?text=" . $user->id . '/' . $transaction->id . '/no_transaksi=' . $transaction->no_transaction;
             $data = [
                 'name' => $user->name,
                 'desc' => $campaign->title,

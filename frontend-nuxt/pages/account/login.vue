@@ -169,7 +169,7 @@ export default {
           this.$toast.show({
             title: "Berhasil Login",
             message: "Redirect ke halaman sebelumnya",
-            classToast: 'bg-green-400',
+            classToast: 'bg-green-500',
             classTitle: "text-white text-xl",
             classMessage: "text-white",
             classClose: "text-green-200",
@@ -177,7 +177,9 @@ export default {
             timeout: 3,
           });
           // this.$router.push({name: 'secret'});
-          this.getProfile(token);
+          setTimeout(() => {  
+            this.getProfile(token);
+          }, 1000);
         })
         .catch((errors) => {
           this.loading = false;
@@ -223,9 +225,9 @@ export default {
     async redirectAfterLogin(histURL) {
       await this.$destroy()
       if (histURL[1] === "account") {
-        this.$router.replace("/");
+        window.location.replace("/");
       } else if (histURL[3] === "verification") {
-        this.$router.push(this.$nuxt.context.from.fullPath);
+        window.location.replace(this.$nuxt.context.from.fullPath);
       } else {
         // this.$router.go(-1)
         window.location.replace(this.$nuxt.context.from.fullPath);

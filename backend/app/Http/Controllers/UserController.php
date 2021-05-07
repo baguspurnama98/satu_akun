@@ -69,15 +69,27 @@ class UserController extends Controller
             if ($request->instagram) {
                 $user_social = SocialMedia::where(['user_id' => $id_user, 'type' => 'instagram'])->exists() ? SocialMedia::where(['user_id' => $id_user, 'type' => 'instagram'])->first() : new SocialMedia();
                 $user_social->fill(['type' => 'instagram', 'username' => $request->input('instagram'), 'user_id' => $id_user])->save();
+            } else if (!$request->instagram) {
+                $user_social = SocialMedia::where(['user_id' => $id_user, 'type' => 'instagram'])->first();
+                if ($user_social) $user_social->delete();
             }
+
             if ($request->twitter) {
                 $user_social = SocialMedia::where(['user_id' => $id_user, 'type' => 'twitter'])->exists() ? SocialMedia::where(['user_id' => $id_user, 'type' => 'twitter'])->first() : new SocialMedia();
                 $user_social->fill(['type' => 'twitter', 'username' => $request->input('twitter'), 'user_id' => $id_user])->save();
+            } else if (!$request->twitter) {
+                $user_social = SocialMedia::where(['user_id' => $id_user, 'type' => 'twitter'])->first();
+                if ($user_social) $user_social->delete();
             }
+
             if ($request->facebook) {
                 $user_social = SocialMedia::where(['user_id' => $id_user, 'type' => 'facebook'])->exists() ? SocialMedia::where(['user_id' => $id_user, 'type' => 'facebook'])->first() : new SocialMedia();
                 $user_social->fill(['type' => 'facebook', 'username' => $request->input('facebook'), 'user_id' => $id_user])->save();
+            } else if (!$request->facebook) {
+                $user_social = SocialMedia::where(['user_id' => $id_user, 'type' => 'facebook'])->first();
+                if ($user_social) $user_social->delete();
             }
+            
             return response()->json(['message' => 'SUCCESS', 'social_media' => SocialMedia::where('user_id', $id_user)->get()], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e], 409);

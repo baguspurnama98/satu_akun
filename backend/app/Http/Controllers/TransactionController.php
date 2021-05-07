@@ -105,13 +105,12 @@ class TransactionController extends Controller
     {
         $transaction = Transaction::where('id', $id_transaction)->first();
         try {
-            $campaign_member = CampaignMember::where(['campaign_id' => $transaction->id_campaign, 'user_id' => $transaction->id_user])->first();
+            $campaign_member = CampaignMember::where(['campaign_id' => $transaction->campaign_id, 'user_id' => $transaction->user_id])->first();
             if ($transaction->status !== 1) {
                 $campaign_member->delete();
                 // return
                 return $withResponse ? response()->json(['message' => 'Success delete member on campaign'], 201) : false;
             } else {
-                $transaction->status = 1;
                 $campaign_member->is_pay = 1;
                 $campaign_member->touch();
                 $campaign_member->save();
@@ -131,6 +130,8 @@ class TransactionController extends Controller
             $transaction->fill($request->all());
             $transaction->touch();
             $transaction->save();
+
+            $this->verifyTransactionCampaign($id_transaction, false);
             // return successful response
             return response()->json(['transaction' => $transaction, 'message' => 'UPDATED'], 201);
         } catch (\Exception $e) {
@@ -159,11 +160,6 @@ class TransactionController extends Controller
         try {
             $transactions = Transaction::where('timeout', '<=', Carbon::now())->where('status', 0)->whereHas('users.campaign_members');
             if ($transactions->doesntExist() || $transactions->count() === 0) return response()->json(['message' => 'No Transaction'], 200); 
-            
-            // Sisanya tinggal dimasukin ke job, jadi langsung return, kalau ada yg gagal, ntar tinggal di masukin ke log
-            Transaction::where('status', 2)->with('users.campaign_members', function($q) { 
-                $q->where('is_host', 0)->delete(); 
-            })->get();
 
             foreach ($transactions->get() as $transaction) {
                 $updated_transaction = $this->updateStatus($transaction);
@@ -173,6 +169,8 @@ class TransactionController extends Controller
                 $emailJob = (new MailJob($user, $campaign, $type));
                 dispatch($emailJob);
             }
+
+            $this->bulkingDeleteMember();
 
             return response()->json(['message' => 'UPDATED'], 201);
         } catch (\Exception $err) {
@@ -185,5 +183,15 @@ class TransactionController extends Controller
     private function updateStatus($transaction)
     {
         return tap($transaction)->update(['status' => 2]); //second way
+    }
+
+    /**
+     * where status = 2
+     */
+    private function bulkingDeleteMember() {
+        // Sisanya tinggal dimasukin ke job, jadi langsung return, kalau ada yg gagal, ntar tinggal di masukin ke log
+        Transaction::where('status', 2)->with('users.campaign_members', function($q) { 
+            $q->where(['is_host' => 0, 'is_pay' => 0])->delete(); 
+        })->get();
     }
 }

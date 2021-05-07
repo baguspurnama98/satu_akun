@@ -28,3 +28,10 @@ export default {
   props: ["categories", "goToCategory", "selectedCategory"],
 };
 </script>
+
+<style scoped>
+a.nuxt-link-exact-active {
+  font-weight: bold;
+  color: #667eea
+}
+</style>

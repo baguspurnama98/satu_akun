@@ -31,13 +31,20 @@
               <li>
                 <a
                   class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
-                  >cs@satuakun.id</a
+                  >admin@patungin.com</a
                 >
               </li>
               <li>
                 <a
                   class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
-                  >085155144278</a
+                  >0813‑1174‑9217</a
+                >
+              </li>
+              <li>
+                <NuxtLink
+                  class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm md:text-base"
+                  to="/about"
+                >Tentang Patungin</NuxtLink
                 >
               </li>
             </nav>

@@ -318,7 +318,7 @@ export default {
             this.$toast.show({
               title: "Berhasil Daftar",
               message: "Redirect ke halaman validasi OTP",
-              classToast: "bg-green-400",
+              classToast: "bg-green-500",
               classTitle: "text-white text-xl",
               classMessage: "text-white",
               classClose: "text-green-200",
