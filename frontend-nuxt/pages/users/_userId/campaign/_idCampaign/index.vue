@@ -37,10 +37,10 @@
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                class="h-6 w-6 text-indigo-500"
+                class="h-6 w-6 text-green-500"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                v-if="transaction.status === 0"
+                v-if="transaction.status === 1"
               >
                 <path
                   stroke-linecap="round"

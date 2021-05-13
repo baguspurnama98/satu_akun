@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      <div style="border-bottom: 2px solid #eaeaea">
+      <div style="border-bottom: 2px solid #eaeaea" class="mt-10">
         <ul class="flex cursor-pointer xs:text-sm">
           <li
             class="py-2 px-6 rounded-t-lg"
@@ -77,7 +77,6 @@ export default {
     this.$axios
       .$get(`transaction/user/${this.$store.state.user.id}`)
       .then((resp) => {
-        console.log(resp)
         for (let i = 0; i < resp.transactions.length; i++) {
           if (resp.transactions[i].status === 0) {
             onGoing.push(resp.transactions[i])
@@ -87,7 +86,6 @@ export default {
         }
         this.transactions_onGoing = onGoing
         this.transactions_done = done
-        console.log(this.transactions_onGoing, this.transactions_done)
       })
       .catch((errors) => {
         if (errors.response.status === 404) {

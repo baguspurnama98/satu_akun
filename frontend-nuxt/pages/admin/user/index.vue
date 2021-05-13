@@ -46,7 +46,6 @@ export default {
     },
 
     activateUser(id) {
-      // this.loadingActivate = true
       this.$axios
         .$get(`user/deactivate/${id}/1`)
         .then((resp) => {
@@ -64,7 +63,6 @@ export default {
     },
   },
   mounted() {
-    // console.log(this.users)
     const fullPath = this.$route.fullPath
     const params = fullPath.substring(1).split('/')
 

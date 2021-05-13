@@ -19,7 +19,7 @@
             v-for="item in menu"
             :key="item.id"
             :class="[
-              menuActive == item.route ? 'text-indigo-400 font-bold' : '',
+              menuActive == item.route ? 'text-indigo-500 font-bold text-lg' : 'text-md',
             ]"
             >{{ item.name }}</a
           >

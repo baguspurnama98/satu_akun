@@ -208,7 +208,7 @@
           </button>
           <button
             v-else-if="
-              registered && !isDisable && this.$store.state.auth.token && !isPay
+              registered && !isDisable && this.$store.state.auth.token && !is_pay
             "
             class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-orange-400 hover:bg-orange-500 focus:bg-orange-600"
             v-bind:class="[!isLogin || isDisable ? 'opacity-50 ' : '']"
@@ -242,7 +242,7 @@
           </button>
           <button
             v-else-if="
-              registered && !isDisable && this.$store.state.auth.token && isPay
+              registered && !isDisable && this.$store.state.auth.token && is_pay
             "
             class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-green-400 hover:bg-green-500 focus:bg-green-600"
             v-bind:class="[!isLogin || isDisable ? 'opacity-50 ' : '']"
@@ -314,7 +314,7 @@
       </button>
       <button
         v-else-if="
-          registered && !isDisable && this.$store.state.auth.token && !isPay
+          registered && !isDisable && this.$store.state.auth.token && !is_pay
         "
         class="w-1/3 xs:w-full mb-4 mt-7 py-2 rounded text-white inline-block shadow-md bg-orange-500 hover:bg-orange-600 focus:bg-orange-700"
         @click.prevent="rsvpCheckout(campaign.id)"
@@ -348,7 +348,7 @@
       </button>
       <button
         v-else-if="
-          registered && !isDisable && this.$store.state.auth.token && isPay
+          registered && !isDisable && this.$store.state.auth.token && is_pay
         "
         class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-green-400 hover:bg-green-500 focus:bg-green-600"
         v-bind:class="[!isLogin || isDisable ? 'opacity-50 ' : '']"
@@ -457,7 +457,9 @@ export default {
     isLogin() {
       return this.$store.state.auth.token;
     },
-
+    is_pay() {
+      return this.isPay
+    },
     isDisable() {
       if (this.$store.state.auth.token) {
         return (

@@ -19,7 +19,7 @@
           >
           <v-th :sortKey="nameLength">Tanggal</v-th>
           <v-th :sortKey="nameLength">Biaya</v-th>
-          <th class="wi-full">Aksi</th>
+          <th class="wi-full">Status</th>
         </thead>
         <tbody slot="body" slot-scope="{ displayData }">
           <tr
@@ -59,6 +59,7 @@
       <smart-pagination
         :currentPage.sync="currentPage"
         :totalPages="totalPages"
+        class="flex justify-end"
       />
     </div>
   </div>
