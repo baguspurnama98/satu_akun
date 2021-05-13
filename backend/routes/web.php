@@ -109,8 +109,11 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
     // Transaction
     $router->group(['prefix' => 'transaction'], function () use ($router) {
+        
         /** masih without middleware */
         $router->get('cron', 'TransactionController@cronCheckTransaction');
+        $router->post('callback', 'TransactionController@callbackPayment');
+
         $router->group(['middleware' => 'auth'], function () use ($router) {
             // ini transaksi yg dimiliki user
             $router->get('user/{id_user}', 'TransactionController@userTransaction');

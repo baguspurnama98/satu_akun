@@ -29,8 +29,6 @@ class MailJob extends Job
      */
     public function __construct(User $user, $data, $type)
     {
-        array_push($data, ['contact_admin' => $this->contact_admin]);
-        
         // https://laravel.com/docs/8.x/queues#handling-relationships
         $this->user = $user->withoutRelations();
         $this->data = $data;
@@ -46,8 +44,10 @@ class MailJob extends Job
     {
         //
         if ($this->type === 'otp') {
+            $this->data += ['contact_admin' => $this->contact_admin];
             $this->sendEmailOTP($this->data, $this->user);
         } elseif ($this->type === 'transaction') {
+            $this->data += ['contact_admin' => $this->contact_admin];
             $this->sendTransactionUser($this->data, $this->user);
         } elseif ($this->type === 'members') {
             $this->sendTransactionFail($this->data, $this->user);
@@ -64,7 +64,7 @@ class MailJob extends Job
     
     private function sendEmailOTP($data, $user) {
         $from_email = 'noreply@patungin.com';
-        $surname = 'noreply';
+        $surname = 'Patungin';
 
         /**
          * @param 'templates.mail' = blade email yang bakal di kirim kan ke email
@@ -104,7 +104,7 @@ class MailJob extends Job
     private function sendTransactionFail($campaign, $user)
     {
         $from_email = 'noreply@patungin.com';
-        $surname = 'noreply';
+        $surname = 'Patungin';
 
         $data = [
             'name' => $user->name,
@@ -125,7 +125,7 @@ class MailJob extends Job
     private function sendCampaignExpired($campaign, $user)
     {
         $from_email = 'admin@patungin.com';
-        $surname = 'admin';
+        $surname = 'Patungin';
 
         $data = [
             'name' => $user->name,

@@ -10,7 +10,7 @@ export default ({ $axios, store }) => {
     // Update token axios header
     let selisih = (Date.now() - store.state.auth.datetime) / 1000
 
-    if (selisih > 3600) {
+    if (selisih > 3600 && token) {
       store.dispatch('auth/logout')
     }
     if (token) {

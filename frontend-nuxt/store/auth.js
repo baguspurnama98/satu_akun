@@ -22,16 +22,34 @@ export const mutations = {
   ADD_ROUTE: (state, route) => {
     state.previousRoute = route
   },
+
+  GET_TOKEN(state) {
+    return state.token
+  }
 }
 
 // actions hanyalah function yg mentrigger mutations
 // dipanggil dengan cara dispatch
 export const actions = {
-  async setToken({ commit }, { token, expiresIn = 0, role = 'u' }) {
+  // ini aslinya login
+  async setToken({ commit }, { token, expiresIn = 0 }) {
     this.$axios.setToken(token, 'Bearer')
     const expiryTime = new Date(new Date().getTime() + expiresIn * 1000)
     cookies.set('x-access-token', token, { expires: expiryTime })
     await commit('SET_TOKEN', token)
+
+    // notify others tab if we had login
+    window.localStorage.setItem('SHARING_CREDENTIAL', token)
+    window.localStorage.removeItem('SHARING_CREDENTIALS')
+  },
+
+  async setAxiosToken({ commit }, { token }) {
+    this.$axios.setToken(token, 'Bearer')
+    await commit('SET_TOKEN', token)
+  },
+
+  async getAxiosToken({ commit }, { token }) {
+    return commit('GET_TOKEN', token)
   },
 
   async refreshToken({ dispatch }) {
@@ -43,6 +61,9 @@ export const actions = {
     this.$axios.setToken(false)
     cookies.remove('x-access-token')
     commit('REMOVE_TOKEN')
+
+    window.localStorage.setItem('CREDENTIALS_FLUSH', Date.now().toString())
+    window.localStorage.removeItem('CREDENTIALS_FLUSH')
   },
 
   savePreviousRoute({ commit }, route) {

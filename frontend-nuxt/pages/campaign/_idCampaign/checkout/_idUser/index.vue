@@ -241,7 +241,6 @@ export default {
         this.transaction = resp.transactions[0];
         this.campaign = this.transaction.campaigns;
         this.user = this.transaction.users;
-        console.log(this.transaction);
       })
       .catch((errors) => {
         if (errors.response.status === 404) {

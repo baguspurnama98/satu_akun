@@ -97,9 +97,9 @@
 
           <div class="col-span-3 row-span-1 pb-4">
             <div
-              class="grid grid-cols-3 gap-4 items-center justify-between leading-tight"
+              class="grid grid-cols-2 gap-4 items-end justify-items-end leading-tight"
             >
-              <div class="col-end-7 col-span-2">
+              <div class="col-end-5 col-span-3">
                 <span class="text-red-700 text-sm"
                   >{{ campaign.expired_date | remainingTime }} lagi</span
                 >

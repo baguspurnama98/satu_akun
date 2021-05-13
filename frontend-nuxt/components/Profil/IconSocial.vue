@@ -1,10 +1,14 @@
 <template>
   <!-- Social Medianya si host biar terpercaya jika dia daftarin di kita (hanya inputin username akunnya aja) -->
-  <div class="grid grid-cols-2 xs:grid-flow-col xs:auto-cols-max mt-2">
-    <div class="col-auto xs:col">
-      <span class="inline-flex lg:ml-auto lg:mt-0 w-full md:w-auto">
+    <div v-if="getSocial(socialHost.instagram) || getSocial(socialHost.facebook) || getSocial(socialHost.twitter)" class="">
+      <span class="inline-flex lg:ml-auto lg:mt-0 w-full md:w-auto" style="vertical-align: sub">
         <!-- Nanti ambil data dari database, kalau dia punya ig, maka class hidden di nonaktifin -->
-        <a class="text-gray-500 hover:text-gray-800 cursor-pointer">
+        
+        <a v-if="getSocial(socialHost.facebook)" class="text-gray-500 hover:text-gray-800 cursor-pointer"
+            :href="`https://facebook.com/${getSocial(socialHost.facebook)}`"
+            noopener
+            noreferer
+            target="_blank">
           <svg
             fill="currentColor"
             stroke-linecap="round"
@@ -18,7 +22,12 @@
             ></path>
           </svg>
         </a>
-        <a class="ml-3 text-gray-500 hover:text-gray-800 cursor-pointer">
+        <a v-if="getSocial(socialHost.twitter)" class="ml-3 text-gray-500 hover:text-gray-800 cursor-pointer"
+            :href="`https://twitter.com/${getSocial(socialHost.twitter)}`"
+            noopener
+            noreferer
+            target="_blank"
+        >
           <svg
             fill="currentColor"
             stroke-linecap="round"
@@ -32,7 +41,12 @@
             ></path>
           </svg>
         </a>
-        <a class="ml-3 text-gray-500 hover:text-gray-800 cursor-pointer">
+        <a v-if="getSocial(socialHost.instagram)" class="ml-3 text-gray-500 hover:text-gray-800 cursor-pointer"
+            :href="`https://instagram.com/${getSocial(socialHost.instagram)}`"
+            noopener
+            noreferer
+            target="_blank"
+        >
           <svg
             fill="none"
             stroke="currentColor"
@@ -64,12 +78,20 @@
                 </svg>
               </a> -->
       </span>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'IconSocial'
+    name: 'IconSocial',
+    props: ["socialHost"],
+    methods: {
+      getSocial(social){
+        if (social !== '' || !this.$store.state.auth.token) {
+            return social;
+        }
+        return false
+      }
+    },
 };
 </script>

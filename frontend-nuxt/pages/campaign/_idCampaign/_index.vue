@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Content disini -->
-    <DetailCampaign :campaign="campaign" :registered="registered" />
+    <DetailCampaign :campaign="campaign" :registered="registered" :is-pay="is_pay" :social-host="social" />
   </div>
 </template>
 
@@ -13,14 +13,34 @@ export default {
   data() {
     return {
       registered: true,
+      is_pay: false,
+      social: {
+        instagram: "",
+        facebook: "",
+        twitter: "",
+      },
       campaign: {
         id_host: '',
-
         total_members: 0,
         slot_capacity: 0,
         campaign_members: [],
       },
     }
+  },
+  methods: {
+    getUserSocial() {
+      let idUser = this.campaign.id_host;
+      this.$axios
+        .$get(`user/${idUser}/social`, {})
+        .then((res) => {
+          res.social_media.forEach((item) => {
+            this.social[item.type] = item.username;
+          });
+        })
+        .catch((errors) => {
+          console.error(errors);
+        });
+    },
   },
   beforeMount() {
     this.$destroy();
@@ -41,6 +61,7 @@ export default {
         }
 
         this.campaign = resp.campaigns
+        this.getUserSocial();
       })
       .catch((errors) => {
         if (errors.response.status === 404) {
@@ -58,7 +79,8 @@ export default {
         .then((resp) => {
           if (resp.campaign_members.length == 0) {
             this.registered = false
-          }
+            
+          } else if (resp.campaign_members[0].is_pay) this.is_pay = true
         })
     }
   },

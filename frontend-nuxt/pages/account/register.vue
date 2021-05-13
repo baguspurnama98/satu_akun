@@ -213,7 +213,7 @@
                   class="px-6 py-2 w-full rounded text-white shadow-lg bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
                   type="submit"
                   v-bind:class="[isDisabled ? 'opacity-50' : '']"
-                  :disabled="isDisabled"
+                  :disabled="isDisabled || loading"
                 >
                   <div class="inline-flex items-center">
                     <svg

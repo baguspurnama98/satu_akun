@@ -11,7 +11,7 @@
       <v-table
         :data="campaigns"
         :filters="filters"
-        class="w-full text-left flex-wrap z-10"
+        class="w-full text-left flex-wrap z-10 wrapper xs:block"
         :hideSortIcons="false"
         :currentPage.sync="currentPage"
         :pageSize="10"

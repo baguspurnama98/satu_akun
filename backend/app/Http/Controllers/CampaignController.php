@@ -167,6 +167,7 @@ class CampaignController extends Controller
         }
     }
 
+    
     public function updateCampaign(Request $request, $id_campaign) {
 
         $this->validate($request, [
@@ -307,7 +308,7 @@ class CampaignController extends Controller
     private function generateNewTransaction($campaign, $user, $bank = 'OVO')
     {
         $price_after_fee = getCalculatedPrice($campaign->slot_price);
-        $random_code = mt_rand(10,999); // gunakan round aja kalau sistem ga support
+        $random_code = mt_rand(10,99); // gunakan round aja kalau sistem ga support
         $final_price = $price_after_fee + $random_code;
 
         $date = new DateTime();
@@ -423,13 +424,19 @@ class CampaignController extends Controller
 
     public function cronCheckCampaign() {
         try {
-            $campaigns = Campaign::with('campaign_members')->where('expired_date', '<', Carbon::now())->where('status', '0');
+            $campaigns = Campaign::with('campaign_members')
+                                 ->where('expired_date', '<', Carbon::now())->where('status', '0')
+                                 ->withCount(['campaign_members as slot_members' => function ($query) {
+                                    return $query->where('is_host', 0);
+                                }]);
+
             if ($campaigns->doesntExist() || $campaigns->count() === 0) return response()->json(['message' => 'No Campaigns'], 200);
             
             // Sisanya tinggal dimasukin ke job, jadi langsung return, kalau ada yg gagal, ntar tinggal di masukin ke log
-            
             foreach ($campaigns->get() as $campaign) {
-                $updated_campaign = $this->updateStatus($campaign);
+                if (tap($campaign)->get()->slot_members === tap($campaign)->get()->slot_capacity) continue;
+                
+                $updated_campaign = $this->updateStatus($campaign, 2)->get();
                 $user = User::where('id', $updated_campaign->host_name->id)->first();
                 $type = "campaigns";
                 $emailJob = (new MailJob($user, $updated_campaign, $type));
@@ -444,9 +451,9 @@ class CampaignController extends Controller
     }
 
 
-    private function updateStatus($campaign)
+    private function updateStatus($campaign, $status)
     {
-        return tap($campaign)->update(['status' => 2]); //second way
+        return tap($campaign)->update(['status' => $status]);
     }
 
 

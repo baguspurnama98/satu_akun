@@ -364,7 +364,7 @@
           class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
           type="submit"
           v-bind:class="[isDisabled ? 'opacity-50' : '']"
-          :disabled="isDisabled"
+          :disabled="isDisabled || loading"
         >
           <span class="inline-flex items-center p-0 m-0">
             <svg
@@ -478,12 +478,11 @@ export default {
           this.$axios
             .$post(`campaign/store/${this.$store.state.user.id}`, formData)
             .then((resp) => {
-              console.log(resp);
               if (resp.message === "CREATED") {
                 this.$toast.show({
                   title: "Berhasil dibuat",
                   message: "Yeay, Campaign kamu berhasil dibuat!",
-                  classToast: "bg-green-400",
+                  classToast: "bg-green-500",
                   classTitle: "text-white text-xl",
                   classMessage: "text-white",
                   classClose: "text-green-200",
@@ -501,12 +500,11 @@ export default {
           this.$axios
             .$post(`campaign/update/${this.campaign.id}`, formData)
             .then((resp) => {
-              console.log(resp);
               if (resp.message === "UPDATED") {
                 this.$toast.show({
                   title: "Berhasil Disimpan",
                   message: "Campaign kamu telah disimpan",
-                  classToast: "bg-green-400",
+                  classToast: "bg-green-500",
                   classTitle: "text-white text-xl",
                   classMessage: "text-white",
                   classClose: "text-green-200",

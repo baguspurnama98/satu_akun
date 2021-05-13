@@ -83,19 +83,6 @@ class TransactionController extends Controller
         }
     }
 
-    // TODO verify transaction &/ update transaction & call member campaign
-    public function updateStatusTransaction($id_transaction, $status = 1) {
-        $transaction = Transaction::findOrFail($id_transaction);
-        try {
-            $transaction->status = $status;
-            $transaction->touch();
-            $transaction->save();
-            $this->verifyTransactionCampaign($transaction->id, false);
-            return response()->json(['transaction' => $transaction, 'message' => 'UPDATED'], 201);
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e], 409);
-        }
-    }
 
     // gunanya untuk cek si transaksi si member
     /**
@@ -162,7 +149,7 @@ class TransactionController extends Controller
             if ($transactions->doesntExist() || $transactions->count() === 0) return response()->json(['message' => 'No Transaction'], 200); 
 
             foreach ($transactions->get() as $transaction) {
-                $updated_transaction = $this->updateStatus($transaction);
+                $updated_transaction = $this->updateStatus($transaction, 0);
                 $campaign = Campaign::where('id', $updated_transaction->campaign_id)->first();
                 $user = User::where('id', $updated_transaction->user_id)->first();
                 $type = "members";
@@ -180,9 +167,59 @@ class TransactionController extends Controller
         
     }
 
-    private function updateStatus($transaction)
+
+    protected $apiSignature = 'sMcN8od7tHFXM4tnTHFdBcQrf4AtDm0H';
+    /**
+     * https://github.com/trijayadigital/cekmutasi-laravel/blob/master/src/Cekmutasi.php#L125
+     * 
+     * cth response
+     * {"message":{"action":"payment_report","content":{"service_name":"BRI","service_code":"bri","account_number":"129129120129","account_name":"Apri","data":[{"id":1,"unix_timestamp":1620401882,"type":"credit","amount":"90000.00","description":"Test From Cekmutasi","balance":"150000.00"}],"timezone":"Asia\/Jakarta"}}}
+     */
+    public function callbackPayment(Request $request) {
+        $incomingSignature = $request->server('HTTP_API_SIGNATURE');
+
+        if ( empty($incomingSignature) ) {
+            Log::info(get_class($this).': Undefined Signature');
+            exit("Undefined signature!");
+        }
+
+        if ( $this->apiSignature !== $incomingSignature ) {
+            Log::info(get_class($this).': Invalid Signature, ' . $this->apiSignature . ' vs ' . $incomingSignature);
+            exit("Invalid signature!");
+        }
+
+        $json = $request->getContent();
+        $response = json_decode($json); // decoded
+
+        if ( json_last_error() !== JSON_ERROR_NONE ) {
+            Log::info(get_class($this).': Invalid JSON, ' . $json);
+            exit("Invalid JSON!");
+        }
+
+        if ($response->action === 'payment_report') {
+            foreach ($response->content->data as $dataTransaction) {
+                $total_nominal = (int) $dataTransaction->amount;
+                $transaction = Transaction::where('total_nominal', $total_nominal)
+                                          ->where('timeout', '>=', Carbon::now()->startOfDay())
+                                          ->with('campaign_members', function ($q) {
+                                                $q->update([
+                                                    'is_pay' => 1
+                                                ]);
+                                            });
+                $transaction = $this->updateStatus($transaction, 1);
+                $transaction = $transaction->get();
+            }
+            
+        }
+
+        return response()->json(['message' => "UPDATED"], 201);
+    }
+
+
+
+    private function updateStatus($transaction, $status)
     {
-        return tap($transaction)->update(['status' => 2]); //second way
+        return tap($transaction)->update(['status' => $status]); 
     }
 
     /**
