@@ -142,7 +142,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     // Email
     $router->group(['prefix' => 'email'], function () use ($router) {
         $router->group(['middleware' => 'auth'], function () use ($router) {
-            $router->post('store', 'EmailController@create');
+            $router->post('create', 'EmailController@create');
             $router->post('update/{id_email}', 'EmailController@update');
             $router->delete('delete/{id_email}', 'EmailController@delete');
         });
