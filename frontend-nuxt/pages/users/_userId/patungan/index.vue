@@ -195,7 +195,7 @@
                     <li class="px-2 py-2 hover:bg-gray-100 w-full border-none">
                       <a
                         class="inline-flex items-center"
-                        :href="`/campaign/${campaign.id}/${campaign.slug}`"
+                        :href="getLinkPatungan(campaign)"
                       >
                         <svg
                           class="w-4 h-4 mr-2"
@@ -265,6 +265,11 @@ export default {
       campaigns: null,
     }
   },
+  computed: {
+    getIdUser() {
+      return this.$store.state.user.id
+    },
+  },
   methods: {
     showDetail(value) {
       if (value === this.activeDetail) {
@@ -273,6 +278,12 @@ export default {
         this.activeDetail = value
       }
     },
+    getLinkPatungan(campaign) {
+        if (campaign.status === 0) {
+          return `/campaign/${campaign.id}/${campaign.slug}` 
+        }
+        return `/users/${this.getIdUser}/patungan/${campaign.id}`
+    }
   },
   activated() {
     if (this.$fetchState.timestamp <= Date.now() - 30000) {

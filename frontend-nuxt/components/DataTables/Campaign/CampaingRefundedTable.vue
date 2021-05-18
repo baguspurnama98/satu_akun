@@ -10,7 +10,7 @@
       <v-table
         :data="campaigns"
         :filters="filters"
-        class="w-full text-left flex-wrap z-10"
+        class="w-full text-left flex-wrap z-10 wrapper xs:block xs:min-h-screen"
         :hideSortIcons="false"
         :currentPage.sync="currentPage"
         :pageSize="10"
@@ -195,6 +195,7 @@
       <smart-pagination
         :currentPage.sync="currentPage"
         :totalPages="totalPages"
+        class="flex justify-end"
       />
     </div>
 

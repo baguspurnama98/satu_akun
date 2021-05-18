@@ -255,9 +255,7 @@ export default {
     this.$axios
       .$get(`campaign/user/${this.$store.state.user.id}?host=true`)
       .then((resp) => {
-        console.log(resp)
         this.campaigns = resp.campaigns
-        console.log(this.campaigns)
       })
       .catch((errors) => {
         console.log(errors)

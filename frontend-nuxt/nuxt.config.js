@@ -68,7 +68,7 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
-    '@nuxt/content',
+    // '@nuxt/content',
     // untuk generate file env
     '@nuxtjs/dotenv',
     [ 'nuxt-tailvue', { all: true, toast: { defaults: { containerClasses: [ 'mt-12', 'z-40', 'top-0', 'right-0' ] } } } ],
@@ -81,7 +81,7 @@ export default {
   },
 
   // Content module configuration (https://go.nuxtjs.dev/config-content)
-  content: {},
+//   content: {},
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},

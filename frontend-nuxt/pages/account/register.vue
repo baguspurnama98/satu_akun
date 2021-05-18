@@ -213,7 +213,7 @@
                   class="px-6 py-2 w-full rounded text-white shadow-lg bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
                   type="submit"
                   v-bind:class="[isDisabled ? 'opacity-50' : '']"
-                  :disabled="isDisabled"
+                  :disabled="isDisabled || loading"
                 >
                   <div class="inline-flex items-center">
                     <svg
@@ -318,7 +318,7 @@ export default {
             this.$toast.show({
               title: "Berhasil Daftar",
               message: "Redirect ke halaman validasi OTP",
-              classToast: "bg-green-400",
+              classToast: "bg-green-500",
               classTitle: "text-white text-xl",
               classMessage: "text-white",
               classClose: "text-green-200",

@@ -1,0 +1,23 @@
+RewriteEngine on
+Options -MultiViews
+RewriteEngine On
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{SERVER_PORT} 80
+RewriteCond %{HTTP_HOST} ^patungin\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.patungin\.com$
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [QSA,L]
+
+# redirect http to https
+
+
+# RewriteEngine on
+
+# RewriteOptions inherit
+# RewriteCond %{HTTPS} off
+# RewriteCond %{HTTP:X-Forwarded-SSL} !on
+# RewriteCond %{HTTP_HOST} ^patungin\.com$ [OR]
+# RewriteCond %{HTTP_HOST} ^www\.patungin\.com$
+# RewriteRule ^/?$ "https\:\/\/patungin\.com\/" [R=301,L]
+

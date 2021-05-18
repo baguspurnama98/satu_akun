@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 //import auth facades
 
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Http;
 // import Optimus for hashid
 use Jenssegers\Optimus\Optimus;
 
@@ -51,5 +52,17 @@ class Controller extends BaseController
     protected function formatRupiah($value)
     {
         return "Rp " . number_format($value, 0, ",", ".") . ',-';
+    }
+
+
+    /**
+     * helper for CORS, fetch data from server side
+     * future improve maybe adding some data request
+     */
+    public function fetchURL(Request $request) {
+        $url = $request->query('url');
+        $response = Http::get($url)->throw();
+
+        return response()->json(['data' => $response->json(), 'message' => 'SUCCESS'], 200);
     }
 }

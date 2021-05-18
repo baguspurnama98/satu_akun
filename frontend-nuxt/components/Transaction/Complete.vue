@@ -19,7 +19,7 @@
           >
           <v-th :sortKey="nameLength">Tanggal</v-th>
           <v-th :sortKey="nameLength">Biaya</v-th>
-          <th class="wi-full">Aksi</th>
+          <th class="wi-full">Status</th>
         </thead>
         <tbody slot="body" slot-scope="{ displayData }">
           <tr
@@ -28,7 +28,7 @@
             class="border-t-2 hover:bg-gray-200"
           >
             <td class="px-3">
-              {{ row.detail_campaign.title }}
+              {{ row.campaigns.title }}
             </td>
             <td class="px-3">
               {{ row.date | formatDate }}
@@ -44,10 +44,10 @@
             <td class="px-4 py-3 text-xs">
               <div class="inline-flex">
                 <button
-                  class="px-2 py-1 text-white bg-blue-500 hover:bg-blue-600 focus:outline-none rounded-lg mr-2 shadow-md text-md"
+                  class="px-2 py-1 text-white bg-green-500 hover:bg-green-600 focus:outline-none rounded-lg mr-2 shadow-md text-md"
                   disabled
                 >
-                  <span class="inline-flex font-medium"> Selesai</span>
+                  <span class="inline-flex font-medium"> Verifikasi </span>
                 </button>
               </div>
             </td>
@@ -57,6 +57,7 @@
       <smart-pagination
         :currentPage.sync="currentPage"
         :totalPages="totalPages"
+        class="flex justify-end"
       />
     </div>
   </div>
@@ -75,11 +76,12 @@ export default {
   },
   methods: {
     nameLength(row) {
-      return row.detail_campaign.email.length
+        // kenapa ini dimatikan guss? di InProgress aku liat diginikan
+    //   return row.detail_campaign.email.length
     },
 
     indexChar(row) {
-      return row.detail_campaign.email.charCodeAt(0) - 96
+    //   return row.detail_campaign.email.charCodeAt(0) - 96
     },
 
     dateSort(a, b) {

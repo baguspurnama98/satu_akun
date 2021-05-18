@@ -17,6 +17,8 @@ class MailJob extends Job
     protected $data;
     protected $type;
 
+    protected $contact_admin = "6282266605123";
+
 
     /**
      * https://lumen.laravel.com/docs/8.x/queues
@@ -42,11 +44,15 @@ class MailJob extends Job
     {
         //
         if ($this->type === 'otp') {
+            $this->data += ['contact_admin' => $this->contact_admin];
             $this->sendEmailOTP($this->data, $this->user);
         } elseif ($this->type === 'transaction') {
+            $this->data += ['contact_admin' => $this->contact_admin];
             $this->sendTransactionUser($this->data, $this->user);
-        } else {
+        } elseif ($this->type === 'members') {
             $this->sendTransactionFail($this->data, $this->user);
+        } else {
+            $this->sendCampaignExpired($this->data, $this->user);
         }
         
     }
@@ -57,8 +63,8 @@ class MailJob extends Job
     // https://stackoverflow.com/questions/38601527/how-to-use-cpanel-email-accounts-to-send-confirmation-emails-in-laravel
     
     private function sendEmailOTP($data, $user) {
-        $from_email = 'noreply@baguspurnama.com';
-        $surname = 'noreply';
+        $from_email = 'noreply@patungin.com';
+        $surname = 'Patungin';
 
         /**
          * @param 'templates.mail' = blade email yang bakal di kirim kan ke email
@@ -75,7 +81,7 @@ class MailJob extends Job
 
     private function sendTransactionUser($data, $user)
     {
-        $from_email = 'invoice@baguspurnama.com';
+        $from_email = 'invoice@patungin.com';
         $surname = 'Patungin';
 
         /**
@@ -95,17 +101,39 @@ class MailJob extends Job
      * remove members
      * data == campaign
      */
-    private function sendTransactionFail($data, $user)
+    private function sendTransactionFail($campaign, $user)
     {
-        $from_email = 'noreply@baguspurnama.com';
-        $surname = 'noreply';
+        $from_email = 'noreply@patungin.com';
+        $surname = 'Patungin';
 
         $data = [
             'name' => $user->name,
-            'campaign' => $data->title,
+            // 'campaign' => $campaign->title,
+            'header_info' => 'Kamu telah gagal melakukan pembayaran dalam waktu yang ditentukan pada campaign ' . $campaign->title,
+            'msg_info' => 'Sistem kami telah menghapus kamu dari campaign tersebut secara otomatis.',
         ];
 
-        Mail::send('mails.member_fail', $data, function($message) use($user, $from_email, $surname) {
+        Mail::send('mails.failed', $data, function($message) use($user, $from_email, $surname) {
+            // to
+            $message->to($user->email, $user->name)->subject('Kamu Dikeluarkan dari Campaign');
+            // from
+            $message->from($from_email, $surname);
+        });
+    }
+
+
+    private function sendCampaignExpired($campaign, $user)
+    {
+        $from_email = 'admin@patungin.com';
+        $surname = 'Patungin';
+
+        $data = [
+            'name' => $user->name,
+            'header_info' => "Campaign kamu yang berjudul " . $campaign->title .  " telah melewati batas expired yang telah ditentukan.",
+            'msg_info' => 'Sistem kami telah mengubah status campaign tersebut menjadi expired secara otomatis. Silahkan menghubungi Admin jika ada yang ditanyakan',
+        ];
+
+        Mail::send('mails.failed', $data, function($message) use($user, $from_email, $surname) {
             // to
             $message->to($user->email, $user->name)->subject('Kamu Dikeluarkan dari Campaign');
             // from

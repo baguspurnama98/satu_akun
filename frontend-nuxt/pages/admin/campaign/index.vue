@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container px-4 mx-auto flex-wrap items-center justify-between min-h-screen"
+    class="container px-4 mx-auto flex-wrap justify-between min-h-screen relative"
   >
     <breadcrumb :breadcrumbs="breadcrumbs" class="pb-4"></breadcrumb>
     <div class="container mx-auto px-6 pt-3 pb-10">
@@ -19,31 +19,19 @@
             v-for="item in menu"
             :key="item.id"
             :class="[
-              menuActive == item.route ? 'text-indigo-400 font-bold' : '',
+              menuActive == item.route ? 'text-indigo-500 font-bold text-lg' : 'text-md',
             ]"
             >{{ item.name }}</a
           >
         </div>
       </nav>
     </div>
-    <div v-if="menuActive == 'active'" class="datatables-campaign">
-      <CampaignActiveTable />
-    </div>
-    <div v-if="menuActive == 'going-on'" class="datatables-campaign">
-      <CampaignOnGoingTable />
-    </div>
-    <div v-if="menuActive == 'finish'" class="datatables-campaign">
-      <CampaignFinishTable />
-    </div>
-    <div v-if="menuActive == 'refund'" class="datatables-campaign">
-      <CampaingRefundTable />
-    </div>
-    <div v-if="menuActive == 'refunded'" class="datatables-campaign">
-      <CampaingRefundedTable />
-    </div>
-    <div v-if="menuActive == 'expired'" class="datatables-campaign">
-      <CampaignExpiredTable />
-    </div>
+    <CampaignActiveTable v-if="menuActive == 'active'" />
+    <CampaignOnGoingTable v-else-if="menuActive == 'going-on'" />
+    <CampaignFinishTable v-else-if="menuActive == 'finish'" />
+    <CampaingRefundTable v-else-if="menuActive == 'refund'"  />
+    <CampaingRefundedTable v-else-if="menuActive == 'refunded'" />
+    <CampaignExpiredTable v-else-if="menuActive == 'expired'" />
   </div>
 </template>
 
@@ -61,6 +49,7 @@ export default {
     CampaignOnGoingTable,
     CampaignFinishTable,
     CampaingRefundTable,
+    CampaingRefundedTable,
     CampaignExpiredTable,
   },
   data() {
@@ -97,38 +86,7 @@ export default {
       this.campaigns = []
       this.menuActive = menu
       this.idMenu = id
-      // switch (this.idMenu) {
-      //   case '0':
-      //     this.fetchData('0')
-      //     break
-      //   case '1':
-      //     this.fetchData('1')
-      //     break
-      //   case '2':
-      //     this.fetchData('2')
-      //     break
-      //   case '3':
-      //     this.fetchData('3')
-      //     break
-      //   case '4':
-      //     this.fetchData('4')
-      //     break
-      //   case '5':
-      //     this.fetchData('5')
-      //     break
-      // }
     },
-    // fetchData() {
-    //   this.$axios
-    //     .$get(`campaign?status=${this.idMenu}`)
-    //     .then((resp) => {
-    //       this.campaigns = resp.campaigns
-    //       console.log(this.campaigns)
-    //     })
-    //     .catch((errors) => {
-    //       console.log(errors)
-    //     })
-    // },
   },
   mounted() {
     const fullPath = this.$route.fullPath
@@ -157,7 +115,7 @@ export default {
 }
 </script>
 <style lang="postcss">
-.datatables-campaign {
-  @apply px-3 overflow-auto h-screen;
-}
+/* .datatables-campaign .table-campaign { */
+  /* @apply px-3 overflow-auto h-screen; */
+/* } */
 </style>

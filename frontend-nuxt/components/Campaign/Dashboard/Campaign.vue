@@ -22,9 +22,6 @@
             <span class="flex items-center text-gray-600">
               {{ campaign.host_name.name }}
             </span>
-            <span class="flex ml-3 pl-3 border-l-2 border-gray-200 space-x-2s">
-              <icon-social class="lg:mt-6"></icon-social>
-            </span>
           </div>
           <div class="py-3 mb-3">
             <div>
@@ -74,7 +71,7 @@
                       Alamat Email
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0">
-                      {{ campaign.email_id }}
+                      {{ campaign.emails.email }}
                     </dd>
                   </div>
                 </dl>
@@ -105,10 +102,7 @@
             <!-- Batalkan dan Edit hanya aktif ketika dia adalah host dan status masih aktif -->
             <a
               class="flex mx-auto text-white bg-red-500 border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded"
-              v-if="
-                campaign.status === 0 &&
-                campaign.host_name.id === this.$store.state.user.id
-              "
+              v-if="campaign.status === 0 && campaign.host_name.id === this.$store.state.user.id"
               :href="`https://wa.me/628976634788?text=Saya%20ingin%20membatalkan%20campaign%20saya%20yang%20ber-ID:%20${campaign.id}`"
               target="_blank"
             >
@@ -127,20 +121,14 @@
             <!-- Ajukan perpanjangan hanya aktif ketika dia adalah slot dan status expired -->
             <button
               class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded"
-              v-if="
-                campaign.status === 2 &&
-                campaign.host_name.id !== this.$store.state.user.id
-              "
+              v-if="campaign.status === 2 && campaign.host_name.id !== this.$store.state.user.id"
             >
               Perpanjang
             </button>
             <!-- Laporkan hanya aktif ketika dia adalah slot dan status berlangsung -->
             <button
               class="flex mx-auto text-white bg-red-500 border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded"
-              v-if="
-                campaign.status === 1 &&
-                campaign.host_name.id !== this.$store.state.user.id
-              "
+              v-if="campaign.status === 1 && campaign.host_name.id !== this.$store.state.user.id"
             >
               Laporkan
             </button>

@@ -103,6 +103,7 @@
       <smart-pagination
         :currentPage.sync="currentPage"
         :totalPages="totalPages"
+        class="flex justify-end"
       />
     </div>
 

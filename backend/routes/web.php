@@ -60,7 +60,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
     // Campaign
     $router->group(['prefix' => 'campaign'], function () use ($router) {
-
+        $router->get('cron', 'CampaignController@cronCheckCampaign');
         // Categories
         $router->group(['prefix' => 'categories'], function () use ($router) {
             $router->get('/', 'CampaignController@allCategories');
@@ -109,8 +109,11 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
     // Transaction
     $router->group(['prefix' => 'transaction'], function () use ($router) {
+        
         /** masih without middleware */
         $router->get('cron', 'TransactionController@cronCheckTransaction');
+        $router->post('callback', 'TransactionController@callbackPayment');
+
         $router->group(['middleware' => 'auth'], function () use ($router) {
             // ini transaksi yg dimiliki user
             $router->get('user/{id_user}', 'TransactionController@userTransaction');
@@ -139,7 +142,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     // Email
     $router->group(['prefix' => 'email'], function () use ($router) {
         $router->group(['middleware' => 'auth'], function () use ($router) {
-            $router->post('store', 'EmailController@create');
+            $router->post('create', 'EmailController@create');
             $router->post('update/{id_email}', 'EmailController@update');
             $router->delete('delete/{id_email}', 'EmailController@delete');
         });
@@ -147,6 +150,8 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         $router->get('/{id_email}', 'EmailController@getEmail');
     });
 
+
+    $router->get('fetch', 'Controller@fetchURL');
 
     // php.ini files contains some limits that might affect this. Try changing these to high enough values:
     // upload_max_filesize = 50M

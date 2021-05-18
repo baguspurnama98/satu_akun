@@ -119,7 +119,7 @@
                                                                     <br /><br /><br /><br />
                                                                     <i>Email ini dibuat secara otomatis, mohon tidak
                                                                         membalas. Jika butuh bantuan, silahkan
-                                                                        <a href="wa.me/628976634788" target="_blank">hubungi Kami</a></i>
+                                                                        <a href="wa.me/{{ $contact_admin }}" target="_blank">hubungi Kami</a></i>
                                                                     <br /><br />
                                                                 </td>
                                                             </tr>

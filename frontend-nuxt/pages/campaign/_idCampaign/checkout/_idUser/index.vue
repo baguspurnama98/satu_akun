@@ -1,15 +1,12 @@
 <template>
-  <div
-    class="container px-4 mx-auto flex flex-wrap items-start justify-between"
-  >
+  <div class="container px-4 mx-auto flex flex-wrap items-start justify-between">
     <div class="w-full">
       <h3 class="font-bold pb-3 text-4xl text-indigo-500">Checkout</h3>
       <div class="">
         <div class="p-3 rounded-lg">
           <p class="xs:text-sm text-justify xs:text-center">
-            Segera lakukan pembayaran dalam 2 jam. Pastikan Anda melakukan
-            transfer hingga 3 digit terakhir agar memudahkan kami melakukan
-            validasi pembayaran Anda.
+            Segera lakukan pembayaran dalam 2 jam. Pastikan Anda melakukan transfer hingga
+            3 digit terakhir agar memudahkan kami melakukan validasi pembayaran Anda.
           </p>
         </div>
 
@@ -26,9 +23,9 @@
           <div class="flex" style="align-items: center; flex-direction: column">
             <div class="inline-flex">
               <span
-                @click.stop.prevent="copyToClipboard"
+                @click.stop.prevent="copyToClipboard(transaction.no_rek_destination)"
                 class="cursor-pointer text-3xl font-semibold xs:text-xl"
-                >12354453234675</span
+                >{{ transaction.no_rek_destination }}</span
               >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +33,7 @@
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 class="h-5 w-5 self-center xs:h-4 xs:w-4 ml-5 justify-self-center font-semibold cursor-pointer rounded-lg bg-yellow-200"
-                @click.stop.prevent="copyToClipboard"
+                @click.stop.prevent="copyToClipboard(transaction.no_rek_destination)"
               >
                 <path
                   stroke-linecap="round"
@@ -47,10 +44,10 @@
               </svg>
             </div>
             <span class="ml-4 text-lg xs:text-md"
-              >{{ transaction.bank }} | Tasya Purnama</span
+              >{{ transaction.bank }} | Alexander Jesse</span
             >
           </div>
-          <input type="hidden" id="copy-input" :value="12354453234675" />
+          <input type="hidden" id="copy-input" :value="transaction.no_rek_destination" />
         </div>
         <div
           class="border rounded-lg grid grid-cols-2 gap-1 m-2 lg:mx-56 py-3 xs:text-sm"
@@ -104,7 +101,7 @@
         >
           <div class="inline-flex">
             <span
-              @click.stop.prevent="copyToClipboard"
+              @click.stop.prevent="copyToClipboard(transaction.total_nominal)"
               class="cursor-pointer text-3xl font-semibold xs:text-xl"
               id="testing-code"
               >{{ transaction.total_nominal | formatRupiah }}</span
@@ -115,7 +112,7 @@
               viewBox="0 0 24 24"
               stroke="currentColor"
               class="h-5 w-5 self-center xs:h-4 xs:w-4 ml-5 justify-self-center font-semibold cursor-pointer rounded-lg bg-yellow-200"
-              @click.stop.prevent="copyToClipboard"
+              @click.stop.prevent="copyToClipboard(transaction.total_nominal)"
             >
               <path
                 stroke-linecap="round"
@@ -150,16 +147,16 @@
         <div class="p-3 mt-3 rounded-lg">
           <p class="xs:text-sm text-center xs:text-justify">
             Segera lakukan pembayaran sebelum
-            <span class="font-bold"
-              >{{ transaction.timeout | formatTime }} WIB</span
-            >
+            <span class="font-bold">{{ transaction.timeout | formatTime }} WIB</span>
             atau transaksimu akan dibatalkan otomatis oleh sistem
           </p>
           <p class="xs:text-sm text-center xs:text-justify">
             Setelah melakukan pembayaran, kirimkan bukti pembayaran ke
             <span class="font-semibold"
               ><a
-                :href="`https://wa.me/628976634788?text=Saya%20ingin%20konfirmasi%20pembayaran%20https://patungin.baguspurnama.com/admin/transaction/verification/${transaction.id}`"
+                :href="`https://wa.me/${contact_admin}?text=Saya%20ingin%20konfirmasi%20pembayaran%20https://patungin.com/admin/transaction/verification/${transaction.id}`"
+                target="_blank"
+                noopener norefferer
                 >WhatsApp Patungin.com</a
               ></span
             >
@@ -167,9 +164,8 @@
           </p>
           <p class="text-sm text-center xs:text-justify italic">
             <b>*</b>Kami hanya melayani proses konfirmasi pembayaran pada pukul
-            <b>08.00 - 18.00 WIB</b>. Jika Anda melakukan konfirmasi pembayaran
-            diatas jam tersebut, maka proses Anda akan kami proses pada hari
-            selanjutnya.
+            <b>08.00 - 18.00 WIB</b>. Jika Anda melakukan konfirmasi pembayaran diatas jam
+            tersebut, maka proses Anda akan kami proses pada hari selanjutnya.
           </p>
         </div>
       </div>
@@ -178,48 +174,24 @@
     <div class="w-full text-center my-3 md:my-5">
       <a
         class="w-1/3 xs:w-full py-2 rounded text-white inline-block shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700"
-        :href="`https://wa.me/628976634788?text=Saya%20ingin%20konfirmasi%20pembayaran%20https://patungin.baguspurnama.com/admin/transaction/verification/${transaction.id}`"
+        target="_blank"
+        noopener norefferer
+        :href="`https://wa.me/${contact_admin}?text=Saya%20ingin%20konfirmasi%20pembayaran%20https://patungin.com/admin/transaction/verification/${transaction.id}`"
       >
         Saya sudah transfer
       </a>
     </div>
     <input type="hidden" id="copy-input" :value="transaction.total_nominal" />
-    <!-- Notification -->
-    <div
-      class="container h-screen fixed px-4 my-auto mx-auto flex flex-wrap justify-between"
-      v-bind:class="[showAlertCopied ? 'hidden' : '']"
-    >
-      <div class="mx-auto">
-        <div class="bg-white rounded-lg border-gray-300 border p-3 shadow-lg">
-          <div class="flex flex-row">
-            <div class="px-2">
-              <svg
-                width="25"
-                height="25"
-                viewBox="0 0 1792 1792"
-                fill="#34d399"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"
-                />
-              </svg>
-            </div>
-            <div class="ml-2 mr-6 items-center">
-              <span class="">Successfully Copied!</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   </div>
 </template>
 <script>
 export default {
-  name: 'CheckoutCampaign',
+  name: "CheckoutCampaign",
 
   data() {
     return {
+      contact_admin: "6282266605123",
       campaign: {
         title: null,
         durasi: null,
@@ -235,51 +207,51 @@ export default {
         no_transaction: null,
         no_rek_destination: null,
       },
-      showAlertCopied: true,
-    }
+    };
   },
   methods: {
-    handleAlertCopied() {
-      this.showAlertCopied = !this.showAlertCopied
-    },
-
-    copyToClipboard() {
-      let dataToCopy = document.querySelector('#copy-input')
-      dataToCopy.setAttribute('type', 'text')
-      dataToCopy.select()
-
-      try {
-        var successful = document.execCommand('copy')
-
-        this.showAlertCopied = !this.showAlertCopied
-        setTimeout(() => (this.showAlertCopied = true), 600)
-      } catch (err) {
-        alert('Oops, unable to copy')
-      }
-      dataToCopy.setAttribute('type', 'hidden')
-      window.getSelection().removeAllRanges()
+    copyToClipboard(value) {
+      var self = this;
+      navigator.clipboard.writeText(value).then(
+        function () {
+          /* clipboard successfully set */
+          self.$toast.show({
+            title: "Data di salin",
+            message: value,
+            classToast: "bg-green-500",
+            classTitle: "text-white text-xl",
+            classMessage: "text-white",
+            classClose: "text-green-200",
+            classTimeout: "bg-green-600",
+            timeout: 2.5,
+          });
+        },
+        function () {
+          /* clipboard write failed */
+          alert("Oops, unable to copy");
+        }
+      );
     },
   },
   async created() {
-    const { idUser, idCampaign } = this.$route.params
+    const { idUser, idCampaign } = this.$route.params;
     await this.$axios
       .$get(`transaction/user/${idUser}/campaign/${idCampaign}`)
       .then((resp) => {
-        this.transaction = resp.transactions[0]
-        this.campaign = this.transaction.campaigns
-        this.user = this.transaction.users
-        console.log(this.transaction)
+        this.transaction = resp.transactions[0];
+        this.campaign = this.transaction.campaigns;
+        this.user = this.transaction.users;
       })
       .catch((errors) => {
         if (errors.response.status === 404) {
           return this.$nuxt.error({
             statusCode: 404,
-            message: 'Post not found',
-          })
+            message: "Post not found",
+          });
         }
-      })
+      });
   },
-}
+};
 </script>
 
 <style scoped>

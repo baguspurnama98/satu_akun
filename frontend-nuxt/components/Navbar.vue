@@ -100,7 +100,7 @@
           <li class="nav-item relative text-right">
             <NuxtLink
               class="px-3 py-2 mx-2 my-1 rounded inline-flex items-center leading-snug text-white text-md hover:bg-indigo-700 hover:text-gray-100"
-              to="#"
+              to="/about"
             >
               <span>Tentang Kami</span>
             </NuxtLink>
@@ -114,10 +114,10 @@
               type="button"
               @click="toggleButton('navUserOption')"
             >
-              <span v-if="account_login && user_role === 'u'">{{
+              <span v-if="account_login && userRole === 'u'">{{
                 getName
               }}</span>
-              <span v-else-if="account_login && user_role === 'a'">{{
+              <span v-else-if="account_login && userRole === 'a'">{{
                 getName
               }}</span>
               <span v-else>Masuk</span>
@@ -131,7 +131,7 @@
             >
               <template v-if="account_login">
                 <!-- Menu untuk User -->
-                <template v-if="user_role === 'u'">
+                <template v-if="userRole === 'u'">
                   <div class="py-1">
                     <NuxtLink
                       :to="`/users/${this.$store.state.user.id}/campaign/`"
@@ -165,7 +165,7 @@
                 </template>
 
                 <!-- Menu untuk Admin -->
-                <template v-if="user_role === 'a'">
+                <template v-if="userRole === 'a'">
                   <div class="py-1">
                     <NuxtLink
                       to="/admin/"
@@ -175,13 +175,11 @@
                     </NuxtLink>
                   </div>
                   <div class="py-1">
-                    <a
-                      href="https://patungin.com:2096/3rdparty/roundcube/"
-                      target=”_blank” rel="noreferrer noopener"
+                    <span
+                      @click.prevent="window.open('https://patungin.com:2096/3rdparty/roundcube/', '_blank')"
                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                      role="menuitem"
                       >Webmail
-                    </a>
+                    </span>
                   </div>
                 </template>
 
@@ -228,7 +226,6 @@ export default {
       navLayanan: true,
       navUserOption: true,
       name: null,
-      user_role: null,
     }
   },
   computed: {
@@ -240,6 +237,13 @@ export default {
       var firstName = name.split(' ')[0]
       return firstName
     },
+    userRole() {
+      if (this.account_login) {
+        return this.$store.state.user.role
+      } else {
+        return null
+      }
+    }
   },
   methods: {
     clickInNav(e) {
@@ -296,10 +300,6 @@ export default {
         this.toggleButton()
       }
     })
-
-    if (this.account_login) {
-      this.user_role = this.$store.state.user.role
-    }
   },
 }
 </script>
